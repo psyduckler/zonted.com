@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zonted — The Cookbook for the Agent Era</title>
-  <meta name="description" content="Discover AI agent recipes — ready-made workflows that combine APIs to automate real outcomes. Plus 2,887 API ingredients to build your own.">
+  <meta name="description" content="Discover AI agent recipes — ready-made workflows that combine APIs to automate real outcomes. Plus 2,887 APIs to build your own.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -77,8 +77,8 @@
     .recipe-title { font-size: 16px; font-weight: 600; color: var(--text); }
     .recipe-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
     .recipe-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-    .recipe-ingredients { display: flex; flex-wrap: wrap; gap: 6px; }
-    .recipe-ingredients-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .recipe-apis { display: flex; flex-wrap: wrap; gap: 6px; }
+    .recipe-apis-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
 
     /* Badges */
     .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 500; white-space: nowrap; }
@@ -87,7 +87,7 @@
     .badge-difficulty-intermediate { background: rgba(245,158,11,0.15); color: var(--accent); }
     .badge-difficulty-advanced { background: rgba(239,68,68,0.15); color: var(--red); }
     .badge-recipe-cat { background: #1a1a2e; color: var(--blue); }
-    .badge-ingredient { background: var(--accent-dim); color: var(--accent); font-size: 11px; }
+    .badge-api { background: var(--accent-dim); color: var(--accent); font-size: 11px; }
     .badge-free { background: rgba(34,197,94,0.15); color: var(--green); }
     .badge-auth-none { background: rgba(34,197,94,0.12); color: var(--green); }
     .badge-auth-apikey { background: rgba(59,130,246,0.12); color: var(--blue); }
@@ -149,7 +149,7 @@
   <div class="logo">Zonted<span>.</span></div>
   <div class="view-tabs">
     <button class="view-tab active" data-view="recipes">🍳 Recipes <span class="tab-count">10</span></button>
-    <button class="view-tab" data-view="ingredients">🧪 Ingredients <span class="tab-count">2,887</span></button>
+    <button class="view-tab" data-view="apis">🧪 APIs <span class="tab-count">2,887</span></button>
   </div>
   <div class="search-wrap">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -166,7 +166,7 @@
       <div class="sidebar-title">Recipe Categories</div>
       <div id="recipe-cat-list"></div>
     </div>
-    <div id="sidebar-ingredients" class="sidebar-section" style="display:none;">
+    <div id="sidebar-apis" class="sidebar-section" style="display:none;">
       <div class="sidebar-title">API Categories</div>
       <div id="cat-list"></div>
     </div>
@@ -177,10 +177,10 @@
     <!-- Hero -->
     <div class="hero" id="hero">
       <h1>The <span>Cookbook</span> for the Agent Era</h1>
-      <p>Ready-made AI agent workflows that combine APIs to automate real outcomes. Pick a recipe, connect the ingredients, let your agent cook.</p>
+      <p>Ready-made AI agent workflows that combine APIs to automate real outcomes. Pick a recipe, connect the APIs, let your agent cook.</p>
       <div class="hero-stats">
         <div class="hero-stat"><strong>10</strong>Recipes</div>
-        <div class="hero-stat"><strong>2,887</strong>API Ingredients</div>
+        <div class="hero-stat"><strong>2,887</strong>APIs</div>
         <div class="hero-stat"><strong>51</strong>Categories</div>
       </div>
     </div>
@@ -197,8 +197,8 @@
       </div>
     </div>
 
-    <!-- Ingredients (APIs) view -->
-    <div class="view-section" id="view-ingredients">
+    <!-- APIs view -->
+    <div class="view-section" id="view-apis">
       <div class="results-bar">
         <div class="results-count" id="results-count"><strong>2887</strong> APIs</div>
         <button class="clear-btn" id="clear-btn">Clear filters</button>
@@ -323,7 +323,7 @@ document.querySelectorAll('.view-tab').forEach(tab => {
     document.getElementById('view-' + view).classList.add('active');
     // Toggle sidebar
     document.getElementById('sidebar-recipes').style.display = view === 'recipes' ? '' : 'none';
-    document.getElementById('sidebar-ingredients').style.display = view === 'ingredients' ? '' : 'none';
+    document.getElementById('sidebar-apis').style.display = view === 'apis' ? '' : 'none';
     // Update search placeholder
     document.getElementById('search').placeholder = view === 'recipes' ? 'Search recipes...' : 'Search APIs...';
     // Re-apply filters
@@ -365,7 +365,7 @@ function buildRecipeCards() {
     el.dataset.search = (recipe.name + ' ' + recipe.desc + ' ' + recipe.category + ' ' + recipe.apis.join(' ')).toLowerCase();
 
     const diffClass = 'badge-difficulty-' + recipe.difficulty.toLowerCase();
-    const ingredients = recipe.apis.map(a => '<span class="badge badge-ingredient">' + a + '</span>').join('');
+    const ingredients = recipe.apis.map(a => '<span class="badge badge-api">' + a + '</span>').join('');
 
     el.innerHTML =
       '<div class="recipe-header">' +
@@ -378,8 +378,8 @@ function buildRecipeCards() {
         '<span class="badge ' + diffClass + '">' + recipe.difficulty + '</span>' +
       '</div>' +
       '<div style="margin-top:12px">' +
-        '<div class="recipe-ingredients-label">Ingredients</div>' +
-        '<div class="recipe-ingredients">' + ingredients + '</div>' +
+        '<div class="recipe-apis-label">APIs</div>' +
+        '<div class="recipe-apis">' + ingredients + '</div>' +
       '</div>';
 
     grid.appendChild(el);
