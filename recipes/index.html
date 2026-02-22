@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Recipes — Workflow Blueprints for Builders | Zonted</title>
+  <meta name="description" content="Browse 20 IFTTT-style API workflow recipes. Multi-step automation blueprints for making money, creating content, generating leads, and more.">
+  <meta property="og:title" content="API Recipes — Workflow Blueprints for Builders | Zonted">
+  <meta property="og:description" content="Browse 20 IFTTT-style API workflow recipes. Multi-step automation blueprints for making money, creating content, generating leads, and more.">
+  <meta property="og:type" content="website">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --border: #222222;
+      --border2: #2a2a2a;
+      --text: #fafafa;
+      --text2: #999999;
+      --text3: #555555;
+      --accent: #5b5bd6;
+      --accent-hover: #7070e8;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+      --orange: #f97316;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    * { scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .logo-tag {
+      font-size: 0.75rem;
+      color: var(--text3);
+      font-weight: 400;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: auto;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-link:hover { color: var(--text); background: var(--bg3); }
+    .nav-link.active { color: var(--text); background: var(--bg3); font-weight: 500; }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(91,91,214,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(91,91,214,0.1);
+      border: 1px solid rgba(91,91,214,0.2);
+      border-radius: 20px;
+      padding: 0.3rem 0.75rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text2);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.65;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .hero-stat-num {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: var(--text3);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Filter tabs */
+    .filters-section {
+      padding: 0 1.5rem 2rem;
+    }
+
+    .filters-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border2);
+      background: var(--bg2);
+      color: var(--text2);
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    .filter-tab:hover { color: var(--text); border-color: var(--border); }
+
+    .filter-tab.active {
+      background: rgba(91,91,214,0.1);
+      border-color: rgba(91,91,214,0.3);
+      color: var(--accent);
+    }
+
+    .filter-tab[data-cat="Make Money"].active { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3); color: var(--green); }
+    .filter-tab[data-cat="Content Creation"].active { background: rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.3); color: var(--purple); }
+    .filter-tab[data-cat="Lead Gen"].active { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); color: var(--blue); }
+    .filter-tab[data-cat="Monitoring"].active { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: var(--yellow); }
+    .filter-tab[data-cat="Automation"].active { background: rgba(91,91,214,0.1); border-color: rgba(91,91,214,0.3); color: var(--accent); }
+
+    .filter-count {
+      font-size: 0.7rem;
+      background: var(--bg3);
+      border-radius: 10px;
+      padding: 0.05rem 0.4rem;
+      color: var(--text3);
+    }
+
+    /* Recipe grid */
+    .recipes-section {
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .recipes-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Recipe card */
+    .recipe-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .recipe-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--card-accent, var(--accent));
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .recipe-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .recipe-card:hover::before { opacity: 1; }
+    .recipe-card.hidden { display: none; }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cat-make-money { background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+    .cat-content { background: rgba(168,85,247,0.12); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+    .cat-lead-gen { background: rgba(59,130,246,0.12); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+    .cat-monitoring { background: rgba(245,158,11,0.12); color: var(--yellow); border: 1px solid rgba(245,158,11,0.2); }
+    .cat-automation { background: rgba(91,91,214,0.12); color: var(--accent); border: 1px solid rgba(91,91,214,0.2); }
+
+    .card-step-count {
+      font-size: 0.7rem;
+      color: var(--text3);
+      white-space: nowrap;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    .card-apis {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: auto;
+    }
+
+    .api-pill {
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text3);
+      white-space: nowrap;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-meta-info {
+      font-size: 0.72rem;
+      color: var(--text3);
+    }
+
+    .card-cta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .recipe-card:hover .card-cta { color: var(--accent-hover); }
+
+    /* How it works section */
+    .how-section {
+      padding: 4rem 1.5rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .how-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .how-step {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .how-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .how-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .how-desc {
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text3);
+      font-size: 0.75rem;
+    }
+
+    .footer a { color: var(--text3); text-decoration: none; }
+    .footer a:hover { color: var(--text2); }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .hero { padding: 3rem 1.25rem 2.5rem; }
+      .recipes-grid { grid-template-columns: 1fr; }
+      .how-inner { grid-template-columns: 1fr; gap: 1rem; }
+      .hero-stats { gap: 1.5rem; }
+      .logo-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="../zonted-index.html">
+      <span class="logo-name">Zonted</span>
+      <span class="logo-tag">API Directory</span>
+    </a>
+    <nav class="header-nav">
+      <a class="nav-link" href="../zonted-index.html">API Directory</a>
+      <a class="nav-link active" href="index.html">Recipes</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-badge">✦ New</div>
+  <h1>API <span>Recipes</span><br>for Builders</h1>
+  <p class="hero-desc">Multi-step workflow blueprints that show you exactly how to chain APIs together. Pick a recipe, grab the APIs, and start building.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">20</span>
+      <span class="hero-stat-label">Recipes</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">6</span>
+      <span class="hero-stat-label">Categories</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">50+</span>
+      <span class="hero-stat-label">APIs Used</span>
+    </div>
+  </div>
+</section>
+
+<section class="filters-section">
+  <div class="filters-inner">
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tab active" data-cat="all">All <span class="filter-count">20</span></button>
+      <button class="filter-tab" data-cat="Make Money">💰 Make Money <span class="filter-count">5</span></button>
+      <button class="filter-tab" data-cat="Content Creation">✍️ Content Creation <span class="filter-count">5</span></button>
+      <button class="filter-tab" data-cat="Lead Gen">🎯 Lead Gen <span class="filter-count">4</span></button>
+      <button class="filter-tab" data-cat="Monitoring">📡 Monitoring <span class="filter-count">3</span></button>
+      <button class="filter-tab" data-cat="Automation">⚡ Automation <span class="filter-count">3</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="recipes-section">
+  <div class="recipes-grid" id="recipes-grid"></div>
+</section>
+
+<section class="how-section">
+  <div class="how-inner">
+    <div class="how-step">
+      <div class="how-icon">🔍</div>
+      <div class="how-title">Find a Recipe</div>
+      <div class="how-desc">Browse workflows by outcome — making money, content creation, lead gen, monitoring, or automation.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-icon">🔌</div>
+      <div class="how-title">Grab the APIs</div>
+      <div class="how-desc">Each step links to the API docs. Sign up, get your keys, and connect each service.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-icon">🚀</div>
+      <div class="how-title">Build & Ship</div>
+      <div class="how-desc">Follow the data flow to wire the steps together. Most recipes can be running in under an hour.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <a href="../zonted-index.html">← Back to API Directory</a> · <a href="https://psyduckler.com">psyduckler.com</a>
+</footer>
+
+<script>
+const RECIPES = [
+  {
+    slug: "stock-earnings-kalshi",
+    title: "Monitor Earnings Reports and Place Prediction Market Trades",
+    desc: "Automatically track earnings surprises, analyze market implications with AI, and execute informed trades on prediction markets.",
+    category: "Make Money",
+    steps: 3,
+    apis: ["Alpha Vantage", "OpenAI", "Kalshi"],
+    difficulty: "Intermediate"
+  },
+  {
+    slug: "crypto-arbitrage-alerts",
+    title: "Detect Crypto Price Discrepancies for Arbitrage",
+    desc: "Monitor price spreads across exchanges in real-time and receive instant SMS alerts when arbitrage opportunities appear.",
+    category: "Make Money",
+    steps: 3,
+    apis: ["CoinGecko", "CoinCap", "Twilio"],
+    difficulty: "Advanced"
+  },
+  {
+    slug: "competitor-price-monitor",
+    title: "Track Competitor Prices and Get Instant Alerts",
+    desc: "Scrape competitor product pages, normalize the data, and receive Slack alerts the moment prices change.",
+    category: "Make Money",
+    steps: 3,
+    apis: ["ScraperAPI", "Abstract API", "Slack"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "affiliate-product-reviews",
+    title: "Auto-Generate Affiliate Product Reviews from Specs",
+    desc: "Pull product specs and reviews from shopping APIs, generate AI-written review content, and publish with affiliate links automatically.",
+    category: "Make Money",
+    steps: 3,
+    apis: ["Amazon Product API", "OpenAI", "WordPress API"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "real-estate-monitor",
+    title: "Monitor Real Estate Listings for Investment Opportunities",
+    desc: "Watch for new listings matching your criteria, assess neighborhood quality and demographics, then get instant alerts.",
+    category: "Make Money",
+    steps: 4,
+    apis: ["Zillow API", "Walk Score", "Census Bureau", "Twilio"],
+    difficulty: "Intermediate"
+  },
+  {
+    slug: "news-to-social-posts",
+    title: "Turn Breaking News into Viral Social Media Posts",
+    desc: "Fetch trending articles, rewrite them as punchy social posts with AI, and cross-post to Twitter and LinkedIn automatically.",
+    category: "Content Creation",
+    steps: 4,
+    apis: ["NewsAPI", "OpenAI", "Twitter API", "LinkedIn API"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "rss-to-seo-blog",
+    title: "Turn RSS Feeds into SEO-Optimized Blog Posts",
+    desc: "Monitor industry RSS feeds, rewrite content with a unique angle using AI, and auto-publish to your CMS with SEO metadata.",
+    category: "Content Creation",
+    steps: 3,
+    apis: ["RSS Parser", "OpenAI", "WordPress API"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "youtube-podcast-notes",
+    title: "Convert YouTube Videos to Podcast Episodes with Show Notes",
+    desc: "Pull video captions, generate accurate transcripts with speaker labels, then create polished show notes and timestamps.",
+    category: "Content Creation",
+    steps: 4,
+    apis: ["YouTube Data API", "AssemblyAI", "OpenAI", "Airtable"],
+    difficulty: "Intermediate"
+  },
+  {
+    slug: "content-trending-topics",
+    title: "Generate Daily Content from Trending Topics",
+    desc: "Find what's trending on Reddit, verify with search volume data, and generate a content brief with AI before your competitors do.",
+    category: "Content Creation",
+    steps: 4,
+    apis: ["Reddit API", "SerpAPI", "OpenAI", "Notion API"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "image-caption-social",
+    title: "Auto-Caption Photos and Schedule to Social Channels",
+    desc: "Analyze uploaded photos with vision AI to generate captions, hashtags, and optimal posting times — then publish automatically.",
+    category: "Content Creation",
+    steps: 3,
+    apis: ["Cloudinary", "OpenAI Vision", "Buffer API"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "job-postings-lead-gen",
+    title: "Turn Job Postings into Qualified Sales Leads",
+    desc: "Find companies actively hiring in roles that signal budget for your product, enrich with firmographics, and add to your outreach sequence.",
+    category: "Lead Gen",
+    steps: 4,
+    apis: ["JSearch API", "Clearbit", "Hunter.io", "SendGrid"],
+    difficulty: "Intermediate"
+  },
+  {
+    slug: "github-dev-leads",
+    title: "Find Developer Leads from GitHub Activity",
+    desc: "Identify developers starring or forking relevant repos, enrich their profiles with company data, and add them to your developer outreach.",
+    category: "Lead Gen",
+    steps: 3,
+    apis: ["GitHub API", "Clearbit", "Apollo"],
+    difficulty: "Intermediate"
+  },
+  {
+    slug: "reddit-mention-outreach",
+    title: "Monitor Brand Mentions and Auto-Draft Outreach",
+    desc: "Track your brand, product category, or competitor mentions on Reddit, score the sentiment, and draft personalized responses.",
+    category: "Lead Gen",
+    steps: 3,
+    apis: ["Reddit API", "OpenAI", "SendGrid"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "lead-scoring-crm",
+    title: "Score Inbound Leads and Route to the Right Sales Rep",
+    desc: "Enrich form submissions with firmographic data, score lead quality with AI, and auto-route to the right rep with a personalized opener.",
+    category: "Lead Gen",
+    steps: 4,
+    apis: ["Typeform", "Clearbit", "OpenAI", "HubSpot API"],
+    difficulty: "Intermediate"
+  },
+  {
+    slug: "uptime-incident-monitor",
+    title: "Monitor Site Uptime and Auto-Create Incident Reports",
+    desc: "Detect downtime instantly, auto-post to your status page, page the on-call engineer, and send a team Slack update — all automatically.",
+    category: "Monitoring",
+    steps: 4,
+    apis: ["UptimeRobot", "Statuspage API", "PagerDuty", "Slack"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "air-quality-health-alerts",
+    title: "Monitor Air Quality and Send Personalized Health Alerts",
+    desc: "Get real-time AQI readings, analyze health risk with AI based on subscriber profiles, and send personalized advisories via SMS.",
+    category: "Monitoring",
+    steps: 3,
+    apis: ["OpenAQ", "OpenAI", "Twilio"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "security-threat-monitor",
+    title: "Monitor Security Threats and Auto-Block Malicious IPs",
+    desc: "Check incoming IPs against threat databases, deep-scan suspicious files, auto-update your firewall rules, and alert the security team.",
+    category: "Monitoring",
+    steps: 4,
+    apis: ["AbuseIPDB", "VirusTotal", "Cloudflare API", "Slack"],
+    difficulty: "Advanced"
+  },
+  {
+    slug: "calendar-task-sync",
+    title: "Auto-Sync Meetings and Create Follow-Up Tasks",
+    desc: "Listen for new calendar events, generate AI-powered action items and summaries, create tasks in your project tool, and brief the team.",
+    category: "Automation",
+    steps: 4,
+    apis: ["Google Calendar", "OpenAI", "Todoist API", "Slack"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "document-multilingual",
+    title: "Auto-Translate Documents and Distribute to Global Teams",
+    desc: "Detect new documents in shared storage, translate to multiple languages automatically, and post each version to the right team channel.",
+    category: "Automation",
+    steps: 3,
+    apis: ["Google Drive API", "LibreTranslate", "Slack"],
+    difficulty: "Beginner"
+  },
+  {
+    slug: "supply-chain-weather",
+    title: "Optimize Delivery Routes Using Real-Time Weather Data",
+    desc: "Fetch weather conditions along your routes, recalculate optimal paths avoiding hazards, update drivers in real-time, and notify customers.",
+    category: "Automation",
+    steps: 4,
+    apis: ["OpenWeatherMap", "Here Maps API", "Fleet API", "SendGrid"],
+    difficulty: "Advanced"
+  }
+];
+
+const CAT_COLORS = {
+  "Make Money": "cat-make-money",
+  "Content Creation": "cat-content",
+  "Lead Gen": "cat-lead-gen",
+  "Monitoring": "cat-monitoring",
+  "Automation": "cat-automation"
+};
+
+const CAT_CARD_ACCENT = {
+  "Make Money": "#22c55e",
+  "Content Creation": "#a855f7",
+  "Lead Gen": "#3b82f6",
+  "Monitoring": "#f59e0b",
+  "Automation": "#5b5bd6"
+};
+
+function renderRecipes(filter) {
+  const grid = document.getElementById('recipes-grid');
+  grid.innerHTML = '';
+
+  const filtered = filter === 'all' ? RECIPES : RECIPES.filter(r => r.category === filter);
+
+  filtered.forEach(recipe => {
+    const card = document.createElement('a');
+    card.href = recipe.slug + '.html';
+    card.className = 'recipe-card';
+    card.style.setProperty('--card-accent', CAT_CARD_ACCENT[recipe.category]);
+
+    const apiPills = recipe.apis.map(a => `<span class="api-pill">${a}</span>`).join('');
+
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="category-badge ${CAT_COLORS[recipe.category]}">${recipe.category}</span>
+        <span class="card-step-count">${recipe.steps} steps</span>
+      </div>
+      <div class="card-title">${recipe.title}</div>
+      <div class="card-desc">${recipe.desc}</div>
+      <div class="card-apis">${apiPills}</div>
+      <div class="card-footer">
+        <span class="card-meta-info">${recipe.difficulty}</span>
+        <span class="card-cta">View Recipe <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+// Filter tabs
+document.getElementById('filter-tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.filter-tab');
+  if (!tab) return;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  renderRecipes(tab.dataset.cat);
+});
+
+renderRecipes('all');
+</script>
+</body>
+</html>

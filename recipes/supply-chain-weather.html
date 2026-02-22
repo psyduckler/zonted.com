@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimize Delivery Routes Using Real-Time Weather Data | Zonted API Recipes</title>
+  <meta name="description" content="Continuously fetch weather conditions along your active delivery routes, recalculate optimal paths that avoid hazards and delays, push updated routes to drivers in real-time, and proactively notify customers of ETA changes.">
+  <meta property="og:title" content="Optimize Delivery Routes Using Real-Time Weather Data | Zonted API Recipes">
+  <meta property="og:description" content="Continuously fetch weather conditions along your active delivery routes, recalculate optimal paths that avoid hazards and delays, push updated routes to drivers in real-time, and proactively notify customers of ETA changes.">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --border: #222222;
+      --border2: #2a2a2a;
+      --text: #fafafa;
+      --text2: #999999;
+      --text3: #555555;
+      --accent: #5b5bd6;
+      --accent-hover: #7070e8;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    * { scrollbar-width: thin; scrollbar-color: var(--border2) transparent; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: auto;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-link:hover { color: var(--text); background: var(--bg3); }
+    .nav-link.active { color: var(--text); background: var(--bg3); font-weight: 500; }
+
+    /* Container */
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--text3);
+      padding: 1.25rem 0 0;
+    }
+
+    .breadcrumb a { color: var(--text3); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text2); }
+    .breadcrumb span { color: var(--text3); }
+
+    /* Hero */
+    .recipe-hero {
+      padding: 3rem 1.5rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .recipe-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 400px;
+      background: var(--hero-glow, radial-gradient(ellipse, rgba(91,91,214,0.08) 0%, transparent 70%));
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .recipe-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .recipe-title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      max-width: 760px;
+    }
+
+    .recipe-desc {
+      font-size: 1.05rem;
+      color: var(--text2);
+      line-height: 1.65;
+      max-width: 660px;
+      margin-bottom: 2rem;
+    }
+
+    .recipe-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text3);
+    }
+
+    .meta-item strong { color: var(--text2); }
+
+    /* Workflow section */
+    .workflow-section {
+      padding: 0 1.5rem 4rem;
+    }
+
+    .section-header {
+      max-width: 880px;
+      margin: 0 auto 2rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text3);
+    }
+
+    /* Steps flow */
+    .steps-flow {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .step-wrapper {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 52px;
+      flex-shrink: 0;
+    }
+
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      border: 2px solid var(--step-border);
+      background: var(--step-bg);
+      color: var(--step-color);
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-line {
+      width: 2px;
+      flex: 1;
+      min-height: 24px;
+      background: var(--border2);
+      margin: 4px 0;
+    }
+
+    .step-card {
+      flex: 1;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--step-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 0;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .step-card:hover {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .step-type-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+      background: var(--step-bg);
+      border: 1px solid var(--step-border);
+      color: var(--step-color);
+      width: fit-content;
+    }
+
+    .step-api-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .step-cat-badge {
+      font-size: 0.65rem;
+      color: #8080e8;
+      background: rgba(91,91,214,0.1);
+      border: 1px solid rgba(91,91,214,0.2);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+      width: fit-content;
+    }
+
+    .step-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .step-api-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid rgba(91,91,214,0.25);
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .step-api-link:hover {
+      background: rgba(91,91,214,0.1);
+      border-color: rgba(91,91,214,0.4);
+    }
+
+    .step-desc {
+      font-size: 0.875rem;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .step-outputs {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+    }
+
+    .outputs-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 0.5rem;
+    }
+
+    .outputs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .output-chip {
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+
+    .connector-arrow {
+      max-width: 880px;
+      margin: 0 auto;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0;
+    }
+
+    .connector-left {
+      width: 52px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .connector-line {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--border2), rgba(91,91,214,0.3));
+    }
+
+    .connector-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    .flow-label {
+      font-size: 0.7rem;
+      color: var(--text3);
+      font-style: italic;
+    }
+
+    /* Use cases section */
+    .use-cases-section {
+      padding: 0 1.5rem 4rem;
+    }
+
+    .use-cases-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .use-cases-grid {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .use-case-tag {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.9rem;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      color: var(--text2);
+    }
+
+    /* APIs used section */
+    .apis-section {
+      padding: 0 1.5rem 4rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .apis-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 3rem 0;
+    }
+
+    .apis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .api-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .api-card-num {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .api-card-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .api-card-cat {
+      font-size: 0.7rem;
+      color: #8080e8;
+    }
+
+    .api-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 0.25rem;
+    }
+
+    .api-card-link:hover { text-decoration: underline; }
+
+    /* Related section */
+    .related-section {
+      padding: 4rem 1.5rem;
+    }
+
+    .related-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .related-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .related-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-1px);
+    }
+
+    .related-cat {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .related-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .related-cta {
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-top: auto;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text3);
+      font-size: 0.75rem;
+    }
+
+    .footer a { color: var(--text3); text-decoration: none; }
+    .footer a:hover { color: var(--text2); }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .recipe-hero { padding: 2rem 1.25rem 2.5rem; }
+      .step-wrapper { gap: 1rem; }
+      .step-left { width: 40px; }
+      .step-num { width: 40px; height: 40px; font-size: 0.9rem; }
+      .step-header { flex-direction: column; gap: 0.75rem; }
+      .step-api-link { align-self: flex-start; }
+      .apis-grid { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr; }
+      .recipe-meta { gap: 1rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="../zonted-index.html">
+      <span class="logo-name">Zonted</span>
+    </a>
+    <nav class="header-nav">
+      <a class="nav-link" href="../zonted-index.html">API Directory</a>
+      <a class="nav-link active" href="index.html">Recipes</a>
+    </nav>
+  </div>
+</header>
+
+<div class="recipe-hero" style="--hero-glow: radial-gradient(ellipse, rgba(91,91,214,0.08) 0%, transparent 70%);">
+  <div class="hero-inner container">
+    <nav class="breadcrumb">
+      <a href="../zonted-index.html">Zonted</a>
+      <span>›</span>
+      <a href="index.html">Recipes</a>
+      <span>›</span>
+      <a href="index.html#cat-automation">Automation</a>
+      <span>›</span>
+      <span>Optimize Delivery Routes Using Real-Time Weather D...</span>
+    </nav>
+    <div style="margin-top: 1.5rem;">
+      <span class="recipe-category-badge" style="color: #5b5bd6; background: rgba(91,91,214,0.1); border: 1px solid rgba(91,91,214,0.2);">⚡ Automation</span>
+    </div>
+    <h1 class="recipe-title">Optimize Delivery Routes Using Real-Time Weather Data</h1>
+    <p class="recipe-desc">Continuously fetch weather conditions along your active delivery routes, recalculate optimal paths that avoid hazards and delays, push updated routes to drivers in real-time, and proactively notify customers of ETA changes.</p>
+    <div class="recipe-meta">
+      <span class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <strong>4</strong> steps
+      </span>
+      <span class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="m8 21 4-4 4 4"/><path d="M2 17h20"/></svg>
+        <strong>4</strong> APIs
+      </span>
+      <span class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Agent-agnostic workflow
+      </span>
+    </div>
+  </div>
+</div>
+
+<section class="workflow-section">
+  <div class="section-header container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Each step receives data from the previous and passes it to the next.</p>
+  </div>
+  <div class="steps-flow container">
+
+      <div class="step-wrapper" style="--step-color: #22c55e; --step-bg: rgba(34,197,94,0.1); --step-border: rgba(34,197,94,0.25);">
+        <div class="step-left">
+          <div class="step-num">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" style="--step-color: #22c55e; --step-bg: rgba(34,197,94,0.1); --step-border: rgba(34,197,94,0.25);">
+          <div class="step-header">
+            <div class="step-info">
+              <div class="step-type-badge" style="--step-color: #22c55e; --step-bg: rgba(34,197,94,0.1); --step-border: rgba(34,197,94,0.25);">TRIGGER</div>
+              <div class="step-api-name">OpenWeatherMap API</div>
+              <div class="step-cat-badge">Zonted · Weather</div>
+              <div class="step-title">Fetch Weather Along Delivery Routes</div>
+            </div>
+            <a class="step-api-link" href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">
+              View API Docs
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <p class="step-desc">Query weather conditions at waypoints along each active delivery route every 30 minutes. Look for precipitation, poor visibility (< 200m), wind gusts, ice warnings, and severe weather alerts.</p>
+          <div class="step-outputs">
+            <div class="outputs-label">Outputs →</div>
+            <div class="outputs-list"><span class="output-chip">weather conditions</span><span class="output-chip">precipitation mm/h</span><span class="output-chip">visibility meters</span><span class="output-chip">wind speed</span><span class="output-chip">road hazard risk level</span><span class="output-chip">weather alerts</span><span class="output-chip">affected route segments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector-arrow">
+        <div class="connector-left"><div class="connector-line"></div></div>
+        <div class="connector-right"><span class="flow-label">passes data to step 2</span></div>
+      </div>
+
+      <div class="step-wrapper" style="--step-color: #3b82f6; --step-bg: rgba(59,130,246,0.1); --step-border: rgba(59,130,246,0.25);">
+        <div class="step-left">
+          <div class="step-num">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" style="--step-color: #3b82f6; --step-bg: rgba(59,130,246,0.1); --step-border: rgba(59,130,246,0.25);">
+          <div class="step-header">
+            <div class="step-info">
+              <div class="step-type-badge" style="--step-color: #3b82f6; --step-bg: rgba(59,130,246,0.1); --step-border: rgba(59,130,246,0.25);">ACTION</div>
+              <div class="step-api-name">HERE Maps API</div>
+              <div class="step-cat-badge">Zonted · Geocoding</div>
+              <div class="step-title">Recalculate Optimal Routes</div>
+            </div>
+            <a class="step-api-link" href="https://developer.here.com/documentation" target="_blank" rel="noopener noreferrer">
+              View API Docs
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <p class="step-desc">Use HERE's routing API to recalculate all affected routes, avoiding hazardous segments. Factor in current traffic, road closures, and the weather risk score. Generate 2–3 route alternatives with ETAs.</p>
+          <div class="step-outputs">
+            <div class="outputs-label">Outputs →</div>
+            <div class="outputs-list"><span class="output-chip">optimized route polyline</span><span class="output-chip">new ETA</span><span class="output-chip">distance</span><span class="output-chip">traffic delay minutes</span><span class="output-chip">weather delay minutes</span><span class="output-chip">route alternatives</span><span class="output-chip">fuel estimate</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector-arrow">
+        <div class="connector-left"><div class="connector-line"></div></div>
+        <div class="connector-right"><span class="flow-label">passes data to step 3</span></div>
+      </div>
+
+      <div class="step-wrapper" style="--step-color: #3b82f6; --step-bg: rgba(59,130,246,0.1); --step-border: rgba(59,130,246,0.25);">
+        <div class="step-left">
+          <div class="step-num">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" style="--step-color: #3b82f6; --step-bg: rgba(59,130,246,0.1); --step-border: rgba(59,130,246,0.25);">
+          <div class="step-header">
+            <div class="step-info">
+              <div class="step-type-badge" style="--step-color: #3b82f6; --step-bg: rgba(59,130,246,0.1); --step-border: rgba(59,130,246,0.25);">ACTION</div>
+              <div class="step-api-name">Fleet Tracking API (Samsara)</div>
+              <div class="step-cat-badge">Zonted · Tracking</div>
+              <div class="step-title">Push Updated Routes to Drivers</div>
+            </div>
+            <a class="step-api-link" href="https://developers.samsara.com/reference/overview" target="_blank" rel="noopener noreferrer">
+              View API Docs
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <p class="step-desc">Send the new route to each driver's in-cab device or mobile app via Samsara's dispatch API. Include a plain-language explanation of why the route changed. Confirm driver acknowledgment.</p>
+          <div class="step-outputs">
+            <div class="outputs-label">Outputs →</div>
+            <div class="outputs-list"><span class="output-chip">routes updated count</span><span class="output-chip">drivers notified</span><span class="output-chip">acknowledgments received</span><span class="output-chip">dispatch timestamp</span><span class="output-chip">ETA updated</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector-arrow">
+        <div class="connector-left"><div class="connector-line"></div></div>
+        <div class="connector-right"><span class="flow-label">passes data to step 4</span></div>
+      </div>
+
+      <div class="step-wrapper" style="--step-color: #a855f7; --step-bg: rgba(168,85,247,0.1); --step-border: rgba(168,85,247,0.25);">
+        <div class="step-left">
+          <div class="step-num">4</div>
+          
+        </div>
+        <div class="step-card" style="--step-color: #a855f7; --step-bg: rgba(168,85,247,0.1); --step-border: rgba(168,85,247,0.25);">
+          <div class="step-header">
+            <div class="step-info">
+              <div class="step-type-badge" style="--step-color: #a855f7; --step-bg: rgba(168,85,247,0.1); --step-border: rgba(168,85,247,0.25);">OUTPUT</div>
+              <div class="step-api-name">SendGrid API</div>
+              <div class="step-cat-badge">Zonted · Email</div>
+              <div class="step-title">Notify Customers of ETA Changes</div>
+            </div>
+            <a class="step-api-link" href="https://docs.sendgrid.com/api-reference" target="_blank" rel="noopener noreferrer">
+              View API Docs
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <p class="step-desc">For any delivery where the ETA shifts by more than 30 minutes, send a proactive email or SMS to the customer. Include the new estimated arrival window and the reason (weather conditions).</p>
+          <div class="step-outputs">
+            <div class="outputs-label">Outputs →</div>
+            <div class="outputs-list"><span class="output-chip">customers notified</span><span class="output-chip">emails sent</span><span class="output-chip">new ETA communicated</span><span class="output-chip">reason included</span><span class="output-chip">reply-to set for customer response</span></div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<section class="use-cases-section">
+  <div class="use-cases-inner container">
+    <h2 class="section-title">Built For</h2>
+    <div class="use-cases-grid"><span class="use-case-tag">Logistics optimization</span><span class="use-case-tag">Last-mile delivery</span><span class="use-case-tag">Supply chain resilience</span></div>
+  </div>
+</section>
+
+<section class="apis-section">
+  <div class="apis-inner">
+    <div class="container">
+      <h2 class="section-title">APIs in this Recipe</h2>
+      <p class="section-subtitle" style="margin-top: 0.35rem;">Click any API to view its documentation and get started.</p>
+      <div class="apis-grid">
+        <div class="api-card">
+          <div class="api-card-num">Step 1 · TRIGGER</div>
+          <div class="api-card-name">OpenWeatherMap API</div>
+          <div class="api-card-cat">Zonted category: Weather</div>
+          <a class="api-card-link" href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">
+            View documentation
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="api-card">
+          <div class="api-card-num">Step 2 · ACTION</div>
+          <div class="api-card-name">HERE Maps API</div>
+          <div class="api-card-cat">Zonted category: Geocoding</div>
+          <a class="api-card-link" href="https://developer.here.com/documentation" target="_blank" rel="noopener noreferrer">
+            View documentation
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="api-card">
+          <div class="api-card-num">Step 3 · ACTION</div>
+          <div class="api-card-name">Fleet Tracking API (Samsara)</div>
+          <div class="api-card-cat">Zonted category: Tracking</div>
+          <a class="api-card-link" href="https://developers.samsara.com/reference/overview" target="_blank" rel="noopener noreferrer">
+            View documentation
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="api-card">
+          <div class="api-card-num">Step 4 · OUTPUT</div>
+          <div class="api-card-name">SendGrid API</div>
+          <div class="api-card-cat">Zonted category: Email</div>
+          <a class="api-card-link" href="https://docs.sendgrid.com/api-reference" target="_blank" rel="noopener noreferrer">
+            View documentation
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="related-section">
+  <div class="related-inner container">
+    <h2 class="section-title">Related Recipes</h2>
+    <div class="related-grid">
+        <a class="related-card" href="air-quality-health-alerts.html">
+          <span class="related-cat" style="color: #f59e0b">📡 Monitoring</span>
+          <div class="related-title">Monitor Air Quality and Send Personalized Health Alerts</div>
+          <span class="related-cta">View Recipe →</span>
+        </a>
+
+        <a class="related-card" href="calendar-task-sync.html">
+          <span class="related-cat" style="color: #5b5bd6">⚡ Automation</span>
+          <div class="related-title">Auto-Sync Meetings and Create Follow-Up Tasks</div>
+          <span class="related-cta">View Recipe →</span>
+        </a>
+
+        <a class="related-card" href="document-multilingual.html">
+          <span class="related-cat" style="color: #5b5bd6">⚡ Automation</span>
+          <div class="related-title">Auto-Translate Documents and Distribute to Global Teams</div>
+          <span class="related-cta">View Recipe →</span>
+        </a>
+</div>
+    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+      <a href="index.html" style="font-size: 0.875rem; color: var(--accent); text-decoration: none;">← Browse all recipes</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <a href="../zonted-index.html">← Back to API Directory</a> · <a href="index.html">All Recipes</a> · <a href="https://psyduckler.com">psyduckler.com</a>
+</footer>
+
+</body>
+</html>
