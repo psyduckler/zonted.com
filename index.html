@@ -178,7 +178,13 @@
     <div class="hero" id="hero">
       <h1>The <span>Cookbook</span> for the Agent Era</h1>
       <p>Ready-made AI agent workflows that combine APIs to automate real outcomes. Pick a recipe, connect the APIs, let your agent cook.</p>
-      <div class="hero-stats">
+      <div class="cook-input-wrap" style="margin-top:20px;max-width:600px;">
+        <div style="position:relative;">
+          <input type="text" id="cook-input" placeholder="What do you want to build?" style="width:100%;padding:14px 120px 14px 16px;font-size:15px;border-radius:10px;border:1px solid var(--border);background:var(--card-bg);color:var(--text);outline:none;font-family:inherit;" />
+          <button id="cook-btn" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:8px 18px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;">Cook it up 🍳</button>
+        </div>
+      </div>
+      <div class="hero-stats" style="margin-top:16px;">
         <div class="hero-stat"><strong>2,783</strong>APIs</div>
       </div>
     </div>
