@@ -69,7 +69,7 @@
     .clear-btn.visible { display: inline; }
 
     /* Recipe cards */
-    .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+    .recipe-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 720px; }
     .recipe-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; cursor: default; transition: all 0.15s; }
     .recipe-card:hover { border-color: #333; background: var(--surface-hover); transform: translateY(-1px); }
     .recipe-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
@@ -79,6 +79,13 @@
     .recipe-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
     .recipe-apis { display: flex; flex-wrap: wrap; gap: 6px; }
     .recipe-apis-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .recipe-section { margin-top: 14px; }
+    .recipe-section-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 6px; }
+    .recipe-source, .recipe-dep { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 4px; }
+    .recipe-source strong, .recipe-dep strong { color: var(--text); font-weight: 600; }
+    .recipe-workflow { list-style: none; counter-reset: step; padding: 0; }
+    .recipe-workflow li { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 4px; counter-increment: step; padding-left: 22px; position: relative; }
+    .recipe-workflow li::before { content: counter(step); position: absolute; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-dim); color: var(--accent); font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; top: 2px; }
 
     /* Badges */
     .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 500; white-space: nowrap; }
@@ -222,27 +229,36 @@
 const RECIPES = [
   {
     emoji: "📈",
-    name: "Prediction Market Trader",
-    desc: "Pull economic data from FRED (GDP, CPI, employment), find relevant prediction markets on Kalshi, calculate divergence between consensus and data, and place informed trades automatically.",
+    name: "Prediction Market Trading Bot",
+    desc: "Automates trading on a prediction market platform based on real-time data and sentiment analysis. It leverages news sentiment and market trends to make informed buy/sell decisions, aiming to maximize profitability and manage risk.",
     difficulty: "Advanced",
     category: "Money",
-    apis: ["FRED API", "Kalshi API"]
+    apis: ["News API", "Twitter/X API", "CoinMarketCap", "Stripe API", "Slack API"],
+    dataSources: [{"name":"News API","reason":"To gather real-time news articles related to the prediction market topic."},{"name":"Twitter/X API","reason":"To gauge real-time sentiment from social media related to the prediction market topic."},{"name":"CoinMarketCap","reason":"To get real-time prices and market data for crypto-based prediction markets"}],
+    dependencies: [{"name":"Stripe API","reason":"To handle deposits and withdrawals from the trading account."},{"name":"Slack API","reason":"To send notifications about trade executions and bot performance."}],
+    workflow: ["Fetch real-time news and social media data related to the prediction market topic using the News API and Twitter/X API.","Analyze sentiment of the news and social media data using a sentiment analysis model (e.g., Google Cloud NLP) and combine with crypto price data from CoinMarketCap.","Based on the sentiment and price analysis, determine optimal trading actions (buy or sell) based on predefined trading strategies and risk parameters.","Execute trades on the prediction market platform using the Stripe API for transactions.","Monitor bot performance, track profitability, and send notifications to the user via Slack API about trade executions and overall bot performance."]
   },
   {
-    emoji: "📱",
-    name: "Social Content Pipeline",
-    desc: "Search for high-quality photos using SerpAPI, generate short-form video with Veo 3, add branded text overlays, and publish directly to Instagram — all from a single text prompt.",
+    emoji: "🎬",
+    name: "Instagram Reel Generator",
+    desc: "This recipe automatically generates Instagram Reels from various content sources. It leverages AI to create engaging videos with captions, music, and transitions, automating the content creation process for social media.",
     difficulty: "Intermediate",
     category: "Content",
-    apis: ["SerpAPI", "Instagram Graph API", "Google Veo 3"]
+    apis: ["News API", "Reddit API", "Unsplash", "ElevenLabs", "Synthesia", "Instagram Graph API"],
+    dataSources: [{"name":"News API","reason":"To source trending news stories that can be turned into engaging video content."},{"name":"Reddit API","reason":"To identify trending topics and discussions on relevant subreddits, providing material for relatable Reels."},{"name":"Unsplash","reason":"To source royalty-free stock photos and videos for reel creation."}],
+    dependencies: [{"name":"ElevenLabs","reason":"To generate realistic voiceovers for the Reels from the sourced content, enhancing accessibility and engagement."},{"name":"Synthesia","reason":"To create AI-generated avatar presenters for the Reels, adding a dynamic visual element."},{"name":"Instagram Graph API","reason":"To automatically publish the generated Reels to Instagram."}],
+    workflow: ["Fetch trending news and Reddit posts using the News API and Reddit API.","Use Unsplash to find relevant images and videos.","Generate voiceovers with ElevenLabs based on the content.","Create an AI avatar presenter using Synthesia.","Combine the content, voiceover, and avatar into a Reel and post to Instagram via the Instagram Graph API."]
   },
   {
-    emoji: "🔍",
-    name: "SEO Autopilot",
-    desc: "Monitor your Google Analytics traffic, pull Search Console query data, identify declining pages, and use Gemini to generate optimization recommendations — delivered weekly.",
+    emoji: "✍️",
+    name: "SEO Content Generator",
+    desc: "This recipe generates SEO-optimized content for a given keyword. It leverages search engine data and AI to create engaging and relevant articles designed to rank well in search results.",
     difficulty: "Intermediate",
     category: "Marketing",
-    apis: ["Google Analytics 4", "Search Console API", "Gemini API"]
+    apis: ["SerpAPI", "OpenAI"],
+    dataSources: [{"name":"SerpAPI","reason":"To fetch search engine results for keyword analysis and competitor research."}],
+    dependencies: [{"name":"OpenAI","reason":"To generate the SEO-optimized content based on the analyzed data."}],
+    workflow: ["Input a target keyword.","Use SerpAPI to retrieve top-ranking articles and related search queries for the keyword.","Analyze the search results to identify key topics, keywords, and content gaps.","Use OpenAI to generate a unique article optimized for the identified keywords and topics.","Output the SEO-optimized content."]
   },
   {
     emoji: "💼",
@@ -277,12 +293,15 @@ const RECIPES = [
     apis: ["FRED API", "Slack API"]
   },
   {
-    emoji: "🧠",
-    name: "AI Research Assistant",
-    desc: "Take a research question, search the web for relevant sources, extract and summarize key findings, and compile a structured research brief — in minutes, not hours.",
-    difficulty: "Beginner",
+    emoji: "🎬",
+    name: "YouTube Video Summarizer",
+    desc: "This recipe summarizes YouTube videos using AI. It extracts the video transcript, generates a concise summary, and provides key timestamps for navigation.",
+    difficulty: "Intermediate",
     category: "Research",
-    apis: ["Brave Search API", "Gemini API"]
+    apis: ["YouTube API", "OpenAI", "Resend"],
+    dataSources: [{"name":"YouTube API","reason":"Provides access to video metadata (title, description, etc.) and, most importantly, the video transcript, which is essential for summarization."}],
+    dependencies: [{"name":"OpenAI","reason":"Uses GPT to generate a concise and informative summary of the video transcript."},{"name":"Resend","reason":"Optionally sends the summary via email to the user."}],
+    workflow: ["User provides a YouTube video URL.","Extract the video ID from the URL.","Use the YouTube API to fetch the video transcript.","Send the transcript to OpenAI's GPT model for summarization.","Optionally, send the summary via Resend to the user's email address.","Return the summary and key timestamps to the user."]
   },
   {
     emoji: "🏷️",
@@ -385,6 +404,19 @@ function buildRecipeCards() {
         '<div class="recipe-apis-label">APIs</div>' +
         '<div class="recipe-apis">' + ingredients + '</div>' +
       '</div>';
+
+    if (recipe.dataSources) {
+      el.innerHTML += '<div class="recipe-section"><div class="recipe-section-title">Data Sources</div>' +
+        recipe.dataSources.map(s => '<div class="recipe-source"><strong>' + s.name + '</strong> — ' + s.reason + '</div>').join('') + '</div>';
+    }
+    if (recipe.dependencies) {
+      el.innerHTML += '<div class="recipe-section"><div class="recipe-section-title">Dependencies</div>' +
+        recipe.dependencies.map(d => '<div class="recipe-dep"><strong>' + d.name + '</strong> — ' + d.reason + '</div>').join('') + '</div>';
+    }
+    if (recipe.workflow) {
+      el.innerHTML += '<div class="recipe-section"><div class="recipe-section-title">Workflow</div>' +
+        '<ol class="recipe-workflow">' + recipe.workflow.map(s => '<li>' + s + '</li>').join('') + '</ol></div>';
+    }
 
     grid.appendChild(el);
   });
