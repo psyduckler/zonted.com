@@ -234,9 +234,9 @@ const RECIPES = [
     desc: "Automates trading on a prediction market platform based on real-time data and sentiment analysis. It leverages news sentiment and market trends to make informed buy/sell decisions, aiming to maximize profitability and manage risk.",
     difficulty: "Advanced",
     category: "Money",
-    apis: ["News API", "Twitter/X API", "CoinMarketCap", "Stripe API", "Slack API"],
+    apis: ["News API", "Twitter/X API", "CoinMarketCap", "Kalshi API", "Polymarket API", "Stripe API", "Slack API"],
     dataSources: [{"name":"News API","reason":"To gather real-time news articles related to the prediction market topic."},{"name":"Twitter/X API","reason":"To gauge real-time sentiment from social media related to the prediction market topic."},{"name":"CoinMarketCap","reason":"To get real-time prices and market data for crypto-based prediction markets"}],
-    dependencies: [{"name":"Stripe API","reason":"To handle deposits and withdrawals from the trading account."},{"name":"Slack API","reason":"To send notifications about trade executions and bot performance."}],
+    dependencies: [{"name":"Kalshi API","reason":"To place trades and manage positions on Kalshi prediction markets."},{"name":"Polymarket API","reason":"To place trades and manage positions on Polymarket prediction markets."},{"name":"Stripe API","reason":"To handle deposits and withdrawals from the trading account."},{"name":"Slack API","reason":"To send notifications about trade executions and bot performance."}],
     workflow: ["Fetch real-time news and social media data related to the prediction market topic using the News API and Twitter/X API.","Analyze sentiment of the news and social media data using a sentiment analysis model (e.g., Google Cloud NLP) and combine with crypto price data from CoinMarketCap.","Based on the sentiment and price analysis, determine optimal trading actions (buy or sell) based on predefined trading strategies and risk parameters.","Execute trades on the prediction market platform using the Stripe API for transactions.","Monitor bot performance, track profitability, and send notifications to the user via Slack API about trade executions and overall bot performance."]
   },
   {
