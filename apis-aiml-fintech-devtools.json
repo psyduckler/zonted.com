@@ -1,0 +1,1202 @@
+[
+  {
+    "name": "Mistral AI",
+    "description": "Open and efficient large language models with API access to Mistral 7B, Mixtral, and frontier models. Strong on multilingual tasks and function calling.",
+    "category": "AI/ML",
+    "url": "https://docs.mistral.ai/api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://mistral.ai"
+  },
+  {
+    "name": "Cohere",
+    "description": "Enterprise NLP platform with LLMs for text generation, embeddings, classification, and RAG. Offers Command, Embed, and Rerank models.",
+    "category": "AI/ML",
+    "url": "https://docs.cohere.com/reference/about",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://cohere.com"
+  },
+  {
+    "name": "Together AI",
+    "description": "Cloud platform for running and fine-tuning open-source LLMs including Llama, Mistral, and more. Fast inference at scale.",
+    "category": "AI/ML",
+    "url": "https://docs.together.ai/reference/inference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.together.ai"
+  },
+  {
+    "name": "Fireworks AI",
+    "description": "High-performance inference API for open-source LLMs. Sub-second latency for Llama, Mixtral, and custom models with function calling support.",
+    "category": "AI/ML",
+    "url": "https://docs.fireworks.ai/api-reference/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://fireworks.ai"
+  },
+  {
+    "name": "Groq",
+    "description": "Ultra-fast LLM inference using custom LPU hardware. Runs Llama, Mixtral, and Gemma at hundreds of tokens per second via OpenAI-compatible API.",
+    "category": "AI/ML",
+    "url": "https://console.groq.com/docs/openai",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://groq.com"
+  },
+  {
+    "name": "Perplexity AI",
+    "description": "LLM API with built-in web search grounding. Models return cited, real-time answers. Supports sonar and sonar-pro model families.",
+    "category": "AI/ML",
+    "url": "https://docs.perplexity.ai/api-reference/chat-completions",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.perplexity.ai"
+  },
+  {
+    "name": "DeepSeek",
+    "description": "High-capability LLM API from DeepSeek including DeepSeek-V3 and DeepSeek-R1 reasoning model. OpenAI-compatible endpoints.",
+    "category": "AI/ML",
+    "url": "https://api-docs.deepseek.com/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.deepseek.com"
+  },
+  {
+    "name": "xAI / Grok",
+    "description": "xAI's Grok LLM API with real-time X/Twitter data access. Supports Grok-2 and vision models with OpenAI-compatible interface.",
+    "category": "AI/ML",
+    "url": "https://docs.x.ai/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://x.ai"
+  },
+  {
+    "name": "Leonardo AI",
+    "description": "AI image generation API with fine-tuned models for game assets, concept art, and product images. Offers ControlNet, image-to-image, and upscaling.",
+    "category": "AI/ML",
+    "url": "https://docs.leonardo.ai/reference/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://leonardo.ai"
+  },
+  {
+    "name": "Ideogram",
+    "description": "AI image generation API specializing in text rendering within images. High accuracy for logos, posters, and typography-heavy graphics.",
+    "category": "AI/ML",
+    "url": "https://developer.ideogram.ai/api-reference/api-reference/generate",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://ideogram.ai"
+  },
+  {
+    "name": "Black Forest Labs (Flux)",
+    "description": "FLUX image generation models API including FLUX.1 Pro, Dev, and Schnell. State-of-the-art photorealism and prompt adherence.",
+    "category": "AI/ML",
+    "url": "https://docs.bfl.ml/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://blackforestlabs.ai"
+  },
+  {
+    "name": "OpenAI DALL-E",
+    "description": "DALL-E 3 image generation API via OpenAI. Creates high-quality images from text prompts with editing and variation endpoints.",
+    "category": "AI/ML",
+    "url": "https://platform.openai.com/docs/api-reference/images",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://openai.com"
+  },
+  {
+    "name": "Midjourney API",
+    "description": "Access Midjourney's image generation via unofficial/third-party API wrappers. No official API exists yet; use proxy services like UseAPI or GoAPI.",
+    "category": "AI/ML",
+    "url": "https://www.useapi.net/docs/midjourney-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.midjourney.com"
+  },
+  {
+    "name": "Deepgram",
+    "description": "AI-powered speech-to-text API with real-time and batch transcription, speaker diarization, language detection, and audio intelligence features.",
+    "category": "AI/ML",
+    "url": "https://developers.deepgram.com/reference/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://deepgram.com"
+  },
+  {
+    "name": "OpenAI Whisper API",
+    "description": "OpenAI's Whisper speech-to-text API supporting 57 languages with transcription and translation endpoints.",
+    "category": "AI/ML",
+    "url": "https://platform.openai.com/docs/api-reference/audio",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://openai.com"
+  },
+  {
+    "name": "PlayHT",
+    "description": "AI voice generation API with 900+ ultra-realistic voices for text-to-speech, voice cloning, and real-time streaming audio.",
+    "category": "AI/ML",
+    "url": "https://docs.play.ht/reference/api-getting-started",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://play.ht"
+  },
+  {
+    "name": "Resemble AI",
+    "description": "Voice cloning and AI speech synthesis API. Clone any voice from audio samples and generate custom speech with emotional control.",
+    "category": "AI/ML",
+    "url": "https://docs.resemble.ai/docs/overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.resemble.ai"
+  },
+  {
+    "name": "Murf AI",
+    "description": "AI voice generator API with 120+ studio-quality voices in 20+ languages for voiceovers, e-learning, and product demos.",
+    "category": "AI/ML",
+    "url": "https://murf.ai/api/docs",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://murf.ai"
+  },
+  {
+    "name": "Runway ML",
+    "description": "AI video generation and editing API. Gen-2 and Gen-3 Alpha for text-to-video, image-to-video, and video-to-video transformations.",
+    "category": "AI/ML",
+    "url": "https://docs.dev.runwayml.com/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://runwayml.com"
+  },
+  {
+    "name": "Pika Labs",
+    "description": "AI video generation API for creating and editing videos from text or images. Supports motion controls and character consistency.",
+    "category": "AI/ML",
+    "url": "https://docs.pika.art/api/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://pika.art"
+  },
+  {
+    "name": "Luma AI (Dream Machine)",
+    "description": "High-quality AI video generation API by Luma AI. Creates cinematic videos from text prompts or reference images with camera controls.",
+    "category": "AI/ML",
+    "url": "https://docs.lumalabs.ai/docs/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://lumalabs.ai"
+  },
+  {
+    "name": "HeyGen",
+    "description": "AI video avatar generation API. Create talking-head videos with custom avatars, voice cloning, and multi-language lip sync.",
+    "category": "AI/ML",
+    "url": "https://docs.heygen.com/reference/list-avatars-v2",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.heygen.com"
+  },
+  {
+    "name": "Synthesia",
+    "description": "AI video generation API with digital human avatars. Produce professional videos in 120+ languages without cameras or actors.",
+    "category": "AI/ML",
+    "url": "https://docs.synthesia.io/reference/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.synthesia.io"
+  },
+  {
+    "name": "D-ID",
+    "description": "AI-powered video and avatar generation API. Animate still photos, create talking avatars, and produce personalized video messages at scale.",
+    "category": "AI/ML",
+    "url": "https://docs.d-id.com/reference/get-started",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.d-id.com"
+  },
+  {
+    "name": "Banana Dev",
+    "description": "Serverless GPU inference platform for deploying custom ML models. Pay-per-inference with cold-start optimization for production workloads.",
+    "category": "AI/ML",
+    "url": "https://docs.banana.dev/banana-docs/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.banana.dev"
+  },
+  {
+    "name": "Modal",
+    "description": "Cloud infrastructure for ML training and inference. Run Python functions on GPUs with auto-scaling, no Docker required.",
+    "category": "AI/ML",
+    "url": "https://modal.com/docs/reference/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://modal.com"
+  },
+  {
+    "name": "AWS Bedrock",
+    "description": "Fully managed AWS service for building GenAI applications. Access Claude, Llama, Titan, Stable Diffusion, and more via unified API.",
+    "category": "AI/ML",
+    "url": "https://docs.aws.amazon.com/bedrock/latest/APIReference/",
+    "auth": "awsSigv4",
+    "https": true,
+    "free_tier": false,
+    "source": "https://aws.amazon.com/bedrock/"
+  },
+  {
+    "name": "Azure OpenAI Service",
+    "description": "Microsoft Azure-hosted OpenAI models including GPT-4, DALL-E, and Whisper with enterprise compliance, private networking, and SLAs.",
+    "category": "AI/ML",
+    "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/reference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://azure.microsoft.com/en-us/products/ai-services/openai-service"
+  },
+  {
+    "name": "Google Cloud Vision API",
+    "description": "Detect objects, faces, text, landmarks, and explicit content in images. Includes OCR, logo detection, and image classification.",
+    "category": "AI/ML",
+    "url": "https://cloud.google.com/vision/docs/reference/rest",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://cloud.google.com/vision"
+  },
+  {
+    "name": "AWS Rekognition",
+    "description": "Amazon's image and video analysis service. Detect objects, celebrities, text, and unsafe content. Includes facial analysis and recognition.",
+    "category": "AI/ML",
+    "url": "https://docs.aws.amazon.com/rekognition/latest/APIReference/",
+    "auth": "awsSigv4",
+    "https": true,
+    "free_tier": true,
+    "source": "https://aws.amazon.com/rekognition/"
+  },
+  {
+    "name": "AI21 Labs (Jamba)",
+    "description": "Enterprise LLM API with Jamba (hybrid SSM-Transformer) and Jurassic models. Optimized for long-context tasks and document understanding.",
+    "category": "AI/ML",
+    "url": "https://docs.ai21.com/reference/jamba-15-api-ref",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.ai21.com"
+  },
+  {
+    "name": "Writer",
+    "description": "Enterprise AI writing platform API with Palmyra LLMs optimized for business content. Includes RAG, function calling, and knowledge graph features.",
+    "category": "AI/ML",
+    "url": "https://dev.writer.com/api-guides/quickstart",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://writer.com"
+  },
+  {
+    "name": "TextRazor",
+    "description": "NLP API for entity extraction, relation detection, topic classification, and dependency parsing. Processes text in 15+ languages.",
+    "category": "AI/ML",
+    "url": "https://www.textrazor.com/docs/rest",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.textrazor.com"
+  },
+  {
+    "name": "Weaviate",
+    "description": "Open-source vector database with cloud-hosted API. Semantic search, hybrid search, and generative AI integration for RAG applications.",
+    "category": "AI/ML",
+    "url": "https://weaviate.io/developers/weaviate/api/rest",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://weaviate.io"
+  },
+  {
+    "name": "Qdrant",
+    "description": "High-performance vector similarity search engine with cloud API. Supports filtering, payload storage, and multitenancy for production RAG.",
+    "category": "AI/ML",
+    "url": "https://qdrant.tech/documentation/interfaces/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://qdrant.tech"
+  },
+  {
+    "name": "Chroma",
+    "description": "Open-source embedding database with cloud-hosted API. Built for AI applications requiring semantic search and document storage.",
+    "category": "AI/ML",
+    "url": "https://docs.trychroma.com/reference/py-client",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.trychroma.com"
+  },
+  {
+    "name": "Algolia",
+    "description": "Hosted search and discovery API. Lightning-fast full-text search with typo tolerance, filters, and AI-powered personalization for apps.",
+    "category": "AI/ML",
+    "url": "https://www.algolia.com/doc/api-reference/api-methods/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.algolia.com"
+  },
+  {
+    "name": "Meilisearch",
+    "description": "Open-source search engine with cloud API. Instant search with typo tolerance, filtering, and geosearch. Self-host or use Meilisearch Cloud.",
+    "category": "AI/ML",
+    "url": "https://www.meilisearch.com/docs/reference/api/overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.meilisearch.com"
+  },
+  {
+    "name": "Fal.ai",
+    "description": "Serverless GPU platform for running AI models via API. Hosts FLUX, LoRA fine-tunes, Whisper, and 100+ models with fast cold starts.",
+    "category": "AI/ML",
+    "url": "https://fal.ai/docs/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://fal.ai"
+  },
+  {
+    "name": "Cerebras",
+    "description": "Ultra-fast LLM inference API using wafer-scale chip technology. Runs Llama-3 and other models at 2000+ tokens/second.",
+    "category": "AI/ML",
+    "url": "https://inference-docs.cerebras.ai/api-reference/chat-completions",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://cerebras.ai"
+  },
+  {
+    "name": "Samba Nova",
+    "description": "Enterprise AI inference API with SambaNova SN40L chips. Delivers fast inference for Llama-3 and Meta models at scale.",
+    "category": "AI/ML",
+    "url": "https://docs.sambanova.ai/sambastudio/latest/inference-api.html",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://sambanova.ai"
+  },
+  {
+    "name": "PayPal",
+    "description": "Global payments API for accepting online payments, subscriptions, invoicing, and payouts. Supports PayPal Wallet, cards, and BNPL (Pay Later).",
+    "category": "Fintech",
+    "url": "https://developer.paypal.com/api/rest/",
+    "auth": "OAuth",
+    "https": true,
+    "free_tier": true,
+    "source": "https://developer.paypal.com"
+  },
+  {
+    "name": "Braintree",
+    "description": "PayPal-owned payments gateway API for cards, PayPal, Venmo, and wallets. Full-stack solution with client SDKs and webhooks.",
+    "category": "Fintech",
+    "url": "https://developer.paypal.com/braintree/docs/reference/general/overview",
+    "auth": "OAuth",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.braintreepayments.com"
+  },
+  {
+    "name": "Adyen",
+    "description": "Enterprise payments API processing cards, wallets, and local payment methods in 200+ countries. Unified commerce for online and in-person.",
+    "category": "Fintech",
+    "url": "https://docs.adyen.com/api-explorer/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.adyen.com"
+  },
+  {
+    "name": "Wise (formerly TransferWise)",
+    "description": "International money transfer and multi-currency account API. Send, receive, and convert money at mid-market exchange rates.",
+    "category": "Fintech",
+    "url": "https://docs.wise.com/api-docs/api-reference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://wise.com"
+  },
+  {
+    "name": "Checkout.com",
+    "description": "Global payments platform API for card processing, alternative payments, and fraud prevention. Strong in Europe, Middle East, and Asia-Pacific.",
+    "category": "Fintech",
+    "url": "https://www.checkout.com/docs/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.checkout.com"
+  },
+  {
+    "name": "MX Technologies",
+    "description": "Financial data aggregation API connecting to 16,000+ financial institutions. Account verification, transaction enrichment, and money insights.",
+    "category": "Fintech",
+    "url": "https://docs.mx.com/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.mx.com"
+  },
+  {
+    "name": "Yodlee",
+    "description": "Bank-level financial data aggregation API from Envestnet. Account data, transaction history, investment data, and income verification.",
+    "category": "Fintech",
+    "url": "https://developer.yodlee.com/api-reference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.yodlee.com"
+  },
+  {
+    "name": "Finicity (Mastercard Open Banking)",
+    "description": "Open banking API for account aggregation, income verification, and cash flow analytics. Powers mortgage and lending decisions.",
+    "category": "Fintech",
+    "url": "https://developer.mastercard.com/open-banking-us/documentation/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.mastercard.com/us/en/business/issuers/open-banking.html"
+  },
+  {
+    "name": "Tink (Visa Open Banking)",
+    "description": "European open banking API for account aggregation, payment initiation, and financial data. Connects 3,400+ banks across Europe.",
+    "category": "Fintech",
+    "url": "https://docs.tink.com/api",
+    "auth": "OAuth",
+    "https": true,
+    "free_tier": false,
+    "source": "https://tink.com"
+  },
+  {
+    "name": "Moralis",
+    "description": "Web3 development API for blockchain data across EVM chains. Wallet balances, NFTs, transactions, DeFi positions, and real-time streams.",
+    "category": "Fintech",
+    "url": "https://docs.moralis.io/web3-data-api/reference/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://moralis.io"
+  },
+  {
+    "name": "Interactive Brokers API",
+    "description": "Broker API for trading stocks, options, futures, forex, and bonds. REST (Client Portal) and FIX/TWS APIs for automated trading strategies.",
+    "category": "Fintech",
+    "url": "https://ibkrcampus.com/ibkr-api-page/cpapi-v1/",
+    "auth": "OAuth",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.interactivebrokers.com"
+  },
+  {
+    "name": "Chargebee",
+    "description": "Subscription billing and revenue management API. Manage plans, coupons, invoices, and revenue recognition for SaaS businesses.",
+    "category": "Fintech",
+    "url": "https://apidocs.chargebee.com/docs/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.chargebee.com"
+  },
+  {
+    "name": "Recurly",
+    "description": "Subscription management API for recurring billing, dunning management, and revenue recovery. Supports 20+ payment gateways.",
+    "category": "Fintech",
+    "url": "https://recurly.com/developers/api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://recurly.com"
+  },
+  {
+    "name": "Paddle",
+    "description": "Payments infrastructure API for SaaS companies. Acts as merchant of record handling tax, VAT, and compliance globally.",
+    "category": "Fintech",
+    "url": "https://developer.paddle.com/api-reference/overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.paddle.com"
+  },
+  {
+    "name": "Lemon Squeezy",
+    "description": "Payments and subscriptions API for digital products and SaaS. Built-in tax compliance, license keys, and affiliate system.",
+    "category": "Fintech",
+    "url": "https://docs.lemonsqueezy.com/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.lemonsqueezy.com"
+  },
+  {
+    "name": "Persona",
+    "description": "Identity verification and KYC API. Document verification, selfie checks, database verification, and continuous monitoring for compliance.",
+    "category": "Fintech",
+    "url": "https://docs.withpersona.com/reference/api-overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://withpersona.com"
+  },
+  {
+    "name": "Onfido",
+    "description": "AI-powered identity verification API. Document and biometric checks with global coverage for KYC/AML compliance workflows.",
+    "category": "Fintech",
+    "url": "https://documentation.onfido.com/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://onfido.com"
+  },
+  {
+    "name": "Jumio",
+    "description": "Automated identity verification and eKYC API. Real-time document authentication and biometric liveness detection in 200+ countries.",
+    "category": "Fintech",
+    "url": "https://docs.jumio.com/production/Content/References/API/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.jumio.com"
+  },
+  {
+    "name": "Sardine",
+    "description": "Fraud prevention and compliance API for fintech. Device intelligence, behavior biometrics, and real-time risk scoring for onboarding and payments.",
+    "category": "Fintech",
+    "url": "https://docs.sardine.ai/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.sardine.ai"
+  },
+  {
+    "name": "Stripe Tax",
+    "description": "Automated global tax calculation and filing API. Compute, collect, and report sales tax, VAT, and GST across 40+ countries.",
+    "category": "Fintech",
+    "url": "https://docs.stripe.com/tax/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://stripe.com/tax"
+  },
+  {
+    "name": "Open Exchange Rates",
+    "description": "Reliable currency exchange rates and conversion API. 200+ currencies with historical data going back to 1999.",
+    "category": "Fintech",
+    "url": "https://docs.openexchangerates.org/reference/api-introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://openexchangerates.org"
+  },
+  {
+    "name": "Render API",
+    "description": "Deploy and manage cloud services on Render via REST API. Trigger deploys, manage services, environment variables, and databases.",
+    "category": "DevTools",
+    "url": "https://api-docs.render.com/reference/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://render.com"
+  },
+  {
+    "name": "Fly.io API",
+    "description": "Global app deployment API. Deploy Docker containers to 30+ regions with machines API, volumes, networking, and autoscaling.",
+    "category": "DevTools",
+    "url": "https://fly.io/docs/machines/api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://fly.io"
+  },
+  {
+    "name": "Deno Deploy API",
+    "description": "Serverless JavaScript/TypeScript edge deployment API. Deploy Deno scripts globally with CI/CD integration and custom domains.",
+    "category": "DevTools",
+    "url": "https://docs.deno.com/deploy/api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://deno.com/deploy"
+  },
+  {
+    "name": "PlanetScale API",
+    "description": "Serverless MySQL-compatible database with branching workflow. API for managing databases, branches, deploy requests, and schema changes.",
+    "category": "DevTools",
+    "url": "https://api-docs.planetscale.com/reference/overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://planetscale.com"
+  },
+  {
+    "name": "Neon",
+    "description": "Serverless Postgres with branching. Scale to zero, instant branches for dev/test, and API for managing projects, branches, and databases.",
+    "category": "DevTools",
+    "url": "https://api-docs.neon.tech/reference/getting-started-with-neon-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://neon.tech"
+  },
+  {
+    "name": "Turso",
+    "description": "SQLite at the edge via libSQL API. Distributed SQLite databases with multi-region replication and HTTP API for serverless apps.",
+    "category": "DevTools",
+    "url": "https://docs.turso.tech/api-reference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://turso.tech"
+  },
+  {
+    "name": "Xata",
+    "description": "Serverless database API combining Postgres, search, and analytics. Schema management, full-text search, and vector support in one platform.",
+    "category": "DevTools",
+    "url": "https://xata.io/docs/rest-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://xata.io"
+  },
+  {
+    "name": "CockroachDB Serverless API",
+    "description": "Distributed SQL database API. Deploy globally consistent Postgres-compatible databases with automatic scaling and zero downtime.",
+    "category": "DevTools",
+    "url": "https://www.cockroachlabs.com/docs/cockroachcloud/cloud-api.html",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.cockroachlabs.com"
+  },
+  {
+    "name": "Clerk",
+    "description": "Drop-in authentication and user management API. Handles sign-in, MFA, organizations, and session management with pre-built UI components.",
+    "category": "DevTools",
+    "url": "https://clerk.com/docs/reference/backend-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://clerk.com"
+  },
+  {
+    "name": "WorkOS",
+    "description": "Enterprise authentication API for SSO (SAML/OIDC), Directory Sync, SCIM, and Admin Portal. Sell to enterprises faster.",
+    "category": "DevTools",
+    "url": "https://workos.com/docs/reference/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://workos.com"
+  },
+  {
+    "name": "Descope",
+    "description": "No-code authentication platform API for passwordless login, MFA, SSO, and passkeys. Drag-and-drop flow builder with SDK support.",
+    "category": "DevTools",
+    "url": "https://docs.descope.com/api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.descope.com"
+  },
+  {
+    "name": "Resend",
+    "description": "Developer-first transactional email API built for modern applications. Send with custom domains, React email templates, and webhooks.",
+    "category": "DevTools",
+    "url": "https://resend.com/docs/api-reference/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://resend.com"
+  },
+  {
+    "name": "Amazon SES",
+    "description": "AWS cloud email sending service for transactional, marketing, and bulk email. Pay-per-email pricing with delivery analytics.",
+    "category": "DevTools",
+    "url": "https://docs.aws.amazon.com/ses/latest/APIReference/",
+    "auth": "awsSigv4",
+    "https": true,
+    "free_tier": true,
+    "source": "https://aws.amazon.com/ses/"
+  },
+  {
+    "name": "Loops",
+    "description": "Email platform API designed for SaaS products. Send transactional emails, onboarding sequences, and newsletters to your users.",
+    "category": "DevTools",
+    "url": "https://loops.so/docs/api-reference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://loops.so"
+  },
+  {
+    "name": "Grafana Cloud API",
+    "description": "Managed observability stack API. Metrics (Prometheus), logs (Loki), traces (Tempo), and alerting via unified Grafana interface.",
+    "category": "DevTools",
+    "url": "https://grafana.com/docs/grafana-cloud/developer-resources/api-reference/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://grafana.com/products/cloud/"
+  },
+  {
+    "name": "BetterStack (Logtail)",
+    "description": "Uptime monitoring and log management API. Monitor HTTP endpoints, ping checks, on-call routing, and structured log ingestion.",
+    "category": "DevTools",
+    "url": "https://betterstack.com/docs/uptime/api/getting-started-with-uptime-api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://betterstack.com"
+  },
+  {
+    "name": "Axiom",
+    "description": "Serverless log management and observability API. Ingest billions of events, query with APL, and monitor with dashboards. Zero-ops.",
+    "category": "DevTools",
+    "url": "https://axiom.co/docs/restapi/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://axiom.co"
+  },
+  {
+    "name": "GitHub Actions API",
+    "description": "Automate GitHub Actions workflows via REST API. Trigger runs, manage secrets, artifacts, and self-hosted runners programmatically.",
+    "category": "DevTools",
+    "url": "https://docs.github.com/en/rest/actions",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://github.com/features/actions"
+  },
+  {
+    "name": "Buildkite",
+    "description": "CI/CD platform API for managing pipelines, builds, agents, and artifacts. Hybrid model runs agents on your own infrastructure.",
+    "category": "DevTools",
+    "url": "https://buildkite.com/docs/apis/rest-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://buildkite.com"
+  },
+  {
+    "name": "Depot",
+    "description": "Remote Docker build API. 10-40x faster Docker builds using persistent caching and high-performance Intel/ARM builders.",
+    "category": "DevTools",
+    "url": "https://depot.dev/docs/api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://depot.dev"
+  },
+  {
+    "name": "LaunchDarkly",
+    "description": "Feature flag management API for controlled rollouts, A/B testing, and kill switches. Real-time flag delivery with targeting rules.",
+    "category": "DevTools",
+    "url": "https://apidocs.launchdarkly.com/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://launchdarkly.com"
+  },
+  {
+    "name": "Flagsmith",
+    "description": "Open-source feature flag and remote config API. Manage features with segments, multivariate flags, and integrations. Self-host or cloud.",
+    "category": "DevTools",
+    "url": "https://docs.flagsmith.com/clients/rest",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://flagsmith.com"
+  },
+  {
+    "name": "PostHog",
+    "description": "Product analytics and feature flags API. Capture events, manage feature flags, A/B tests, session recordings, and user surveys.",
+    "category": "DevTools",
+    "url": "https://posthog.com/docs/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://posthog.com"
+  },
+  {
+    "name": "Unleash",
+    "description": "Open-source feature toggle API with enterprise controls. Gradual rollouts, strategies, metrics, and SDKs for any language.",
+    "category": "DevTools",
+    "url": "https://docs.getunleash.io/reference/api/unleash",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.getunleash.io"
+  },
+  {
+    "name": "Sanity",
+    "description": "Headless CMS with real-time API (GROQ). Structured content platform with live collaboration and portable text for any front-end.",
+    "category": "DevTools",
+    "url": "https://www.sanity.io/docs/http-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.sanity.io"
+  },
+  {
+    "name": "Strapi",
+    "description": "Open-source headless CMS REST and GraphQL API. Self-host or use Strapi Cloud. Customizable content types with role-based access.",
+    "category": "DevTools",
+    "url": "https://docs.strapi.io/dev-docs/api/rest",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://strapi.io"
+  },
+  {
+    "name": "Hygraph (formerly GraphCMS)",
+    "description": "GraphQL-native headless CMS API. Federated content infrastructure with content modeling, localization, and webhooks.",
+    "category": "DevTools",
+    "url": "https://hygraph.com/docs/api-reference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://hygraph.com"
+  },
+  {
+    "name": "Payload CMS",
+    "description": "Open-source headless CMS and application framework with REST and GraphQL APIs. Code-first content modeling with TypeScript.",
+    "category": "DevTools",
+    "url": "https://payloadcms.com/docs/rest-api/overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://payloadcms.com"
+  },
+  {
+    "name": "Ably",
+    "description": "Realtime messaging API for pub/sub, presence, and history. Globally distributed with guaranteed message ordering and delivery.",
+    "category": "DevTools",
+    "url": "https://ably.com/docs/api/rest-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://ably.com"
+  },
+  {
+    "name": "PartyKit",
+    "description": "Realtime collaborative applications API built on Cloudflare Workers and Durable Objects. WebSocket rooms for multiplayer and sync.",
+    "category": "DevTools",
+    "url": "https://docs.partykit.io/reference/partysocket-api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://partykit.io"
+  },
+  {
+    "name": "Inngest",
+    "description": "Event-driven function scheduling API. Run reliable background jobs, scheduled functions, and multi-step workflows with automatic retries.",
+    "category": "DevTools",
+    "url": "https://www.inngest.com/docs/api/serve",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.inngest.com"
+  },
+  {
+    "name": "Temporal",
+    "description": "Durable workflow orchestration API. Run fault-tolerant long-running workflows with retries, timers, and signals in any language.",
+    "category": "DevTools",
+    "url": "https://docs.temporal.io/develop/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://temporal.io"
+  },
+  {
+    "name": "Hookdeck",
+    "description": "Webhook management API. Receive, filter, transform, and retry webhooks reliably. Includes ingest, routing, and observability.",
+    "category": "DevTools",
+    "url": "https://hookdeck.com/api-ref",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://hookdeck.com"
+  },
+  {
+    "name": "Trigger.dev",
+    "description": "Open-source background jobs and workflow API. Write long-running tasks in code with retry logic, scheduling, and real-time observability.",
+    "category": "DevTools",
+    "url": "https://trigger.dev/docs/api-reference/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://trigger.dev"
+  },
+  {
+    "name": "Cloudflare AI",
+    "description": "Run AI inference at the edge via Cloudflare Workers AI API. Access LLMs, image generation, embeddings, and speech recognition globally.",
+    "category": "AI/ML",
+    "url": "https://developers.cloudflare.com/workers-ai/models/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://ai.cloudflare.com"
+  },
+  {
+    "name": "Nvidia NIM",
+    "description": "NVIDIA Inference Microservices API for running optimized AI models. Llama, Mistral, Stable Diffusion, and more on NVIDIA GPUs.",
+    "category": "AI/ML",
+    "url": "https://docs.api.nvidia.com/nim/reference/llm-apis",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://build.nvidia.com"
+  },
+  {
+    "name": "Google Imagen API",
+    "description": "Google's state-of-the-art text-to-image generation API via Vertex AI. Photorealistic and artistic image generation with editing capabilities.",
+    "category": "AI/ML",
+    "url": "https://cloud.google.com/vertex-ai/generative-ai/docs/image/overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://cloud.google.com/vertex-ai"
+  },
+  {
+    "name": "Tavily",
+    "description": "AI-optimized search API built for LLM agents. Returns clean, relevant search results with source citations for RAG and research agents.",
+    "category": "AI/ML",
+    "url": "https://docs.tavily.com/docs/tavily-api/rest_api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://tavily.com"
+  },
+  {
+    "name": "Exa AI",
+    "description": "Neural search API for LLMs. Find and retrieve web content using meaning-based search with clean text extraction for AI pipelines.",
+    "category": "AI/ML",
+    "url": "https://docs.exa.ai/reference/contents",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://exa.ai"
+  },
+  {
+    "name": "Browserbase",
+    "description": "Headless browser infrastructure API for AI agents. Run Playwright/Puppeteer at scale with stealth, proxies, and session recording.",
+    "category": "DevTools",
+    "url": "https://docs.browserbase.com/introduction",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://browserbase.com"
+  },
+  {
+    "name": "E2B",
+    "description": "Secure cloud sandboxes API for AI code execution. Run AI-generated code safely in isolated environments with file system and internet access.",
+    "category": "DevTools",
+    "url": "https://e2b.dev/docs",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://e2b.dev"
+  },
+  {
+    "name": "Upstash QStash",
+    "description": "HTTP-based message queue and scheduler API. Publish messages, schedule tasks, and handle retries for serverless applications.",
+    "category": "DevTools",
+    "url": "https://upstash.com/docs/qstash/api/messages/create",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://upstash.com"
+  },
+  {
+    "name": "Tinybird",
+    "description": "Real-time analytics API platform. Publish high-volume event data and expose it as low-latency REST API endpoints for product analytics.",
+    "category": "DevTools",
+    "url": "https://www.tinybird.co/docs/api-reference",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.tinybird.co"
+  },
+  {
+    "name": "Langfuse",
+    "description": "LLM observability and prompt management API. Trace LLM calls, evaluate outputs, manage prompts, and monitor AI application quality.",
+    "category": "AI/ML",
+    "url": "https://api.reference.langfuse.com/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://langfuse.com"
+  },
+  {
+    "name": "LlamaIndex Cloud",
+    "description": "Managed RAG pipeline API. Parse documents, build indexes, and query data with LlamaIndex infrastructure without managing servers.",
+    "category": "AI/ML",
+    "url": "https://docs.cloud.llamaindex.ai/llamacloud/getting_started/api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://cloud.llamaindex.ai"
+  },
+  {
+    "name": "Vapi",
+    "description": "Voice AI API for building phone call agents. Make and receive calls with custom AI voice agents, STT, TTS, and real-time conversation.",
+    "category": "AI/ML",
+    "url": "https://docs.vapi.ai/api-reference/swagger",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://vapi.ai"
+  },
+  {
+    "name": "Retell AI",
+    "description": "AI voice agent API for phone calls. Build and deploy voice bots with low latency, interruption handling, and custom LLM integration.",
+    "category": "AI/ML",
+    "url": "https://docs.retellai.com/api-references/create-call",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": false,
+    "source": "https://www.retellai.com"
+  },
+  {
+    "name": "Hume AI",
+    "description": "Empathic AI API that understands emotional expression in voice, face, and language. Emotional intelligence for voice agents and chatbots.",
+    "category": "AI/ML",
+    "url": "https://dev.hume.ai/reference/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://hume.ai"
+  },
+  {
+    "name": "Jina AI",
+    "description": "Multimodal AI API for embeddings, reranking, and grounded search. Reader API converts web URLs to clean markdown for LLM ingestion.",
+    "category": "AI/ML",
+    "url": "https://jina.ai/api-dashboard",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://jina.ai"
+  },
+  {
+    "name": "Voyage AI",
+    "description": "Best-in-class embedding models API optimized for retrieval and RAG. Domain-specific models for code, legal, and finance text.",
+    "category": "AI/ML",
+    "url": "https://docs.voyageai.com/reference/embeddings-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.voyageai.com"
+  },
+  {
+    "name": "Novita AI",
+    "description": "Affordable AI inference API for 100+ open-source models. Image generation, LLM inference, and video AI at competitive per-token pricing.",
+    "category": "AI/ML",
+    "url": "https://docs.novia.ai/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://novita.ai"
+  },
+  {
+    "name": "Railway API",
+    "description": "Deploy applications, databases, and services via Railway GraphQL API. Manage environments, variables, deployments, and domains.",
+    "category": "DevTools",
+    "url": "https://docs.railway.app/reference/public-api",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://railway.app"
+  },
+  {
+    "name": "Courier",
+    "description": "Multi-channel notification API for email, SMS, push, Slack, and more. Single API for all notification channels with routing logic.",
+    "category": "DevTools",
+    "url": "https://www.courier.com/docs/reference/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.courier.com"
+  },
+  {
+    "name": "Novu",
+    "description": "Open-source notification infrastructure API. Manage in-app, email, SMS, push, and chat notifications with workflow engine.",
+    "category": "DevTools",
+    "url": "https://docs.novu.co/api-reference/overview",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://novu.co"
+  },
+  {
+    "name": "Cloudflare Workers API",
+    "description": "Deploy serverless functions at the edge via Cloudflare API. Manage Workers, KV storage, Durable Objects, and R2 object storage.",
+    "category": "DevTools",
+    "url": "https://developers.cloudflare.com/api/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://workers.cloudflare.com"
+  },
+  {
+    "name": "Checkly",
+    "description": "Monitoring as code API. Synthetic monitoring for APIs and web apps using Playwright. Schedule checks and get alerts on failures.",
+    "category": "DevTools",
+    "url": "https://www.checklyhq.com/docs/api-checks/",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.checklyhq.com"
+  },
+  {
+    "name": "Highlight.io",
+    "description": "Full-stack monitoring API for session replay, error tracking, and logs. Works across frontend and backend with OpenTelemetry.",
+    "category": "DevTools",
+    "url": "https://www.highlight.io/docs/general/product-features/logging/log-management",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://www.highlight.io"
+  },
+  {
+    "name": "Google Gemini API",
+    "description": "Google's multimodal Gemini API via Google AI Studio. Access Gemini 2.5 Pro, Flash, and experimental models with 1M context windows.",
+    "category": "AI/ML",
+    "url": "https://ai.google.dev/api/rest/v1beta/models",
+    "auth": "apiKey",
+    "https": true,
+    "free_tier": true,
+    "source": "https://ai.google.dev"
+  }
+]

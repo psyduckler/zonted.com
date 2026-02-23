@@ -1,0 +1,289 @@
+[
+  {
+    "name": "Cohere",
+    "description": "Cohere API - found on Postman API Network with 9 collections",
+    "category": "AI/ML",
+    "url": "https://www.postman.com/gold-zodiac-851076/controle-coherence-dpe-audit-public/collection/bfv1qqv/controle-coherence-dpe-audit",
+    "source": "postman"
+  },
+  {
+    "name": "LangChain",
+    "description": "LangChain API - found on Postman API Network with 2 collections",
+    "category": "AI/ML",
+    "url": "https://www.postman.com/regie-osano/llm-langchainproject/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Whisper",
+    "description": "Whisper API - found on Postman API Network with 14 collections",
+    "category": "AI/ML",
+    "url": "https://www.postman.com/warped-desert-243526/whisper-public/collection/6r9vmpl/whisper-api",
+    "source": "postman"
+  },
+  {
+    "name": "Amplitude",
+    "description": "Amplitude API - found on Postman API Network with 6 collections",
+    "category": "Analytics",
+    "url": "https://www.postman.com/amplitude-dev-docs/amplitude-developers/collection/2hjpzte/amplitude-analytics-apis",
+    "source": "postman"
+  },
+  {
+    "name": "Plausible",
+    "description": "Plausible API - found on Postman API Network with 2 collections",
+    "category": "Analytics",
+    "url": "https://www.postman.com/orange-eclipse-846149/hhs-s4-2122-wa-g6-yunus/collection/ew6rsul/plausible-analytics-stats",
+    "source": "postman"
+  },
+  {
+    "name": "Segment",
+    "description": "Segment API - found on Postman API Network with 33 collections",
+    "category": "Analytics",
+    "url": "https://www.postman.com/genexam/get/collection/mon65gd/segment-apis",
+    "source": "postman"
+  },
+  {
+    "name": "Keycloak",
+    "description": "Keycloak API - found on Postman API Network with 45 collections",
+    "category": "Authentication",
+    "url": "https://www.postman.com/expertflow/keycloak-authentication/collection/quqilwg/keycloak-springboot-adapter-demo",
+    "source": "postman"
+  },
+  {
+    "name": "Jenkins",
+    "description": "Jenkins API - found on Postman API Network with 41 collections",
+    "category": "CI/CD",
+    "url": "https://www.postman.com/api-evangelist/jenkins/collection/ee5046d/jenkins-capability",
+    "source": "postman"
+  },
+  {
+    "name": "Sanity",
+    "description": "Sanity API - found on Postman API Network with 5 collections",
+    "category": "CMS",
+    "url": "https://www.postman.com/chesslore/sanity-forwelfare-s-public-workspace/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Strapi",
+    "description": "Strapi API - found on Postman API Network with 56 collections",
+    "category": "CMS",
+    "url": "https://www.postman.com/recorrenciacheckout/strapi-course/collection/1s8maou/strapi-api",
+    "source": "postman"
+  },
+  {
+    "name": "Linode",
+    "description": "Linode API - found on Postman API Network with 3 collections",
+    "category": "Cloud",
+    "url": "https://www.postman.com/akamai/akamai-cloud/collection/nkts86f/linode-api-v4",
+    "source": "postman"
+  },
+  {
+    "name": "Render",
+    "description": "Render API - found on Postman API Network with 31 collections",
+    "category": "Cloud",
+    "url": "https://www.postman.com/render/render/collection/gaxxz4g/render-public-api",
+    "source": "postman"
+  },
+  {
+    "name": "Vultr",
+    "description": "Vultr API - found on Postman API Network with 2 collections",
+    "category": "Cloud",
+    "url": "https://www.postman.com/vultr-api/vultr-api-v2/collection/soddyfe/vultr-api-v2",
+    "source": "postman"
+  },
+  {
+    "name": "FullContact",
+    "description": "FullContact API - found on Postman API Network with 2 collections",
+    "category": "Data Enrichment",
+    "url": "https://www.postman.com/api-evangelist/fullcontact/collection/eprs1nq/fullcontact-apis",
+    "source": "postman"
+  },
+  {
+    "name": "CockroachDB",
+    "description": "CockroachDB API - found on Postman API Network with 2 collections",
+    "category": "Database",
+    "url": "https://www.postman.com/blonde-hairy-cockroaches/valetax-test/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Convex",
+    "description": "Convex API - found on Postman API Network with 2 collections",
+    "category": "Database",
+    "url": "https://www.postman.com/convex-interactive/finders-w0rkspace/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Fauna",
+    "description": "Fauna API - found on Postman API Network with 1 collections",
+    "category": "Database",
+    "url": "https://www.postman.com/warped-star-554865/adbms-faunadb/overview",
+    "source": "postman"
+  },
+  {
+    "name": "MongoDB",
+    "description": "MongoDB API - found on Postman API Network with 83 collections",
+    "category": "Database",
+    "url": "https://www.postman.com/postman/postman-team-collections/collection/ph4wmcj/mongodb-data-api",
+    "source": "postman"
+  },
+  {
+    "name": "Neon",
+    "description": "Neon API - found on Postman API Network with 38 collections",
+    "category": "Database",
+    "url": "https://www.postman.com/satusehat/satusehat-public/collection/pf0fdkq/09-use-case-neonatus",
+    "source": "postman"
+  },
+  {
+    "name": "OMDB",
+    "description": "OMDB API - found on Postman API Network with 13 collections",
+    "category": "Entertainment",
+    "url": "https://www.postman.com/movie-box/movie-box/collection/j4jxcqr/omdb",
+    "source": "postman"
+  },
+  {
+    "name": "US Census",
+    "description": "US Census API - found on Postman API Network with 7 collections",
+    "category": "Government",
+    "url": "https://www.postman.com/postman/us-2020-election/collection/cbbryzz/us-census-bureau",
+    "source": "postman"
+  },
+  {
+    "name": "Terraform",
+    "description": "Terraform API - found on Postman API Network with 1 collections",
+    "category": "Infrastructure",
+    "url": "https://www.postman.com/waffle-lab/hashicorp/collection/zkt5klx/hashicorp-terraform-cloud",
+    "source": "postman"
+  },
+  {
+    "name": "Grafana",
+    "description": "Grafana API - found on Postman API Network with 12 collections",
+    "category": "Monitoring",
+    "url": "https://www.postman.com/dark-desert-649950/prometheus-grafana-test/collection/9kfbrtg/prometheus",
+    "source": "postman"
+  },
+  {
+    "name": "Prometheus",
+    "description": "Prometheus API - found on Postman API Network with 10 collections",
+    "category": "Monitoring",
+    "url": "https://www.postman.com/oracledevs/verrazzano-1-x-apis/collection/wdd55hg/prometheus-http-api",
+    "source": "postman"
+  },
+  {
+    "name": "Google Places",
+    "description": "Google Places API - found on Postman API Network with 4 collections",
+    "category": "Places",
+    "url": "https://www.postman.com/red-resonance-5259/reviews/collection/u365m6u/google-places",
+    "source": "postman"
+  },
+  {
+    "name": "FCM",
+    "description": "FCM API - found on Postman API Network with 24 collections",
+    "category": "Push Notifications",
+    "url": "https://www.postman.com/androidgeorge/pdfmanager/collection/ruk49uw/fcm-topic",
+    "source": "postman"
+  },
+  {
+    "name": "Ably",
+    "description": "Ably API - found on Postman API Network with 7 collections",
+    "category": "Real-time",
+    "url": "https://www.postman.com/tecxar/wably/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Deno",
+    "description": "Deno API - found on Postman API Network with 22 collections",
+    "category": "Runtime",
+    "url": "https://www.postman.com/denosanthan-8100074/sky-flask-test/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Wolfram Alpha",
+    "description": "Wolfram Alpha API - found on Postman API Network with 4 collections",
+    "category": "Science",
+    "url": "https://www.postman.com/warped-shuttle-382899/wolfram-workspace-demo/collection/cq3p2mc/v1-simple",
+    "source": "postman"
+  },
+  {
+    "name": "Algolia",
+    "description": "Algolia API - found on Postman API Network with 2 collections",
+    "category": "Search",
+    "url": "https://www.postman.com/emporix/andi-start/collection/wqvduqu/algolia-search-and-write-keys",
+    "source": "postman"
+  },
+  {
+    "name": "Elasticsearch",
+    "description": "Elasticsearch API - found on Postman API Network with 49 collections",
+    "category": "Search",
+    "url": "https://www.postman.com/calltrigger/test-s-public-workspace/collection/qts4pyh/elasticsearch",
+    "source": "postman"
+  },
+  {
+    "name": "HIBP",
+    "description": "HIBP API - found on Postman API Network with 2 collections",
+    "category": "Security",
+    "url": "https://www.postman.com/tiaho-rest/haveibeenpwned/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Snyk",
+    "description": "Snyk API - found on Postman API Network with 6 collections",
+    "category": "Security",
+    "url": "https://www.postman.com/api-evangelist/snyk/collection/mppgu5u/snyk-api",
+    "source": "postman"
+  },
+  {
+    "name": "DHL",
+    "description": "DHL API - found on Postman API Network with 24 collections",
+    "category": "Shipping",
+    "url": "https://www.postman.com/grey-spaceship-7822/dhl/collection/zgjtde0/dhl",
+    "source": "postman"
+  },
+  {
+    "name": "EasyPost",
+    "description": "EasyPost API - found on Postman API Network with 5 collections",
+    "category": "Shipping",
+    "url": "https://www.postman.com/shippingcalc/shippingcalc-s-public-workspace/collection/0wwroen/buy-a-stamp-from-easypost",
+    "source": "postman"
+  },
+  {
+    "name": "FedEx",
+    "description": "FedEx API - found on Postman API Network with 26 collections",
+    "category": "Shipping",
+    "url": "https://www.postman.com/grey-comet-92855/kikilogistics/collection/pnp56yr/fedex",
+    "source": "postman"
+  },
+  {
+    "name": "USPS",
+    "description": "USPS API - found on Postman API Network with 26 collections",
+    "category": "Shipping",
+    "url": "https://www.postman.com/finance-demo/postal-meridian-shipping-services/collection/p31jjp9/usps-api",
+    "source": "postman"
+  },
+  {
+    "name": "Skyscanner",
+    "description": "Skyscanner API - found on Postman API Network with 6 collections",
+    "category": "Travel",
+    "url": "https://www.postman.com/cgt-matellio/flights-apis/collection/t5ibogy/skyscanner-b2b-apis-v3",
+    "source": "postman"
+  },
+  {
+    "name": "ChromaDB",
+    "description": "ChromaDB API - found on Postman API Network with 11 collections",
+    "category": "Vector DB",
+    "url": "https://www.postman.com/cinnachromareviews-8342167/cinnachroma-reviews-s-workspace/overview",
+    "source": "postman"
+  },
+  {
+    "name": "Qdrant",
+    "description": "Qdrant API - found on Postman API Network with 1 collections",
+    "category": "Vector DB",
+    "url": "https://www.postman.com/dark-zodiac-340992/alioth/collection/4z25sso/qdrant",
+    "source": "postman"
+  },
+  {
+    "name": "Weaviate",
+    "description": "Weaviate API - found on Postman API Network with 6 collections",
+    "category": "Vector DB",
+    "url": "https://www.postman.com/joinodin/storyden/collection/nosmlbu/weaviate",
+    "source": "postman"
+  }
+]
