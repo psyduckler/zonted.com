@@ -552,6 +552,33 @@ document.getElementById('recipe-clear-btn').addEventListener('click', () => {
   filterRecipes();
 });
 
+// ── Cook It Up button
+document.getElementById('cook-btn').addEventListener('click', () => {
+  const input = document.getElementById('cook-input');
+  const query = (input.value || '').trim();
+  if (!query) return;
+  // Switch to recipes view
+  currentView = 'recipes';
+  document.querySelectorAll('.view-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.view === 'recipes');
+  });
+  document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('view-recipes').classList.add('active');
+  document.getElementById('sidebar-recipes').style.display = '';
+  document.getElementById('sidebar-apis').style.display = 'none';
+  // Set search query and filter
+  searchQuery = query.toLowerCase();
+  document.getElementById('search').value = query;
+  document.getElementById('search').placeholder = 'Search recipes...';
+  filterRecipes();
+  // Scroll to recipes
+  document.getElementById('view-recipes').scrollIntoView({ behavior: 'smooth' });
+});
+// Also handle Enter key on cook input
+document.getElementById('cook-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('cook-btn').click();
+});
+
 // ── Mobile sidebar
 document.getElementById('mobile-toggle').addEventListener('click', () => {
   document.getElementById('sidebar').classList.toggle('open');
