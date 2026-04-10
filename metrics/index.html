@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <title>Tabiji Metrics — Zonted</title>
+    <meta name="description" content="Real performance data for Tabiji.ai — Google Analytics, Search Console, Instagram, YouTube, and Pinterest metrics over the last 90 days.">
+    <link rel="canonical" href="https://zonted.com/metrics/">
+    <meta property="og:title" content="Tabiji Metrics — Zonted">
+    <meta property="og:description" content="Real performance data for Tabiji.ai across all platforms — 90 day snapshot.">
+    <meta property="og:url" content="https://zonted.com/metrics/">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+    <style>
+        :root {
+            --bg: #fcfcfa;
+            --bg-surface: #f5f4f0;
+            --bg-raised: #edecea;
+            --border: #ddd;
+            --border-light: #e8e8e4;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --text-dim: #999;
+            --accent: #1a1a1a;
+            --green: #2a7a2a;
+            --blue: #369;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.85;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--text); text-decoration: underline; }
+        a:hover { color: #000; }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(252,252,250,0.95);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 32px; }
+
+        .nav-links a {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .page-header {
+            padding: 48px 0 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .updated-badge {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            background: var(--bg-surface);
+            padding: 3px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        /* Summary cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 2.5rem;
+        }
+
+        .summary-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .summary-card .value {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .summary-card .label {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 4px;
+        }
+
+        /* Sections */
+        .metric-section {
+            margin-bottom: 3rem;
+        }
+
+        .metric-section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metric-section h2 .icon {
+            font-size: 1.2rem;
+        }
+
+        .metric-section .section-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        /* Metric rows */
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .metric-value {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Top 5 list */
+        .top-list {
+            list-style: none;
+        }
+
+        .top-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-light);
+            align-items: flex-start;
+        }
+
+        .top-item:last-child { border-bottom: none; }
+
+        .top-rank {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            flex: 0 0 24px;
+            padding-top: 2px;
+        }
+
+        .top-info {
+            flex: 1;
+        }
+
+        .top-title {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 2px;
+        }
+
+        .top-title a {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        .top-stats {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .top-stats span {
+            margin-right: 12px;
+        }
+
+        .channel-badge {
+            display: inline-block;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: var(--bg-raised);
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        /* Divider between overview and top list */
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0;
+        }
+
+        .subsection-label {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-top {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid { grid-template-columns: 1fr 1fr; }
+            .page-header h1 { font-size: 1.6rem; }
+        }
+
+        @media (max-width: 480px) {
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Zonted.</a>
+            <div class="nav-links">
+                <a href="/reviews/">Reviews</a>
+                <a href="/posts/">Posts</a>
+                <a href="/metrics/" class="active">Metrics</a>
+                <a href="/about/">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Tabiji Metrics</h1>
+            <p>Real performance data for <a href="https://tabiji.ai">tabiji.ai</a> — an AI-powered travel site running on automated content pipelines. All data from the last 90 days.</p>
+            <div class="updated-badge">Updated April 10, 2026</div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="value">4,216</div>
+                <div class="label">GA Sessions</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">6.23M</div>
+                <div class="label">IG Views (90d)</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">2,233</div>
+                <div class="label">IG Followers</div>
+            </div>
+        </div>
+
+        <!-- Google Analytics -->
+        <div class="metric-section">
+            <h2><span class="icon">📊</span> Google Analytics (90d)</h2>
+            <p class="section-desc">Website traffic for tabiji.ai from Google Analytics 4.</p>
+
+            <div class="metric-row">
+                <span class="metric-label">Sessions</span>
+                <span class="metric-value">4,216</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Users</span>
+                <span class="metric-value">3,301</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Pageviews</span>
+                <span class="metric-value">10,362</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Avg. Session Duration</span>
+                <span class="metric-value">3m 34s</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Engagement Rate</span>
+                <span class="metric-value">28.8%</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Channels</div>
+            <div class="metric-row">
+                <span class="metric-label">Direct</span>
+                <span class="metric-value">2,795 sessions</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Organic Search</span>
+                <span class="metric-value">556 sessions</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Organic Social</span>
+                <span class="metric-value">367 sessions</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Unassigned</span>
+                <span class="metric-value">267 sessions</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Referral</span>
+                <span class="metric-value">229 sessions</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Pages by Views</div>
+            <ul class="top-list">
+                <li class="top-item">
+                    <span class="top-rank">1</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/">Homepage</a></div>
+                        <div class="top-stats"><span>2,189 views</span> <span>1,025 sessions</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">2</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/plan">Trip Planner</a></div>
+                        <div class="top-stats"><span>492 views</span> <span>329 sessions</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">3</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/">Popular Picks</a></div>
+                        <div class="top-stats"><span>415 views</span> <span>153 sessions</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">4</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/find/">Find</a></div>
+                        <div class="top-stats"><span>410 views</span> <span>66 sessions</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">5</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/success">Success</a></div>
+                        <div class="top-stats"><span>318 views</span> <span>225 sessions</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Google Search Console -->
+        <div class="metric-section">
+            <h2><span class="icon">🔍</span> Google Search Console (90d)</h2>
+            <p class="section-desc">Organic search performance for tabiji.ai.</p>
+
+            <div class="metric-row">
+                <span class="metric-label">Clicks</span>
+                <span class="metric-value">248</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Impressions</span>
+                <span class="metric-value">66,080</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">CTR</span>
+                <span class="metric-value">0.38%</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Avg. Position</span>
+                <span class="metric-value">10.6</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Pages by Clicks</div>
+            <ul class="top-list">
+                <li class="top-item">
+                    <span class="top-rank">1</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/">tabiji.ai</a></div>
+                        <div class="top-stats"><span>28 clicks</span> <span>359 impressions</span> <span>Pos 4.4</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">2</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/tallinn-rooftop-bars/">Tallinn Rooftop Bars</a></div>
+                        <div class="top-stats"><span>6 clicks</span> <span>405 impressions</span> <span>Pos 7.9</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">3</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/barcelona-night-markets/">Barcelona Night Markets</a></div>
+                        <div class="top-stats"><span>3 clicks</span> <span>59 impressions</span> <span>Pos 6.9</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">4</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/beijing-food-halls/">Beijing Food Halls</a></div>
+                        <div class="top-stats"><span>3 clicks</span> <span>34 impressions</span> <span>Pos 6.9</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">5</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/casablanca-bookshops/">Casablanca Bookshops</a></div>
+                        <div class="top-stats"><span>3 clicks</span> <span>43 impressions</span> <span>Pos 9.5</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Instagram -->
+        <div class="metric-section">
+            <h2><span class="icon">📸</span> Instagram (90d)</h2>
+            <p class="section-desc">@<a href="https://instagram.com/tabiji.ai">tabiji.ai</a> — automated travel reels produced by AI agents.</p>
+
+            <div class="metric-row">
+                <span class="metric-label">Followers</span>
+                <span class="metric-value">2,233</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Total Media</span>
+                <span class="metric-value">687</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Views (90d)</span>
+                <span class="metric-value">6,234,725</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Reach (90d)</span>
+                <span class="metric-value">1,981,438</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Accounts Engaged (90d)</span>
+                <span class="metric-value">55,678</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Total Interactions (90d)</span>
+                <span class="metric-value">115,106</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top Recent Reels by Views</div>
+            <ul class="top-list">
+                <li class="top-item">
+                    <span class="top-rank">1</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DWzKJTYkyp_/">His badge is fake. Red Square, Moscow police. 🇷🇺</a></div>
+                        <div class="top-stats"><span>38,650 views</span> <span>17 likes</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">2</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DWuB_kbDnV1/">The #1 mistake tourists make in Paris 🇫🇷</a></div>
+                        <div class="top-stats"><span>11,977 views</span> <span>16 likes</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">3</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DWzCoWzkoVS/">One second you have it. La Rambla phone grab. 🇪🇸</a></div>
+                        <div class="top-stats"><span>7,428 views</span> <span>4 likes</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">4</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DW7LlrwjIwq/">Putting your towel on the private beach in Nice? 🇫🇷</a></div>
+                        <div class="top-stats"><span>5,174 views</span> <span>5 likes</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">5</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DWwfPFmjcSQ/">Barcelona airport rental lot — check your car 🇪🇸</a></div>
+                        <div class="top-stats"><span>4,338 views</span> <span>5 likes</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- YouTube -->
+        <div class="metric-section">
+            <h2><span class="icon">▶️</span> YouTube</h2>
+            <p class="section-desc">@<a href="https://youtube.com/@tabijiai">tabijiai</a> — AI-generated travel shorts.</p>
+
+            <div class="metric-row">
+                <span class="metric-label">Subscribers</span>
+                <span class="metric-value">46</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Videos</span>
+                <span class="metric-value">498</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Channel Views</span>
+                <span class="metric-value">189,934</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Shorts by Views</div>
+            <ul class="top-list">
+                <li class="top-item">
+                    <span class="top-rank">1</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://youtube.com/shorts/hfDAw5vf2h0">Buying Fake Tartan Souvenirs in Scotland</a></div>
+                        <div class="top-stats"><span>17K views</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">2</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://youtube.com/shorts/C48p27KXjFQ">The scam every tourist falls for in Bali 🇮🇩</a></div>
+                        <div class="top-stats"><span>9.4K views</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">3</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://youtube.com/shorts/WoDT5e6xBlU">3 Restaurant Red Flags in Lisbon 🚩</a></div>
+                        <div class="top-stats"><span>3K views</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">4</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://youtube.com/shorts/iV207rs5vBQ">The #1 mistake tourists make in Rome</a></div>
+                        <div class="top-stats"><span>2.9K views</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">5</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://youtube.com/shorts/0EKsCkGELvA">The #2 Mistake Tourists Make in Taipei 🇹🇼</a></div>
+                        <div class="top-stats"><span>2.7K views</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Pinterest -->
+        <div class="metric-section">
+            <h2><span class="icon">📌</span> Pinterest (90d)</h2>
+            <p class="section-desc">@<a href="https://pinterest.com/tabijiai">tabijiai</a> — travel pins and infographics.</p>
+
+            <div class="metric-row">
+                <span class="metric-label">Pins</span>
+                <span class="metric-value">2,675</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Boards</span>
+                <span class="metric-value">8</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Monthly Views</span>
+                <span class="metric-value">16,129</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Impressions (90d)</span>
+                <span class="metric-value">16,205</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Saves (90d)</span>
+                <span class="metric-value">74</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Clicks (90d)</span>
+                <span class="metric-value">909</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Pins by Impressions</div>
+            <ul class="top-list">
+                <li class="top-item">
+                    <span class="top-rank">1</span>
+                    <div class="top-info">
+                        <div class="top-title">POV: you just landed in Bangkok. It's 1975.</div>
+                        <div class="top-stats"><span>1,193 impressions</span> <span>4 saves</span> <span>21 clicks</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">2</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DV45dYekiJZ/">Instagram Reel cross-post</a></div>
+                        <div class="top-stats"><span>329 impressions</span> <span>2 saves</span> <span>5 clicks</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">3</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DWHso6oglI4/">Instagram Reel cross-post</a></div>
+                        <div class="top-stats"><span>252 impressions</span> <span>0 saves</span> <span>7 clicks</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">4</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/p/DU1bFXQEt1U/">Instagram post cross-post</a></div>
+                        <div class="top-stats"><span>237 impressions</span> <span>0 saves</span> <span>7 clicks</span></div>
+                    </div>
+                </li>
+                <li class="top-item">
+                    <span class="top-rank">5</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="https://www.instagram.com/reel/DV44h7eCkvv/">Instagram Reel cross-post</a></div>
+                        <div class="top-stats"><span>229 impressions</span> <span>2 saves</span> <span>28 clicks</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">&copy; 2026 Bernard Huang &middot; zonted.com</div>
+        </div>
+    </footer>
+</body>
+</html>
