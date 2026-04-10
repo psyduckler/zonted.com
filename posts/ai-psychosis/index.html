@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <title>AI Psychosis — Zonted</title>
+    <meta name="description" content="AI tools don't save you time. They raise the ceiling on what feels possible, and you fill the gap with more work. Here's what that actually feels like from the inside.">
+    <link rel="canonical" href="https://zonted.com/posts/ai-psychosis/">
+    <meta property="og:title" content="AI Psychosis">
+    <meta property="og:description" content="AI tools don't save you time. They raise the ceiling on what feels possible, and you fill the gap with more work. Here's what that actually feels like from the inside.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/tabiji-owl-logo.png">
+    <meta property="og:url" content="https://zonted.com/posts/ai-psychosis/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-04-10T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Psychosis">
+    <meta name="twitter:description" content="AI tools don't save you time. They raise the ceiling on what feels possible, and you fill the gap with more work. Here's what that actually feels like from the inside.">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"AI Psychosis","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-10","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/ai-psychosis/","description":"AI tools don't save you time. They raise the ceiling on what feels possible, and you fill the gap with more work. Here's what that actually feels like from the inside."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"AI Psychosis"}]}
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; background: var(--bg); color: var(--text); font-feature-settings: 'kern' 1, 'liga' 1; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 660px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); }
+        .article-meta { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .back-link { font-family: 'Inter', system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .back-link:hover { color: var(--text); }
+        .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+
+    .toc-sidebar { padding-top: 2rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+    .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+    .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+    .toc-sidebar li { margin-bottom: 0.4rem; }
+    .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; transition: color 0.2s; }
+    .toc-sidebar a:hover { color: var(--text); }
+    .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+    .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+    .toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+    .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter',system-ui,sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+    .toc-mobile-toggle .toc-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; }
+    .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+    .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; border-top: 1px solid var(--border); }
+    .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+    .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+    .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter',system-ui,sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+    .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; }
+    .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+    .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+    .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+    @media (max-width: 900px) {
+        .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+        .toc-sidebar { display: none; }
+        .toc-mobile-wrapper { display: block; }
+        .article-content { max-width: 100%; width: 100%; }
+        .content-wrapper .article-content .article-container { padding: 0.5rem 1.25rem 2rem; }
+    }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Zonted.</a>
+            <div class="nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+            </div>
+        </div>
+    </nav>
+<div style="max-width:660px;margin:1.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" class="back-link">&larr; Back to Posts</a>
+</div>
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open')">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-high">The High</a></li>
+            <li><a href="#the-paradox">The Paradox</a></li>
+            <li><a href="#arbitrage-anxiety">Arbitrage Anxiety</a></li>
+            <li><a href="#always-on">Always On</a></li>
+            <li><a href="#the-bet">The Bet</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#the-high">The High</a></li>
+        <li><a href="#the-paradox">The Paradox</a></li>
+        <li><a href="#arbitrage-anxiety">Arbitrage Anxiety</a></li>
+        <li><a href="#always-on">Always On</a></li>
+        <li><a href="#the-bet">The Bet</a></li>
+    </ul>
+</aside>
+<div class="article-content">
+<article class="article-container">
+    <h1>AI Psychosis</h1>
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+        <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+        <div>
+            <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">April 10, 2026 &middot; 5 min read</div>
+        </div>
+    </div>
+
+    <div class="article-body">
+
+        <p class="dropcap">There's a specific kind of madness that takes hold when you first realize what AI can actually do. Not the theoretical promise. The practical, ship-it-today kind of power. I've been calling it AI psychosis, and I think most people building right now have some version of it.</p>
+
+        <p>It starts innocently. You delegate something you used to spend hours on &mdash; writing SEO content, editing a video, researching a topic &mdash; and AI does it in minutes. Not perfectly, but well enough to ship. You feel a rush. Not because the output is amazing, but because you just got three hours of your life back. Then you fill those three hours with three new projects.</p>
+
+        <p>That's the first symptom.</p>
+
+        <h2 id="the-high">The High</h2>
+
+        <p>Before AI, I managed freelance writers, edited their drafts, coordinated publishing calendars. I had never touched video production. Now I generate SEO content, produce video reels, cross-post to multiple platforms, and use AI as a thought partner for strategy &mdash; all workflows I run solo.</p>
+
+        <p>The turning point wasn't any single tool. It was understanding that once you have a working recipe &mdash; a proven workflow that produces good output &mdash; you can automate the repetition. Build it once, bundle it into a skill, schedule it on a cron job, and scale it. Suddenly you're not doing the work anymore. You're designing systems that do the work.</p>
+
+        <p>That's when one person starts to feel like a team of twenty. And that feeling is intoxicating.</p>
+
+        <p>You look at what you shipped in a week and think: there's no way one person did all this. And you're right &mdash; one person didn't. One person plus a fleet of AI agents did. But you're the one who feels the high.</p>
+
+        <h2 id="the-paradox">The Paradox</h2>
+
+        <p>Here's the thing nobody warns you about: you get more tired, not less.</p>
+
+        <p>This makes no sense on the surface. The grunt work is gone. I'm not manually editing videos or uploading posts to six platforms or wrangling freelancers. AI handles all of that. So why am I more exhausted than when I was doing everything by hand?</p>
+
+        <p>Because what's left is pure strategy. All day, every day, I'm making decisions. What direction are we heading? Is this the right content angle? Is this format working? Should we double down or pivot? When you strip away the execution, all that remains is judgment. And judgment is exhausting in a way that mechanical work never is.</p>
+
+        <p>Execution gives your brain a break. You enter a flow state, you do the thing, you feel accomplished. Strategy never gives you a break. There's no flow state in constantly evaluating whether you're heading in the right direction. It's all signal, no autopilot.</p>
+
+        <p>I traded grunt work for decision fatigue, and the decision fatigue is worse.</p>
+
+        <h2 id="arbitrage-anxiety">Arbitrage Anxiety</h2>
+
+        <p>But the tiredness isn't even the hardest part. The hardest part is the anxiety.</p>
+
+        <p>There's a window right now &mdash; and I believe it's closing &mdash; where AI gives you insane leverage if you know what you're doing. The cost to produce written content has dropped to near zero. Platforms like TikTok, Instagram, and YouTube Shorts are actively looking the other way on AI-generated content, creating a loophole for anyone willing to produce at scale. Mainstream API providers are <a href="/posts/the-great-api-shutdown/">shutting off access</a>. The old gatekeepers are falling and the new ones haven't been built yet.</p>
+
+        <p>This isn't FOMO. FOMO is worrying you'll miss a party. This is arbitrage anxiety &mdash; you see an inefficiency in the market, you know it's temporary, and every hour you're not exploiting it feels like watching money evaporate.</p>
+
+        <p>The internet is being flooded with AI slop at a pace that is genuinely hard to comprehend. What works today might not work in six months. The loopholes will close. The platforms will crack down. The SEO landscape will get so crowded with near-zero-cost content that the margins will disappear.</p>
+
+        <p>So you work now. And tomorrow. And on weekends.</p>
+
+        <p>I told my fianc&eacute;e that we need to lock in. Time feels more precious now than it ever has. Hanging out with friends, going outside, doing anything that isn't building &mdash; it all feels like a luxury I can't afford right now. Not because I don't want those things. Because the window is closing and I can feel it.</p>
+
+        <h2 id="always-on">Always On</h2>
+
+        <p>This is what AI psychosis looks like in practice: 6am to 10pm, seven days a week.</p>
+
+        <p>Not because someone is forcing me. Not because I'll get fired if I stop. Because the possibility space expanded so dramatically that anything less than full commitment feels like negligence.</p>
+
+        <p>Before AI, progress felt linear. You practiced, you got better, you shipped incrementally. Your competitors were doing the same thing at roughly the same speed. There was a ceiling on how fast anyone could move, because everyone was bound by the same human bottleneck: time and attention.</p>
+
+        <p>That constraint is gone. The game changed from <em>who grinds hardest</em> to <em>who figures out the leverage fastest</em>. And this new game rewards obsession in a way the old one never did. A solo founder who understands AI automation can outproduce a team of ten who don't. That wasn't true two years ago. It is now.</p>
+
+        <p>So you stay on. Not because you're productive every minute &mdash; you're not &mdash; but because the cost of being off feels higher than the cost of burning out.</p>
+
+        <h2 id="the-bet">The Bet</h2>
+
+        <p>Here's the part that makes all of this surreal: it might not matter.</p>
+
+        <p>Frontier models keep getting more powerful. Companies are promising AGI. If that actually happens &mdash; real AGI, not marketing AGI &mdash; then everything I'm building right now could become irrelevant overnight. Whoever controls the most powerful models controls the game. It won't matter how clever your workflows were or how hard you hustled. The leverage I'm exploiting right now will be available to everyone, which means it'll be available to no one.</p>
+
+        <p>I know this. And I still wake up at 6am.</p>
+
+        <p>Because the alternative is worse. If I stop and AGI arrives, I lost nothing I wouldn't have lost anyway. But if I stop and AGI doesn't arrive &mdash; or arrives slower than the hype suggests &mdash; then I'll have watched everyone who kept building pull ahead while I stood still.</p>
+
+        <p>So you make the bet. You bet that what you're doing matters, while holding the uncomfortable awareness that it might not. You push through the fatigue and the anxiety and the always-on feeling because the regret of not trying would be worse than the exhaustion of trying.</p>
+
+        <p>I want to be done working for money. I want to catch lightning in a bottle one more time. And right now, building with AI feels like the highest-probability path to getting there.</p>
+
+        <p>That's AI psychosis. It's not irrational. It might not even be unhealthy &mdash; not yet. But it's real, and it's consuming, and if you're building with AI right now, you probably have it too.</p>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+    </div>
+</article>
+</div>
+</div>
+
+<!-- NAV_LINKS_START -->
+<div style="max-width:660px;margin:3rem auto 0;padding:0 2rem;text-align:center;">
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fzonted.com%2Fposts%2Fai-psychosis%2F&text=AI%20Psychosis" target="_blank" rel="noopener" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;color:var(--text-dim);text-decoration:none;">Share on X &rarr;</a>
+</div>
+<div style="max-width:660px;margin:2rem auto;padding:0 2rem;display:flex;justify-content:space-between;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">
+    <a href="/posts/makeugc/" style="color:var(--text-muted);text-decoration:none;">&larr; MakeUGC Review 2026: AI UGC Video Ads Worth $10...</a>
+    <a href="/posts/wavespeed/" style="color:var(--text-muted);text-decoration:none;">Wavespeed Review 2026: The Best AI Video API fo... &rarr;</a>
+</div>
+<!-- NAV_LINKS_END -->
+
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> &middot; <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
+<script>
+(function(){
+    var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    var sections = [];
+    tocLinks.forEach(function(link){
+        var id = link.getAttribute('href').replace('#','');
+        var el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el});
+    });
+    function update(){
+        var current = sections[0];
+        for(var i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current) document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+})();
+</script>
+</body>
+</html>
