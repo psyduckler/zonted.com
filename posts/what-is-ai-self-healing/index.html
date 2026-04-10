@@ -135,10 +135,15 @@
         .article-body strong { color: var(--text); }
         footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
         footer p { color: var(--text-muted); font-size: 0.85rem; }
+
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 660px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
         @media (max-width: 768px) {
-            .nav-links.open { display: flex; }
-            nav a}
-        .verdict-box { background: var(--bg-surface); border: 2px solid var(--green); border-radius: 6px; padding: 1.5rem 2rem; margin: 2rem 0; }
+.verdict-box { background: var(--bg-surface); border: 2px solid var(--green); border-radius: 6px; padding: 1.5rem 2rem; margin: 2rem 0; }
         .verdict-box h3 { color: var(--green); margin-bottom: 0.75rem; font-size: 1.1rem; }
         .verdict-box p { margin-bottom: 0.75rem; }
         .verdict-box p:last-child { margin-bottom: 0; }
@@ -229,15 +234,16 @@
 </head>
 <body>
 
-<nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
-<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
-    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
-    <div style="display:flex;gap:1.5rem;">
-        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
-        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
-    </div>
-</div>
-</nav>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Zonted.</a>
+            <div class="nav-links">
+                <a href="/reviews/">Reviews</a>
+                <a href="/posts/">Posts</a>
+                <a href="/about/">About</a>
+            </div>
+        </div>
+    </nav>
 <div style="max-width:660px;margin:0 auto;padding:1.5rem 2rem 0;">
     <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
 </div>

@@ -114,10 +114,15 @@
         .article-body strong { color: var(--text); }
         footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
         footer p { color: var(--text-muted); font-size: 0.85rem; }
+
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 660px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
         @media (max-width: 768px) {
-            .nav-links.open { display: flex; }
-            nav a}
-        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5rem 0 2rem; border-radius: 6px; border: 1px solid var(--border); }
+.table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5rem 0 2rem; border-radius: 6px; border: 1px solid var(--border); }
         .spec-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.95rem; }
         .spec-table th, .spec-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
         .spec-table th { background: var(--bg-surface); color: var(--text); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
@@ -213,15 +218,16 @@
 </head>
 <body>
 
-<nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
-<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
-    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
-    <div style="display:flex;gap:1.5rem;">
-        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
-        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
-    </div>
-</div>
-</nav>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Zonted.</a>
+            <div class="nav-links">
+                <a href="/reviews/">Reviews</a>
+                <a href="/posts/">Posts</a>
+                <a href="/about/">About</a>
+            </div>
+        </div>
+    </nav>
 <div style="max-width:660px;margin:0 auto;padding:1.5rem 2rem 0;">
     <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
 </div>

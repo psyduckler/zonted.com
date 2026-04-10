@@ -54,7 +54,12 @@
         html, body { width: 100%; }
         body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--text); font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; }
         img, video { max-width: 100%; height: auto; }
-        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(252,252,250,0.95); z-index: 100; border-bottom: 1px solid var(--border); }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 660px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
         .article-container { max-width: 660px; margin: 0 auto; padding: 7rem 2rem 3rem; }
         .article-container h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
         .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 3.5rem 0 1.25rem; letter-spacing: -0.01em; }
@@ -166,12 +171,12 @@
 </head>
 <body>
     <nav>
-        <div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
-            <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em;">Zonted.</a>
-            <div style="display:flex;gap:1.5rem;">
-                <a href="/reviews/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
-                <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
-                <a href="/about/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">About</a>
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Zonted.</a>
+            <div class="nav-links">
+                <a href="/reviews/">Reviews</a>
+                <a href="/posts/">Posts</a>
+                <a href="/about/">About</a>
             </div>
         </div>
     </nav>
