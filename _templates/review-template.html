@@ -1,0 +1,446 @@
+<!--
+  ZONTED REVIEW TEMPLATE
+  Usage: cp _templates/review-template.html reviews/[slug]/index.html
+  Then find-replace all {{PLACEHOLDER}} values.
+  Run: python3 scripts/build.py to regenerate index pages.
+
+  Placeholders to replace:
+    {{TITLE}}          - Full article title, e.g. "MakeUGC Review 2026: AI UGC Video Ads Worth $10 Per Clip?"
+    {{SLUG}}           - URL slug, e.g. "makeugc"
+    {{DESCRIPTION}}    - Meta description (1-2 sentences)
+    {{DATE}}           - ISO date, e.g. "2026-04-09"
+    {{DATE_DISPLAY}}   - Human-readable date, e.g. "April 9, 2026"
+    {{READ_TIME}}      - e.g. "9 min read"
+    {{OG_IMAGE}}       - Full URL to OG image, e.g. "https://img.zonted.com/og/makeugc-review.jpg"
+    {{AFFILIATE_URL}}  - Primary affiliate/product link
+    {{PRODUCT_NAME}}   - Name of the product being reviewed
+    {{SHARE_TEXT}}      - URL-encoded tweet text
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <title>{{TITLE}} — zonted.com</title>
+    <meta name="description" content="{{DESCRIPTION}}">
+    <link rel="canonical" href="https://zonted.com/reviews/{{SLUG}}/">
+    <meta property="og:title" content="{{TITLE}}">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://zonted.com/reviews/{{SLUG}}/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="{{DATE}}T00:00:00Z">
+    <meta property="article:modified_time" content="{{DATE}}T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta property="og:image" content="{{OG_IMAGE}}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{TITLE}}">
+    <meta name="twitter:description" content="{{DESCRIPTION}}">
+    <meta name="twitter:image" content="{{OG_IMAGE}}">
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"{{TITLE}}","author":{"@type":"Person","name":"Bernard Huang"},"datePublished":"{{DATE}}","dateModified":"{{DATE}}","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/reviews/{{SLUG}}/","description":"{{DESCRIPTION}}"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Reviews","item":"https://zonted.com/reviews/"},{"@type":"ListItem","position":3,"name":"{{TITLE}}"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"{{FAQ_Q1}}","acceptedAnswer":{"@type":"Answer","text":"{{FAQ_A1}}"}},{"@type":"Question","name":"{{FAQ_Q2}}","acceptedAnswer":{"@type":"Answer","text":"{{FAQ_A2}}"}},{"@type":"Question","name":"{{FAQ_Q3}}","acceptedAnswer":{"@type":"Answer","text":"{{FAQ_A3}}"}}]}
+    </script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fcfcfa;
+            --bg-surface: #f5f4f0;
+            --bg-raised: #edecea;
+            --border: #ddd;
+            --border-light: #e8e8e4;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --text-dim: #999;
+            --accent: #1a1a1a;
+            --accent-hover: #000;
+            --green: #2a7a2a;
+            --red: #a33;
+            --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--text); font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; }
+        img, video { max-width: 100%; height: auto; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(252,252,250,0.95); z-index: 100; border-bottom: 1px solid var(--border); }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 7rem 2rem 3rem; }
+        .article-container h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 3.5rem 0 1.25rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body a:hover { color: var(--accent-hover); }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid #999; padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            padding-top: 0.1em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* Sidenotes — inline callout style */
+        .sidenote {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            margin: 1.25rem 0;
+            padding: 0.75rem 1rem;
+            background: var(--bg-surface);
+            border-left: 2px solid var(--border);
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Floating TOC */
+        .toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+        .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s, border-color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+
+        /* Data tables */
+        .table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; border-radius: 6px; border: 1px solid var(--border); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .data-table th { background: var(--bg-surface); color: var(--text); padding: 0.65rem 1rem; text-align: left; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; }
+        .data-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); background: #fff; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:nth-child(even) td { background: var(--bg-surface); }
+
+        /* Verdict boxes */
+        .verdict { border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+        .verdict-win { background: rgba(42,122,42,0.05); border-left: 4px solid var(--green); }
+        .verdict-lose { background: rgba(170,51,51,0.05); border-left: 4px solid var(--red); }
+        .verdict-neutral { background: var(--bg-surface); border-left: 4px solid #999; }
+        .verdict-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+        .verdict-win .verdict-label { color: var(--green); }
+        .verdict-lose .verdict-label { color: var(--red); }
+        .verdict-neutral .verdict-label { color: #666; }
+        .verdict p { margin-bottom: 0; font-size: 0.97rem; }
+
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 4.5rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+            nav { padding: 0; }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <nav>
+        <div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+            <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em;">Zonted.</a>
+            <div style="display:flex;gap:1.5rem;">
+                <a href="/reviews/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+                <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+                <a href="/about/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">About</a>
+            </div>
+        </div>
+    </nav>
+<div style="max-width:800px;margin:5.5rem auto 0;padding:0 2rem;">
+    <a href="/reviews/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Reviews</a>
+</div>
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <!-- UPDATE: Add your TOC sections here -->
+            <li><a href="#what-is">What Is {{PRODUCT_NAME}}?</a></li>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#output-quality">Output Quality</a></li>
+            <li><a href="#strengths">Strengths</a></li>
+            <li><a href="#weaknesses">Weaknesses</a></li>
+            <li><a href="#vs-alternatives">How It Compares</a></li>
+            <li><a href="#verdict">Final Verdict</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <!-- UPDATE: Add your TOC sections here (shorter labels for sidebar) -->
+        <li><a href="#what-is">What Is It?</a></li>
+        <li><a href="#getting-started">Getting Started</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#output-quality">Output Quality</a></li>
+        <li><a href="#strengths">Strengths</a></li>
+        <li><a href="#weaknesses">Weaknesses</a></li>
+        <li><a href="#vs-alternatives">How It Compares</a></li>
+        <li><a href="#verdict">Final Verdict</a></li>
+        <li><a href="#faq">FAQ</a></li>
+    </ul>
+</aside>
+<div class="article-content">
+<article class="article-container">
+    <h1>{{TITLE}}</h1>
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+        <div>
+            <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">{{DATE_DISPLAY}} &middot; {{READ_TIME}}</div>
+        </div>
+    </div>
+
+    <div style="background:var(--bg-surface);border-left:3px solid #999;padding:1.25rem 1.5rem;border-radius:0 6px 6px 0;margin:0 0 2rem 0;">
+        <strong style="color:var(--text);font-size:1.05rem;">Key Takeaways</strong>
+        <ul style="margin:0.75rem 0 0 1.25rem;color:var(--text);">
+            <li><strong>{{KEY_TAKEAWAY_1_BOLD}}</strong> — {{KEY_TAKEAWAY_1_TEXT}}</li>
+            <li><strong>{{KEY_TAKEAWAY_2_BOLD}}</strong> — {{KEY_TAKEAWAY_2_TEXT}}</li>
+            <li><strong>{{KEY_TAKEAWAY_3_BOLD}}</strong> — {{KEY_TAKEAWAY_3_TEXT}}</li>
+            <li><strong>{{KEY_TAKEAWAY_4_BOLD}}</strong> — {{KEY_TAKEAWAY_4_TEXT}}</li>
+        </ul>
+    </div>
+
+    <div class="article-body">
+
+        <div style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.82rem;color:var(--text-dim);margin-bottom:2.5rem;padding:0.6rem 0;border-bottom:1px solid var(--border);">Last tested: {{DATE_DISPLAY}} &middot; Pricing and features may have changed.</div>
+
+        <h2 id="what-is">What Is {{PRODUCT_NAME}}?</h2>
+        <p class="dropcap">{{INTRO_PARAGRAPH}}</p>
+        <p>{{SECOND_PARAGRAPH}}</p>
+
+        <!-- SIDENOTE EXAMPLE (uncomment to use):
+        <aside class="sidenote">For comparison, [competitor] starts at $X/mo with no trial.</aside>
+        -->
+
+        <h2 id="getting-started">Getting Started</h2>
+        <p>{{GETTING_STARTED_TEXT}}</p>
+
+        <!-- IMAGE EXAMPLE:
+        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/{{SLUG}}/screenshot.jpg" alt="{{IMAGE_ALT}}" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">{{IMAGE_CAPTION}}</figcaption></figure>
+        -->
+
+        <h2 id="pricing">Pricing</h2>
+        <p>{{PRICING_INTRO}}</p>
+
+        <!-- DATA TABLE EXAMPLE (uncomment to use):
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Price</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Starter</strong></td>
+                        <td>$X/mo</td>
+                        <td>Feature 1, Feature 2</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pro</strong></td>
+                        <td>$X/mo</td>
+                        <td>Feature 1, Feature 2, Feature 3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        -->
+
+        <div class="verdict verdict-neutral">
+            <div class="verdict-label">Pricing Verdict</div>
+            <p>{{PRICING_VERDICT}}</p>
+        </div>
+
+        <h2 id="features">Features</h2>
+        <p>{{FEATURES_INTRO}}</p>
+        <ul>
+            <li><strong>{{FEATURE_1}}</strong> — {{FEATURE_1_DESC}}</li>
+            <li><strong>{{FEATURE_2}}</strong> — {{FEATURE_2_DESC}}</li>
+            <li><strong>{{FEATURE_3}}</strong> — {{FEATURE_3_DESC}}</li>
+        </ul>
+
+        <h2 id="output-quality">Output Quality</h2>
+        <p>{{OUTPUT_QUALITY_TEXT}}</p>
+
+        <h2 id="strengths">What I Liked</h2>
+        <ul>
+            <li><strong>{{STRENGTH_1}}</strong> — {{STRENGTH_1_DESC}}</li>
+            <li><strong>{{STRENGTH_2}}</strong> — {{STRENGTH_2_DESC}}</li>
+            <li><strong>{{STRENGTH_3}}</strong> — {{STRENGTH_3_DESC}}</li>
+        </ul>
+
+        <h2 id="weaknesses">What Frustrated Me</h2>
+        <ul>
+            <li><strong>{{WEAKNESS_1}}</strong> — {{WEAKNESS_1_DESC}}</li>
+            <li><strong>{{WEAKNESS_2}}</strong> — {{WEAKNESS_2_DESC}}</li>
+            <li><strong>{{WEAKNESS_3}}</strong> — {{WEAKNESS_3_DESC}}</li>
+        </ul>
+
+        <h2 id="vs-alternatives">How It Compares</h2>
+        <p>{{COMPARISON_INTRO}}</p>
+
+        <!-- COMPARISON TABLE EXAMPLE (uncomment to use):
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Focus</th>
+                        <th>Starting Price</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong><a href="{{AFFILIATE_URL}}" target="_blank" rel="noopener" style="color:var(--text);">{{PRODUCT_NAME}}</a></strong></td>
+                        <td>{{FOCUS}}</td>
+                        <td>$X/mo</td>
+                        <td>{{BEST_FOR}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Competitor A</strong></td>
+                        <td>{{COMP_A_FOCUS}}</td>
+                        <td>$X/mo</td>
+                        <td>{{COMP_A_BEST_FOR}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        -->
+
+        <h2 id="verdict">Final Verdict</h2>
+        <div class="verdict verdict-neutral">
+            <div class="verdict-label">Overall</div>
+            <p><strong>{{VERDICT_SUMMARY}}</strong></p>
+            <p style="margin-top:0.75rem;">{{VERDICT_IMPROVEMENT}}</p>
+        </div>
+
+        <p style="font-size:1.05rem;margin-top:1rem;"><strong>Overall: {{SCORE}}/10</strong> — {{SCORE_SUMMARY}}</p>
+
+        <p style="margin-top:1.5rem;"><a href="{{AFFILIATE_URL}}" target="_blank" rel="noopener">{{CTA_TEXT}} &rarr;</a></p>
+
+        <h2 id="faq">FAQ</h2>
+
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">{{FAQ_Q1}}</h3>
+            <p>{{FAQ_A1}}</p>
+        </div>
+
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">{{FAQ_Q2}}</h3>
+            <p>{{FAQ_A2}}</p>
+        </div>
+
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">{{FAQ_Q3}}</h3>
+            <p>{{FAQ_A3}}</p>
+        </div>
+
+    </div>
+</article>
+</div>
+</div>
+
+<div style="max-width:660px;margin:2rem auto;padding:0 2rem;text-align:center;">
+    <a href="https://x.com/intent/tweet?text={{SHARE_TEXT}}&url=https://zonted.com/reviews/{{SLUG}}/" target="_blank" rel="noopener" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Share on X &rarr;</a>
+</div>
+
+<!-- NAV_LINKS_START -->
+<div style="max-width:660px;margin:2rem auto 3rem;padding:0 2rem;display:flex;justify-content:space-between;gap:1rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.9rem;">
+    <!-- <a href="/reviews/{{PREV_SLUG}}/" style="color:var(--text-muted);text-decoration:none;">&larr; {{PREV_TITLE}}</a> -->
+    <!-- <a href="/reviews/{{NEXT_SLUG}}/" style="color:var(--text-muted);text-decoration:none;">{{NEXT_TITLE}} &rarr;</a> -->
+</div>
+<!-- NAV_LINKS_END -->
+
+<footer>
+    <p>&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com">zonted.com</a> &middot; <a href="https://tabiji.ai">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" target="_blank" rel="noopener">X</a></p>
+</footer>
+
+<script>
+// TOC active state tracking
+(function(){
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const sections = [];
+    tocLinks.forEach(function(link){
+        const id = link.getAttribute('href').replace('#','');
+        const el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el, link:link});
+    });
+    function updateActive(){
+        let current = sections[0];
+        for(let i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current){
+            document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+            const label = document.querySelector('.toc-active-label');
+            if(label && current.link) label.textContent = current.link.textContent;
+        }
+    }
+    window.addEventListener('scroll', updateActive, {passive:true});
+    updateActive();
+})();
+</script>
+</body>
+</html>
