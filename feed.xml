@@ -8,6 +8,14 @@
     <lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Human-in-the-Loop</title>
+      <link>https://zonted.com/posts/human-in-the-loop/</link>
+      <description>I have 20 AI agents running 24/7. The fantasy was that they</description>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/human-in-the-loop/</guid>
+    </item>
+    <item>
       <title>Wavespeed Review 2026: The Best AI Video API for Agents &amp; Builders</title>
       <link>https://zonted.com/posts/wavespeed/</link>
       <description>Hands-on review of Wavespeed — the AI inference platform with 1,000+ models, pay-per-use pricing, and a unified API. After 200+ reels through their pipeline, here</description>
