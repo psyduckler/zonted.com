@@ -11,22 +11,17 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zonted.com/reviews/</loc>
-    <lastmod>2026-04-10</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://zonted.com/about/</loc>
     <lastmod>2026-04-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zonted.com/reviews/wavespeed/</loc>
+    <loc>https://zonted.com/posts/wavespeed/</loc>
     <lastmod>2026-04-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://zonted.com/reviews/makeugc/</loc>
+    <loc>https://zonted.com/posts/makeugc/</loc>
     <lastmod>2026-04-09</lastmod>
     <priority>0.7</priority>
   </url>

@@ -27,8 +27,6 @@ FALLBACK_DATES = {
     "posts/ai-image-generation-comparison": "2026-03-11",
 }
 
-COMING_SOON_REVIEWS = ["Arcads", "Creatify", "HeyGen", "Synthesia"]
-
 # ---------------------------------------------------------------------------
 # Category assignment
 # ---------------------------------------------------------------------------
@@ -36,7 +34,7 @@ COMING_SOON_REVIEWS = ["Arcads", "Creatify", "HeyGen", "Synthesia"]
 def get_category(slug, title):
     title_lower = title.lower()
     slug_lower = slug.lower()
-    if 'review' in slug_lower or slug.startswith('reviews/'):
+    if 'review' in slug_lower:
         return 'Reviews'
     if any(w in title_lower for w in ['vs', 'comparison', 'compared', 'showdown', 'best ai']):
         return 'Comparisons'
@@ -84,9 +82,6 @@ def extract_metadata(filepath, slug):
     rt_match = re.search(r'(\d+)\s*min\s*read', content, re.IGNORECASE)
     reading_time = int(rt_match.group(1)) if rt_match else None
 
-    # Type
-    article_type = "review" if slug.startswith('reviews/') else "post"
-
     category = get_category(slug, title)
 
     return {
@@ -94,7 +89,6 @@ def extract_metadata(filepath, slug):
         'description': description,
         'date': date_str,
         'reading_time': reading_time,
-        'type': article_type,
         'slug': slug,
         'category': category,
         'filepath': filepath,
@@ -103,15 +97,13 @@ def extract_metadata(filepath, slug):
 
 def scan_articles():
     articles = []
-    for section in ['posts', 'reviews']:
-        section_dir = os.path.join(ROOT, section)
-        if not os.path.isdir(section_dir):
-            continue
+    section_dir = os.path.join(ROOT, 'posts')
+    if os.path.isdir(section_dir):
         for name in os.listdir(section_dir):
             article_dir = os.path.join(section_dir, name)
             index_file = os.path.join(article_dir, 'index.html')
             if os.path.isdir(article_dir) and os.path.isfile(index_file):
-                slug = f"{section}/{name}"
+                slug = f"posts/{name}"
                 meta = extract_metadata(index_file, slug)
                 articles.append(meta)
 
@@ -145,18 +137,14 @@ def format_date_rfc822(date_str):
 # Entry list HTML generation
 # ---------------------------------------------------------------------------
 
-def make_entry_row(article, show_type=False):
+def make_entry_row(article):
     date_display = format_date_short(article['date']) if article['date'] else ''
     cat = article['category'].lower()
-    type_tag = ''
-    if show_type:
-        type_label = 'Review' if article['type'] == 'review' else 'Post'
-        type_tag = f'\n                    <span class="entry-type">{type_label}</span>'
 
     return (
         f'                <li class="entry-row" data-category="{cat}">\n'
         f'                    <span class="entry-date">{date_display}</span>\n'
-        f'                    <a href="/{article["slug"]}/" class="entry-title">{html.escape(article["title"])}</a>{type_tag}\n'
+        f'                    <a href="/{article["slug"]}/" class="entry-title">{html.escape(article["title"])}</a>\n'
         f'                </li>'
     )
 
@@ -206,7 +194,7 @@ def generate_homepage(articles):
         content = f.read()
 
     # Build entry list
-    rows = [make_entry_row(a, show_type=True) for a in articles]
+    rows = [make_entry_row(a) for a in articles]
     entry_html = '\n'.join(rows)
 
     new_block = (
@@ -256,12 +244,11 @@ def generate_homepage(articles):
 # ---------------------------------------------------------------------------
 
 def generate_posts_hub(articles):
-    posts = [a for a in articles if a['type'] == 'post']
     filepath = os.path.join(ROOT, 'posts', 'index.html')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    rows = [make_entry_row(a, show_type=False) for a in posts]
+    rows = [make_entry_row(a) for a in articles]
     entry_html = '\n'.join(rows)
 
     new_block = (
@@ -282,51 +269,7 @@ def generate_posts_hub(articles):
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
 
-    return len(posts)
-
-
-# ---------------------------------------------------------------------------
-# Reviews hub generation
-# ---------------------------------------------------------------------------
-
-def generate_reviews_hub(articles):
-    reviews = [a for a in articles if a['type'] == 'review']
-    filepath = os.path.join(ROOT, 'reviews', 'index.html')
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    rows = [make_entry_row(a, show_type=False) for a in reviews]
-
-    # Add coming soon entries
-    for name in COMING_SOON_REVIEWS:
-        rows.append(
-            f'                <li class="entry-row upcoming">\n'
-            f'                    <span class="entry-date">Coming soon</span>\n'
-            f'                    <span class="entry-title">{name} Review</span>\n'
-            f'                </li>'
-        )
-
-    entry_html = '\n'.join(rows)
-
-    new_block = (
-        f'<!-- ENTRY_LIST_START -->\n'
-        f'            <ul class="entry-list">\n'
-        f'{entry_html}\n'
-        f'            </ul>\n'
-        f'            <!-- ENTRY_LIST_END -->'
-    )
-
-    content = re.sub(
-        r'<!-- ENTRY_LIST_START -->.*?<!-- ENTRY_LIST_END -->',
-        new_block,
-        content,
-        flags=re.DOTALL
-    )
-
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(content)
-
-    return len(reviews)
+    return len(articles)
 
 
 # ---------------------------------------------------------------------------
@@ -341,7 +284,6 @@ def generate_sitemap(articles):
     urls.append(('/', '1.0', today))
     # Hubs
     urls.append(('/posts/', '0.8', today))
-    urls.append(('/reviews/', '0.8', today))
     # About
     urls.append(('/about/', '0.6', today))
 
@@ -507,19 +449,13 @@ def inject_nav_links(articles):
 
 def main():
     articles = scan_articles()
-
-    review_count = sum(1 for a in articles if a['type'] == 'review')
-    post_count = sum(1 for a in articles if a['type'] == 'post')
-    print(f"Found {len(articles)} articles ({review_count} review, {post_count} posts)")
+    print(f"Found {len(articles)} articles")
 
     n = generate_homepage(articles)
     print(f"Generated index.html ({n} entries)")
 
     n = generate_posts_hub(articles)
     print(f"Generated posts/index.html ({n} entries)")
-
-    n = generate_reviews_hub(articles)
-    print(f"Generated reviews/index.html ({n} entry)")
 
     n = generate_sitemap(articles)
     print(f"Generated sitemap.xml ({n} URLs)")
