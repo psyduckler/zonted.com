@@ -60,7 +60,7 @@
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
         .nav-links a:hover { color: var(--text); }
-        .article-container { max-width: 660px; margin: 0 auto; padding: 7rem 2rem 3rem; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
         .article-container h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
         .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 3.5rem 0 1.25rem; letter-spacing: -0.01em; }
         .article-body h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
@@ -102,7 +102,7 @@
         }
 
         /* Floating TOC */
-        .toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+        .toc-sidebar { padding-top: 2rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
         .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
         .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
         .toc-sidebar li { margin-bottom: 0.4rem; }
@@ -132,7 +132,7 @@
             .toc-sidebar { display: none; }
             .toc-mobile-wrapper { display: block; }
             .article-content { max-width: 100%; width: 100%; }
-            .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; max-width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 0.5rem 1.25rem 2rem; max-width: 100%; }
             .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
             .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
             .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
@@ -243,7 +243,7 @@
     <div style="background:var(--bg-surface);border-left:3px solid #999;padding:1.25rem 1.5rem;border-radius:0 6px 6px 0;margin:0 0 2rem 0;">
         <strong style="color:var(--text);font-size:1.05rem;">Key Takeaways</strong>
         <ul style="margin:0.75rem 0 0 1.25rem;color:var(--text);">
-            <li><strong>1,000+ models under one API</strong> — image, video, audio, 3D, digital humans. Every major provider (Google, ByteDance, Alibaba, Kling, Minimax) plus Wavespeed's own models, all through a single endpoint.</li>
+            <li><strong>1,000+ models under one API</strong> — image, video, audio, 3D, digital humans. Every major provider (Google, ByteDance, Alibaba, Kling, <a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&source=link">Minimax</a>) plus Wavespeed's own models, all through a single endpoint.</li>
             <li><strong>Pure pay-per-use pricing</strong> — no monthly subscriptions, no credit packs that expire. You pay for what you generate, and costs match what you'd pay going direct to providers.</li>
             <li><strong>Built for developers, not casual creators</strong> — the API is robust with extensive docs, but there are no templates or guided workflows. You need to know what you're building.</li>
             <li><strong>200+ reels and counting</strong> — we've been running our entire <a href="https://tabiji.ai">tabiji.ai</a> reel pipeline through Wavespeed since switching, progressing from Minimax to Veo 3.1 Lite to Seedance 2.0.</li>

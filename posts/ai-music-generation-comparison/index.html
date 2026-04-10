@@ -105,7 +105,7 @@
         .nav-links a:hover { color: var(--text); }
         img, video { max-width: 100%; height: auto; }
         @media(max-width:768px){
-        .article-container{max-width: 660px;margin:0 auto;padding:3rem 2rem 3rem}
+        .article-container{max-width: 660px;margin:0 auto;padding:0.5rem 2rem 3rem}
         .article-container h1{font-size:clamp(1.8rem,4vw,2.5rem);color: var(--text);line-height:1.25;letter-spacing:-0.02em;margin-bottom:1.5rem}
         .article-body h2{font-size:1.4rem;color: var(--text);font-weight:700;margin:2.5rem 0 1rem}
         .article-body h3{font-size:1.15rem;color: var(--text);font-weight:600;margin:2rem 0 0.75rem}
@@ -139,7 +139,7 @@ footer p{color:var(--text-muted);font-size:0.85rem}
         .verdict-box{background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0}
         .verdict-box h3{color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem}
         .verdict-box p{margin-bottom:0.75rem}.verdict-box p:last-child{margin-bottom:0}
-        .toc-sidebar{padding-top:7rem;width:220px;flex-shrink:0;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto}
+        .toc-sidebar{padding-top:2rem;width:220px;flex-shrink:0;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto}
         .toc-sidebar h2{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em}
         .toc-sidebar ul{list-style:none;padding:0;margin:0}.toc-sidebar li{margin-bottom:0.4rem}
         .toc-sidebar a{color:var(--text-muted);text-decoration:none;font-size:0.85rem;display:block;padding:0.25rem 0 0.25rem 0.75rem;border-left:2px solid transparent;line-height:1.3}
@@ -274,7 +274,7 @@ footer p{color:var(--text-muted);font-size:0.85rem}
     <div class="article-body">
 
         <h2 id="tldr">TL;DR</h2>
-        <p class="dropcap">We produce dozens of <a href="/posts/ai-reels-what-actually-works/">Instagram Reels</a> and YouTube Shorts per week at <a href="/">tabiji.ai</a>. Every one needs background music. We tested two AI music generators in production: <strong>MiniMax Music API</strong> (three models: 2.0, 2.5, 2.5+) and <strong>Suno AI</strong> (reverse-engineered API, bird-codename models, piano covers scored by Gemini).</p>
+        <p class="dropcap">We produce dozens of <a href="/posts/ai-reels-what-actually-works/">Instagram Reels</a> and YouTube Shorts per week at <a href="/">tabiji.ai</a>. Every one needs background music. We tested two AI music generators in production: <strong><a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&source=link">MiniMax Music API</a></strong> (three models: 2.0, 2.5, 2.5+) and <strong>Suno AI</strong> (reverse-engineered API, bird-codename models, piano covers scored by Gemini).</p>
         <p>The punchline: <strong>Suno produces significantly better music</strong> (8.5/10) but has no public API — we had to reverse-engineer it. <strong>MiniMax produces good-enough music</strong> (7/10) with a real API at ~$0.01/track. We built infrastructure for both, then ended up using MiniMax for daily production because it's simpler. We use Suno when music quality actually matters.</p>
         <p>Along the way, we also built a <strong>Gemini 2.5 Flash audio scorer</strong> to evaluate AI-generated piano covers — and discovered that Gemini is too polite to be a useful music critic. Every sample on this page is a real production artifact. Press play.</p>
 
@@ -288,7 +288,7 @@ footer p{color:var(--text-muted);font-size:0.85rem}
         <p>We chose option three — and then spent weeks going deeper than we expected. What started as "just add background music to Reels" turned into reverse-engineering undocumented APIs, discovering that AI models use bird codenames instead of version numbers, building a Gemini-powered music scoring system, and learning that AI music critics are too nice.</p>
         <p>This is the full story.</p>
 
-        <h2 id="minimax-models">MiniMax Music: The Production Workhorse</h2>
+        <h2 id="minimax-models"><a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&source=link">MiniMax Music</a>: The Production Workhorse</h2>
         <p>MiniMax offers three music generation models through their API. They look similar on paper, but in practice they behave very differently — and only one of them actually works for instrumental background music.</p>
 
         <div class="table-wrap"><table class="spec-table">
@@ -611,7 +611,7 @@ if __name__ == "__main__":
         <h3>Google <a href="/posts/veo3-vs-hailuo-minimax/">Veo 3</a> — Decent SFX, Not Music</h3>
         <p>Veo 3's <code>generate_audio</code> parameter produces synchronized audio: ambient street noise, wind, water, footsteps. For establishing shots it adds atmosphere. But it can't produce composed background music. We disable it for most Reels.</p>
 
-        <h3>Z.AI CogVideoX-3 — Synthetic and Unusable</h3>
+        <h3><a href="https://z.ai/subscribe?ic=JY9V1BN5ZO">Z.AI</a> CogVideoX-3 — Synthetic and Unusable</h3>
         <p>Claims "AI SFX audio" in docs. In practice: mediocre, synthetic, obviously AI-generated. Never used in production.</p>
 
         <h3>MiniMax Hailuo I2V — No Audio At All</h3>

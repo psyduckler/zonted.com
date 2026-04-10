@@ -91,7 +91,7 @@
         html, body { width: 100%; }
         body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
         img, video { max-width: 100%; height: auto; }
-.article-container { max-width: 660px; margin: 0 auto; padding: 3rem 2rem 3rem; }
+.article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
         .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
         .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
         .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
@@ -290,7 +290,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
 
             <div class="verdict-box" style="border-color: var(--text); background: linear-gradient(135deg, var(--bg-surface), #faf5ee);">
                 <h3 style="color: var(--text); margin-bottom: 0.5rem;">TL;DR — 5 Models, 26 Images, Two Benchmarks</h3>
-                <p class="dropcap">We tested <strong>GPT (DALL-E 3)</strong>, <strong>Grok Aurora</strong>, <strong>Nano Banana 2</strong> (Gemini), <strong>MiniMax image-01</strong>, and <strong>CogView-4</strong> across two real production workflows: vintage 1970s Kodachrome film photography (18 images) and iPhone-realistic phone photos for <a href="/posts/ai-reels-what-actually-works/">Instagram Reels</a> (8 images).</p>
+                <p class="dropcap">We tested <strong>GPT (DALL-E 3)</strong>, <strong>Grok Aurora</strong>, <strong>Nano Banana 2</strong> (Gemini), <strong><a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&source=link">MiniMax image-01</a></strong>, and <strong>CogView-4</strong> across two real production workflows: vintage 1970s Kodachrome film photography (18 images) and iPhone-realistic phone photos for <a href="/posts/ai-reels-what-actually-works/">Instagram Reels</a> (8 images).</p>
                 <p><strong>The biggest differentiator wasn't image quality — it was prompt adherence.</strong> Most models produce decent-looking images. Only Nano Banana 2 consistently does what you actually ask. It scored 8.8/10 for vintage photography, 9/10 for crowd scenes, and costs ~$0.02/image. For portraits, MiniMax leads. For an all-rounder, Grok. GPT finished last for both use cases.</p>
             </div>
 
@@ -311,7 +311,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
                 <tbody>
                     <tr><td><strong>Nano Banana 2</strong></td><td>Google (Gemini 3.1 Flash)</td><td>~$0.02</td><td>Up to 4K</td><td>Kyoto + Verona</td></tr>
                     <tr><td><strong>MiniMax image-01</strong></td><td>MiniMax</td><td>~$0.04</td><td>Up to 2K</td><td>Kyoto + Verona</td></tr>
-                    <tr><td><strong>CogView-4</strong></td><td>Z.AI (Zhipu AI)</td><td>~$0.02</td><td>720×1440</td><td>Kyoto only</td></tr>
+                    <tr><td><strong>CogView-4</strong></td><td><a href="https://z.ai/subscribe?ic=JY9V1BN5ZO">Z.AI</a> (Zhipu AI)</td><td>~$0.02</td><td>720×1440</td><td>Kyoto only</td></tr>
                     <tr><td><strong>Grok Aurora</strong></td><td>xAI</td><td>~$0.07</td><td>Up to 2K</td><td>Verona only</td></tr>
                     <tr><td><strong>GPT (DALL-E 3)</strong></td><td>OpenAI</td><td>~$0.04–$0.08</td><td>1024×1792</td><td>Verona only</td></tr>
                 </tbody>
@@ -638,7 +638,7 @@ for part in response.candidates[0].content.parts:
         with open("output.png", "wb") as f:
             f.write(part.inline_data.data)</code></pre>
 
-            <h3>MiniMax image-01</h3>
+            <h3><a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&source=link">MiniMax image-01</a></h3>
 
             <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>curl -X POST "https://api.minimax.chat/v1/image_generation" \
   -H "Authorization: Bearer YOUR_MINIMAX_KEY" \
@@ -650,7 +650,7 @@ for part in response.candidates[0].content.parts:
     "response_format": "url"
   }'</code></pre>
 
-            <h3>CogView-4 (Z.AI)</h3>
+            <h3>CogView-4 (<a href="https://z.ai/subscribe?ic=JY9V1BN5ZO">Z.AI</a>)</h3>
 
             <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>curl -X POST "https://open.bigmodel.cn/api/paas/v4/images/generations" \
   -H "Authorization: Bearer YOUR_ZAI_KEY" \

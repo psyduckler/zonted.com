@@ -99,7 +99,7 @@
         html, body { width: 100%; }
         body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
         img, video { max-width: 100%; height: auto; }
-.article-container { max-width: 660px; margin: 0 auto; padding: 3rem 2rem 3rem; }
+.article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
         .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
         .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
         .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
@@ -398,7 +398,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
 
         <div class="article-body">
 
-            <p class="dropcap">We publish 5–7 AI-generated <a href="/posts/ai-reels-what-actually-works/">Instagram Reels</a> every day — in production, fully automated via cron jobs, across 8+ content formats. Over three weeks we ran <strong>Veo 3</strong>, <strong>Hailuo 2.3 (MiniMax)</strong>, <strong>Sora 2 (OpenAI)</strong>, <strong>Grok Imagine (xAI)</strong>, and <strong>CogVideoX-3 (Z.AI)</strong> through our pipeline with real money on the line.</p>
+            <p class="dropcap">We publish 5–7 AI-generated <a href="/posts/ai-reels-what-actually-works/">Instagram Reels</a> every day — in production, fully automated via cron jobs, across 8+ content formats. Over three weeks we ran <strong>Veo 3</strong>, <strong>Hailuo 2.3 (MiniMax)</strong>, <strong>Sora 2 (OpenAI)</strong>, <strong>Grok Imagine (xAI)</strong>, and <strong>CogVideoX-3 (<a href="https://z.ai/subscribe?ic=JY9V1BN5ZO">Z.AI</a>)</strong> through our pipeline with real money on the line.</p>
 
             <p>The single most important thing we learned isn't which model looks best. It's that <strong>text-to-video is not production-ready for Reels</strong>. Image-to-video is the only viable path. Everything else flows from that insight.</p>
 
@@ -436,7 +436,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
                     <tr><th>Spec</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><strong>Provider</strong></td><td>Google</td><td>MiniMax</td><td>OpenAI</td><td>xAI</td><td>Z.AI (Zhipu)</td></tr>
+                    <tr><td><strong>Provider</strong></td><td>Google</td><td><a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&source=link">MiniMax</a></td><td>OpenAI</td><td>xAI</td><td>Z.AI (Zhipu)</td></tr>
                     <tr><td><strong>Cost / clip</strong></td><td>~$4.50–6</td><td class="winner">~$0.27</td><td>~$0.80</td><td>~$0.40</td><td class="winner">$0.20</td></tr>
                     <tr><td><strong>Quality</strong></td><td class="winner">10/10</td><td>7/10</td><td>7/10</td><td>7/10</td><td>6/10</td></tr>
                     <tr><td><strong>Gen speed</strong></td><td>2–4 min</td><td>~90s</td><td>~120s</td><td class="winner">~37s</td><td>~3.5 min</td></tr>
@@ -485,7 +485,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
                 <li><strong>Verdict:</strong> The best model for quality. Unsustainable for daily content at scale.</li>
             </ul>
 
-            <h3 id="hailuo-review">Hailuo 2.3 (MiniMax) — The Budget Workhorse</h3>
+            <h3 id="hailuo-review">Hailuo 2.3 (<a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&source=link">MiniMax</a>) — The Budget Workhorse</h3>
 
             <p>Hailuo is why we can publish 5–7 Reels per day. At $0.27/clip with 90-second generation and excellent I2V quality, it's the best value for a production pipeline. The model inherits composition and color grade from input images and adds smooth, tasteful motion via 15 camera commands (<code>[Push in]</code>, <code>[Pan left]</code>, <code>[Tilt up]</code>, etc.).</p>
 
@@ -522,7 +522,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
                 <li><strong>Verdict:</strong> Best for rapid iteration and prototyping. Style preservation is its weakest point — it turned our watercolor capybara into a real one.</li>
             </ul>
 
-            <h3 id="cogvideox-3-review">CogVideoX-3 (Z.AI) — The Budget Native Portrait</h3>
+            <h3 id="cogvideox-3-review">CogVideoX-3 (<a href="https://z.ai/subscribe?ic=JY9V1BN5ZO">Z.AI</a>) — The Budget Native Portrait</h3>
 
             <p>Best spec sheet per dollar: $0.20/clip flat, native 1080×1920 portrait, built-in AI SFX, 30/60fps, unique start+end frame interpolation. On paper it should be our pick. Quality kept us on Hailuo.</p>
 
