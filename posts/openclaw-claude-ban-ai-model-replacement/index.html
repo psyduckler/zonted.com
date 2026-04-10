@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours — Zonted</title>
+    <meta name="description" content="OpenClaw banned Claude and Anthropic on Saturday. The community scrambled. We tested GPT 5.4, GLM 5.1, MiniMax M2.7, MIMO, and Qwen 3.6 — and landed on a hybrid setup that actually works better than before.">
+    <link rel="canonical" href="https://zonted.com/posts/openclaw-claude-ban-ai-model-replacement/">
+    <meta property="og:title" content="The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours">
+    <meta property="og:description" content="OpenClaw banned Claude and Anthropic on Saturday. We tested GPT 5.4, GLM 5.1, MiniMax M2.7, MIMO, and Qwen 3.6 — and landed on a hybrid setup that actually works better than before.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.tabiji.ai/tabiji-owl-logo.png">
+    <meta property="og:url" content="https://zonted.com/posts/openclaw-claude-ban-ai-model-replacement/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-04-07T00:00:00Z">
+    <meta property="article:section" content="AI & Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours">
+    <meta name="twitter:description" content="OpenClaw banned Claude and Anthropic. We tested 5 replacement models and found a hybrid setup that beats the old one.">
+
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours",
+        "author":{"@type":"Person","name":"Bernard Huang"},
+        "datePublished": "2026-04-07",
+        "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},
+        "url":"https://zonted.com/posts/openclaw-claude-ban-ai-model-replacement/",
+        "description": "OpenClaw banned Claude and Anthropic on Saturday. We tested 5 replacement models and landed on a hybrid setup that actually works better than before."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name":"Home","item":"https://zonted.com/"},
+          {"@type": "ListItem", "position": 2, "name":"Posts","item":"https://zonted.com/posts/"},
+          {"@type": "ListItem", "position": 3, "name": "The Day Claude Got Banned", "item": "https://zonted.com/posts/openclaw-claude-ban-ai-model-replacement/"}
+        ]
+      }
+    ]
+    </script>
+
+    
+
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; background: var(--bg); color: var(--text); font-feature-settings: 'kern' 1, 'liga' 1; }
+        img, video { max-width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 7rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-container h2 { font-size: 1.4rem; color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.01em; }
+        .article-container h3 { font-size: 1.15rem; color: var(--text); margin-top: 1.75rem; margin-bottom: 0.75rem; }
+        .article-meta { font-family:'Inter',system-ui,sans-serif; font-size:0.9rem; color:var(--text-muted); margin-bottom:2rem; }
+        .article-meta .tag { background: var(--sand); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .article-meta .date { color: var(--text-muted); font-size: 0.9rem; }
+        .article-body { font-size: 1.05rem; color: var(--text); }
+        .article-body p { margin-bottom: 1.5rem; }
+        .article-body strong { color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body a:hover { color: var(--text); }
+        .article-body ul, .article-body ol { margin-bottom: 1.5rem; padding-left: 1.75rem; }
+        .article-body li { margin-bottom: 0.5rem; }
+        .article-body blockquote { border-left: 4px solid var(--accent); padding-left: 1.25rem; margin: 1.5rem 0; color: var(--text-muted); font-style: italic; }
+        .article-body pre { background: var(--text); color: var(--warm-cream); padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.5rem 0; font-size: 0.9rem; line-height: 1.6; }
+        .article-body code { background: var(--sand); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.88em; color: var(--text); }
+        .article-body pre code { background: none; padding: 0; color: inherit; }
+        .article-image { margin: 2rem 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+        .article-image img { width: 100%; display: block; }
+        .article-image .caption { padding: 0.75rem 1rem; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:var(--text-dim); font-style:italic; text-align:center; }
+        .highlight-box { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; margin: 1.5rem 0; }
+        .highlight-box h4 { color: var(--text); margin-bottom: 0.5rem; font-size: 1rem; }
+        .highlight-box p { margin-bottom: 0; font-size: 0.95rem; color: var(--text-muted); }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+        .comparison-table th { background: var(--accent); color: white; padding: 0.75rem 1rem; text-align: left; font-weight: 600; }
+        .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+        .comparison-table tr:nth-child(even) td { background: var(--bg-surface); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .verdict { background: linear-gradient(135deg, var(--indigo), var(--indigo-light)); color: white; border-radius: 6px; padding: 1.5rem; margin: 2rem 0; }
+        .verdict h4 { margin-bottom: 0.5rem; font-size: 1rem; opacity: 0.85; }
+        .verdict p { margin-bottom: 0; font-size: 1.05rem; }
+        .takeaway { background: var(--green); color: white; border-radius: 6px; padding: 1.5rem; margin: 2rem 0; }
+        .takeaway h4 { margin-bottom: 0.5rem; font-size: 1rem; }
+        .takeaway p:last-child { margin-bottom: 0; }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); margin-top: 4rem; }
+        footer p { color: var(--text-muted); font-size: 0.85rem; }
+        @media (max-width: 768px) {
+            .nav-links.open { display: flex; }
+            }
+    .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+    </head>
+<body>
+
+<nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width:660px;margin:0 auto;padding:1.5rem 2rem 0;">
+    <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+</div>
+    
+
+    <div class="article-container">
+        <h1>The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours</h1>
+        <div class="article-meta">
+            <span class="tag">AI Infrastructure</span>
+            <span class="tag">OpenClaw</span>
+            <span class="tag">Model Benchmarking</span>
+            <span class="date">April 7, 2026 · 9 min read</span>
+        </div>
+        <div class="article-body">
+<p class="dropcap">Saturday morning started like any other. Our cron jobs were running. Instagram Reels were publishing. The travel content machine was humming along on <strong>Claude Opus 4.6</strong> — our daily driver for six months. Then, without warning: <em>connection refused</em>.</p>
+
+<p>OpenClaw had banned Claude and the entire Anthropic API ecosystem. The community Discord exploded. Forums filled with panic. People who had built entire agent workflows around Claude were suddenly staring at broken pipelines and zero explanation.</p>
+
+<p>We were one of them.</p>
+
+<p>What happened next was a 48-hour sprint through every mainstream model on the market. Here's exactly what we tested, what we found, and why our final setup is — honestly — better than what we had before.</p>
+
+<h2>The Models We Tested</h2>
+
+<p>No cherry-picking. We ran identical tasks across all models: Reddit research synthesis, itinerary generation, Instagram caption writing, cron job scheduling logic, and video script production. We evaluated on three axes: <strong>output quality</strong>, <strong>token efficiency</strong>, and <strong>reliability</strong>.</p>
+
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Quality</th>
+            <th>Speed</th>
+            <th>Token Cost</th>
+            <th>Verdict</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GPT 5.4 (OpenAI)</td>
+            <td>Excellent</td>
+            <td>Fast</td>
+            <td>High</td>
+            <td>Capable but expensive at scale. No meaningful quality edge over alternatives.</td>
+        </tr>
+        <tr>
+            <td>MiniMax Highspeed M2.7</td>
+            <td>Good</td>
+            <td>Very Fast</td>
+            <td>Very Low</td>
+            <td>Strong for structured tasks. Struggled with nuanced reasoning in research synthesis.</td>
+        </tr>
+        <tr>
+            <td>MiniMax MIMO</td>
+            <td>Decent</td>
+            <td>Fast</td>
+            <td>Low</td>
+            <td>Fine for simple, repetitive tasks. Not a full Claude replacement.</td>
+        </tr>
+        <tr>
+            <td>Qwen 3.6</td>
+            <td>Good</td>
+            <td>Moderate</td>
+            <td>Low</td>
+            <td>Surprisingly capable at reasoning. Occasionally verbose. Inconsistent on creative tasks.</td>
+        </tr>
+        <tr>
+            <td><strong>GLM 5.1 (Zhipu AI)</strong></td>
+            <td><strong>Excellent</strong></td>
+            <td><strong>Fast</strong></td>
+            <td><strong>Very Low</strong></td>
+            <td><strong>Best all-around replacement. Nuanced, fast, affordable. Our new default.</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="verdict">
+    <h4>Bottom Line</h4>
+    <p><strong>GLM 5.1 won on every axis that matters</strong> — quality comparable to Claude, cost a fraction of GPT-5.4, and it didn't hallucinates the way Qwen occasionally does on creative tasks.</p>
+</div>
+
+<h2>But Then We Tried Claude Code</h2>
+
+<p>While benchmarking replacement models, we started experimenting with something else: <strong>Claude Code</strong> — Anthropic's CLI tool for autonomous coding and task execution.</p>
+
+<p>The trigger was frustration with the ban itself. If OpenClaw could unilaterally cut off an entire provider, we needed a way to run Claude independently for the tasks where it genuinely excels — coding and content writing — without being subject to a single platform's policy decisions.</p>
+
+<p>What we found surprised us.</p>
+
+<h3>Claude Code Feels Like a Tool, Not an Agent</h3>
+
+<p>There's a philosophical shift that happens when you use Claude Code in the terminal versus Claude in a chat interface. The chat interface tries to be helpful in the way a smart colleague would — anticipating, suggesting, narrating. Claude Code just <em>does the thing you asked</em>.</p>
+
+<p>It reads your codebase. It writes the fix. It runs the tests. It commits. It doesn't announce what it's doing unless you ask it to. For the kind of work we do — automating content pipelines, writing scripts, orchestrating video generation — this is exactly the right mental model.</p>
+
+<p>Agents are exciting in demos. <strong>Tools win in production.</strong></p>
+
+<h3>The Terminal Flag That Actually Matters</h3>
+
+<p>There's one thing that made the difference between Claude Code being genuinely useful and it being a permission dialog nightmare: <code>--dangerously-skip-permissions</code>.</p>
+
+<div class="highlight-box">
+    <h4>The Desktop App Problem</h4>
+    <p>The Claude desktop app keeps interrupting even with permission bypass enabled. Every file write, every terminal command, every directory read — all of them trigger a popup that requires human acknowledgment. After about ten minutes of use, you realize you've spent more time clicking "Allow" than actually getting work done. It's unusable for automated workflows.</p>
+</div>
+
+<p>The solution is running Claude Code from the terminal with <code>--dangerously-skip-permissions</code>:</p>
+
+<pre><code>claude --dangerously-skip-permissions \
+  --prompt "Fix the bug in fulfill-order.js where the email template path is wrong"</code></pre>
+
+<p>No popups. No interruptions. It just works — the way a proper CLI tool should.</p>
+
+<div class="highlight-box">
+    <h4>⚠️ Security Note</h4>
+    <p><code>--dangerously-skip-permissions</code> allows Claude Code to execute arbitrary shell commands, write files, and run scripts without confirmation. Only use this in contained environments (CI/CD, isolated containers, or local dev machines where you understand the blast radius). Never run this on shared systems or production servers without proper safeguards.</p>
+</div>
+
+<h2>The Hybrid Stack We Landed On</h2>
+
+<p>After a week of testing, our stack isn't a pure replacement — it's a deliberate split based on what each tool does best:</p>
+
+<div class="article-image">
+    <img src="https://img.tabiji.ai/resources/cleanshot-claude-ban.png" alt="Claude Code terminal running with --dangerously-skip-permissions, showing a popular picks page audit" loading="lazy">
+    <div class="caption">Claude Code in the terminal with --dangerously-skip-permissions enabled. This audit of 1,444 tabiji popular picks pages ran autonomously — 18 tool uses, 24.0k tokens, 50 seconds. The desktop app couldn't have done this without clicking "Allow" 50 times.</div>
+</div>
+
+<ul>
+    <li><strong>OpenClaw + GLM 5.1</strong> — All cron jobs, Instagram Reel generation, Pinterest scheduling, social media management, video creation pipelines, research enrichment tasks. GLM 5.1 handles these with exceptional reliability at 1/10th the cost of GPT-5.4.</li>
+    <li><strong>Claude Code (terminal, --dangerously-skip-permissions)</strong> — Code reviews, script writing, content drafting, bug fixes, complex multi-step tasks that benefit from deep reasoning. It's our specialized tool for anything that touches the codebase or requires genuinely creative writing.</li>
+</ul>
+
+<div class="takeaway">
+    <h4>The Unexpected Result</h4>
+    <p>The hybrid approach is better than what we had before. GLM 5.1 is faster and cheaper than Claude for our scheduled work. And Claude Code, used as a focused CLI tool rather than a general agent, is more reliable and predictable than running Claude through OpenClaw's agent loop for coding tasks.</p>
+    <p>We didn't just recover from the ban. We improved our cost structure and reliability in the process.</p>
+</div>
+
+<h2>What the OpenClaw Ban Taught Us</h2>
+
+<p>The real lesson isn't about Claude or Anthropic. It's about <strong>vendor lock-in in the AI agent layer</strong>.</p>
+
+<p>When you build your entire operation on a single model's agent framework, you're one policy change away from a Saturday morning emergency. The answer isn't to find the most stable provider — there is no such thing. The answer is to build a stack where:</p>
+
+<ul>
+    <li>Your <strong>scheduling and orchestration layer</strong> (OpenClaw) is model-agnostic</li>
+    <li>Your <strong>default model</strong> is excellent and affordable — not necessarily the most prestigious</li>
+    <li>Specialized tasks that need a specific model's strengths can call that model directly, outside the main agent loop</li>
+</ul>
+
+<p>GLM 5.1 is our default now. Claude Code is our coding tool. OpenClaw is our scheduler. Three separate concerns, three independent failure modes, zero single points of failure.</p>
+
+<p>If you got hit by the OpenClaw ban, the scramble is real. But the silver lining is real too: most of the "replacement" models we tested were good enough, and a few were genuinely better for specific tasks. The constraint forced an architecture review that most teams put off until they have no choice.</p>
+
+<h2>FAQs</h2>
+
+<h3>Why not just use GPT-5.4 as the replacement?</h3>
+<p>GPT-5.4 is excellent — no question. But at our production scale (thousands of API calls per day), the cost difference between GPT-5.4 and GLM-5.1 is substantial. And in blind tests, our editors couldn't consistently prefer GPT-5.4 output over GLM-5.1 for travel content. When the cheaper option is equally good, cost efficiency wins.</p>
+
+<h3>Is --dangerously-skip-permissions safe?</h3>
+<p>It's safe if you understand what you're doing. Running it on your local dev machine with a contained project directory is reasonable. Running it on a shared production server without sandboxing is not. Treat it like <code>sudo</code> — powerful when used intentionally, dangerous when used carelessly.</p>
+
+<h3>Can't you just use the Claude desktop app with bypass enabled?</h3>
+<p>We tried. The desktop app's permission bypass is unreliable — it still interrupts frequently, sometimes mid-task. The terminal approach with <code>--dangerously-skip-permissions</code> is the only way to get truly uninterrupted autonomous operation. The desktop app is fine for interactive use; it's not designed for automated workflows.</p>
+
+<h3>Will you go back to Claude in OpenClaw if the ban lifts?</h3>
+<p>Possibly — but not as our default. GLM 5.1 works well and costs less. Claude would become a specialized tool for specific tasks, same as Claude Code. The days of single-provider dependency are over for us, and that's a healthier place to be.</p>
+
+        </div>
+    </div>
+
+    <footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slop &rarr; Iterate &rarr; Curate: Why AI Content Has to Start Bad to Get Good — Zonted</title>
+    <meta name="description" content="The goal isn't to avoid AI slop — it's to slop on purpose, learn from what fails, and curate what works. We tested 15+ content formats, killed most of them, and scaled the survivors. Here's how slop became strategy.">
+    <link rel="canonical" href="https://zonted.com/posts/slop-iterate-curate-ai-content/">
+    <meta property="og:title" content="Slop &rarr; Iterate &rarr; Curate: Why AI Content Has to Start Bad to Get Good">
+    <meta property="og:description" content="The goal isn't to avoid AI slop. It's to slop on purpose, learn from what fails, and curate what works. Here's how we tested 15+ formats, killed most, and scaled the survivors.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.tabiji.ai/tabiji-owl-logo.png">
+    <meta property="og:url" content="https://zonted.com/posts/slop-iterate-curate-ai-content/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-03-18T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Slop &rarr; Iterate &rarr; Curate: Why AI Content Has to Start Bad to Get Good">
+    <meta name="twitter:description" content="The goal isn't to avoid AI slop. It's to slop on purpose, learn from what fails, and curate what works. 15+ formats tested, most killed, survivors scaled.">
+
+    <script type="application/ld+json">
+    [
+      {"@context":"https://schema.org","@type":"Article","headline":"Slop \u2192 Iterate \u2192 Curate: Why AI Content Has to Start Bad to Get Good","author":{"@type":"Person","name":"Bernard Huang"},"datePublished":"2026-03-18","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/slop-iterate-curate-ai-content/","description":"The goal isn't to avoid AI slop \u2014 it's to slop on purpose, learn from what fails, and curate what works. We tested 15+ content formats, killed most of them, and scaled the survivors."},
+      {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Slop \u2192 Iterate \u2192 Curate","item":"https://zonted.com/posts/slop-iterate-curate-ai-content/"}]}
+    ]
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; background: var(--bg); color: var(--text); font-feature-settings: 'kern' 1, 'liga' 1; }
+        img, video { max-width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 2rem 2rem 3rem; }
+        .article-container h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); }
+        .article-meta { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .format-card { background: var(--bg-surface); border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+        .format-card .label { font-family: 'Inter', system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+        .format-card .label.killed { color: var(--red); }
+        .format-card .label.scaled { color: var(--green); }
+        .format-card .label.evolved { color: var(--text-muted); }
+        .format-card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.05rem; color: var(--text); margin-bottom: 0.3rem; }
+        .format-card p { font-size: 0.92rem; margin-bottom: 0; color: var(--text-muted); }
+        .ig-embed-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0 2rem; align-items: start; }
+        .ig-embed-row blockquote { margin: 0 !important; background: none !important; border-left: none !important; padding: 0 !important; font-style: normal !important; }
+        @media (max-width: 640px) { .ig-embed-row { grid-template-columns: 1fr; } }
+        .killed-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem; }
+        .killed-item { text-align: center; }
+        .killed-item a { display: block; }
+        .killed-item img { width: 100%; border-radius: 6px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .killed-item img:hover { transform: scale(1.03); }
+        .killed-item .killed-caption { font-family: 'Inter', system-ui, sans-serif; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.3; }
+        .killed-item .killed-reason { font-family: 'Inter', system-ui, sans-serif; font-size: 0.72rem; color: var(--red); font-weight: 600; margin-top: 0.2rem; }
+        .back-link { font-family: 'Inter', system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .back-link:hover { color: var(--text); }
+        .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+</head>
+<body>
+<nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width:660px;margin:1.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" class="back-link">&larr; Back to Posts</a>
+</div>
+
+<article class="article-container">
+    <h1>Slop &rarr; Iterate &rarr; Curate: Why AI Content Has to Start Bad to Get Good</h1>
+    <div class="article-meta">By Bernard Huang &middot; March 18, 2026 &middot; 7 min read</div>
+
+    <div class="article-body">
+        <p class="dropcap">The internet has a word for low-quality AI content: <em>slop</em>. And the conventional wisdom is simple — don't make it. Use AI responsibly. Curate before you publish. Quality over quantity.</p>
+
+        <p>That advice sounds wise. It's also wrong — or at least, it skips the most important step.</p>
+
+        <p>We've spent six weeks building <a href="https://tabiji.ai">tabiji.ai</a> from zero to 700+ destination pages, 386 local guides, 324 itineraries, and 200+ short-form videos across Instagram, YouTube, and X. We now publish 21 videos per day across 10 active formats, plus daily Pinterest content, weekly resource articles, and an open API serving 1,428 JSON files.</p>
+
+        <p>None of it started good. <strong>All of it started as slop.</strong> And that was the point.</p>
+
+        <h2>The Case for Deliberate Slop</h2>
+
+        <p>Here's what nobody tells you about AI content production: <strong>you can't know what works until you ship what doesn't.</strong></p>
+
+        <p>The instinct is to plan. Research your audience. Study the algorithm. Craft the perfect format. Then launch. This is how traditional content marketing works, and it makes sense when each piece costs $500 and two weeks of a writer's time.</p>
+
+        <p>But when AI drops your marginal production cost to $0.30 per piece, the calculus inverts. Planning is expensive. Shipping is cheap. The fastest way to learn what resonates isn't to theorize — it's to produce 15 different formats, publish all of them, and let the data tell you which ones to keep.</p>
+
+        <p>That's not recklessness. That's the scientific method applied to content.</p>
+
+        <h2>The Graveyard: Formats We Killed</h2>
+
+        <p>We've tested over 15 video formats for Instagram Reels in the last month. Most of them died. Here's the kill list — with actual screenshots from the posts we axed:</p>
+
+        <div class="killed-gallery">
+            <div class="killed-item">
+                <a href="https://www.instagram.com/p/DWAPOcnFdZm/" target="_blank" rel="noopener"><img src="https://img.tabiji.ai/resources/slop-iterate-curate/killed-natural-attractions.png" alt="Killed format: natural attractions slideshow — Iceland Landmannalaugar" loading="lazy"></a>
+                <div class="killed-caption">Natural Attractions</div>
+                <div class="killed-reason">Not interesting enough + copyrighted music</div>
+            </div>
+            <div class="killed-item">
+                <a href="https://www.instagram.com/p/DV9wbdCDB1Q/" target="_blank" rel="noopener"><img src="https://img.tabiji.ai/resources/slop-iterate-curate/killed-vintage-pov.png" alt="Killed format: Vintage POV — Berlin 1961 Brandenburg Gate" loading="lazy"></a>
+                <div class="killed-caption">Vintage POV</div>
+                <div class="killed-reason">Not interesting enough</div>
+            </div>
+            <div class="killed-item">
+                <a href="https://www.instagram.com/p/DVrqVgujwS-/" target="_blank" rel="noopener"><img src="https://img.tabiji.ai/resources/slop-iterate-curate/killed-pov-destination.png" alt="Killed format: POV destination — Cappadocia hot air balloons" loading="lazy"></a>
+                <div class="killed-caption">POV: Destination</div>
+                <div class="killed-reason">Too generic</div>
+            </div>
+            <div class="killed-item">
+                <a href="https://www.instagram.com/p/DWFdgmQCoMY/" target="_blank" rel="noopener"><img src="https://img.tabiji.ai/resources/slop-iterate-curate/killed-countries-as-personalities.png" alt="Killed format: Countries as Personalities — If Countries Were People in Your Friend Group" loading="lazy"></a>
+                <div class="killed-caption">Countries as Personalities</div>
+                <div class="killed-reason">Not enough engagement</div>
+            </div>
+            <div class="killed-item">
+                <a href="https://www.instagram.com/p/DVtLoCygdDQ/" target="_blank" rel="noopener"><img src="https://img.tabiji.ai/resources/slop-iterate-curate/killed-one-thing.png" alt="Killed format: One thing you can't miss — Hanoi" loading="lazy"></a>
+                <div class="killed-caption">One Thing You Can't Miss</div>
+                <div class="killed-reason">Too generic</div>
+            </div>
+            <div class="killed-item">
+                <a href="https://www.instagram.com/p/DVv2JMDiu4b/" target="_blank" rel="noopener"><img src="https://img.tabiji.ai/resources/slop-iterate-curate/killed-tourists-vs-locals.png" alt="Killed format: Tourists vs Locals — Saigon T&acirc;n &#272;&#7883;nh Market" loading="lazy"></a>
+                <div class="killed-caption">Tourists vs Locals</div>
+                <div class="killed-reason">Questionable attraction selection</div>
+            </div>
+        </div>
+
+        <p>Every one of these looked good in isolation. Cinematic AI footage of Cappadocia at sunrise. A nostalgic 1961 Berlin POV. Iceland's highlands with dramatic text. <em>They all felt like they should work.</em> That's the trap — aesthetic appeal doesn't equal engagement.</p>
+
+        <div class="format-card">
+            <div class="label killed">Killed — too generic</div>
+            <h4>"POV: Destination" &amp; "One Thing You Can't Miss"</h4>
+            <p>Beautiful footage, clean text overlays, solid production. Averaged 9–134 views. Nobody saved them, nobody shared them. The format was indistinguishable from every other travel account on Instagram. When you can't tell whether a human or AI made it <em>and</em> it doesn't offer anything useful, you've just made wallpaper.</p>
+        </div>
+
+        <div class="format-card">
+            <div class="label killed">Killed — aesthetics does not equal engagement</div>
+            <h4>"Vintage POV" &amp; "Natural Attractions" Reels</h4>
+            <p>The Vintage POV format (8mm-style AI footage of historical cities) was beautiful to watch and terrible on Instagram — 110–134 views. The Natural Attractions format ran into a double problem: the content wasn't differentiated enough, and using copyrighted music meant constant takedown risk. The lesson: aesthetic content without a hook doesn't trigger saves or shares — the two signals Instagram's algorithm actually rewards.</p>
+        </div>
+
+        <div class="format-card">
+            <div class="label killed">Killed — selection problem</div>
+            <h4>"Tourists vs Locals" Reels</h4>
+            <p>The concept was solid — show where tourists go, then reveal where locals actually eat/shop/hang out. But the attraction selection was off. Picking the <em>right</em> local spot requires real insider knowledge that AI models don't reliably have. Without Reddit-sourced specifics, the "local" recommendations felt just as generic as the tourist ones.</p>
+        </div>
+
+        <div class="format-card">
+            <div class="label killed">Killed — not enough engagement</div>
+            <h4>"Countries as Personalities" Reels</h4>
+            <p>"If Countries Were People in Your Friend Group" — AI-generated scenes of each country's personality stereotype with flag overlays and Ken Burns animation. The concept was fun and shareable in theory, but the listicle format didn't generate enough saves or shares to justify the production complexity. Six countries per video diluted the hook — viewers didn't stick around for all six reveals. The format lacked the utility or tension that our top performers (scam alerts, tourist mistakes) rely on.</p>
+        </div>
+
+        <p>Each of these formats cost us about $0.30 and 4 minutes of compute to produce. Total R&amp;D investment to learn they don't work: maybe $15. A traditional video team would have spent $5,000 and three weeks arriving at the same conclusion.</p>
+
+        <h2>The Survivors: What Slop Taught Us</h2>
+
+        <p>While most formats died, a few showed immediate signal. And the reasons were never what we predicted.</p>
+
+        <div class="format-card">
+            <div class="label scaled">Scaled — 2,461 avg views</div>
+            <h4>"Scam Alert" Reels</h4>
+            <p>Warning tourists about specific scams in specific cities. Our #1 performer by far. Why? Fear is the strongest engagement trigger in travel content. People save these to reference later. They share them with friends planning trips. One Paris bracelet scam Reel hit 3,100+ views — from an account with under 500 followers.</p>
+        </div>
+
+        <div class="ig-embed-row">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVyeOTaiS9s/" data-instgrm-version="14" style="max-width:540px;min-width:326px;width:100%;"></blockquote>
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVzgG_7gC7S/" data-instgrm-version="14" style="max-width:540px;min-width:326px;width:100%;"></blockquote>
+        </div>
+
+        <div class="format-card">
+            <div class="label scaled">Scaled — 865 avg views, best engagement</div>
+            <h4>"Tourist Mistake" Reels</h4>
+            <p>"#1 Mistake Tourists Make in [City]" — two-clip format showing the mistake, then what locals actually do. This format has our best engagement ratio: 31 saves, 39 shares per Reel on average. The two-clip before/after structure creates a micro-narrative that keeps people watching. Now running 3x/day.</p>
+        </div>
+
+        <div class="ig-embed-row">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVwKPLfCBv1/" data-instgrm-version="14" style="max-width:540px;min-width:326px;width:100%;"></blockquote>
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DV_rmCNDEjU/" data-instgrm-version="14" style="max-width:540px;min-width:326px;width:100%;"></blockquote>
+        </div>
+
+        <div class="format-card">
+            <div class="label evolved">Evolved — 3 iterations deep</div>
+            <h4>"Budget Breakdown" Reels</h4>
+            <p>"What $30/day gets you in Bangkok." Started as a single image with text. Evolved into a stair-stepping 5-clip video (each item more expensive than the last, total revealed at the end). The progressive escalation structure keeps viewers watching through the payoff. Now running 2x/day with queues for 50+ cities.</p>
+        </div>
+
+        <div class="ig-embed-row">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DWAmGrjD6mk/" data-instgrm-version="14" style="max-width:540px;min-width:326px;width:100%;"></blockquote>
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DV9nRsdgbGt/" data-instgrm-version="14" style="max-width:540px;min-width:326px;width:100%;"></blockquote>
+        </div>
+
+        <h2>The Pattern: Slop Reveals Direction</h2>
+
+        <p>Looking back, we couldn't have predicted any of this. We assumed beautiful AI footage would win — it didn't. We assumed food content would crush — it was mid. The formats that actually work share three traits we only discovered through volume:</p>
+
+        <ol>
+            <li><strong>Utility over aesthetics.</strong> People save content that helps them avoid a $200 scam. They don't save content that looks pretty. Saves and shares are what Instagram's algorithm rewards, not impressions.</li>
+            <li><strong>Specificity over generality.</strong> "Don't eat at tourist restaurants" gets ignored. "The bracelet scam on the Champs-Elysees where someone ties a string to your wrist" gets saved. Real Reddit-sourced details beat generic AI advice every time.</li>
+            <li><strong>Structure over production value.</strong> A two-clip before/after with a $0.27 MiniMax video outperforms an $4.50 cinematic Veo 3 clip with no narrative structure. The hook matters more than the pixels.</li>
+        </ol>
+
+        <p>None of these insights came from planning. They came from publishing 200+ videos and watching the numbers.</p>
+
+        <h2>The Same Pattern Holds for Written Content</h2>
+
+        <p>Our SEO and AEO (Answer Engine Optimization) content followed the same arc.</p>
+
+        <p>Our first popular-picks guides were pure LLM output — well-structured lists of "best restaurants in Tokyo" that read fine and ranked for nothing. They were slop. Good-looking, well-formatted slop.</p>
+
+        <p>But shipping them taught us what was missing:</p>
+
+        <ul>
+            <li><strong>Iteration 1:</strong> Add Reddit-sourced quotes with specific dishes, prices, and "what to order" callouts. Specificity that no model can hallucinate from training data.</li>
+            <li><strong>Iteration 2:</strong> Enrich with Google Places API data — live ratings, review counts, opening hours, direct Maps links. Trust signals that make visitors actually go to these places.</li>
+            <li><strong>Iteration 3:</strong> Add JSON-LD structured data so Google shows star ratings in search results. Schema markup that turns a page into a rich result.</li>
+            <li><strong>Iteration 4:</strong> Build a free static API exposing the enriched data — 3,755 places with ratings, hours, quotes, and photos — so other developers and AI agents can build on it.</li>
+        </ul>
+
+        <p>The results are showing up in Search Console. In the last 30 days, our 166 popular-picks pages have generated <strong>837 Google impressions</strong> across 26 indexed pages — with specific guides like Ho Chi Minh rooftop bars (102 impressions, position 14.8), Le Marais cheap restaurants (96 impressions, position 10.7), and Marrakech street food (65 impressions, position 9.7) already earning clicks. These are pages that <em>didn't exist</em> six weeks ago and ranked for nothing in version one.</p>
+
+        <p>The first version was slop. The fourth version is a data moat. But we never would have reached version four without shipping version one.</p>
+
+        <h2>The Same Pattern, Again: AEO Content</h2>
+
+        <p>When we started writing resource articles for answer engine optimization, our first attempts were generic "Best AI Travel Planners" listicles. They existed. They ranked for nothing. They were cited by zero AI models.</p>
+
+        <p>But each article taught us something:</p>
+
+        <ul>
+            <li>Articles with <strong>real cost data</strong> ("$0.27/clip vs $4.50/clip") get cited by AI models because they contain facts that can't be generated from training data alone.</li>
+            <li>Articles with <strong>embedded examples</strong> (actual video comparisons, real screenshots) outperform abstract analysis.</li>
+            <li><strong>Comparison articles</strong> targeting "X vs Y" queries became our SEO beachhead — they match how people actually search and how AI models structure answers.</li>
+        </ul>
+
+        <p>Our 50+ destination comparison pages are proving this in real data. In the last 30 days, 13 compare pages have generated <strong>308 Google Search impressions</strong> across queries like "greece vs italy" (59 impressions), "croatia vs montenegro" (40 impressions), "seoul vs tokyo" (30 impressions), and "vietnam vs philippines" (30 impressions). Several are already landing on page one.</p>
+
+        <p>Meanwhile, AI models are becoming a real traffic source. <strong>ChatGPT now sends 61 sessions per month</strong> to tabiji.ai — making it our 5th largest traffic source ahead of Pinterest and YouTube. Reddit referrals (86 sessions, 35% bounce rate) drive the highest-quality organic traffic. And Pinterest, while smaller at 17 sessions, has a <strong>12% bounce rate</strong> — the stickiest traffic source by far, meaning those visitors actually explore the site.</p>
+
+        <p>These pages started as experiments — another form of deliberate slop. The data told us to double down.</p>
+
+        <h2>The Key Insight: Not "Don't Slop" — "Slop to Learn How Not to Slop"</h2>
+
+        <p>The AI content discourse has it backwards. The advice shouldn't be "don't produce AI slop." It should be: <strong>"produce AI slop deliberately, measure ruthlessly, and curate what survives."</strong></p>
+
+        <p>The three-stage cycle:</p>
+
+        <ol>
+            <li><strong>Slop.</strong> Ship fast, ship ugly, ship in volume. 15 video formats, 10 article angles, 5 content types. Your production cost is low enough that failed experiments are practically free.</li>
+            <li><strong>Iterate.</strong> Watch the data. What gets saved? What gets shared? What do AI models cite? What ranks? Kill the losers fast — we killed three formats in under two weeks each. Double down on the winners — Tourist Mistake went from 1x/day to 3x/day the moment we saw the engagement data.</li>
+            <li><strong>Curate.</strong> The survivors get refined. Add data enrichment. Add structured data. Add the specificity that turns slop into signal. This is where the real investment goes — not into the AI generation, but into the layers of verification, enrichment, and curation that make the output trustworthy.</li>
+        </ol>
+
+        <p>The irony is that the final output — the curated, enriched, data-backed content — doesn't look like AI content at all. It looks like expert content. Because the AI was never the point. The AI was the starting gun.</p>
+
+        <blockquote>Slop is not the enemy. Slop that stays slop is the enemy.</blockquote>
+
+        <p>The companies winning at AI content aren't the ones who avoid slop. They're the ones who <em>use</em> slop as a discovery mechanism, kill failures fast, and invest in curation. The cycle is the strategy.</p>
+
+        <p>Start bad. Get data. Get better. Repeat.</p>
+    </div>
+</article>
+
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<script async src="//www.instagram.com/embed.js"></script>
+</body>
+</html>

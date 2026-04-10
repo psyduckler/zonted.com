@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>AI Image Generation Comparison: 5 Models, 26 Images, Real Results (2026)</title>
+    <meta name="description" content="We tested GPT, Grok, Gemini (Nano Banana 2), MiniMax, and CogView-4 across 26 images in two real production workflows. The biggest differentiator wasn't image quality — it was prompt adherence.">
+    <link rel="canonical" href="https://zonted.com/posts/ai-image-generation-comparison/">
+    <meta property="og:title" content="AI Image Generation Comparison: 5 Models, 26 Images, Real Results (2026)">
+    <meta property="og:description" content="We tested GPT, Grok, Gemini (Nano Banana 2), MiniMax, and CogView-4 across 26 images in two real production workflows. The biggest differentiator wasn't image quality — it was prompt adherence.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://zonted.com/posts/ai-image-generation-comparison/">
+    <meta property="og:image" content="https://img.tabiji.ai/resources/ai-image-generation-comparison/hero-comparison-grid.jpg">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AI Image Generation Comparison: 5 Models, 26 Images, Real Results (2026)",
+      "author":{"@type":"Person","name":"Bernard Huang"},
+      "datePublished": "2026-03-11",
+      "dateModified": "2026-03-19",
+      "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"}},
+      "image": "https://img.tabiji.ai/resources/ai-image-generation-comparison/hero-comparison-grid.jpg",
+      "mainEntityOfPage": "https://zonted.com/posts/ai-image-generation-comparison/"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which AI image generator follows prompts best?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nano Banana 2 (Google Gemini 3.1 Flash Image) is the most prompt-adherent AI image generator we tested. In our 26-image benchmark across 5 models, it was the only one that consistently followed stylistic constraints — including producing true black-and-white when asked, rendering correct Japanese kanji, and adding technically accurate Kodachrome film border markings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best AI image generator for travel photography in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the scene type. For crowd scenes, landmarks, and anything with text or signage, Nano Banana 2 is the clear winner (9/10 in our crowd benchmark). For intimate portraits and close-up people shots, MiniMax image-01 produces the most convincing human faces (8/10). Grok Aurora is the best all-rounder, finishing top-2 in both categories. GPT/DALL-E 3 finished last."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI generate realistic vintage film photography?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — Nano Banana 2 can generate images that convincingly mimic 1970s Kodachrome film, including accurate film grain, warm color science, scan artifacts, and even film rebate markings. The key is detailed prompt engineering: specifying exact film stock characteristics, era-appropriate composition, and physical scan artifacts rather than generic vintage filter instructions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does AI image generation cost per image?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI image generation costs range from $0.02 to $0.08 per image in 2026. Nano Banana 2 (Gemini) and CogView-4 cost ~$0.02/image. MiniMax image-01 costs ~$0.04/image. GPT/DALL-E 3 costs ~$0.04–$0.08/image. Grok Aurora pricing is ~$0.07/image."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is prompt engineering more important than which AI model you choose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In our testing, the gap between a lazy prompt and a detailed one was larger than the gap between models. A detailed V2 prompt specifying Kodachrome color science, scan artifacts, and era-appropriate composition unlocked dramatically better output — but only on models that actually follow instructions. Nano Banana 2 rewarded detailed prompts the most."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which AI model handles Japanese text and kanji best?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nano Banana 2 is the best at rendering Japanese text (kanji). In our Fushimi Inari test, it produced legible and correct kanji. MiniMax rendered blurry, unreadable text. CogView-4 produced garbled nonsense characters. GPT/DALL-E 3 also garbled sign text in our Verona test. For any content involving CJK text or signage, Nano Banana 2 is the only reliable option."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+        :root {
+    --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+    --border: #ddd; --border-light: #e8e8e4;
+    --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+    --accent: #1a1a1a; --accent-hover: #000;
+    --green: #2a7a2a; --red: #a33; --blue: #369;
+}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+.article-container { max-width: 660px; margin: 0 auto; padding: 3rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+footer p { color: var(--text-muted); font-size: 0.85rem; }
+        @media (max-width: 768px) {
+            .nav-links.open { display: flex; }
+            nav a}
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin: 1.5rem 0 2rem; }
+        .comparison-grid.two-col { grid-template-columns: 1fr 1fr; }
+        .comparison-grid.four-col { grid-template-columns: repeat(4, 1fr); }
+        .comparison-card { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--bg); }
+        .comparison-card img { width: 100%; height: auto; display: block; }
+        .comparison-card .card-label { padding: 0.5rem 0.75rem; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); background: var(--bg-surface); text-align: center; }
+        .comparison-card .card-label .score { display: inline-block; background: var(--accent); color: white; padding: 0.1rem 0.5rem; border-radius: 20px; font-size: 0.75rem; margin-left: 0.35rem; }
+        .comparison-card .card-label .score.high { background: var(--text-muted); }
+        .comparison-card .card-label .score.mid { background: var(--earth); }
+        .comparison-card .card-label .score.low { background: var(--accent); }
+        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5rem 0 2rem; border-radius: 10px; border: 1px solid var(--border); }
+        .spec-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 0.95rem; }
+        .spec-table th, .spec-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .spec-table th { background: var(--bg-surface); color: var(--text); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+        .spec-table td { color: var(--text); }
+        .spec-table tr:last-child td { border-bottom: none; }
+        .spec-table .winner { background: rgba(122, 139, 111, 0.08); font-weight: 600; }
+        .verdict-box { background: var(--bg-surface); border: 2px solid var(--text-muted); border-radius: 12px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .verdict-box h3 { color: var(--text-muted); margin-bottom: 0.75rem; font-size: 1.1rem; }
+        .verdict-box p { margin-bottom: 0.75rem; }
+        .verdict-box p:last-child { margin-bottom: 0; }
+        .article-hero { margin: -0.5rem -2rem 2rem; border-radius: 12px; overflow: hidden; position: relative; }
+        .article-hero img { width: 100%; height: auto; display: block; }
+        .article-hero .hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 2rem; background: linear-gradient(transparent, rgba(0,0,0,0.6)); color: white; }
+        .article-hero .hero-overlay span { font-size: 0.85rem; opacity: 0.9; }
+        .article-meta { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+        .toc-sidebar { padding-top: 3rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+        .toc-sidebar h2 { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(254, 252, 249, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 660px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; border-radius: 0; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+            .article-body pre { max-width: 100%; overflow-x: auto; }
+            .comparison-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+            .comparison-grid.two-col { grid-template-columns: 1fr !important; }
+            .comparison-card .card-label { font-size: 0.85rem; padding: 0.6rem 0.75rem; }
+            .spec-table { min-width: 420px; font-size: 0.85rem; }
+            .spec-table th, .spec-table td { padding: 0.5rem 0.65rem; }
+            .table-wrap { max-width: 100%; }
+            .verdict-box { padding: 1rem 1.25rem; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+            .spec-table { min-width: 360px; font-size: 0.8rem; }
+            .spec-table th, .spec-table td { padding: 0.4rem 0.5rem; }
+            .verdict-box { padding: 0.85rem 1rem; }
+            .verdict-box h3 { font-size: 1rem; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        }
+        .img-caption { text-align: center; font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-top: -0.5rem; margin-bottom: 1.5rem; }
+        .video-comparison { margin: 1.5rem 0 2rem; }
+        .video-comparison h4 { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        .video-card { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-surface); }
+        .video-card video { width: 100%; height: auto; display: block; object-fit: cover; }
+        .video-card .card-label { padding: 0.5rem 0.75rem; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); background: var(--bg-surface); text-align: center; }
+        .full-reels-section { margin: 2.5rem 0; }
+        .full-reels-section .reel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .reel-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-surface); }
+        .reel-card video { width: 100%; height: auto; display: block; object-fit: cover; }
+        .reel-card .card-label { padding: 0.65rem 1rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); background: var(--bg-surface); text-align: center; }
+        @media (max-width: 640px) {
+            .video-grid { grid-template-columns: 1fr; }
+            .full-reels-section .reel-grid { grid-template-columns: 1fr; }
+        }
+            .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+</head>
+<body>
+    <nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width: 660px;margin:1.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" style="color:var(--text-muted);text-decoration:none;font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+</div>
+
+<div class="toc-mobile-wrapper">
+    <div class="toc-mobile-sticky" id="toc-mobile">
+        <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+            <span class="toc-active-label">📑 Contents</span>
+            <span class="toc-chevron">▼</span>
+        </button>
+        <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+            <ul>
+                <li><a href="#why-this-test-matters" onclick="closeMobileToc()">Why This Test Matters</a></li>
+                <li><a href="#the-models" onclick="closeMobileToc()">The 5 Models</a></li>
+                <li><a href="#test-1-vintage-kyoto" onclick="closeMobileToc()">Test 1: Vintage Kyoto</a></li>
+                <li><a href="#gion-bw-test" onclick="closeMobileToc()">The B&amp;W Test</a></li>
+                <li><a href="#test-2-phone-verona" onclick="closeMobileToc()">Test 2: Phone Camera Verona</a></li>
+                <li><a href="#prompt-engineering" onclick="closeMobileToc()">Prompt Engineering</a></li>
+                <li><a href="#scorecard" onclick="closeMobileToc()">Combined Scorecard</a></li>
+                <li><a href="#what-to-use" onclick="closeMobileToc()">What to Use for What</a></li>
+                <li><a href="#pricing" onclick="closeMobileToc()">Pricing</a></li>
+                <li><a href="#how-to-use" onclick="closeMobileToc()">Code Examples</a></li>
+                <li><a href="#full-reels" onclick="closeMobileToc()">Full Reels</a></li>
+                <li><a href="#related" onclick="closeMobileToc()">Related</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#why-this-test-matters">Why This Test Matters</a></li>
+        <li><a href="#the-models">The 5 Models</a></li>
+        <li><a href="#test-1-vintage-kyoto">Test 1: Vintage Kyoto</a></li>
+        <li><a href="#gion-bw-test">The B&amp;W Test</a></li>
+        <li><a href="#test-2-phone-verona">Test 2: Phone Camera Verona</a></li>
+        <li><a href="#prompt-engineering">Prompt Engineering</a></li>
+        <li><a href="#scorecard">Combined Scorecard</a></li>
+        <li><a href="#what-to-use">What to Use for What</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#how-to-use">Code Examples</a></li>
+        <li><a href="#full-reels">Full Reels</a></li>
+        <li><a href="#related">Related</a></li>
+    </ul>
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>AI Image Generation Comparison: 5 Models, 26 Images, Real Results (2026)</h1>
+        <div class="article-meta">Published March 11, 2026 · Last updated March 19, 2026 · By Bernard Huang</div>
+
+        <div class="article-body">
+
+            <div class="article-hero">
+                <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/hero-comparison-grid.jpg" alt="Side-by-side comparison of AI-generated vintage 1970s photographs of Fushimi Inari by Nano Banana 2 (9.5/10), MiniMax (5.5/10), and CogView-4 (4/10) — same prompt, dramatically different results" width="2424" height="1478">
+            </div>
+
+            <div class="verdict-box" style="border-color: var(--text); background: linear-gradient(135deg, var(--bg-surface), #faf5ee);">
+                <h3 style="color: var(--text); margin-bottom: 0.5rem;">TL;DR — 5 Models, 26 Images, Two Benchmarks</h3>
+                <p class="dropcap">We tested <strong>GPT (DALL-E 3)</strong>, <strong>Grok Aurora</strong>, <strong>Nano Banana 2</strong> (Gemini), <strong>MiniMax image-01</strong>, and <strong>CogView-4</strong> across two real production workflows: vintage 1970s Kodachrome film photography (18 images) and iPhone-realistic phone photos for Instagram Reels (8 images).</p>
+                <p><strong>The biggest differentiator wasn't image quality — it was prompt adherence.</strong> Most models produce decent-looking images. Only Nano Banana 2 consistently does what you actually ask. It scored 8.8/10 for vintage photography, 9/10 for crowd scenes, and costs ~$0.02/image. For portraits, MiniMax leads. For an all-rounder, Grok. GPT finished last for both use cases.</p>
+            </div>
+
+            <h2 id="why-this-test-matters">Why This Test Matters</h2>
+
+            <p>Most AI image generation comparisons test generic prompts — "a cat wearing a hat," "futuristic cityscape." That tells you which model makes the prettiest pictures. It doesn't tell you which model <em>follows instructions</em>.</p>
+
+            <p>We needed to know something different. We build <a href="/">AI-generated travel itineraries</a> at tabiji, and our <a href="https://www.instagram.com/tabijiai/">Instagram Reels</a> need two very specific types of images: vintage film photographs styled to look like 1970s Kodachrome slides, and iPhone-realistic phone photos that pass as candid tourist shots. Both require strict stylistic control — specific film grain, era-appropriate composition, accurate text rendering, and deliberate "imperfection."</p>
+
+            <p><strong>If a model can't follow a detailed brief for vintage Kodachrome, it can't follow a detailed brief for anything.</strong> This test is a proxy for prompt adherence across any demanding creative workflow — whether you're building mockups, infographics, social media content, or production imagery at scale.</p>
+
+            <h2 id="the-models">The 5 Models We Tested</h2>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Model</th><th>Provider</th><th>Cost/Image</th><th>Max Resolution</th><th>Tests</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Nano Banana 2</strong></td><td>Google (Gemini 3.1 Flash)</td><td>~$0.02</td><td>Up to 4K</td><td>Kyoto + Verona</td></tr>
+                    <tr><td><strong>MiniMax image-01</strong></td><td>MiniMax</td><td>~$0.04</td><td>Up to 2K</td><td>Kyoto + Verona</td></tr>
+                    <tr><td><strong>CogView-4</strong></td><td>Z.AI (Zhipu AI)</td><td>~$0.02</td><td>720×1440</td><td>Kyoto only</td></tr>
+                    <tr><td><strong>Grok Aurora</strong></td><td>xAI</td><td>~$0.07</td><td>Up to 2K</td><td>Verona only</td></tr>
+                    <tr><td><strong>GPT (DALL-E 3)</strong></td><td>OpenAI</td><td>~$0.04–$0.08</td><td>1024×1792</td><td>Verona only</td></tr>
+                </tbody>
+            </table></div>
+
+            <p>We ran two separate benchmarks. <strong>Test 1 (Kyoto)</strong> tested vintage film photography across 4 iconic landmarks with 3 models — Nano Banana 2, MiniMax, and CogView-4. <strong>Test 2 (Verona)</strong> tested iPhone-realistic phone photos across 2 scene types with 4 models — adding GPT and Grok while dropping CogView-4.</p>
+
+            <h2 id="test-1-vintage-kyoto">Test 1: Vintage 1970s Kyoto — Can AI Fake Film Photography?</h2>
+
+            <p>We ran three models through four Kyoto landmarks — Fushimi Inari, Kinkaku-ji, Arashiyama, and Gion — with prompts requesting 1970s Kodachrome film aesthetic: warm saturated midtones, vintage grain, amateur composition, and era-appropriate details. Same prompt, same day, direct comparison. Here's Fushimi Inari — the most revealing of the four:</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-fushimi-inari.jpg" alt="AI-generated vintage 1970s photograph of Fushimi Inari torii gates in Kyoto, created by Nano Banana 2 (Gemini 3.1 Flash) — rated 9.5/10 for authenticity" loading="lazy">
+                    <div class="card-label">Nano Banana 2 <span class="score high">9.5/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-fushimi-inari.jpg" alt="AI-generated vintage photograph of Fushimi Inari torii gates by MiniMax image-01 — warm color science but wrong POV, rated 5.5/10" loading="lazy">
+                    <div class="card-label">MiniMax <span class="score mid">5.5/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/cogview-fushimi-inari.jpg" alt="AI-generated photograph of Fushimi Inari by CogView-4 — cinematic modern look instead of vintage, garbled kanji, rated 4/10" loading="lazy">
+                    <div class="card-label">CogView-4 <span class="score low">4/10</span></div>
+                </div>
+            </div>
+
+            <div class="video-comparison">
+                <h4>▶ Animated — Vintage POV Reel Clips</h4>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/nano-01-fushimi.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-fushimi-inari.jpg"></video>
+                        <div class="card-label">Nano Banana 2 — Animated</div>
+                    </div>
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/minimax-01-fushimi.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-fushimi-inari.jpg"></video>
+                        <div class="card-label">MiniMax — Animated</div>
+                    </div>
+                </div>
+                <p class="img-caption" style="margin-top: 0.5rem;">These clips show the same images after Remotion rendering — with film grain, vignette, and slow drift animation applied.</p>
+            </div>
+
+            <p>The pattern was consistent across all four landmarks. <strong>Nano Banana 2</strong> produced the most convincing vintage imagery every time — correct Kodachrome warm tones, legible Japanese kanji (you can read "奉" and "納" at Fushimi Inari), authentic amateur composition, and proper architectural proportions. <strong>MiniMax</strong> had beautiful color science but consistently ignored POV instructions and produced compositions too polished for a tourist snapshot. <strong>CogView-4</strong> defaulted to modern cinematic aesthetics regardless of the prompt — orange-teal color grading, HDR dynamic range, garbled kanji.</p>
+
+            <p>Here are Kinkaku-ji and Arashiyama — the same story:</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-kinkakuji.jpg" alt="AI-generated vintage 1970s photograph of Kinkaku-ji Golden Pavilion reflected in mirror pond, created by Nano Banana 2 — muted gold tones, rated 8/10" loading="lazy">
+                    <div class="card-label">NB2 — Kinkaku-ji <span class="score high">8/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-kinkakuji.jpg" alt="AI-generated photograph of Kinkaku-ji by MiniMax image-01 — warm tones but overly polished composition, rated 6/10" loading="lazy">
+                    <div class="card-label">MiniMax — Kinkaku-ji <span class="score mid">6/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/cogview-kinkakuji.jpg" alt="AI-generated photograph of Kinkaku-ji by CogView-4 — modern HDR look with no vintage character, rated 3/10" loading="lazy">
+                    <div class="card-label">CogView-4 — Kinkaku-ji <span class="score low">3/10</span></div>
+                </div>
+            </div>
+
+            <div class="video-comparison">
+                <h4>▶ Animated — Kinkaku-ji Reel Clips</h4>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/nano-02-kinkakuji.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-kinkakuji.jpg"></video>
+                        <div class="card-label">Nano Banana 2 — Animated</div>
+                    </div>
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/minimax-02-kinkakuji.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-kinkakuji.jpg"></video>
+                        <div class="card-label">MiniMax — Animated</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-arashiyama-bamboo.jpg" alt="AI-generated vintage 1970s photograph of Arashiyama bamboo grove in Kyoto by Nano Banana 2 — olive-shifted greens mimicking Kodachrome, rated 8.5/10" loading="lazy">
+                    <div class="card-label">NB2 — Arashiyama <span class="score high">8.5/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-arashiyama-bamboo.jpg" alt="AI-generated photograph of Arashiyama bamboo grove by MiniMax — warm tones but too vivid for vintage, rated 6/10" loading="lazy">
+                    <div class="card-label">MiniMax — Arashiyama <span class="score mid">6/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/cogview-arashiyama-bamboo.jpg" alt="AI-generated photograph of Arashiyama bamboo grove by CogView-4 — oversaturated modern cinematic look, rated 2.5/10" loading="lazy">
+                    <div class="card-label">CogView-4 — Arashiyama <span class="score low">2.5/10</span></div>
+                </div>
+            </div>
+
+            <div class="video-comparison">
+                <h4>▶ Animated — Arashiyama Reel Clips</h4>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/nano-03-arashiyama.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-arashiyama-bamboo.jpg"></video>
+                        <div class="card-label">Nano Banana 2 — Animated</div>
+                    </div>
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/minimax-03-arashiyama.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-arashiyama-bamboo.jpg"></video>
+                        <div class="card-label">MiniMax — Animated</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="gion-bw-test">The Black &amp; White Test That Broke Two Models</h2>
+
+            <p>This was the most revealing test in our entire benchmark. We asked for <strong>"absolutely no color whatsoever, silver gelatin print"</strong> — a geisha walking through Gion's lantern-lit streets at dusk, shot on black and white film.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-gion-evening.jpg" alt="AI-generated black and white silver gelatin photograph of Gion district in Kyoto by Nano Banana 2 — stunning monochrome with deep blacks and luminous lanterns, rated 9/10" loading="lazy">
+                    <div class="card-label">Nano Banana 2 <span class="score high">9/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-gion-evening.jpg" alt="MiniMax failed black and white test for Gion evening scene — rendered in full color despite explicit B&W prompt, rated 2/10" loading="lazy">
+                    <div class="card-label">MiniMax <span class="score low">2/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/cogview-gion-evening.jpg" alt="CogView-4 completely ignored black and white instruction for Gion scene — bright orange and red colors, rated 0/10 for prompt adherence" loading="lazy">
+                    <div class="card-label">CogView-4 <span class="score low">0/10</span></div>
+                </div>
+            </div>
+
+            <div class="video-comparison">
+                <h4>▶ Animated — Gion Evening Reel Clips</h4>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/nano-06-gion.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-gion-evening.jpg"></video>
+                        <div class="card-label">Nano Banana 2 — Animated</div>
+                    </div>
+                    <div class="video-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/clips/minimax-06-gion.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-gion-evening.jpg"></video>
+                        <div class="card-label">MiniMax — Animated</div>
+                    </div>
+                </div>
+            </div>
+
+            <p><strong>Nano Banana 2</strong> delivered a stunning silver gelatin print. Pure monochrome, zero color bleed. Deep inky blacks in the machiya facades, luminous lantern highlights, visible grain consistent with Tri-X film stock. The kind of image you'd expect in a Daidō Moriyama photobook.</p>
+
+            <p><strong>MiniMax rendered in full color.</strong> Warm amber lanterns, teal shadows. Attractive? Sure. But the prompt said "absolutely no color whatsoever." It ignored that completely.</p>
+
+            <p><strong>CogView-4 was the worst offender.</strong> Bright orange lanterns, vivid red obi accents, warm pavement reflections. Not just "not black and white" — aggressively, blatantly colorful.</p>
+
+            <blockquote>Prompt adherence is the single most important differentiator between AI image models. Most models produce decent images. Only some actually do what you ask. When we said "black and white," Nano Banana 2 gave us black and white. The other two gave us whatever they felt like.</blockquote>
+
+            <h2 id="test-2-phone-verona">Test 2: Phone Camera Realism — Verona</h2>
+
+            <p>Vintage film is one use case. The other half of our pipeline needs images that pass as <strong>real iPhone photos</strong> — handheld grain, natural depth of field, authentic crowd behavior, legible signage. For this test, we added <strong>GPT (DALL-E 3)</strong> and <strong>Grok (Aurora)</strong> while dropping CogView-4. Two prompts, four models, eight images.</p>
+
+            <h3>Which AI model handles crowd scenes best?</h3>
+
+            <p><strong>Prompt:</strong> An exhausted female tourist photographed from behind in a dense crowd outside Casa di Giulietta in Verona. iPhone photo quality — handheld, natural grain, depth of field, motion blur. Juliet's bronze statue visible ahead. Tourist overwhelm is palpable.</p>
+
+            <div class="comparison-grid four-col">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/gpt-mistake.png" alt="GPT DALL-E 3 generated image of Juliet's House crowd scene — over-cinematic, garbled text on signs, porcelain-smooth faces, rated 6/10" loading="lazy">
+                    <div class="card-label">GPT (DALL-E 3) <span class="score mid">6/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/grok-mistake.jpg" alt="Grok Aurora generated image of Juliet's House crowd scene — incredibly expressive exhausted woman, natural crowd density, rated 8.5/10" loading="lazy">
+                    <div class="card-label">Grok (Aurora) <span class="score high">8.5/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/nb2-mistake.png" alt="Nano Banana 2 generated image of Juliet's House crowd scene — most photorealistic, legible Juliet text, correct Fjällräven backpack, rated 9/10" loading="lazy">
+                    <div class="card-label">Nano Banana 2 <span class="score high">9/10 🏆</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/minimax-mistake.jpg" alt="MiniMax generated image of Juliet's House crowd scene — too dark, bokeh too cinematic, reads as dangerous alley not tourist trap, rated 7/10" loading="lazy">
+                    <div class="card-label">MiniMax <span class="score mid">7/10</span></div>
+                </div>
+            </div>
+
+            <p><strong>Nano Banana 2 won decisively (9/10).</strong> The most photorealistic result — "Juliet" text on souvenirs is legible, the Fjällräven backpack logo on the main subject is rendered correctly (the model knew the specific brand), and a person holding a phone in the foreground adds authentic casual detail. Hardest to identify as AI.</p>
+
+            <p><strong>Grok Aurora came close (8.5/10).</strong> The exhausted woman is incredibly expressive and natural — best emotional storytelling of any model. Some face dissolution in deeper crowd, but the focal subject is flawless.</p>
+
+            <p><strong>MiniMax (7/10)</strong> was too dark — bokeh and lighting read as Sony A7III, not iPhone. The scene looks like a dangerous alley, not a tourist trap. <strong>GPT (6/10)</strong> garbled all sign text ("SLOLEROCVEE" instead of readable Italian) and produced porcelain-smooth faces immediately identifiable as AI.</p>
+
+            <h3>Is GPT good for portrait-style travel photos?</h3>
+
+            <p><strong>Prompt:</strong> Two Italian men in their 50s laughing and drinking wine at an outdoor café in Piazza delle Erbe, Verona. Candid iPhone shot — natural light, movement blur, authentic body language. Amarone bottle visible. Medieval tower in background.</p>
+
+            <div class="comparison-grid four-col">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/gpt-local.png" alt="GPT DALL-E 3 generated image of Italian men at Piazza delle Erbe café — over-saturated, hyper-rendered, uncanny faces, tourism ad look, rated 4/10" loading="lazy">
+                    <div class="card-label">GPT (DALL-E 3) <span class="score low">4/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/grok-local.jpg" alt="Grok Aurora generated image of Italian men at Piazza delle Erbe café — best authentic mood, convincingly Italian men, natural laughter, rated 7/10" loading="lazy">
+                    <div class="card-label">Grok (Aurora) <span class="score mid">7/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/nb2-local.png" alt="Nano Banana 2 generated image of Italian men at Piazza delle Erbe café — best prompt adherence, legible Amarone label, wine glass + bottle, rated 6.5/10" loading="lazy">
+                    <div class="card-label">Nano Banana 2 <span class="score mid">6.5/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/tmp/verona-benchmark/minimax-local.jpg" alt="MiniMax generated image of Italian men at Piazza delle Erbe café — most photographically convincing, best faces, natural lighting, documentary feel, rated 8/10" loading="lazy">
+                    <div class="card-label">MiniMax <span class="score high">8/10 🏆</span></div>
+                </div>
+            </div>
+
+            <p><strong>MiniMax won this round (8/10).</strong> Most photographically convincing — the men look like real, specific humans rather than generically "Italian-looking" AI faces. Natural lighting, documentary feel, intimate mood. MiniMax's cinematic tendencies, which hurt it in crowd scenes, produced exactly the right result for portraits.</p>
+
+            <p><strong>Grok (7/10)</strong> had the best authentic mood — natural laughter, convincingly Italian men. Minor tells: matching sweaters and missing wine glasses. <strong>Nano Banana 2 (6.5/10)</strong> had the best prompt adherence (legible Amarone label, wine glass + bottle present) but the scene felt staged. <strong>GPT (4/10)</strong> was dead last — over-saturated, hyper-rendered, immediately recognizable as AI.</p>
+
+            <div class="verdict-box">
+                <h3>📱 Key Finding: Different Models Win Different Scene Types</h3>
+                <p><strong>Nano Banana 2 dominates crowd and location scenes</strong> — text rendering, brand accuracy, and iPhone aesthetic make it the clear winner for anything with signage, landmarks, or branded items.</p>
+                <p><strong>MiniMax dominates intimate people/portrait scenes</strong> — when the faces are the subject, MiniMax's human rendering is unmatched.</p>
+                <p><strong>Grok is the strongest all-rounder</strong> — close second in both categories, best emotional storytelling overall. If you're picking one model for everything, pick Grok.</p>
+                <p><strong>GPT/DALL-E 3 is dead last for photorealism.</strong> Garbled text, over-rendered aesthetics, and uncanny faces make it unsuitable for content that needs to pass as real.</p>
+            </div>
+
+            <h2 id="prompt-engineering">Prompt Engineering Makes or Breaks It</h2>
+
+            <p>After the initial Kyoto round, we rewrote our prompts with much more specific technical detail. The improvement was dramatic — but only on models that actually listen.</p>
+
+            <ul>
+                <li><strong>V1 (vague):</strong> "Shot on Kodachrome film, vintage feel"</li>
+                <li><strong>V2 (specific):</strong> "Warm saturated midtones, slightly cool shadows, limited dynamic range with clipped highlights and blocked shadows. Include scan artifacts: dust specks, hair, scratches. Amateur composition, slightly off-center. Chromatic aberration, lens softness at edges. No borders, no frame edges."</li>
+            </ul>
+
+            <div class="comparison-grid two-col">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-fushimi-inari.jpg" alt="Nano Banana 2 Fushimi Inari with basic V1 prompt — good vintage feel but missing physical film artifacts" loading="lazy">
+                    <div class="card-label">Nano Banana 2 — V1 Prompt</div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-v2-fushimi-inari.jpg" alt="Nano Banana 2 Fushimi Inari with detailed V2 prompt — added Kodachrome film rebate markings, exposure-dependent grain, and scan artifacts" loading="lazy">
+                    <div class="card-label">Nano Banana 2 — V2 Prompt</div>
+                </div>
+            </div>
+
+            <p>The V2 version is dramatically more convincing. Nano Banana 2 responded by adding <strong>Kodachrome film rebate markings</strong> along the frame edge — "12 KODACHROME" in the characteristic orange-on-black typography, with frame numbers and orientation arrows. These are technically accurate references to how real Kodachrome slides look when scanned from their original mounts. The grain also became exposure-dependent (clumping in shadows, finer in highlights) — exactly how real silver halide crystals behave on actual film.</p>
+
+            <div class="comparison-grid two-col">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-fushimi-inari.jpg" alt="MiniMax Fushimi Inari with basic V1 prompt — warm tones but modern composition" loading="lazy">
+                    <div class="card-label">MiniMax — V1 Prompt</div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-v2-fushimi-inari.jpg" alt="MiniMax Fushimi Inari with detailed V2 prompt — warmer and moodier but still unable to produce physical film artifacts" loading="lazy">
+                    <div class="card-label">MiniMax — V2 Prompt</div>
+                </div>
+            </div>
+
+            <p>MiniMax improved moderately — warmer tones, a subtle light leak — but <strong>couldn't produce the physical film artifacts</strong> that V2 prompts requested. No border markings, no scan lines, no stock-specific text. Better prompts made it warmer and moodier, but couldn't make it look like actual film.</p>
+
+            <blockquote>The gap between a lazy prompt and a detailed one is bigger than the gap between models. But only on models that actually follow instructions. Nano Banana 2's prompt engineering ceiling is virtually unlimited. MiniMax improves incrementally. CogView-4 largely ignores the details.</blockquote>
+
+            <h2 id="scorecard">Combined Scorecard: All 5 Models</h2>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Category</th><th>Nano Banana 2</th><th>MiniMax</th><th>CogView-4</th><th>Grok Aurora</th><th>GPT (DALL-E 3)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Prompt Adherence</strong></td><td class="winner">9.5/10</td><td>5/10</td><td>2/10</td><td>7/10</td><td>5/10</td></tr>
+                    <tr><td><strong>Vintage Film</strong></td><td class="winner">8.8/10</td><td>5.9/10</td><td>3.6/10</td><td>—</td><td>—</td></tr>
+                    <tr><td><strong>Crowd Scenes</strong></td><td class="winner">9/10</td><td>7/10</td><td>—</td><td>8.5/10</td><td>6/10</td></tr>
+                    <tr><td><strong>People/Portraits</strong></td><td>6.5/10</td><td class="winner">8/10</td><td>—</td><td>7/10</td><td>4/10</td></tr>
+                    <tr><td><strong>Text / Kanji Accuracy</strong></td><td class="winner">8/10</td><td>4/10</td><td>1.5/10</td><td>6/10</td><td>3/10</td></tr>
+                    <tr><td><strong>Prompt Eng. Ceiling</strong></td><td class="winner">10/10</td><td>5/10</td><td>3/10</td><td>7/10</td><td>5/10</td></tr>
+                    <tr><td><strong>Emotional Storytelling</strong></td><td>7/10</td><td>7/10</td><td>6/10</td><td class="winner">9/10</td><td>5/10</td></tr>
+                    <tr><td><strong>Cost per Image</strong></td><td class="winner">~$0.02</td><td>~$0.04</td><td class="winner">~$0.02</td><td>~$0.07</td><td>~$0.04–$0.08</td></tr>
+                </tbody>
+            </table></div>
+
+            <h2 id="what-to-use">What to Use for What</h2>
+
+            <p>After 26+ images across 5 models, here's the decision tree:</p>
+
+            <ul>
+                <li><strong>Crowd scenes, landmarks, anything with text or signage →</strong> Nano Banana 2. Nothing else comes close for photorealism + text accuracy.</li>
+                <li><strong>Close-up portraits, people-focused shots →</strong> MiniMax image-01. Best faces, most natural human rendering.</li>
+                <li><strong>All-rounder / only picking one model →</strong> Grok Aurora. Strong in both categories, best emotional storytelling.</li>
+                <li><strong>Vintage film photography →</strong> Nano Banana 2. The only model that treats stylistic constraints as instructions.</li>
+                <li><strong>Generic social media / "just make it look good" →</strong> Grok or MiniMax. Both produce visually striking content without much prompt engineering.</li>
+                <li><strong>Content with CJK text (Japanese, Chinese, Korean) →</strong> Nano Banana 2. Only reliable option for correct text rendering.</li>
+                <li><strong>Not recommended: GPT/DALL-E 3</strong> for anything that needs to pass as a real photo. Over-rendered aesthetic is immediately identifiable as AI.</li>
+                <li><strong>Not recommended: CogView-4</strong> for anything requiring stylistic control. Beautiful cinematic images, but ignores what you ask for.</li>
+            </ul>
+
+            <h2 id="pricing">Pricing Comparison</h2>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Factor</th><th>Nano Banana 2</th><th>MiniMax</th><th>CogView-4</th><th>Grok Aurora</th><th>GPT (DALL-E 3)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Cost per image</strong></td><td class="winner">~$0.02</td><td>~$0.04</td><td class="winner">~$0.02</td><td>~$0.07</td><td>~$0.04–$0.08</td></tr>
+                    <tr><td><strong>6-image Reel cost</strong></td><td class="winner">~$0.12</td><td>~$0.24</td><td class="winner">~$0.12</td><td>~$0.42</td><td>~$0.24–$0.48</td></tr>
+                    <tr><td><strong>Max resolution</strong></td><td class="winner">Up to 4K</td><td>Up to 2K</td><td>720×1440</td><td>Up to 2K</td><td>1024×1792</td></tr>
+                    <tr><td><strong>Free tier</strong></td><td class="winner">Yes (Gemini API)</td><td>Limited</td><td>Limited</td><td>Limited</td><td>No</td></tr>
+                    <tr><td><strong>API complexity</strong></td><td>Moderate (SDK)</td><td>Simple REST</td><td>Simple REST</td><td>Simple REST</td><td>Simple REST</td></tr>
+                    <tr><td><strong>Latency</strong></td><td>~8–15s</td><td>~10–20s</td><td>~15–25s</td><td>~10–15s</td><td>~10–20s</td></tr>
+                </tbody>
+            </table></div>
+
+            <p>Nano Banana 2 wins on price-to-quality ratio. Same cost as CogView-4 with dramatically better results. Less than half the cost of Grok with comparable or better output for most use cases. The Gemini API free tier means you can experiment before spending anything.</p>
+
+            <h2 id="how-to-use">How to Use These Models (Code Examples)</h2>
+
+            <p>All five models are accessible via API. Here's how to call each one.</p>
+
+            <h3>Nano Banana 2 (Google Gemini 3.1 Flash Image)</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>import google.generativeai as genai
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+model = genai.GenerativeModel("gemini-3.1-flash-image-preview")
+
+response = model.generate_content(
+    "A vintage 1970s Kodachrome photograph of Fushimi Inari torii gates. "
+    "Warm saturated midtones, slightly cool shadows, limited dynamic range. "
+    "Include scan artifacts: dust specks, scratches. Amateur composition.",
+    generation_config=genai.GenerationConfig(
+        response_modalities=["IMAGE", "TEXT"]
+    )
+)
+
+# Save the image
+for part in response.candidates[0].content.parts:
+    if part.inline_data:
+        with open("output.png", "wb") as f:
+            f.write(part.inline_data.data)</code></pre>
+
+            <h3>MiniMax image-01</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>curl -X POST "https://api.minimax.chat/v1/image_generation" \
+  -H "Authorization: Bearer YOUR_MINIMAX_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "image-01",
+    "prompt": "A vintage 1970s photograph of Fushimi Inari torii gates...",
+    "aspect_ratio": "9:16",
+    "response_format": "url"
+  }'</code></pre>
+
+            <h3>CogView-4 (Z.AI)</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>curl -X POST "https://open.bigmodel.cn/api/paas/v4/images/generations" \
+  -H "Authorization: Bearer YOUR_ZAI_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cogview-4-250304",
+    "prompt": "A vintage 1970s photograph of Fushimi Inari torii gates...",
+    "size": "720x1440"
+  }'</code></pre>
+
+            <h3>Grok (xAI Aurora)</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>curl -X POST "https://api.x.ai/v1/images/generations" \
+  -H "Authorization: Bearer YOUR_XAI_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "grok-2-image-1212",
+    "prompt": "Phone camera photo of exhausted tourist in crowd...",
+    "n": 1,
+    "response_format": "url"
+  }'</code></pre>
+
+            <h3>GPT / DALL-E 3 (OpenAI)</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>curl -X POST "https://api.openai.com/v1/images/generations" \
+  -H "Authorization: Bearer YOUR_OPENAI_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "dall-e-3",
+    "prompt": "Phone camera photo of exhausted tourist in crowd...",
+    "n": 1,
+    "size": "1024x1792",
+    "quality": "standard"
+  }'</code></pre>
+
+            <p>For production use, start with <a href="https://ai.google.dev/">Google AI Studio</a> (free tier includes Gemini image generation) and experiment with detailed prompts before scaling up.</p>
+
+            <h2 id="full-reels">Full Reels: Side by Side</h2>
+
+            <p>Numbers and screenshots only tell part of the story. Here are the complete assembled Reels — the actual final output of our vintage POV pipeline. Each Reel sequences all Kyoto scenes with Remotion-rendered film grain, vignette, slow drift animation, and text overlays.</p>
+
+            <div class="full-reels-section">
+                <div class="reel-grid">
+                    <div class="reel-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/vintage-kyoto-nano-reel.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/nano-fushimi-inari.jpg"></video>
+                        <div class="card-label">🏆 Nano Banana 2 — Full Kyoto Reel (21s)</div>
+                    </div>
+                    <div class="reel-card">
+                        <video src="https://img.tabiji.ai/resources/ai-image-comparison/vintage-kyoto-minimax-reel.mp4" controls preload="none" playsinline loading="lazy" poster="https://img.tabiji.ai/resources/ai-image-generation-comparison/minimax-fushimi-inari.jpg"></video>
+                        <div class="card-label">MiniMax — Full Kyoto Reel (21s)</div>
+                    </div>
+                </div>
+                <p class="img-caption" style="margin-top: 0.75rem;">Both Reels use identical Remotion compositions and timing. The only difference is the source images. Notice how Nano Banana 2's vintage authenticity carries through to the animated version — the film grain and warm tones feel cohesive, while MiniMax's modern rendering creates a subtle disconnect with the vintage effects layer.</p>
+            </div>
+
+            <h2 id="related">Related Resources</h2>
+
+            <ul>
+                <li><a href="/posts/veo3-vs-hailuo-minimax/">AI Video Generation Compared: Veo 3 vs MiniMax vs CogVideoX</a> — our companion test of video models</li>
+                <li><a href="/posts/ai-music-generation-comparison/">AI Music Generation Compared</a> — testing music models for Reel soundtracks</li>
+                <li><a href="/i/kyoto-5-day/">Sample Kyoto 5-Day Itinerary</a> — see how we use AI-generated content in real itineraries</li>
+                <li><a href="/posts/">All Posts</a> — more tech comparisons and guides</li>
+            </ul>
+
+            <hr style="border: none; border-top: 1px solid var(--border); margin: 3rem 0;">
+
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem;">All images in this comparison were generated from identical prompts on the same day (March 10, 2026). No post-processing was applied. The images shown are direct outputs from each model's API.</p>
+
+        </div>
+    </div>
+</div>
+</div>
+
+    <div style="max-width:860px;margin:0 auto 2rem;padding:0 2rem;">
+        <div style="background:var(--warm-cream,#F5F0E8);border-left:4px solid var(--terracotta,#1a1a1a);border-radius:10px;padding:1.5rem 2rem;">
+        </div>
+    </div>
+
+    <footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+
+    <script>
+    function closeMobileToc() {
+        var el = document.getElementById('toc-mobile');
+        if (el) el.classList.remove('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var sections = document.querySelectorAll('h2[id]');
+        var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+        var activeLabel = document.querySelector('.toc-active-label');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(function(a) { a.classList.remove('active'); });
+                    var matches = document.querySelectorAll('a[href="#' + entry.target.id + '"]');
+                    matches.forEach(function(a) { a.classList.add('active'); });
+                    if (activeLabel && matches.length > 0) {
+                        activeLabel.textContent = '📑 ' + matches[0].textContent;
+                    }
+                }
+            });
+        }, { rootMargin: '-120px 0px -70% 0px' });
+        sections.forEach(function(s) { observer.observe(s); });
+    });
+    </script>
+</body>
+</html>

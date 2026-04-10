@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Best AI Video Generator for Instagram Reels (2026): Veo 3 vs Hailuo vs Sora 2 vs CogVideoX vs Grok — Tested in Production</title>
+    <meta name="description" content="We tested 5 AI video models across 50+ Instagram Reels in production. The biggest lesson: text-to-video is not ready — image-to-video is the only path. Real costs, real data, real opinions.">
+    <link rel="canonical" href="https://zonted.com/posts/veo3-vs-hailuo-minimax/">
+    <meta property="og:title" content="Best AI Video Generator for Instagram Reels (2026): 5 Models Tested in Production">
+    <meta property="og:description" content="We tested Veo 3, Hailuo, Sora 2, CogVideoX-3, and Grok across 50+ Reels. Real cost data, T2V vs I2V comparison, and why we spend $150/mo instead of $2,430.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.tabiji.ai/tabiji-owl-logo.png">
+    <meta property="og:url" content="https://zonted.com/posts/veo3-vs-hailuo-minimax/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Best AI Video Generator for Instagram Reels (2026): Veo 3 vs Hailuo vs Sora 2 vs CogVideoX vs Grok Compared",
+        "author":{"@type":"Person","name":"Bernard Huang"},
+        "datePublished": "2026-03-11",
+        "dateModified": "2026-03-19",
+        "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"}},
+        "description": "Production comparison of Veo 3, Hailuo (MiniMax), Sora 2 (OpenAI), CogVideoX-3, and Grok Imagine Video for AI video generation. Based on 50+ Instagram Reels with real cost data, quality scores, and API details.",
+        "mainEntityOfPage": "https://zonted.com/posts/veo3-vs-hailuo-minimax/"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the best AI video generator for Instagram Reels?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For production use at scale, Hailuo 2.3 (MiniMax) offers the best balance of quality and cost at ~$0.27/clip. For maximum cinematic quality regardless of budget, Google's Veo 3 is the best at ~$4.50/clip. CogVideoX-3 is the cheapest at $0.20/clip with native portrait support. We tested all 5 models — Veo 3, Hailuo, Sora 2, CogVideoX-3, and Grok Imagine — in production."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much does AI video generation cost per clip?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Veo 3 costs ~$4.50–6.00 per 6–8 second clip ($0.75/second). Sora 2 (OpenAI) costs ~$0.80 per 8-second clip ($0.10/second). Grok Imagine costs ~$0.40 per 8-second clip. Hailuo (MiniMax) costs ~$0.27 per clip via image-to-video mode. CogVideoX-3 (Z.AI) costs $0.20 per video flat rate. At 5–7 Reels per day, Veo 3 would cost ~$2,430/month while Hailuo costs ~$146/month."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does Hailuo (MiniMax) support portrait 9:16 video for Reels?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Not natively in text-to-video mode — Hailuo T2V always outputs 1366×768 landscape. The workaround is to use image-to-video (I2V) mode with a portrait input image. The output is 1080×1934 (slightly off from true 9:16), requiring an FFmpeg crop to 1080×1920 for Instagram boost eligibility."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can Veo 3 generate audio with video?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, Veo 3 generates built-in ambient audio and sound effects (birds chirping, wind, traffic). Sora 2 (OpenAI) and Grok Imagine also generate built-in audio automatically. CogVideoX-3 has built-in AI SFX but at lower quality. Hailuo has no video audio but MiniMax offers a separate Music 2.5+ API for instrumental background tracks."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which AI video generator has the best quality?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Google's Veo 3 has the highest visual quality — scoring 10/10 for cinematic look and motion realism. It produces video that's nearly indistinguishable from real drone footage. Hailuo 2.3 scores 7/10 (good but clearly AI), and CogVideoX-3 scores 6/10 (decent but sometimes stiff). However, on phone screens scrolled quickly, the quality gap matters less than cost."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How long does AI video generation take?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Grok Imagine is the fastest at ~31 seconds per clip. Hailuo 2.3 takes ~90 seconds. Veo 3 takes ~2–4 minutes. Sora 2 takes ~120 seconds. CogVideoX-3 takes ~3.5 minutes. For multi-clip Reels (5–10 clips), Grok can finish a batch in under 5 minutes while Veo 3 would take 30+ minutes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is OpenAI Sora 2 worth it for Instagram Reels?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sora 2 costs $0.80 per 8-second clip ($0.10/second), making it the most expensive budget option. It offers native 9:16 portrait at 720p, built-in audio generation, and durations up to 16-20 seconds. However, MiniMax Hailuo is 3x cheaper and Grok is 2x cheaper at similar 720p quality. Sora 2 Pro offers 1080p output but at even higher cost. We'd recommend it mainly for teams already using the OpenAI API who want decent quality with built-in audio and don't want to integrate another provider."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+        :root {
+    --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+    --border: #ddd; --border-light: #e8e8e4;
+    --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+    --accent: #1a1a1a; --accent-hover: #000;
+    --green: #2a7a2a; --red: #a33; --blue: #369;
+}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+.article-container { max-width: 660px; margin: 0 auto; padding: 3rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+                .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+footer p { color: var(--text-muted); font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .nav-links.open { display: flex; }
+            nav a}
+
+        /* Spec table */
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .spec-table {
+            width: 100%;
+            min-width: 520px;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .spec-table th, .spec-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .spec-table th {
+            background: var(--bg-surface);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .spec-table td { color: var(--text); }
+        .spec-table tr:last-child td { border-bottom: none; }
+        .spec-table .winner { background: rgba(122, 139, 111, 0.08); font-weight: 600; }
+        /* Verdict box */
+        .verdict-box {
+            background: var(--bg-surface);
+            border: 2px solid var(--text-muted);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+        .verdict-box h3 {
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .verdict-box p { margin-bottom: 0.75rem; }
+        .verdict-box p:last-child { margin-bottom: 0; }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* TOC sidebar */
+        .toc-sidebar {
+            padding-top: 3rem;
+            width: 220px; flex-shrink: 0;
+            position: sticky; top: 80px;
+            max-height: calc(100vh - 100px); overflow-y: auto;
+        }
+        .toc-sidebar h2 { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+                .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(254, 252, 249, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+
+        .content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 660px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; border-radius: 0; }
+            .table-wrap { max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+            .spec-table { min-width: 420px; font-size: 0.85rem; }
+            .spec-table th, .spec-table td { padding: 0.5rem 0.65rem; }
+            .verdict-box { padding: 1rem 1.25rem; }
+            .reel-grid { grid-template-columns: 1fr; }
+            .ig-embed-wrap { max-width: 100%; }
+            .pipeline-steps { gap: 0.35rem; }
+            .pipeline-step { font-size: 0.75rem; padding: 0.4rem 0.5rem; }
+            .pipeline-arrow { font-size: 1rem; }
+            .cost-callout .big-number { font-size: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+            .spec-table { min-width: 360px; font-size: 0.8rem; }
+            .spec-table th, .spec-table td { padding: 0.4rem 0.5rem; }
+            .verdict-box { padding: 0.85rem 1rem; }
+            .verdict-box h3 { font-size: 1rem; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+            .pipeline-steps { flex-direction: column; align-items: stretch; }
+            .pipeline-arrow { transform: rotate(90deg); text-align: center; }
+            .cost-callout .big-number { font-size: 1.75rem; }
+        }
+
+        /* Instagram embed responsive */
+        .ig-embed-wrap {
+            max-width: 400px;
+            margin: 1.5rem auto 2rem;
+        }
+        .ig-embed-wrap iframe {
+            border: none !important;
+        }
+
+        /* Reel grid — side by side embeds */
+        .reel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0 2rem;
+        }
+        .reel-grid .reel-cell {
+            text-align: center;
+        }
+        .reel-grid .reel-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        /* Cost callout */
+        .cost-callout {
+            background: linear-gradient(135deg, var(--bg-surface), #f0ece4);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .cost-callout .big-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.1;
+        }
+        .cost-callout .label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .img-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Pipeline diagram */
+        .pipeline-steps {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        .pipeline-step {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            text-align: center;
+        }
+        .pipeline-arrow {
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+            .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+
+</head>
+<body>
+    <nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width: 660px;margin:1.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" style="color:var(--text-muted);text-decoration:none;font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+</div>
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">📑 Contents</span>
+        <span class="toc-chevron">▼</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#t2v-vs-i2v">The Real Lesson: T2V vs I2V</a></li>
+            <li><a href="#the-models">Five Models at a Glance</a></li>
+            <li><a href="#our-pipeline">Our Production Pipeline</a></li>
+            <li><a href="#model-deep-dives">Model Deep Dives</a></li>
+            <li><a href="#capybara-test">The Capybara Test</a></li>
+            <li><a href="#published-examples">Published Examples</a></li>
+            <li><a href="#cost-at-scale">Cost at Scale</a></li>
+            <li><a href="#technical-reference">Technical Reference</a></li>
+            <li><a href="#verdict">The Verdict</a></li>
+            <li><a href="#what-we-use">What We Actually Use</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#t2v-vs-i2v">T2V vs I2V</a></li>
+        <li><a href="#the-models">Five Models</a></li>
+        <li><a href="#our-pipeline">Our Pipeline</a></li>
+        <li><a href="#model-deep-dives">Deep Dives</a></li>
+        <li><a href="#capybara-test">Capybara Test</a></li>
+        <li><a href="#published-examples">Published Examples</a></li>
+        <li><a href="#cost-at-scale">Cost at Scale</a></li>
+        <li><a href="#technical-reference">Tech Reference</a></li>
+        <li><a href="#verdict">The Verdict</a></li>
+        <li><a href="#what-we-use">What We Use</a></li>
+    </ul>
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>We Made 50+ Instagram Reels with 5 AI Video Generators. Here's What Actually Works.</h1>
+        <div class="article-meta">Published March 11, 2026 · Last updated March 19, 2026 · By Bernard Huang</div>
+
+        <div class="article-body">
+
+            <p class="dropcap">We publish 5–7 AI-generated Instagram Reels every day — in production, fully automated via cron jobs, across 8+ content formats. Over three weeks we ran <strong>Veo 3</strong>, <strong>Hailuo 2.3 (MiniMax)</strong>, <strong>Sora 2 (OpenAI)</strong>, <strong>Grok Imagine (xAI)</strong>, and <strong>CogVideoX-3 (Z.AI)</strong> through our pipeline with real money on the line.</p>
+
+            <p>The single most important thing we learned isn't which model looks best. It's that <strong>text-to-video is not production-ready for Reels</strong>. Image-to-video is the only viable path. Everything else flows from that insight.</p>
+
+            <div class="verdict-box" style="border-color: var(--text);">
+                <h3>⚡ TL;DR</h3>
+                <p><strong>Hailuo 2.3 (MiniMax)</strong> is our production pick — $0.27/clip, 90-second generation, 7/10 quality that's good enough for Instagram. <strong>Veo 3</strong> is the cinematic king at $4.50/clip but unsustainable at scale. <strong>CogVideoX-3</strong> is cheapest at $0.20/clip with native portrait. <strong>Grok Imagine</strong> is fastest at ~37s but capped at 720p. <strong>Sora 2</strong> has familiar API ergonomics but reliability concerns. We spend ~$150/month on Hailuo vs $2,430/month on Veo 3.</p>
+                <p><em>Also see our <a href="/posts/ai-image-generation-comparison/">AI image generation comparison</a> — the image models that feed our video pipeline.</em></p>
+            </div>
+
+            <h2 id="t2v-vs-i2v">The Real Lesson: Text-to-Video vs Image-to-Video</h2>
+
+            <p>Before comparing models, understand the most important decision in AI video for Reels: <strong>never use text-to-video (T2V) for production content.</strong></p>
+
+            <p>We tested the same T2V prompt across four models — a traveler exploring a night market in Bangkok. Every output was unusable:</p>
+
+            <ul>
+                <li><strong>MiniMax (Hailuo):</strong> Output was 1366×768 <em>landscape</em>. Hailuo T2V cannot produce portrait video — there's no aspect ratio parameter. Dead on arrival for Reels.</li>
+                <li><strong>CogVideoX-3:</strong> Portrait dimensions correct (1080×1920), but motion was stiff and robotic. The person looked like a mannequin sliding through a diorama.</li>
+                <li><strong>Grok Imagine:</strong> Fast generation (~37s), decent atmosphere, but uncanny valley faces. Close-ups of people are Grok's weakest point.</li>
+                <li><strong>Sora 2:</strong> Best atmosphere of the four — good lighting, moody market ambiance. But person rendering was still clearly wrong. Hands, gait, and facial detail all fail under scrutiny.</li>
+            </ul>
+
+            <p>The problem isn't any one model — it's the T2V paradigm itself. You lose control over composition, framing, style, and color grade. The model hallucinates every visual detail from scratch.</p>
+
+            <p><strong>Image-to-video (I2V) solves this.</strong> Generate a portrait image first (we use Nano Banana 2), review or auto-score it, then feed it to the video model. The model inherits the composition, lighting, and color grade from the input image and adds motion. Dramatically more controllable and consistently better.</p>
+
+            <blockquote>Every model produces significantly better output in I2V mode than T2V. If you're building a Reels pipeline, start with your image model — it matters more than your video model.</blockquote>
+
+            <h2 id="the-models">The Five Models at a Glance</h2>
+
+            <p>One table with everything that matters — no cross-referencing five separate sections.</p>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Spec</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Provider</strong></td><td>Google</td><td>MiniMax</td><td>OpenAI</td><td>xAI</td><td>Z.AI (Zhipu)</td></tr>
+                    <tr><td><strong>Cost / clip</strong></td><td>~$4.50–6</td><td class="winner">~$0.27</td><td>~$0.80</td><td>~$0.40</td><td class="winner">$0.20</td></tr>
+                    <tr><td><strong>Quality</strong></td><td class="winner">10/10</td><td>7/10</td><td>7/10</td><td>7/10</td><td>6/10</td></tr>
+                    <tr><td><strong>Gen speed</strong></td><td>2–4 min</td><td>~90s</td><td>~120s</td><td class="winner">~37s</td><td>~3.5 min</td></tr>
+                    <tr><td><strong>Max resolution</strong></td><td class="winner">1080p</td><td>1080p*</td><td>720p (Pro: 1080p)</td><td>720p</td><td class="winner">1080p</td></tr>
+                    <tr><td><strong>Native portrait (9:16)</strong></td><td class="winner">Yes</td><td>❌ I2V only</td><td class="winner">Yes</td><td class="winner">Yes</td><td class="winner">Yes</td></tr>
+                    <tr><td><strong>Built-in audio</strong></td><td class="winner">Ambient + SFX</td><td>❌ (Music API)</td><td class="winner">Yes</td><td class="winner">Yes</td><td>AI SFX</td></tr>
+                    <tr><td><strong>Duration</strong></td><td>5–8s</td><td>6 or 10s</td><td>up to 20s</td><td>1–15s</td><td>5 or 10s</td></tr>
+                    <tr><td><strong>Frame rate</strong></td><td>24fps</td><td>24fps</td><td>24fps</td><td>24fps</td><td>30 or 60fps</td></tr>
+                    <tr><td><strong>Modes</strong></td><td>T2V, I2V</td><td>T2V, I2V</td><td>T2V, I2V</td><td>T2V, I2V, edit</td><td>T2V, I2V, start/end</td></tr>
+                    <tr><td><strong>Reliability</strong></td><td>6/10</td><td class="winner">9/10</td><td>5/10</td><td>7/10</td><td>7/10</td></tr>
+                    <tr><td><strong>Monthly (540 clips)</strong></td><td>$2,430</td><td>$146</td><td>$432</td><td>$216</td><td class="winner">$108</td></tr>
+                </tbody>
+            </table></div>
+
+            <p><em>*Hailuo I2V outputs 1080×1934 — slightly off from true 9:16 (1080×1920). Requires FFmpeg crop for Instagram boost eligibility.</em></p>
+
+            <h2 id="our-pipeline">Our Production Pipeline</h2>
+
+            <p>Understanding our pipeline explains why certain tradeoffs matter more than others.</p>
+
+            <div class="pipeline-steps">
+                <div class="pipeline-step">🖼️ AI Image Gen<br><small>Nano Banana 2</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">🎬 Image-to-Video<br><small>Hailuo / Veo 3 / etc.</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">🎵 Music Gen<br><small>MiniMax Music 2.5+</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">✍️ Text Overlay<br><small>FFmpeg / Remotion</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">📱 Publish<br><small>IG + YouTube + X</small></div>
+            </div>
+
+            <p>Every Reel: generate a portrait image → convert to video via I2V → add instrumental music → apply text overlays → publish to Instagram, YouTube Shorts, and X. Cron jobs fire multiple times per day. No human in the loop.</p>
+
+            <p>We almost always use I2V mode. The portrait image gives us control over composition, style, and color grade that T2V simply can't match. This pipeline biases our evaluation toward I2V quality, portrait support, cost efficiency, and API reliability.</p>
+
+            <h2 id="model-deep-dives">Model Deep Dives</h2>
+
+            <h3 id="veo-3-review">Veo 3 (Google) — The Cinematic Standard</h3>
+
+            <p>Veo 3 set the bar impossibly high. Camera movements are physically grounded — a dolly forward looks like a real dolly, not a zoom. Lighting is natural. Motion blur is correct. The output is nearly indistinguishable from real drone footage. Built-in ambient audio (birds, wind, traffic) adds immersion without a separate step.</p>
+
+            <ul>
+                <li>✅ Best visual quality (10/10), native portrait via <code>aspect_ratio: "9:16"</code>, built-in audio, excellent prompt adherence for cinematography language</li>
+                <li>❌ $4.50–6/clip ($0.75/sec), aggressive rate limits on <code>veo-3.0-generate-001</code> (workaround: fall back to <code>veo-3.0-fast-generate-001</code>), 2–4 min gen time, <code>person_generation: "allow_adult"</code> gotcha for I2V</li>
+                <li><strong>Verdict:</strong> The best model for quality. Unsustainable for daily content at scale.</li>
+            </ul>
+
+            <h3 id="hailuo-review">Hailuo 2.3 (MiniMax) — The Budget Workhorse</h3>
+
+            <p>Hailuo is why we can publish 5–7 Reels per day. At $0.27/clip with 90-second generation and excellent I2V quality, it's the best value for a production pipeline. The model inherits composition and color grade from input images and adds smooth, tasteful motion via 15 camera commands (<code>[Push in]</code>, <code>[Pan left]</code>, <code>[Tilt up]</code>, etc.).</p>
+
+            <ul>
+                <li>✅ $0.27/clip, ~90s gen, reliable uptime, excellent I2V style preservation, companion Music 2.5+ API for instrumental tracks</li>
+                <li>❌ T2V always outputs landscape (1366×768), I2V outputs 1080×1934 (needs FFmpeg crop), less cinematic motion than Veo 3, artifacts on complex textures</li>
+                <li><strong>Verdict:</strong> Our production pick. The workarounds are solvable. Saves $2,000+/month vs Veo 3.</li>
+            </ul>
+
+            <p><strong>The cost confusion:</strong> We initially calculated $0.03/clip based on the API's displayed token pricing — that only covered text prompt tokens. Actual I2V processing: ~$0.27/clip. Still 16x cheaper than Veo 3.</p>
+
+            <div class="cost-callout">
+                <div class="big-number">$0.27 vs $4.50</div>
+                <div class="label">Hailuo vs Veo 3 per clip — 16x cheaper</div>
+            </div>
+
+            <h3 id="sora-2-review">Sora 2 (OpenAI) — The Familiar API</h3>
+
+            <p>Mid-range option for teams already on the OpenAI ecosystem. At $0.80/clip ($0.10/sec), it's 3x more expensive than Hailuo but offers native portrait, built-in audio, and durations up to 20 seconds. API follows standard OpenAI conventions, reducing integration friction.</p>
+
+            <ul>
+                <li>✅ Native 9:16, built-in audio, familiar OpenAI API, long durations (up to 20s), decent atmospheric quality</li>
+                <li>❌ $0.80/clip, 720p standard (1080p requires Pro tier), ~120s gen, reliability issues in production, duration must be a <em>string</em> not integer</li>
+                <li><strong>Verdict:</strong> Convenience pick for OpenAI shops. Not cost-competitive.</li>
+            </ul>
+
+            <h3 id="grok-review">Grok Imagine (xAI) — The Speed Demon</h3>
+
+            <p>Grok generates in ~37 seconds. It's the only model supporting <strong>video editing</strong>: pass an existing video + a prompt to modify it in place. Widest aspect ratio support (7 options) and flexible durations from 1–15 seconds.</p>
+
+            <ul>
+                <li>✅ Fastest gen (~37s), video editing (unique), most aspect ratio options, clean REST API, $0.40/clip</li>
+                <li>❌ 720p max, tends to "reimagine" source images rather than animate them faithfully (style flattening), large files (9.2MB for 8s at 720p)</li>
+                <li><strong>Verdict:</strong> Best for rapid iteration and prototyping. Style preservation is its weakest point — it turned our watercolor capybara into a real one.</li>
+            </ul>
+
+            <h3 id="cogvideox-3-review">CogVideoX-3 (Z.AI) — The Budget Native Portrait</h3>
+
+            <p>Best spec sheet per dollar: $0.20/clip flat, native 1080×1920 portrait, built-in AI SFX, 30/60fps, unique start+end frame interpolation. On paper it should be our pick. Quality kept us on Hailuo.</p>
+
+            <ul>
+                <li>✅ Cheapest at $0.20/clip flat, native 1080×1920 portrait (no workarounds), built-in AI audio, 60fps option, start+end frame mode</li>
+                <li>❌ Quality trails at 6/10 (plasticky textures, unconvincing food close-ups, stiff motion), ~3.5 min gen, less mature API (error messages sometimes in Chinese)</li>
+                <li><strong>Verdict:</strong> Best for tight budgets needing native portrait and simplicity. The $0.07/clip savings vs Hailuo didn't justify switching our pipeline.</li>
+            </ul>
+
+
+            <h2 id="capybara-test">The Capybara Test: Same Image, Three Models</h2>
+
+            <p>We ran the same watercolor capybara illustration through three I2V models with an identical prompt to test style preservation — the key quality metric for any I2V pipeline.</p>
+
+            <p><em>Prompt: "Gentle wind ripples through the tall grass and wildflowers, creating a soft wave pattern. The capybara breathes slowly, its chest rising and falling in a relaxed rhythm. Warm golden light holds steady. No camera movement. Subtle, peaceful motion only."</em></p>
+
+            <div style="margin: 2rem 0;">
+                <p><strong>Source image:</strong></p>
+                <img src="https://img.tabiji.ai/resources/video-generation-comparison/capybara-source.jpg" alt="Watercolor illustration of a capybara wearing headphones lying in a grassy meadow at sunset — the source image for our AI video generation comparison test" style="max-width: 600px; width: 100%; border-radius: 8px; margin-bottom: 1.5rem;" loading="lazy">
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <div>
+                    <p><strong>Hailuo 2.3 (MiniMax)</strong> — $0.27, 6s, 115s gen</p>
+                    <video controls playsinline preload="metadata" style="width: 100%; border-radius: 8px;" poster="https://img.tabiji.ai/resources/video-generation-comparison/capybara-source.jpg">
+                        <source src="https://img.tabiji.ai/resources/video-generation-comparison/capybara-minimax.mp4" type="video/mp4">
+                    </video>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Faithful to the watercolor style. Grass sways gently, subtle breathing motion. Best style preservation. 1406×768, 1.8MB.</p>
+                </div>
+                <div>
+                    <p><strong>Grok Imagine (xAI)</strong> — $0.40, 8s, 31s gen 🏆 fastest</p>
+                    <video controls playsinline preload="metadata" style="width: 100%; border-radius: 8px;" poster="https://img.tabiji.ai/resources/video-generation-comparison/capybara-source.jpg">
+                        <source src="https://img.tabiji.ai/resources/video-generation-comparison/capybara-grok.mp4" type="video/mp4">
+                    </video>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Reimagined the capybara as photorealistic — lost the watercolor style entirely. 720p, 9.2MB.</p>
+                </div>
+                <div>
+                    <p><strong>CogVideoX-3 (Z.AI)</strong> — $0.20, 5s, 141s gen</p>
+                    <video controls playsinline preload="metadata" style="width: 100%; border-radius: 8px;" poster="https://img.tabiji.ai/resources/video-generation-comparison/capybara-source.jpg">
+                        <source src="https://img.tabiji.ai/resources/video-generation-comparison/capybara-cogvideox3.mp4" type="video/mp4">
+                    </video>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Preserved illustration style. Motion more mechanical than Hailuo but stays on-model. Native 1080×1920. 8.0MB.</p>
+                </div>
+            </div>
+
+            <blockquote><strong>Takeaway:</strong> Grok is blazingly fast but reinterprets source images rather than animating them. For I2V style preservation, Hailuo wins. For speed, Grok is unmatched. CogVideoX-3 splits the difference at the lowest price.</blockquote>
+
+            <h2 id="published-examples">Published Examples</h2>
+
+            <p>Real Reels published to <a href="https://www.instagram.com/tabijiai/">@tabijiai</a> using our production pipeline.</p>
+
+            <h3>Veo 3</h3>
+
+            <div class="reel-grid">
+                <div class="reel-cell">
+                    <div class="reel-label">Jiufen, Taiwan 🇹🇼</div>
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DU9Jd1-kmyh/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 0; max-width:100%; min-width:200px; padding:0; width:100%;"></blockquote>
+                </div>
+                <div class="reel-cell">
+                    <div class="reel-label">Melbourne, Australia 🇦🇺</div>
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DU9iDyLjf4F/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 0; max-width:100%; min-width:200px; padding:0; width:100%;"></blockquote>
+                </div>
+            </div>
+
+            <p>Jiufen: warm tungsten lanterns, cool blue twilight, natural parallax through the lantern-lit alleyway. Melbourne: complex scene with vibrant street art, pedestrians, dappled light.</p>
+
+            <h3>Hailuo 2.3</h3>
+
+            <div class="reel-grid">
+                <div class="reel-cell">
+                    <div class="reel-label">Hanoi Egg Coffee ☕</div>
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVj1vgcjahK/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 0; max-width:100%; min-width:200px; padding:0; width:100%;"></blockquote>
+                </div>
+                <div class="reel-cell">
+                    <div class="reel-label">Bali $50/Day 💰</div>
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVmP7ZqAM1T/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 0; max-width:100%; min-width:200px; padding:0; width:100%;"></blockquote>
+                </div>
+            </div>
+
+            <div class="reel-grid">
+                <div class="reel-cell">
+                    <div class="reel-label">Hanoi Train Street 🚂</div>
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVjsEdrgIpc/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 0; max-width:100%; min-width:200px; padding:0; width:100%;"></blockquote>
+                </div>
+                <div class="reel-cell">
+                    <div class="reel-label">Lisbon $65/Day 🇵🇹</div>
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVmT7QklTd9/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.15); margin: 0; max-width:100%; min-width:200px; padding:0; width:100%;"></blockquote>
+                </div>
+            </div>
+
+            <p>Egg Coffee: single 6-second clip, steaming cup, soft bokeh, gentle push-in. Total Reel cost including image gen, music, and hosting: under $0.50. Budget Reels (Bali, Lisbon): 5 clips each at ~$1.36 total.</p>
+
+            <h2 id="cost-at-scale">Cost at Scale</h2>
+
+            <p>This is where the decision gets made.</p>
+
+            <h3>Per-format costs</h3>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Reel Format</th><th>Clips</th><th>Veo 3</th><th>Hailuo</th><th>Sora 2</th><th>Grok</th><th>CogVideoX</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Single clip</strong></td><td>1</td><td>$6.00</td><td class="winner">$0.29</td><td>$0.82</td><td>$0.42</td><td>$0.22</td></tr>
+                    <tr><td><strong>Split-screen</strong></td><td>2</td><td>$12.00</td><td class="winner">$0.56</td><td>$1.62</td><td>$0.82</td><td>$0.42</td></tr>
+                    <tr><td><strong>Budget breakdown</strong></td><td>5</td><td>$30.00</td><td class="winner">$1.36</td><td>$4.02</td><td>$2.02</td><td>$1.02</td></tr>
+                    <tr><td><strong>Montage (10 clips)</strong></td><td>10</td><td>$60.00</td><td class="winner">$2.72</td><td>$8.02</td><td>$4.02</td><td>$2.02</td></tr>
+                </tbody>
+            </table></div>
+
+            <p><em>Costs include image generation (~$0.02/image) and music (negligible). Veo 3 is video generation only.</em></p>
+
+            <h3>Monthly at our volume</h3>
+
+            <p>5–7 Reels/day × average 3 clips × 30 days = <strong>540 clips/month</strong>.</p>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Model</th><th>Cost / Clip</th><th>Monthly (540)</th><th>Annual</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Veo 3</strong></td><td>~$4.50</td><td>$2,430</td><td>$29,160</td></tr>
+                    <tr><td><strong>Sora 2</strong></td><td>~$0.80</td><td>$432</td><td>$5,184</td></tr>
+                    <tr><td><strong>Grok Imagine</strong></td><td>~$0.40</td><td>$216</td><td>$2,592</td></tr>
+                    <tr><td><strong>Hailuo 2.3</strong></td><td>~$0.27</td><td class="winner">$146</td><td class="winner">$1,750</td></tr>
+                    <tr><td><strong>CogVideoX-3</strong></td><td>~$0.20</td><td class="winner">$108</td><td class="winner">$1,296</td></tr>
+                </tbody>
+            </table></div>
+
+            <p>Veo 3 at our volume: <strong>$2,430/month</strong>. Hailuo: $146. That's not a rounding error — it's the difference between a viable content operation and an unsustainable one.</p>
+
+            <h2 id="technical-reference">Technical Reference</h2>
+
+            <p>API details, dimensions, audio specifics, and output format — the appendix for developers integrating these models.</p>
+
+            <h3>API &amp; Authentication</h3>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>API style</strong></td><td>Gemini SDK</td><td>REST</td><td>OpenAI SDK</td><td>REST</td><td>REST</td></tr>
+                    <tr><td><strong>Auth</strong></td><td>API key</td><td>Bearer token</td><td>API key</td><td>API key</td><td>Bearer token</td></tr>
+                    <tr><td><strong>Pattern</strong></td><td>Submit → poll op</td><td>Submit → poll → retrieve file</td><td>POST → poll GET</td><td>POST → poll</td><td>Submit → poll → download</td></tr>
+                    <tr><td><strong>SDK quality</strong></td><td class="winner">Good (google-genai)</td><td>No SDK</td><td class="winner">Good (openai)</td><td>xAI SDK</td><td>Minimal</td></tr>
+                    <tr><td><strong>Error msgs</strong></td><td class="winner">Clear, English</td><td>Mixed</td><td class="winner">Clear</td><td>Clear</td><td>Sometimes Chinese</td></tr>
+                    <tr><td><strong>Rate limits</strong></td><td>Aggressive</td><td class="winner">Generous</td><td>Moderate</td><td>Moderate</td><td>Moderate</td></tr>
+                </tbody>
+            </table></div>
+
+            <h3>API gotchas we discovered</h3>
+            <ul>
+                <li><strong>Veo 3:</strong> <code>person_generation</code> must be <code>"allow_adult"</code> (not <code>"allow_all"</code>) for I2V — undocumented. The <code>generate_audio</code> param only works on Vertex, not Gemini SDK. Hit RESOURCE_EXHAUSTED? Fall back to <code>veo-3.0-fast-generate-001</code> — separate quota pool.</li>
+                <li><strong>Hailuo:</strong> File download endpoint is <code>/v1/files/retrieve?file_id=X</code> → returns JSON with <code>download_url</code> pointing to CDN. Does <em>not</em> return video bytes directly. <code>/v1/files/retrieve_content</code> doesn't exist.</li>
+                <li><strong>Sora 2:</strong> Duration must be passed as a <strong>string</strong>, not integer. POST to <code>/v1/videos</code>, poll at <code>GET /v1/videos/{id}</code>, download at <code>GET /v1/videos/{id}/content</code>. Input image dimensions must exactly match requested <code>size</code>.</li>
+                <li><strong>Grok Imagine:</strong> Poll endpoint is <code>/v1/videos/{request_id}</code> — NOT <code>/v1/videos/generations/{id}</code>. 202 = processing, 200 with <code>status: "done"</code> includes <code>video.url</code>. Cost tracked via <code>usage.cost_in_usd_ticks</code>.</li>
+                <li><strong>CogVideoX-3:</strong> Error messages sometimes return in Chinese. SDK is thinner than competitors — use raw REST.</li>
+            </ul>
+
+            <h3>Dimensions &amp; Portrait Support</h3>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Native 9:16</strong></td><td class="winner">Yes</td><td>❌</td><td class="winner">Yes</td><td class="winner">Yes</td><td class="winner">Yes</td></tr>
+                    <tr><td><strong>T2V output</strong></td><td>1080×1920</td><td>1366×768 landscape</td><td>720×1280</td><td>720p portrait</td><td>1080×1920</td></tr>
+                    <tr><td><strong>I2V output</strong></td><td>Inherits input</td><td>1080×1934*</td><td>Inherits input</td><td>720p</td><td>1080×1920</td></tr>
+                    <tr><td><strong>Post-processing</strong></td><td class="winner">None</td><td>FFmpeg crop</td><td class="winner">None</td><td class="winner">None</td><td class="winner">None</td></tr>
+                    <tr><td><strong>Aspect ratios</strong></td><td>9:16, 16:9, 1:1</td><td>Landscape only (T2V)</td><td>9:16, 16:9, 1:1</td><td class="winner">7 options</td><td>9:16, 16:9</td></tr>
+                </tbody>
+            </table></div>
+
+            <p><em>*Hailuo I2V outputs 1080×1934. The 14px difference matters for Instagram boost eligibility. Normalize with: <code>scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920</code></em></p>
+
+            <h3>Audio</h3>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Built-in audio</strong></td><td class="winner">Ambient + SFX</td><td>None</td><td class="winner">Yes</td><td class="winner">Yes</td><td>AI SFX</td></tr>
+                    <tr><td><strong>Quality</strong></td><td class="winner">Excellent</td><td>N/A</td><td>Good</td><td>Good</td><td>Decent</td></tr>
+                    <tr><td><strong>Disable option</strong></td><td>Vertex only</td><td>N/A</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+                    <tr><td><strong>Separate music API</strong></td><td>No</td><td class="winner">Music 2.5+</td><td>No</td><td>No</td><td>No</td></tr>
+                </tbody>
+            </table></div>
+
+            <p>We overlay background music on every Reel regardless, so built-in audio matters less than you'd think. Hailuo's Music 2.5+ API is actually more useful — custom instrumental tracks with mood prompts, mixed at 30% volume with fade in/out.</p>
+
+            <p><strong>Key gotcha:</strong> MiniMax Music 2.0 and 2.5 don't properly support <code>is_instrumental</code> — always use <strong>Music 2.5+</strong> for instrumental tracks. We learned this when our cron started producing budget Reels with random vocals over street food scenes.</p>
+
+            <h3>Output Format</h3>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Codec / container</strong></td><td>H.264 MP4</td><td>H.264 MP4</td><td>H.264 MP4</td><td>H.264 MP4</td><td>H.264 MP4</td></tr>
+                    <tr><td><strong>Typical file size (6–8s)</strong></td><td>3–5 MB</td><td class="winner">2–3 MB</td><td>3–5 MB</td><td>9.2 MB</td><td>4–5 MB</td></tr>
+                    <tr><td><strong>Audio track</strong></td><td>Yes</td><td>None</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+                    <tr><td><strong>Instagram-ready out of box</strong></td><td class="winner">Yes</td><td>No (needs crop)</td><td class="winner">Yes</td><td class="winner">Yes</td><td class="winner">Yes</td></tr>
+                </tbody>
+            </table></div>
+
+            <p>All five output standard H.264 MP4 that Instagram accepts without transcoding. The only practical difference: Hailuo clips need an FFmpeg normalization step. Our post-processing pipeline uses FFmpeg regardless, so the extra crop adds ~0.5 seconds per clip.</p>
+
+            <h2 id="verdict">The Verdict &amp; Recommendations</h2>
+
+            <div class="verdict-box">
+                <h3>🏆 Production Winner: Hailuo 2.3 (MiniMax)</h3>
+                <p>We moved our entire pipeline — 5–7 Reels/day across 8+ formats — to Hailuo in March 2026. Quality is good enough for Instagram, cost is sustainable, generation is fast, reliability is excellent. The I2V workaround and 1080×1934 dimension quirk are real friction, but they save us $2,000+/month.</p>
+                <p><strong>Our cost per Reel dropped from ~$6–60 to ~$0.30–1.36.</strong></p>
+            </div>
+
+            <div class="verdict-box" style="border-color: var(--text);">
+                <h3>🎬 Quality Winner: Veo 3 (Google)</h3>
+                <p>For small batches of high-impact content — launch trailers, hero Reels, campaign assets — Veo 3 is objectively the best model available. We keep it in our toolkit for special occasions. It just costs too much for the 6 Reels we publish every single day.</p>
+            </div>
+
+            <h3>Who should use what</h3>
+
+            <p><strong>Choose Veo 3</strong> if you're making fewer than 5 videos/week, quality is the top priority, and budget isn't a constraint.</p>
+
+            <p><strong>Choose Hailuo 2.3</strong> if you're publishing daily, running multi-clip Reels, already have an image generation pipeline, and need the best quality-to-cost ratio at scale.</p>
+
+            <p><strong>Choose Sora 2</strong> if you're already on the OpenAI API, want familiar integration, and don't need to optimize cost.</p>
+
+            <p><strong>Choose Grok Imagine</strong> if you need speed for rapid iteration, want video editing capabilities, and can live with 720p.</p>
+
+            <p><strong>Choose CogVideoX-3</strong> if absolute lowest cost is the goal and you want the simplest setup — native portrait, flat pricing, built-in audio, no workarounds.</p>
+
+            <h2 id="what-we-use">What We Actually Use</h2>
+
+            <p>Our production stack as of March 2026:</p>
+
+            <ul>
+                <li><strong>Image gen:</strong> Nano Banana 2 (Gemini 3.1 Flash Image) — ~$0.02/image</li>
+                <li><strong>Video gen:</strong> Hailuo 2.3 via I2V — ~$0.27/clip</li>
+                <li><strong>Music:</strong> MiniMax Music 2.5+ with <code>is_instrumental: true</code></li>
+                <li><strong>Overlays:</strong> FFmpeg + Remotion (textfile approach for apostrophes and Vietnamese diacritics)</li>
+                <li><strong>Publishing:</strong> Instagram Graph API via <code>graph.facebook.com</code> + cross-post to YouTube Shorts and X</li>
+                <li><strong>Automation:</strong> Cron jobs firing 3–6x daily, fully autonomous</li>
+            </ul>
+
+            <p>Total cost per Reel: <strong>$0.30–$1.36</strong> depending on clip count. Monthly video gen budget: <strong>~$150</strong>.</p>
+
+            <p>Veo 3 is the better model. Hailuo is the better product for us. At scale, cost efficiency wins.</p>
+
+            <h2 id="related">Related</h2>
+
+            <ul>
+                <li><strong><a href="/posts/ai-image-generation-comparison/">AI Image Generation: Nano Banana 2 vs MiniMax vs CogView-4</a></strong> — the image models feeding our video pipeline</li>
+                <li><strong><a href="/posts/ai-music-generation-comparison/">AI Music Generation: MiniMax Music 2.0 vs 2.5+</a></strong> — background music at ~$0.01/track</li>
+            </ul>
+
+            <p>See the Reels in action: <a href="https://www.instagram.com/tabijiai/">@tabijiai on Instagram</a> — 5–7 new Reels daily. Or <a href="/">try our free AI travel itinerary builder</a>.</p>
+
+            <hr style="border: none; border-top: 1px solid var(--border); margin: 3rem 0;">
+
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem;">All Reels embedded above were published to <a href="https://www.instagram.com/tabijiai/" style="color: var(--text);">@tabijiai</a> on Instagram between February 19 and March 11, 2026. Cost figures are based on actual API billing, not marketing estimates. We have no affiliate relationship with any provider.</p>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+    <div style="max-width:860px;margin:0 auto 2rem;padding:0 2rem;">
+        <div style="background:var(--warm-cream,#F5F0E8);border-left:4px solid var(--terracotta,#1a1a1a);border-radius:10px;padding:1.5rem 2rem;">
+        </div>
+    </div>
+
+    <footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+
+    <script async src="//www.instagram.com/embed.js"></script>
+    <script>
+    // TOC active state tracking
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('h2[id]');
+        const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(a => a.classList.remove('active'));
+                    document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                }
+            });
+        }, { rootMargin: '-80px 0px -80% 0px' });
+        sections.forEach(s => observer.observe(s));
+    });
+    </script>
+</body>
+</html>

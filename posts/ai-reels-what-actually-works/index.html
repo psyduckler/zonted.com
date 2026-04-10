@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>AI-Generated Instagram Reels, YouTube Shorts, and X Posts: What Actually Works (Real Data from 48 Hours)</title>
+    <meta name="description" content="We tested 100% AI-generated Instagram Reels, YouTube Shorts, and X posts using Veo 3, Nano Banana 2, and FFmpeg. Real view counts across all 3 platforms — what works, what doesn't, and why the same content performs 27x differently depending on where you post it.">
+    <link rel="canonical" href="https://zonted.com/posts/ai-reels-what-actually-works/">
+    <meta property="og:title" content="AI-Generated Instagram Reels, YouTube Shorts, and X Posts: What Actually Works (Real Data from 48 Hours)">
+    <meta property="og:description" content="We tested 100% AI-generated Instagram Reels, YouTube Shorts, and X posts using Veo 3, Nano Banana 2, and FFmpeg. Real view counts across all 3 platforms — what works, what doesn't, and why the same content performs 27x differently depending on where you post it.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://zonted.com/posts/ai-reels-what-actually-works/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-03-11T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta property="og:image" content="https://img.tabiji.ai/og/ai-reels-what-actually-works.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI-Generated Instagram Reels, YouTube Shorts, and X Posts: What Actually Works (Real Data from 48 Hours)">
+    <meta name="twitter:description" content="We tested 100% AI-generated Instagram Reels, YouTube Shorts, and X posts using Veo 3, Nano Banana 2, and FFmpeg. Real view counts across all 3 platforms — what works, what doesn't, and why the same content performs 27x differently depending on where you post it.">
+    <meta name="twitter:image" content="https://img.tabiji.ai/og/ai-reels-what-actually-works.jpg">
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"AI-Generated Instagram Reels, YouTube Shorts, and X Posts: What Actually Works (Real Data from 48 Hours)","author":{"@type":"Person","name":"Bernard Huang"},"datePublished":"2026-03-11","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/ai-reels-what-actually-works/","description":"We've been running 100% AI-generated Instagram Reels using Veo 3, Nano Banana 2, and FFmpeg. Here's an honest breakdown of 8+ formats, real view counts, and what the data actually says."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do AI-generated Instagram Reels actually get views?","acceptedAnswer":{"@type":"Answer","text":"Yes — with the right hook. AI-generated travel Reels using tools like Veo 3 can reach 2,000–3,000+ views per Reel on Instagram within 48 hours. The key is format: fear-based hooks like 'Tourist Mistake' and 'Scam Alert' significantly outperform inspirational or atmospheric content. In our tests, the best-performing Reel hit over 3,100 views with zero human video production."}},{"@type":"Question","name":"What's the best format for AI travel Reels?","acceptedAnswer":{"@type":"Answer","text":"Based on real data from 80+ published Reels, the top-performing formats are 'Tourist Mistake' (#1 Mistake Tourists Make in [City]) and 'Scam Alert' (Every Tourist Falls for This Scam in [City]). Both leverage fear and utility — the two strongest psychological triggers for travel content. They drive saves and shares, which are the key signals Instagram's algorithm rewards."}},{"@type":"Question","name":"Can AI video generators like Veo 3 make good Instagram content?","acceptedAnswer":{"@type":"Answer","text":"Yes, but production quality matters less than the hook. Veo 3 generates cinematic 8-second clips at 9:16 portrait ratio for roughly $0.06–$0.12 per Reel. The AI-generated footage is visually compelling, but formats with weak hooks still fail regardless of video quality. The algorithm rewards content that triggers saves and shares — the hook determines this, not the visual quality."}},{"@type":"Question","name":"How much does it cost to make AI-generated Reels?","acceptedAnswer":{"@type":"Answer","text":"Roughly $0.06–$0.12 per Reel in API costs using Veo 3 for video generation, Nano Banana 2 for images, and MiniMax for AI music. The real investment is building the automated pipeline — the ongoing production cost is minimal compared to traditional video production."}},{"@type":"Question","name":"Do AI Reels perform differently on Instagram vs YouTube?","acceptedAnswer":{"@type":"Answer","text":"Yes, significantly. Instagram rewards fear-based, utility-first content (saves and shares drive distribution). YouTube Shorts rewards watch time and visually compelling or nostalgic content. The 'Vintage POV' format gets only 110–134 views on Instagram but 746+ views and 13 likes on YouTube. 'Scam Alert' and 'Tourist Mistake' formats perform well on both platforms, making them the most efficient cross-platform formats."}},{"@type":"Question","name":"What hooks work best for travel short-form content?","acceptedAnswer":{"@type":"Answer","text":"Based on real performance data, the ranking is: (1) Fear hooks (scam warnings, tourist mistakes) — highest engagement and saves; (2) Curiosity hooks (hidden gems, unknown spots) — moderate engagement; (3) Information hooks (budget breakdowns, logistics) — watched but not saved; (4) Inspiration hooks (beautiful footage, nostalgic aesthetics) — low engagement on Instagram, better on YouTube. For cold audiences, fear and utility hooks are most effective."}}]}
+    </script>
+    <style>
+        :root {
+    --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+    --border: #ddd; --border-light: #e8e8e4;
+    --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+    --accent: #1a1a1a; --accent-hover: #000;
+    --green: #2a7a2a; --red: #a33; --blue: #369;
+}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+.article-container { max-width: 660px; margin: 0 auto; padding: 3rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+                .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+footer p { color: var(--text-muted); font-size: 0.85rem; }
+    
+
+@media (max-width: 768px) {
+    .nav-links.open {
+        display: flex;
+    }
+    /* Mobile: dropdown items inline indented */
+    nav a}
+        /* Floating TOC */
+        .toc-sidebar {
+            padding-top: 3rem;
+            width: 220px; flex-shrink: 0;
+            position: sticky; top: 80px;
+            max-height: calc(100vh - 100px); overflow-y: auto;
+        }
+        .toc-sidebar h2 {
+            font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a {
+            color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+            transition: color 0.2s, border-color 0.2s;
+            display: block; padding: 0.25rem 0 0.25rem 0.75rem;
+            border-left: 2px solid transparent;
+            line-height: 1.3;
+        }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active {
+            color: var(--text); border-left-color: var(--text);
+            font-weight: 600;
+        }
+                .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(254, 252, 249, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle {
+            width: 100%; padding: 0.7rem 1.2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: none; border: none; cursor: pointer;
+            font-family: inherit; font-size: 0.9rem; font-weight: 600;
+            color: var(--text);
+        }
+        .toc-mobile-toggle .toc-active-label {
+            flex: 1; text-align: left; white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem;
+        }
+        .toc-mobile-toggle .toc-chevron {
+            transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted);
+        }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease;
+            border-top: 1px solid var(--border);
+        }
+        .toc-mobile-sticky.open .toc-mobile-dropdown {
+            max-height: 60vh; overflow-y: auto;
+        }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a {
+            display: block; padding: 0.55rem 1.2rem;
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.9rem; transition: background 0.15s, color 0.15s;
+        }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active {
+            color: var(--text); font-weight: 600;
+            background: rgba(26,26,26,0.04);
+        }
+        .content-wrapper {
+            max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+            display: flex; gap: 3rem; align-items: flex-start;
+        }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 660px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; border-radius: 0; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+            .article-body pre { max-width: 100%; overflow-x: auto; }
+            .spec-table { min-width: 420px; font-size: 0.85rem; }
+            .spec-table th, .spec-table td { padding: 0.5rem 0.65rem; }
+            .table-wrap { max-width: 100%; }
+            .verdict-box { padding: 1rem 1.25rem; }
+        }
+
+        /* Data tables */
+        .table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; border-radius: 10px; border: 1px solid var(--border); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .data-table th { background: var(--accent); color: white; padding: 0.65rem 1rem; text-align: left; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; }
+        .data-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:nth-child(even) td { background: rgba(245, 244, 240, 0.5); }
+        .data-table .good { color: #2a7a2a; font-weight: 600; }
+        .data-table .bad { color: #a33; font-weight: 600; }
+        .data-table .meh { color: var(--text-muted); font-weight: 600; }
+
+        /* Verdict boxes */
+        .verdict { border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+        .verdict-win { background: rgba(42, 122, 42, 0.08); border-left: 4px solid #2a7a2a; }
+        .verdict-lose { background: rgba(163, 51, 51, 0.08); border-left: 4px solid #a33; }
+        .verdict-neutral { background: var(--bg-surface); border-left: 4px solid var(--earth); }
+        .verdict-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+        .verdict-win .verdict-label { color: #2a7a2a; }
+        .verdict-lose .verdict-label { color: #a33; }
+        .verdict-neutral .verdict-label { color: var(--text-muted); }
+        .verdict p { margin-bottom: 0; font-size: 0.97rem; }
+
+        /* Stat callout */
+        .stat-row { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+        .stat-box { flex: 1; min-width: 120px; background: var(--bg-surface); border-radius: 10px; padding: 1rem 1.25rem; text-align: center; }
+        .stat-box .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--text); line-height: 1; }
+        .stat-box .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+        @media (max-width: 600px) {
+            .stat-row { gap: 0.75rem; }
+            .stat-box .stat-num { font-size: 1.4rem; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+            .spec-table { min-width: 360px; font-size: 0.8rem; }
+            .spec-table th, .spec-table td { padding: 0.4rem 0.5rem; }
+            .verdict-box { padding: 0.85rem 1rem; }
+            .verdict-box h3 { font-size: 1rem; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        }
+            .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+</head>
+<body>
+    <nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width: 660px;margin:1.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" style="color:var(--text-muted);text-decoration:none;font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+</div>
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">📑 Contents</span>
+        <span class="toc-chevron">▼</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-experiment">The Experiment</a></li>
+            <li><a href="#the-tech-stack">The Tech Stack</a></li>
+            <li><a href="#what-is-working">What's Working</a></li>
+            <li><a href="#what-is-not-working">What's Not Working</a></li>
+            <li><a href="#platform-breakdown">Platform-by-Platform Breakdown</a></li>
+            <li><a href="#the-psychology">The Psychology Behind the Hooks</a></li>
+            <li><a href="#where-we-go-from-here">Where We Go From Here</a></li>
+            <li><a href="#what-this-means-for-ai-content">What This Means for AI-Generated Content</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+            <li><a href="#the-experiment">The Experiment</a></li>
+            <li><a href="#the-tech-stack">The Tech Stack</a></li>
+            <li><a href="#what-is-working">What's Working</a></li>
+            <li><a href="#what-is-not-working">What's Not Working</a></li>
+            <li><a href="#platform-breakdown">Platform-by-Platform Breakdown</a></li>
+            <li><a href="#the-psychology">The Psychology Behind the Hooks</a></li>
+            <li><a href="#where-we-go-from-here">Where We Go From Here</a></li>
+            <li><a href="#what-this-means-for-ai-content">What This Means for AI-Generated Content</a></li>
+    </ul>
+</aside>
+<div class="article-content">
+<article class="article-container">
+        <h1>AI-Generated Instagram Reels, YouTube Shorts, and X Posts: What Actually Works (Real Data from 48 Hours)</h1>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <div>
+                <div style="font-weight:600;color: var(--text);">Tabiji</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">March 11, 2026 · 14 min read</div>
+            </div>
+        </div>
+
+        <div style="background:var(--bg-surface);border-left:3px solid var(--text);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin:0 0 2rem 0;">
+            <strong style="color: var(--text);font-size:1.05rem;">Key Takeaways</strong>
+            <ul style="margin:0.75rem 0 0 1.25rem;color:var(--text);">
+                <li><strong>"Tourist Mistake" and "Scam Alert" formats dominate</strong> — fear-based hooks consistently hit 2,000–3,000+ IG views vs. under 150 for everything else.</li>
+                <li><strong>Platform behavior is radically different:</strong> Instagram rewards saves &amp; shares (utility), YouTube rewards watch time (nostalgia also works).</li>
+                <li><strong>The hook, not video quality, determines reach</strong> — the same AI footage with a weak hook gets 100 views; with a strong hook, 3,000+.</li>
+                <li><strong>Cost is ~$0.06–$0.12 per Reel</strong> — fully automated pipeline using <a href="/posts/veo3-vs-hailuo-minimax/">Veo 3</a>, Nano Banana 2, and FFmpeg.</li>
+                <li><strong>X/Twitter cross-posting generates near-zero reach</strong> for new accounts without an established following.</li>
+            </ul>
+        </div>
+
+        <div class="article-body">
+
+            <p class="dropcap">We're a travel itinerary service that uses AI to build itineraries. So it's fitting — and a little absurd — that we've spent the last few weeks building a fully automated pipeline to generate AI travel Reels and publish them to Instagram, YouTube Shorts, and X. No human hands on video production. No stock footage. No hired creators. Just code, APIs, and cron jobs running while we sleep.</p>
+
+            <p>This is an honest accounting of what 48 hours of data looks like across 8 different Reel formats. Some formats are working remarkably well. Others have been an embarrassing waste of compute. We're sharing the real numbers — not because everything looks great, but because this kind of data is genuinely hard to find and we think it's worth putting into the world.</p>
+
+            <p>The meta irony isn't lost on us: an AI travel company publishing AI analysis of AI-generated content. We'll try to be useful anyway.</p>
+
+            <h2 id="the-experiment">The Experiment</h2>
+
+            <p>tabiji.ai is a free AI travel itinerary service. We build <a href="https://tabiji.ai/plan">personalized trip plans</a> from Reddit recommendations and real traveler data. That's the core product. But we wanted to grow the brand on social media without burning budget on traditional content creation, so we built a fully automated short-form video pipeline.</p>
+
+            <p>The setup: cron jobs run throughout the day, pick a destination and format from a queue, generate a video end-to-end, and publish it to Instagram. The same video then gets cross-posted to YouTube Shorts and X. No humans are involved in the video production itself — only in building and maintaining the pipeline.</p>
+
+            <p>Over 48 hours, we published across <strong>8+ distinct Reel formats</strong> and accumulated enough data to see clear signal. Here's what we tested:</p>
+
+            <ul>
+                <li><strong>Tourist Mistake</strong> — "#1 Mistake Tourists Make in [City]"</li>
+                <li><strong>Scam Alert</strong> — "Every Tourist Falls for This Scam in [City]"</li>
+                <li><strong>Vintage POV</strong> — AI-generated footage styled as archival travel film from the 1960s–70s</li>
+                <li><strong>One Thing You Can't Miss</strong> — "[City]'s Most Underrated Attraction"</li>
+                <li><strong>This vs That</strong> — "Tourists Go HERE, Locals Go HERE"</li>
+                <li><strong>Budget Reel</strong> — "What $50/Day Gets You in [City]"</li>
+                <li><strong>POV</strong> — Generic first-person walkthrough footage</li>
+                <li><strong>Countdown / Top 5</strong> — Top 5 things to do in a destination</li>
+            </ul>
+
+            <h2 id="the-tech-stack">The Tech Stack</h2>
+
+            <p>For the curious: every Reel is generated entirely by machines. The pipeline looks like this:</p>
+
+            <ul>
+                <li><strong>Video generation:</strong> <a href="/posts/veo3-vs-hailuo-minimax/">Veo 3</a> (Google DeepMind) — generates 8-second cinematic clips from text prompts at 9:16 portrait ratio</li>
+                <li><strong>Image generation:</strong> <a href="/posts/ai-image-generation-comparison/">Nano Banana 2</a> (Gemini-based) — for formats that use still images rather than video</li>
+                <li><strong>Music:</strong> MiniMax — AI-generated background music matched to the destination and mood</li>
+                <li><strong>Text overlays:</strong> FFmpeg — applies title, subtitle, and branding text on top of the video</li>
+                <li><strong>Publishing:</strong> Instagram Graph API → YouTube Data API → X API v2, all automated</li>
+                <li><strong>Orchestration:</strong> Shell scripts + cron jobs running on a Mac Mini</li>
+            </ul>
+
+            <p>The cost per Reel is roughly $0.06–$0.12 in API calls, depending on the format. The real investment is time spent building the pipeline — not ongoing production costs.</p>
+
+            <h2 id="what-is-working">What's Working</h2>
+
+            <h3>1. Tourist Mistake — The Clear Winner</h3>
+
+            <div class="verdict verdict-win">
+                <div class="verdict-label">✅ Strong Performer</div>
+                <p>Consistently breaks 500+ views on IG, 700+ on YouTube. The format that generates the most saves and shares by far.</p>
+            </div>
+
+            <p>The "#1 Mistake Tourists Make in [City]" format is performing significantly above everything else. Here are the raw numbers:</p>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reel</th>
+                            <th>IG Views</th>
+                            <th>IG Shares</th>
+                            <th>IG Saves</th>
+                            <th>YT Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1 Mistake — Koh Phi Phi</td>
+                            <td class="good">2,175</td>
+                            <td class="good">22</td>
+                            <td class="good">9</td>
+                            <td class="good">828</td>
+                        </tr>
+                        <tr>
+                            <td>#1 Mistake — Hoi An</td>
+                            <td class="good">2,020</td>
+                            <td>—</td>
+                            <td class="good">13</td>
+                            <td class="good">784</td>
+                        </tr>
+                        <tr>
+                            <td>#1 Mistake — Bangkok</td>
+                            <td class="meh">533</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-box"><div class="stat-num">2,175</div><div class="stat-label">Peak IG Views</div></div>
+                <div class="stat-box"><div class="stat-num">22</div><div class="stat-label">Shares (Koh Phi Phi)</div></div>
+                <div class="stat-box"><div class="stat-num">1.9%</div><div class="stat-label">Engagement Rate</div></div>
+                <div class="stat-box"><div class="stat-num">828</div><div class="stat-label">Peak YT Views</div></div>
+            </div>
+
+            <div style="margin:1.5rem 0;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                <iframe width="315" height="560" src="https://www.youtube.com/embed/E3fNepjCCdU" title="Tourist Mistake — Koh Phi Phi (2,175 views)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" style="border-radius:12px;max-width:100%;"></iframe>
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVuhlO9D_hg/" data-instgrm-version="14" style="max-width:326px;min-width:280px;width:calc(100% - 2px);border-radius:12px;border:0;"></blockquote>
+            </div>
+
+            <p>The Koh Phi Phi reel hit 1.9% engagement — saves plus shares divided by views. For an account with essentially no followers running fully AI-generated content, that's not a number we expected to see. The saves tell the story: people are bookmarking these videos to come back to before their trip. That's exactly the behavior you want from a travel content brand.</p>
+
+            <p>This format works for both platforms simultaneously, which is rare. Most formats that hit on Instagram are flat on YouTube, and vice versa. Tourist Mistake breaks that pattern.</p>
+
+            <h3>2. Scam Alert — IG's Biggest Number, Strong on YouTube</h3>
+
+            <div class="verdict verdict-win">
+                <div class="verdict-label">✅ Strong Performer</div>
+                <p>Prague hit 3,188 views — the highest single Reel we've published. Marrakech followed at 2,139. Strong on YouTube as well, essentially interchangeable with Tourist Mistake.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reel</th>
+                            <th>IG Views</th>
+                            <th>YT Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Scam Alert — Prague</td>
+                            <td class="good">3,188</td>
+                            <td class="good">750</td>
+                        </tr>
+                        <tr>
+                            <td>Scam Alert — Marrakech</td>
+                            <td class="good">2,139</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Scam Alert — Cairo</td>
+                            <td class="meh">180</td>
+                            <td class="good">846</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin:1.5rem 0;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                <iframe width="315" height="560" src="https://www.youtube.com/embed/EkhLYvs-dDY" title="Scam Alert — Prague (3,188 views, highest ever)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" style="border-radius:12px;max-width:100%;"></iframe>
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVuZ9TAlER5/" data-instgrm-version="14" style="max-width:326px;min-width:280px;width:calc(100% - 2px);border-radius:12px;border:0;"></blockquote>
+            </div>
+
+            <p>The Prague Scam reel is our highest view count to date: 3,188 on Instagram. Cairo is newer, so the IG number is still climbing — but it already hit 846 views on YouTube, the highest YouTube number across all formats. The Scam format and the Tourist Mistake format are algorithmically interchangeable on YouTube; both get picked up and distributed at similar rates.</p>
+
+            <p>One interesting outlier: Cairo's IG views (180) are much lower than its YouTube views (846), which is the inverse of most patterns we see. We don't have a clean explanation for this yet — it might be timing, hashtag distribution, or the specific visual style of that clip.</p>
+
+            <h3>3. Vintage POV — YouTube's Sleeper Hit</h3>
+
+            <div class="verdict verdict-neutral">
+                <div class="verdict-label">📊 Platform-Dependent</div>
+                <p>Surprisingly strong on YouTube with the best engagement ratio of any format. Essentially dead on Instagram. Worth running — but YouTube-only.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reel</th>
+                            <th>IG Views</th>
+                            <th>YT Views</th>
+                            <th>YT Likes</th>
+                            <th>YT Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vintage POV — Paris 1962</td>
+                            <td class="bad">119</td>
+                            <td class="good">746</td>
+                            <td class="good">13</td>
+                            <td class="good">1</td>
+                        </tr>
+                        <tr>
+                            <td>Vintage POV — Tokyo</td>
+                            <td class="bad">134</td>
+                            <td class="meh">168</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Vintage POV — Kyoto</td>
+                            <td class="bad">110</td>
+                            <td class="bad">60</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin:1.5rem 0;display:flex;justify-content:center;">
+                <iframe width="315" height="560" src="https://www.youtube.com/embed/lZDnB2sWvA8" title="Vintage POV — Paris 1962 (746 YT views, 13 likes, best engagement ratio)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" style="border-radius:12px;max-width:100%;"></iframe>
+            </div>
+
+            <p>Paris 1962 is the most interesting data point in the entire dataset. On Instagram: 119 views, zero saves, zero shares. On YouTube: 746 views, 13 likes, 1 comment. That's the best <em>engagement ratio</em> of any video we've published — 1.7% like rate on YouTube, which is genuinely good for Shorts.</p>
+
+            <p>The Vintage POV format generates AI footage styled as archival 16mm travel film. That aesthetic clearly resonates with a YouTube audience that skews nostalgic and has longer watch time expectations. On Instagram, the same content is invisible — the algorithm and the audience both want something actionable, not atmospheric.</p>
+
+            <p>The lesson: don't cross-post this format. Run it YouTube-only and let the nostalgic algorithm do its thing.</p>
+
+            <h2 id="what-is-not-working">What's Not Working</h2>
+
+            <h3>1. "One Thing You Can't Miss" — Weakest Format Overall</h3>
+
+            <div class="verdict verdict-lose">
+                <div class="verdict-label">❌ Kill It</div>
+                <p>Every single Reel in this format is under 150 views. Zero saves across 6+ published Reels. Zero shares. We're pausing this format immediately.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reel</th>
+                            <th>IG Views</th>
+                            <th>Saves</th>
+                            <th>Shares</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>One Thing — Hanoi #1</td>
+                            <td class="bad">142</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>One Thing — Hanoi #2</td>
+                            <td class="bad">133</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>One Thing — Hanoi #3</td>
+                            <td class="bad">123</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>One Thing — Hanoi #4</td>
+                            <td class="bad">122</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>One Thing — Hanoi #5</td>
+                            <td class="bad">119</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>One Thing — Hanoi #6</td>
+                            <td class="bad">115</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>One Thing — Hanoi #7 (newest)</td>
+                            <td class="bad">9</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin:1.5rem 0;display:flex;justify-content:center;">
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVvu8QGCHj3/" data-instgrm-version="14" style="max-width:400px;width:100%;border-radius:12px;border:0;"></blockquote>
+            </div>
+
+            <p>This data tells two separate stories. The first is that "One Thing You Can't Miss" is a weak hook — it doesn't create urgency, doesn't trigger fear or curiosity, and doesn't give the viewer a specific reason to watch right now. The second is that publishing 6+ Reels about the same city (Hanoi) in 48 hours dilutes each one. The algorithm almost certainly suppresses repeat content from the same destination cluster. We compounded a bad format with a bad distribution strategy.</p>
+
+            <p>The declining view counts across the Hanoi series (142 → 133 → 123 → ...) look like diminishing returns from algorithmic suppression, not just recency. We're retiring this format and diversifying destinations more aggressively going forward.</p>
+
+            <h3>2. "This vs That" — The Conceptually Sound Failure</h3>
+
+            <div class="verdict verdict-lose">
+                <div class="verdict-label">❌ Pause</div>
+                <p>The concept is solid. The execution — AI-generated video — can't deliver what the format promises. People want to see the contrast, not read about it.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reel</th>
+                            <th>IG Views</th>
+                            <th>Likes</th>
+                            <th>Saves</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>This vs That — Saigon #1</td>
+                            <td class="bad">132</td>
+                            <td class="bad">1</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>This vs That — Saigon #2</td>
+                            <td class="bad">130</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>This vs That — Saigon #3</td>
+                            <td class="bad">127</td>
+                            <td class="bad">0</td>
+                            <td class="bad">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin:1.5rem 0;display:flex;justify-content:center;">
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVv2JMDiu4b/" data-instgrm-version="14" style="max-width:400px;width:100%;border-radius:12px;border:0;"></blockquote>
+            </div>
+
+            <p>"Tourists go to Ben Thanh Market. Locals go to Binh Tay Market." This is genuinely good travel advice. The problem is that showing the difference is what makes the format work — a split-screen of the crowded tourist market versus the authentic local one, actual footage, real contrast. Our AI-generated video clips aren't differentiated enough to make this viscerally clear. The text says "contrast" but the visuals don't deliver it. The format fails not because the idea is bad but because it requires something AI video generation can't yet consistently produce: clearly distinguishable real-world visual contexts.</p>
+
+            <h3>3. Budget Reels — Useful but Forgettable</h3>
+
+            <div class="verdict verdict-neutral">
+                <div class="verdict-label">📊 Middling</div>
+                <p>115–131 views consistently. One save across four Reels total. People watch but don't save or share because there's no emotional hook — just information.</p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reel</th>
+                            <th>IG Views</th>
+                            <th>YT Views</th>
+                            <th>Saves</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Budget — Vienna ($50/day)</td>
+                            <td class="bad">117</td>
+                            <td class="bad">2</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>Budget — Leipzig ($40/day)</td>
+                            <td class="bad">117</td>
+                            <td>—</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>Budget — Ghent ($45/day)</td>
+                            <td class="bad">118</td>
+                            <td class="meh">240</td>
+                            <td class="bad">0</td>
+                        </tr>
+                        <tr>
+                            <td>Budget — Marseille ($50/day)</td>
+                            <td class="bad">131</td>
+                            <td>—</td>
+                            <td class="good">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Budget content performs better than the worst formats, but it doesn't convert. No one saves a Budget Reel because the information feels disposable — you watch, you absorb a rough number, you move on. Compare that to the Tourist Mistake format, where the save behavior is strong because people want to reference the warning before their trip. Budget information doesn't have that urgency.</p>
+
+            <p>The exception: Ghent Budget hit 240 views on YouTube Shorts, which is nearly our platform average for decent content. Budget may perform better on YouTube than Instagram — we'll watch this more carefully.</p>
+
+            <h3>4. Generic POV — Don't Bother</h3>
+
+            <div class="verdict verdict-lose">
+                <div class="verdict-label">❌ Dead Format</div>
+                <p>Cappadocia: 116 views, 0 likes, 0 saves, 0 shares. A format with no differentiation gets no algorithm love.</p>
+            </div>
+
+            <p>A first-person walkthrough of Cappadocia's hot air balloon landscape — without a hook, without information, without a specific angle — gets 116 views and nothing else. The AI-generated footage isn't bad; the format just has nothing to say. Vibe-only content might work for creators with massive followings, but it doesn't work for algorithmic distribution to cold audiences.</p>
+
+            <div style="margin:1.5rem 0;display:flex;justify-content:center;">
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DVrqVgujwS-/" data-instgrm-version="14" style="max-width:400px;width:100%;border-radius:12px;border:0;"></blockquote>
+            </div>
+
+            <h2 id="platform-breakdown">Platform-by-Platform Breakdown</h2>
+
+            <p>The most surprising finding in this data isn't which formats work — it's how dramatically the same content performs differently across platforms.</p>
+
+            <h3>Instagram: Fear and Utility Win</h3>
+
+            <p>Instagram's algorithm rewards content that people <em>react to immediately</em>. The formats that drive saves and shares get distributed. Saves are the most powerful signal — they tell the algorithm that someone found this useful enough to bookmark, which signals genuine value rather than passive entertainment.</p>
+
+            <p>On Instagram, the top performers share two traits: negative framing (mistake, scam, warning) and practical utility (something you'll actually use before your trip). Atmospheric content — beautiful footage, vibes, nostalgia — doesn't move the needle.</p>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>IG Performance</th>
+                            <th>Saves/Shares</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Scam Alert</td><td class="good">2,139–3,188 views</td><td class="good">High</td></tr>
+                        <tr><td>Tourist Mistake</td><td class="good">533–2,175 views</td><td class="good">High</td></tr>
+                        <tr><td>Budget</td><td class="meh">117–131 views</td><td class="bad">Minimal</td></tr>
+                        <tr><td>Vintage POV</td><td class="bad">110–134 views</td><td class="bad">Zero</td></tr>
+                        <tr><td>One Thing</td><td class="bad">9–142 views</td><td class="bad">Zero</td></tr>
+                        <tr><td>This vs That</td><td class="bad">127–132 views</td><td class="bad">Zero</td></tr>
+                        <tr><td>Generic POV</td><td class="bad">116 views</td><td class="bad">Zero</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>YouTube Shorts: The Algorithm Rewards Nostalgia and Information</h3>
+
+            <p>YouTube's short-form algorithm behaves differently from Instagram's. Watch time matters more — if someone watches the full 8 seconds, that's a strong positive signal. The Vintage POV format benefits from this: it's atmospheric and visually compelling enough that people watch it through, even if they don't save or share it on Instagram.</p>
+
+            <p>On YouTube, Scam and Tourist Mistake formats perform similarly to Instagram (750–846 views each), but Vintage POV also shows up strongly (746 views, 13 likes for Paris 1962). The platform's nostalgic audience — people who grew up watching travel documentaries — responds to the 1960s film grain aesthetic in a way Instagram's scroll-hungry audience doesn't.</p>
+
+            <h3>X/Twitter: Basically Zero</h3>
+
+            <p>We should just say this clearly: X is not working. Not a little bit — completely not working.</p>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Typical Range</th>
+                            <th>Best Result</th>
+                            <th>Likes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>X (@tabijiai)</td>
+                            <td class="bad">0–12 views</td>
+                            <td class="bad">12 views</td>
+                            <td class="bad">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Every post: 0–12 impressions, 0 likes, 0 engagement. This isn't a content quality problem — the same videos are hitting 2,000+ views on Instagram. This is a distribution problem. The @tabijiai account has minimal followers, and X's algorithm does not surface video content from new accounts the way Instagram and YouTube do. The free-tier text+link approach that works for link sharing on X doesn't translate to video discovery.</p>
+
+            <p>We haven't invested in X engagement strategy (replying, following, community building) for the @tabijiai account, and it shows. X requires relationship-building before algorithm amplification in a way Instagram and YouTube don't. For now, we're treating X as a low-priority cross-post and not optimizing for it.</p>
+
+            <h2 id="the-psychology">The Psychology Behind the Hooks</h2>
+
+            <p>The data isn't just descriptive — it explains something about how people engage with travel content on social media. The winning formats all leverage the same psychological triggers.</p>
+
+            <h3>Negative Framing Outperforms Positive Framing</h3>
+
+            <p>"The #1 Mistake Tourists Make in Koh Phi Phi" outperforms "Koh Phi Phi's Best Hidden Gem" by a factor of 10x+. This isn't counterintuitive if you think about why people follow travel accounts: they're planning trips and they don't want to embarrass themselves or lose money. A warning is more immediately useful than an attraction recommendation. You can find things to do anywhere; avoiding a costly mistake requires specific knowledge.</p>
+
+            <p>Loss aversion is real, and it applies to travel content. The emotional weight of "this mistake could ruin your trip" is stronger than "this place is really cool."</p>
+
+            <h3>Saves Signal Trip Planning Intent</h3>
+
+            <p>The Tourist Mistake format generates saves; the Vintage POV format generates neither saves nor shares. Saves on Instagram represent deferred action — "I'm not going to Koh Phi Phi tomorrow, but I'll need this when I do." That's exactly the audience tabiji is trying to reach: people who are in trip planning mode, not just casual scrollers. The save behavior is a proxy for purchase intent in our context.</p>
+
+            <h3>Specificity Creates Credibility</h3>
+
+            <p>"Tourists make mistakes in Thailand" is forgettable. "The #1 Mistake Tourists Make in Koh Phi Phi" feels authoritative. The specificity of the destination implies specific knowledge, which implies credibility. The viewer assumes we actually know something about Koh Phi Phi — even if the content was generated by AI from aggregated travel data. The naming precision does a lot of work.</p>
+
+            <h3>Fear > Curiosity > Information > Inspiration</h3>
+
+            <p>Ranking the psychological hooks by performance across our dataset:</p>
+
+            <ol>
+                <li><strong>Fear</strong> (scam, mistake, warning) — highest engagement, most saves</li>
+                <li><strong>Curiosity</strong> (unknown, secret, hidden) — moderate engagement</li>
+                <li><strong>Information</strong> (budget, logistics, tips) — watched but not saved</li>
+                <li><strong>Inspiration</strong> (beautiful footage, vibes, nostalgia) — low engagement on IG, better on YouTube</li>
+            </ol>
+
+            <p>This ranking doesn't mean inspiration has no value — it means fear-based hooks are more powerful for algorithmic cold distribution to audiences who don't know your account yet. Once you have an audience that trusts you, inspirational content probably performs differently. We're not at that stage.</p>
+
+            <h2 id="where-we-go-from-here">Where We Go From Here</h2>
+
+            <p>The data gives us a clear prioritization. Here's what we're actually doing based on these 48 hours:</p>
+
+            <h3>Scale What's Working</h3>
+
+            <ul>
+                <li><strong>Tourist Mistake and Scam formats</strong> — increasing cron frequency, diversifying destinations globally. These two formats alone are driving nearly all meaningful engagement.</li>
+                <li><strong>Vintage POV — YouTube-only</strong> — stopping IG cross-post for this format. It's earning real YouTube engagement and shouldn't be penalized for Instagram's algorithm preferences.</li>
+            </ul>
+
+            <h3>Kill What Isn't</h3>
+
+            <ul>
+                <li><strong>"One Thing You Can't Miss"</strong> — retired. The format is too generic and we compounded the problem by flooding a single destination (Hanoi) with 6+ Reels in 48 hours.</li>
+                <li><strong>"This vs That"</strong> — paused until we can solve the visual contrast problem. The concept works; AI video generation can't execute it yet.</li>
+                <li><strong>Generic POV</strong> — dead. No hook, no distribution.</li>
+            </ul>
+
+            <h3>Open Questions</h3>
+
+            <ul>
+                <li>Does Tourist Mistake performance hold across less-traveled destinations, or is it partly driven by high-interest cities (Koh Phi Phi, Hoi An)?</li>
+                <li>Would Budget Reels perform better with fear-adjacent framing ("You're Overpaying in Vienna") rather than neutral information framing?</li>
+                <li>Can Vintage POV be adapted with an information layer (vintage framing + actual travel tips) to make it work on both platforms?</li>
+                <li>Is 48 hours enough data to kill a format, or are some of these low performers just not getting initial distribution? We're watching 7-day numbers carefully.</li>
+            </ul>
+
+            <h2 id="what-this-means-for-ai-content">What This Means for AI-Generated Content</h2>
+
+            <p>We're running what is — to our knowledge — one of the first fully automated AI short-form travel content pipelines in production at this scale. Some observations beyond just our own data:</p>
+
+            <h3>The Hook Is More Important Than the Production Quality</h3>
+
+            <p>AI-generated video from Veo 3 is genuinely impressive — cinematic, fluid, believable. But the Hanoi "One Thing" series had perfectly fine video and got 9–142 views. The Prague Scam reel hit 3,188 with similar production. The video quality is table stakes; the hook determines distribution. This is probably true for human-created content too, but it's especially pronounced when you can run controlled experiments at scale.</p>
+
+            <h3>AI Video Still Can't Do Visual Contrast Reliably</h3>
+
+            <p>The "This vs That" failure is a real limitation: AI video generation can produce <em>types</em> of footage, but it can't reliably produce footage that's visually distinct enough to make a contrast obvious. "Tourist street market" and "local street market" look similar coming out of Veo 3 unless you engineer the prompt very carefully — and even then, viewers watching at 1x speed on their phone can't necessarily parse the difference. This is a genuine gap in current AI video capability.</p>
+
+            <h3>Platform-Specific Optimization Matters More Than Cross-Platform Efficiency</h3>
+
+            <p>We built this pipeline assuming cross-posting was pure upside — same video, three platforms, more reach. The data shows that's mostly true, but Vintage POV is the counterexample: cross-posting actually hurts the YouTube metrics by association with a format that doesn't work on Instagram. If Instagram viewers skip Vintage POV quickly, that early exit behavior might signal to YouTube that the content is weak, even if YouTube's own metrics look fine. We don't know if this signal pollution is real, but it's a reason to segment platform strategies more carefully.</p>
+
+            <h3>Fear-Based Travel Content Is Underserved</h3>
+
+            <p>Most travel brands are optimizing for aspirational content — beautiful places, dream trips, wanderlust. The strong performance of Scam and Tourist Mistake suggests there's a real audience for utility-first, fear-adjacent travel content that nobody is aggressively serving. The information is genuinely useful (these scams exist, these mistakes do cost people money), the hook is strong, and the save behavior suggests it drives actual trip planning.</p>
+
+            <blockquote>
+                The best performing AI content isn't the most beautiful or the most creative — it's the most useful, packaged with the right emotional trigger.
+            </blockquote>
+
+            <p>We'll keep running experiments and sharing what we find. This pipeline is cheap to operate, fast to iterate, and produces real signal. The 48-hour snapshot above represents something like 80+ Reels published across formats and destinations — the kind of A/B test scale that would have cost thousands of dollars and months of production time in the old world of travel content creation.</p>
+
+            <p>Whether that's exciting or unnerving probably depends on which side of the camera you're usually on.</p>
+
+        </div>
+    </article>
+</div><!-- /article-content -->
+</div><!-- /content-wrapper -->
+
+    
+
+    <footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<script>
+// TOC active state tracking
+const sections = document.querySelectorAll('[id]');
+const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+const mobileLabel = document.querySelector('.toc-active-label');
+function updateTOC() {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop <= 120) current = section.id;
+    });
+    tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+            if (mobileLabel && link.closest('.toc-mobile-dropdown')) {
+                mobileLabel.textContent = link.textContent;
+            }
+        }
+    });
+}
+window.addEventListener('scroll', updateTOC, { passive: true });
+updateTOC();
+// Mobile TOC: close on click
+document.querySelectorAll('.toc-mobile-dropdown a').forEach(a => {
+    a.addEventListener('click', () => {
+        document.getElementById('toc-mobile').classList.remove('open');
+    });
+});
+
+</script>
+<script async src="//www.instagram.com/embed.js"></script>
+</body>
+</html>

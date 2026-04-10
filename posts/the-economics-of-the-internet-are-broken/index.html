@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Economics of the Internet Are Broken — Zonted</title>
+    <meta name="description" content="AI agents killed the publisher incentive model the same way streaming killed the 99-cent MP3. When producing a video costs $0.30 and promoting it costs $50, the math breaks. Here's what replaces it.">
+    <link rel="canonical" href="https://zonted.com/posts/the-economics-of-the-internet-are-broken/">
+    <meta property="og:title" content="The Economics of the Internet Are Broken">
+    <meta property="og:description" content="AI agents killed the publisher incentive model the same way streaming killed the 99-cent MP3. When content costs $0.30 to produce, the entire ad-supported internet stops making sense.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://zonted.com/posts/the-economics-of-the-internet-are-broken/">
+    <meta property="og:image" content="https://img.tabiji.ai/tabiji-owl-logo.png">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-03-19T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Economics of the Internet Are Broken">
+    <meta name="twitter:description" content="AI agents killed the publisher incentive model the same way streaming killed the 99-cent MP3. When content costs $0.30 to produce, the entire ad-supported internet stops making sense.">
+
+    <script type="application/ld+json">
+    [
+      {"@context":"https://schema.org","@type":"Article","headline":"The Economics of the Internet Are Broken","author":{"@type":"Person","name":"Bernard Huang"},"datePublished":"2026-03-19","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/the-economics-of-the-internet-are-broken/","description":"AI agents killed the publisher incentive model the same way streaming killed the 99-cent MP3. When producing a video costs $0.30 and promoting it costs $50, the math breaks. Here's what replaces it."},
+      {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"The Economics of the Internet Are Broken","item":"https://zonted.com/posts/the-economics-of-the-internet-are-broken/"}]}
+    ]
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; background: var(--bg); color: var(--text); font-feature-settings: 'kern' 1, 'liga' 1; }
+        img, video { max-width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 2rem 2rem 3rem; }
+        .article-container h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); }
+        .article-meta { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .cost-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+        .cost-table th { background: var(--text); color: white; padding: 0.75rem 1rem; text-align: left; font-weight: 600; font-family: 'Inter', system-ui, sans-serif; }
+        .cost-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); }
+        .cost-table tr:nth-child(even) td { background: var(--bg-surface); }
+        .cost-table .highlight-row td { background: rgba(26,26,26,0.06); font-weight: 600; }
+        .era-timeline { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+        .era-timeline .era { background: var(--bg-surface); border-radius: 12px; padding: 1.25rem; text-align: center; }
+        .era-timeline .era.current { border: 2px solid var(--text); background: rgba(26,26,26,0.04); }
+        .era-timeline .era h4 { font-family: 'Source Serif 4', Georgia, serif; color: var(--text); font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .era-timeline .era p { font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+        @media (max-width: 600px) { .era-timeline { grid-template-columns: 1fr; } }
+        .back-link { font-family: 'Inter', system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .back-link:hover { color: var(--text); }
+        .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+</head>
+<body>
+<nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width:660px;margin:1.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" class="back-link">&larr; Back to Posts</a>
+</div>
+
+<article class="article-container">
+    <h1>The Economics of the Internet Are Broken</h1>
+    <div class="article-meta">By Bernard Huang &middot; March 19, 2026 &middot; 8 min read</div>
+
+    <div class="article-body">
+        <p class="dropcap">In 2003, buying a song on iTunes for 99 cents felt like the future. It was elegant. It was fair. Artists made music, Apple distributed it, you paid a dollar, everyone was happy.</p>
+
+        <p>Then streaming happened. Spotify gave you every song ever recorded for $10 a month. Overnight, the 99-cent MP3 went from "the future of music" to a relic. Not because the music changed. Because the economics changed.</p>
+
+        <p><strong>The same thing is happening to the entire internet right now.</strong> And almost nobody is talking about it clearly.</p>
+
+        <h2>The Deal That Held the Internet Together</h2>
+
+        <p>For 25 years, the internet ran on a simple bargain:</p>
+
+        <ol>
+            <li>Publishers create content (articles, videos, guides, reviews)</li>
+            <li>Search engines index it and send traffic</li>
+            <li>Publishers monetize that traffic with ads or affiliate links</li>
+            <li>Advertisers pay because eyeballs have value</li>
+        </ol>
+
+        <p>This was the deal. It wasn't perfect — it produced SEO spam and clickbait — but it <em>worked</em>. Creators had an incentive to publish. The more useful your content, the more traffic you got, the more money you made. The flywheel spun.</p>
+
+        <p>AI agents broke that flywheel.</p>
+
+        <h2>The Traffic That Stopped Coming</h2>
+
+        <p>When someone asks ChatGPT "best restaurants in Barcelona," it doesn't send them to your blog post. It synthesizes an answer from training data, maybe cites a source, and the user never clicks through to anything. The query was satisfied. The publisher got nothing.</p>
+
+        <p>This isn't a theory. It's measurable. Publishers across every vertical — travel, finance, health, tech — are watching their organic search traffic flatline or decline. Not because their content got worse. Because the distribution channel changed.</p>
+
+        <p>Google's own AI Overviews now answer queries directly in the search results. The click-through rate to publisher websites has dropped by double digits for informational queries. If you're a publisher whose business model depends on "create great content → get search traffic → monetize with ads," the math is breaking in real time.</p>
+
+        <p>And here's the part that makes it irreversible: <strong>the users prefer it.</strong> Getting an instant answer is better than clicking through three ad-laden pages to find what you need. You can't put that genie back in the bottle. The old distribution model isn't coming back, the same way nobody's going back to buying individual MP3s.</p>
+
+        <h2>The Production Cost Collapse</h2>
+
+        <p>The broken traffic model is one side of the equation. The other side is even more disruptive: <strong>the cost of producing content just fell off a cliff.</strong></p>
+
+        <p>Here's what it actually costs us to produce content with AI agents in March 2026:</p>
+
+        <table class="cost-table">
+            <thead>
+                <tr>
+                    <th>Content Type</th>
+                    <th>AI Cost</th>
+                    <th>Traditional Cost</th>
+                    <th>Reduction</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Instagram Reel (8 sec, fully produced)</td>
+                    <td>$0.30</td>
+                    <td>$200–500</td>
+                    <td>~99%</td>
+                </tr>
+                <tr>
+                    <td>Travel itinerary page (3,000 words + maps)</td>
+                    <td>$0.15</td>
+                    <td>$300–800</td>
+                    <td>~99%</td>
+                </tr>
+                <tr>
+                    <td>Original music track (full composition + publish)</td>
+                    <td>$0.31</td>
+                    <td>$500–2,000</td>
+                    <td>~99%</td>
+                </tr>
+                <tr>
+                    <td>Curated local guide (10 places, rated + verified)</td>
+                    <td>$0.50</td>
+                    <td>$400–1,200</td>
+                    <td>~99%</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Full day of content (23 videos + cross-posts)</td>
+                    <td>~$17</td>
+                    <td>$5,000–15,000</td>
+                    <td>~99%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>These aren't projections. These are our actual costs. We run four AI agents on a Mac Mini that produce 23 videos a day, publish to Instagram, YouTube, X, and Pinterest, and maintain over 1,400 pages of travel content. Total monthly spend: about $500.</p>
+
+        <p>When content costs $0.30 to produce, every assumption about internet economics falls apart.</p>
+
+        <h2>Why Paying to Promote a $0.30 Video Makes No Sense</h2>
+
+        <p>This is the part that really breaks people's brains.</p>
+
+        <p>The traditional playbook for social media content is: produce a video, boost it with paid promotion, acquire eyeballs, monetize those eyeballs. Brands spend $50, $100, $500 to promote a single Instagram Reel. That math made sense when the Reel cost $300 to produce. You're investing $800 total to reach 50,000 people. Fine.</p>
+
+        <p>But when the Reel costs $0.30 to produce? <strong>Spending $50 to promote it is insane.</strong> You're paying 167x the production cost just to distribute it. That's like spending $165 to mail someone a dollar bill.</p>
+
+        <p>The smarter play — the play that only works when production costs are near zero — is <strong>volume over promotion.</strong></p>
+
+        <p>Instead of making 1 video and spending $50 to push it, make 167 videos for that same $50. Let the algorithm pick the winners. Most will get 100 views. Some will get 1,000. A few will break out to 10,000+. The expected reach is higher, the cost is the same, and you've built a library of content instead of paying for a single rented impression.</p>
+
+        <p>This isn't theory. It's what we do every day. We publish 23 Reels daily. We spend $0 on promotion. Some underperform. Some go viral. The aggregate reach grows every week because the algorithm rewards consistency and volume. We're not playing the paid media game at all. We're playing a different game entirely.</p>
+
+        <blockquote>When production costs approach zero, the optimal strategy inverts: produce more, promote less. Volume becomes the distribution strategy.</blockquote>
+
+        <h2>Three Eras of Internet Economics</h2>
+
+        <div class="era-timeline">
+            <div class="era">
+                <h4>Era 1: Purchase</h4>
+                <p>Buy the content.<br>99 cents per song.<br>$15 per article (magazine).<br>Unit economics worked.</p>
+            </div>
+            <div class="era">
+                <h4>Era 2: Attention</h4>
+                <p>Content is free.<br>You pay with attention (ads).<br>Traffic = revenue.<br>SEO era.</p>
+            </div>
+            <div class="era current">
+                <h4>Era 3: Synthetic</h4>
+                <p>Content is AI-generated.<br>Near-zero production cost.<br>Traffic model broken.<br>We are here.</p>
+            </div>
+        </div>
+
+        <p>Each era didn't just change how content was priced — it changed who had power. Era 1 favored labels and publishers (they controlled production). Era 2 favored platforms (they controlled distribution). Era 3 favors <strong>whoever has the best agents and the best taste</strong> — because the production and distribution bottlenecks are both collapsing simultaneously.</p>
+
+        <h2>What Happens to Publishers</h2>
+
+        <p>Let me be blunt: most publishers — the ones whose entire business is "write articles, get traffic, sell ads" — are in serious trouble. Not because their content is bad. Because their business model assumed two things that are no longer true:</p>
+
+        <ol>
+            <li><strong>Search engines will send you traffic.</strong> They're answering queries themselves now.</li>
+            <li><strong>Content is expensive enough to be a moat.</strong> It's not. An AI can produce what took your team a week in about 90 seconds.</li>
+        </ol>
+
+        <p>This doesn't mean all publishers die. But it means the survivors will look very different from today's incumbents. The publishers that make it will be the ones who own:</p>
+
+        <ul>
+            <li><strong>Proprietary data.</strong> Not opinions, not rewrites of press releases — actual first-party data that AI can't generate from training data. Reviews from real users. Real-time pricing. Verified local knowledge.</li>
+            <li><strong>Direct audience relationships.</strong> Email lists, communities, memberships — anything that doesn't depend on a search engine or social algorithm for distribution.</li>
+            <li><strong>Transactional value.</strong> If your content leads to a booking, a purchase, or a signup, AI agents will still need you in the loop. If your content is purely informational, you're training data.</li>
+        </ul>
+
+        <h2>What Happens to Advertising</h2>
+
+        <p>The $600 billion digital advertising industry is built on an assumption: <strong>human attention is scarce and can be interrupted.</strong> You're reading an article, an ad loads, maybe you click.</p>
+
+        <p>In an agentic world, attention isn't just scarce — it's intermediated. The AI agent reads the content, extracts what's useful, and presents a summary to the user. The user never sees the page. They never see the ad. The entire impression-based advertising model fails when the "reader" is a machine that can't be advertised to.</p>
+
+        <p>This is already happening at scale with Google AI Overviews, ChatGPT web browsing, and Perplexity. The agent visits the page, takes what it needs, and the human gets a clean answer. The publisher's ad inventory — the thing they monetize — was never loaded.</p>
+
+        <p>The advertising industry will adapt, obviously. It always does. But the adaptation will be painful, and it'll probably look like: ads inside the AI interface itself (Google is already testing this), sponsored agent responses, and paid data partnerships where brands pay to be in the training data or enrichment pipeline. The one thing it won't look like is the current model of "get traffic, show ads." That's the 99-cent MP3.</p>
+
+        <h2>The Weird Place We're In Right Now</h2>
+
+        <p>Here's what makes this moment strange: we're between eras, and most of the industry is pretending we're not.</p>
+
+        <p>Publishers are still optimizing for SEO as if Google will always send them traffic. Brands are still spending billions on paid social as if boosting posts is the optimal strategy. Ad networks are still selling CPMs as if the impression model will last forever.</p>
+
+        <p>Meanwhile, a guy with a Mac Mini and four AI agents is producing more content per day than most media companies, reaching hundreds of thousands of people per month, and spending $0 on distribution.</p>
+
+        <p>I don't say this to be smug. I say it because the delta between what's possible and what most people are doing is enormous. And deltas like that don't last. The market corrects. When it does, the people who were already operating in Era 3 will have a multi-year head start.</p>
+
+        <h2>So What Replaces It?</h2>
+
+        <p>I don't have a clean answer. Nobody does yet. But here's what I think the early signals point to:</p>
+
+        <ol>
+            <li><strong>Agentic transactions replace attention.</strong> Instead of monetizing pageviews, you monetize data that agents need. Real-time availability, current pricing, verified information. Agents will pay (or their operators will pay) for enrichment data on a per-query basis. This is already how API businesses work — it just hasn't reached content yet.</li>
+            <li><strong>Volume economics replace promotion economics.</strong> The winning strategy isn't "spend more to reach more." It's "produce more, let algorithms curate, build a library." This favors operators with agent infrastructure over operators with ad budgets.</li>
+            <li><strong>Taste becomes the scarce resource.</strong> When anyone can produce content at near-zero cost, the differentiator is <em>what</em> you choose to produce. Editorial judgment, cultural instinct, knowing what people actually want — these are the new competitive advantages. They can't be commoditized because they're fundamentally about having a point of view.</li>
+            <li><strong>Direct relationships become the only reliable distribution.</strong> Owned audiences — email, communities, apps — become the only channels that aren't intermediated by AI. If you're renting attention from Google or Instagram, you're one algorithm change from zero.</li>
+        </ol>
+
+        <h2>The iTunes Lesson</h2>
+
+        <p>When Spotify launched, the music industry panicked. Labels sued. Artists protested. Everyone said streaming would destroy music.</p>
+
+        <p>Music survived. The industry restructured. New business models emerged. Artists who adapted early — who understood that the economics had permanently changed — built massive careers on the new platform. The ones who kept insisting the old model should come back got left behind.</p>
+
+        <p>The internet is going through its Spotify moment right now. The old economics — create content, get traffic, sell ads — are breaking. Not cracking. <em>Breaking.</em> And no amount of SEO optimization or ad spend is going to un-break them, the same way no amount of iTunes marketing was going to stop streaming.</p>
+
+        <blockquote>The cost of producing content just hit $0.30. The cost of distributing it is heading toward zero. Every business model built on content being expensive and traffic being free is about to get repriced.</blockquote>
+
+        <p>The question isn't whether the economics of the internet are broken. They already are. The question is what you build on top of the rubble.</p>
+
+        <p>We're building with agents, producing content we'd actually want to consume, and betting that volume + taste + direct distribution beats the old playbook of promotion + SEO + prayer.</p>
+
+        <p>So far, the math checks out.</p>
+    </div>
+</article>
+
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+</body>
+</html>

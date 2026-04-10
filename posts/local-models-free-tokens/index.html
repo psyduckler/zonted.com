@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>When Token Costs Hit Zero — The Local Model Revolution Is Already Here — Zonted</title>
+    <meta name="description" content="Frontier models spend billions on data centers. But better hardware and local models like Qwen 3.5 are making token costs irrelevant. The future of AI runs on your laptop.">
+    <link rel="canonical" href="https://zonted.com/posts/local-models-free-tokens/">
+    <meta property="og:title" content="When Token Costs Hit Zero — The Local Model Revolution Is Already Here">
+    <meta property="og:description" content="Better hardware + local models = free tokens. We tested Qwen 3.5 on a MacBook Air and the results are surprisingly good. Here's why frontier API costs are about to become optional.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://zonted.com/posts/local-models-free-tokens/">
+    <meta property="og:image" content="https://img.tabiji.ai/resources/local-models-free-tokens/qwen-ollama-local.png">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-03-29T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="When Token Costs Hit Zero — The Local Model Revolution Is Already Here">
+    <meta name="twitter:description" content="Better hardware + local models = free tokens. We tested Qwen 3.5 on a MacBook Air and the results are surprisingly good.">
+    <meta name="twitter:image" content="https://img.tabiji.ai/resources/local-models-free-tokens/qwen-ollama-local.png">
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"When Token Costs Hit Zero — The Local Model Revolution Is Already Here","author":{"@type":"Person","name":"Bernard Huang"},"datePublished":"2026-03-29","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/local-models-free-tokens/","description":"Frontier models spend billions on data centers. But better hardware and local models like Qwen 3.5 are making token costs irrelevant. The future of AI runs on your laptop.","image":"https://img.tabiji.ai/resources/local-models-free-tokens/qwen-ollama-local.png"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"When Token Costs Hit Zero"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can local models really replace frontier APIs?","acceptedAnswer":{"@type":"Answer","text":"For many tasks, yes — already. Local models like Qwen 3.5 handle summarization, classification, drafting, and coding assistance well. Frontier models remain superior for complex reasoning, novel research, and multi-step agentic workflows. The smart approach is adaptive: run local for 80% of tasks, call frontier APIs only when you need the extra capability."}},{"@type":"Question","name":"What hardware do you need to run local models?","acceptedAnswer":{"@type":"Answer","text":"A modern laptop with 16GB+ RAM can run 4B-8B parameter models comfortably via Ollama. Apple Silicon Macs are particularly good because of unified memory architecture. For larger models (30B+), you'll want 32-64GB RAM or a dedicated GPU. The bar keeps dropping — hardware that struggled with 7B models two years ago now runs 30B models smoothly."}},{"@type":"Question","name":"How much money can you save with local models?","acceptedAnswer":{"@type":"Answer","text":"If you're spending $500+/month on API tokens, you could cut that by 60-80% by routing routine tasks to local models. The upfront hardware cost pays for itself within a few months. For individual developers or small teams, local inference is effectively free after the hardware purchase."}},{"@type":"Question","name":"Will frontier model companies go out of business?","acceptedAnswer":{"@type":"Answer","text":"No — but their business model will evolve. Frontier labs will focus on the hardest problems: bleeding-edge reasoning, multimodal capabilities, and enterprise-scale deployments. Think of it like cloud computing: most people run basic workloads locally, but AWS still prints money because the hardest infrastructure problems are worth paying for."}}]}
+    </script>
+    
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; background: var(--bg); color: var(--text); font-feature-settings: 'kern' 1, 'liga' 1; }
+        img, video { max-width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 7rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--accent); padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); }
+        .article-meta { font-family:'Inter',system-ui,sans-serif; font-size:0.9rem; color:var(--text-muted); margin-bottom:2rem; }
+        .highlight-box { background: var(--bg-surface); border-radius: 6px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .highlight-box h3 { color: var(--text); margin-bottom: 0.75rem; }
+        .highlight-box ul { margin-left: 1.25rem; }
+        .highlight-box li { margin-bottom: 0.4rem; }
+        .screenshot-box { margin: 2rem 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .screenshot-box img { display: block; width: 100%; }
+        .screenshot-box .caption { padding: 0.75rem 1rem; font-family:'Inter',system-ui,sans-serif; font-size:0.8rem; color:var(--text-dim); font-style:italic; text-align:center; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .two-col .col { background: var(--bg-surface); border-radius: 6px; padding: 1.5rem; }
+        .two-col .col h3 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+        .two-col .col.local { border-left: 3px solid var(--green); }
+        .two-col .col.frontier { border-left: 3px solid var(--accent); }
+        @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+        .faq-section { margin-top: 3rem; }
+        .faq-section h2 { font-size: 1.4rem; color: var(--text); margin-bottom: 1.5rem; }
+        .faq-item { margin-bottom: 1.5rem; }
+        .faq-item h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+        .faq-item p { font-size: 1rem; line-height: 1.7; color: var(--text); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        @media (max-width: 768px) {
+            .nav-links.open { display: flex; }
+            nav a}
+    .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+
+</head>
+<body>
+
+<nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width:660px;margin:0 auto;padding:1.5rem 2rem 0;">
+    <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+</div>
+
+<div style="max-width:800px;margin:5.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" style="color:#8B7355;text-decoration:none;font-size:0.9rem;font-weight:500;">← Back to Resources</a>
+</div>
+
+<article class="article-container">
+    <h1>When Token Costs Hit Zero</h1>
+    <div class="article-meta">By Bernard Huang · March 29, 2026 · 8 min read</div>
+
+    <div class="article-body">
+<p class="dropcap">I just ran Qwen 3.5 on my MacBook Air. Not through an API. Not through a cloud service. Locally, on the metal, via <a href="https://ollama.com/">Ollama</a>. It thinks out loud, reasons through problems, and gives genuinely useful answers — all without a single token leaving my machine. Zero API cost. Zero latency to a data center. Zero dependency on someone else's infrastructure staying online.</p>
+
+        <p>And the results? <strong>Not bad at all.</strong></p>
+
+        <div class="screenshot-box">
+            <img src="https://img.tabiji.ai/resources/local-models-free-tokens/qwen-ollama-local.png?v=1" alt="Qwen 3.5 4B running locally via Ollama on a MacBook Air, showing thinking and response" loading="lazy">
+            <div class="caption">Qwen 3.5 (4B) running locally on a MacBook Air via Ollama — visible chain-of-thought reasoning, zero API calls.</div>
+        </div>
+
+        <p>This isn't a tech demo or a proof of concept. This is a 4-billion parameter model running on consumer hardware, showing its reasoning process, and producing coherent, thoughtful output. A year ago, you needed a cloud GPU for this. Two years ago, you needed a small data center.</p>
+
+        <p>I think we're at the beginning of the most important shift in AI economics since the transformer paper: <strong>the move from rented intelligence to owned intelligence.</strong></p>
+
+        <h2>The Billion-Dollar Data Center Problem</h2>
+
+        <p>Right now, the AI industry has a spending problem. OpenAI, Google, Anthropic, Meta — they're all in an arms race to build the biggest data centers with the most GPUs. Microsoft alone has committed over $80 billion to AI infrastructure in 2026. These are mind-boggling numbers, and they all flow toward one goal: making frontier models bigger, faster, and smarter.</p>
+
+        <p>And they're succeeding. Claude, GPT, Gemini — these models are genuinely incredible at the hardest problems. Complex reasoning, novel research, multi-step agentic workflows. They keep getting better.</p>
+
+        <p>But here's the thing most people miss: <strong>the majority of AI tasks don't need frontier-level intelligence.</strong></p>
+
+        <p>Think about what you actually use AI for day-to-day. Summarizing emails. Drafting messages. Answering questions about a document. Writing code snippets. Classifying data. Translating text. Generating simple content. These aren't problems that require a trillion-parameter model sitting in a data center in Iowa. They're problems a well-trained 4B model can handle on your laptop — right now, today, for free.</p>
+
+        <h2>The Hardware Convergence</h2>
+
+        <p>This is where it gets interesting. Two forces are converging simultaneously:</p>
+
+        <div class="highlight-box">
+            <h3>Force 1: Models are getting smaller and smarter</h3>
+            <ul>
+                <li>Qwen 3.5 (4B) shows chain-of-thought reasoning on consumer hardware</li>
+                <li>Llama 3.3 runs at 70B quality in a fraction of the compute</li>
+                <li>Phi-4 and Gemma 3 prove that small models can punch way above their weight</li>
+                <li>Quantization and distillation techniques keep improving — models that needed 32GB of VRAM last year run in 8GB today</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3>Force 2: Hardware is getting faster and cheaper</h3>
+            <ul>
+                <li>Apple Silicon's unified memory architecture is perfect for local inference — no GPU memory bottleneck</li>
+                <li>Qualcomm's Snapdragon X Elite puts serious NPU power in laptops and phones</li>
+                <li>Intel and AMD are both shipping dedicated AI accelerators in consumer chips</li>
+                <li>Even phones — the iPhone 16's Neural Engine runs 35 TOPS, up from zero five years ago</li>
+            </ul>
+        </div>
+
+        <p>These two curves are on a collision course. As models shrink and hardware grows, there's an inevitable crossover point where <strong>most AI workloads run locally, on devices you already own, at zero marginal cost.</strong></p>
+
+        <p>We're not approaching that crossover. We're at it.</p>
+
+        <h2>What We've Seen Firsthand</h2>
+
+        <p>We run <a href="https://zonted.com/posts/the-future-is-synthetic/">four AI agents</a> at tabiji. They produce Instagram Reels, build travel itineraries, generate music, and manage our infrastructure. Right now, most of that runs through frontier APIs — Claude, Gemini, MiniMax. Our token costs are real: roughly $500/month to keep the operation running.</p>
+
+        <p>But we've been experimenting with local models for the simpler tasks, and the economics are compelling:</p>
+
+        <div class="two-col">
+            <div class="col local">
+                <h3>🏠 Local Model (Qwen 3.5, 4B)</h3>
+                <ul>
+                    <li>Cost per token: $0.00</li>
+                    <li>Latency: ~50ms first token</li>
+                    <li>Privacy: complete — nothing leaves the machine</li>
+                    <li>Availability: 100% (no outages, no rate limits)</li>
+                    <li>Good at: summaries, classification, drafting, Q&A, code completion</li>
+                </ul>
+            </div>
+            <div class="col frontier">
+                <h3>☁️ Frontier API (Claude Opus, GPT-4o)</h3>
+                <ul>
+                    <li>Cost per token: $15-75 per million</li>
+                    <li>Latency: 200-2000ms first token</li>
+                    <li>Privacy: data sent to third-party servers</li>
+                    <li>Availability: 99.5% (outages happen, rate limits hit)</li>
+                    <li>Good at: complex reasoning, novel problems, multi-step agents</li>
+                </ul>
+            </div>
+        </div>
+
+        <p>The pattern is clear. For the ~80% of tasks that are "good enough" territory, local models already win on every dimension except raw intelligence. And for the 20% where you genuinely need frontier capability, you call the API.</p>
+
+        <p><strong>That's the future: adaptive routing between local and cloud.</strong> Not one or the other. Both — with intelligence about which to use when.</p>
+
+        <h2>The Laptop and Phone Makers Know This</h2>
+
+        <p>Apple, Samsung, Google, Qualcomm, Intel — they all see this coming. And they're not waiting around.</p>
+
+        <p>Apple Intelligence runs Siri's language understanding on-device. Google's Gemini Nano ships on every Pixel. Samsung's Galaxy AI uses on-device models for translation and summarization. Microsoft is building Copilot+ PCs with dedicated NPUs. Every major hardware company is racing to pack more AI capability directly into consumer devices.</p>
+
+        <p>Why? Because it's a massive competitive advantage. A phone that can run a smart assistant <em>without</em> an internet connection is better than one that can't. A laptop that processes your documents locally — never sending them to anyone's server — is more appealing to enterprises than one that pipes everything to the cloud.</p>
+
+        <p>This isn't a niche play. This is the next major hardware selling point, like cameras were for phones in the 2010s. "How smart is your device when it's offline?" is about to become a benchmark that matters.</p>
+
+        <h2>What This Means for Token Economics</h2>
+
+        <p>Here's the part that keeps me up at night — in a good way.</p>
+
+        <p>If you're a company spending $10,000/month on API tokens today, imagine this world:</p>
+
+        <ul>
+            <li><strong>80% of your AI workload</strong> runs on local hardware you already own. Cost: $0.</li>
+            <li><strong>15% of your workload</strong> runs on a small on-premise server with a mid-range GPU. Cost: amortized hardware, ~$200/month.</li>
+            <li><strong>5% of your workload</strong> — the truly hard stuff — calls a frontier API. Cost: $500/month instead of $10,000.</li>
+        </ul>
+
+        <p>That's a 95% cost reduction. Not through some clever optimization or prompt engineering hack. Just through intelligent routing to models that are already available, running on hardware that's already on your desk.</p>
+
+        <p>For individual developers and small teams, it's even more dramatic. Local inference is <em>free</em>. You buy the hardware once, and every token after that costs nothing. The only limit is how fast your machine can run the model.</p>
+
+        <h2>The Frontier Still Matters — But Differently</h2>
+
+        <p>I'm not saying OpenAI and Anthropic are doomed. Far from it. The frontier will always matter for the hardest problems. When I need an agent to orchestrate a complex workflow across multiple tools, reason about ambiguous situations, or handle truly novel problems — I want the best model money can buy.</p>
+
+        <p>But the <em>business model</em> of frontier AI will shift. Instead of charging for every token of every task, frontier providers will increasingly compete on the tasks that <em>only they</em> can do. The commodity layer — the stuff that a 4B model handles fine — becomes a race to zero. The premium layer — genuine intelligence, breakthrough reasoning, reliable agency — that's where the value concentrates.</p>
+
+        <p>Think about it like computing in general. Most of your apps run locally on your phone. But when you need massive parallel processing — training a model, rendering a movie, running a simulation — you rent cloud compute. The cloud didn't kill local computing. It found its niche alongside it. (Meanwhile, <a href="/posts/the-economics-of-the-internet-are-broken/">the economics of the internet</a> are shifting in the same direction — decentralization of compute follows decentralization of content.)</p>
+
+        <p>AI is heading the same way.</p>
+
+        <h2>The Privacy Windfall</h2>
+
+        <p>There's a second-order effect here that doesn't get talked about enough: <strong>privacy.</strong></p>
+
+        <p>Right now, using AI means sending your data to someone else's servers. Your emails, your documents, your code, your business strategy — all of it flows through third-party infrastructure. For individuals, that's uncomfortable. For enterprises handling sensitive data, it's a dealbreaker.</p>
+
+        <p>Local models solve this entirely. Your data never leaves your machine. There's no terms of service to read, no data retention policy to worry about, no chance of your prompts being used to train someone else's model. It's your model, your hardware, your data.</p>
+
+        <p>This alone will drive massive adoption. Every hospital, law firm, financial institution, and government agency that's been hesitant about AI due to data sovereignty concerns just got a green light.</p>
+
+        <h2>What to Do About It</h2>
+
+        <p>If you're building with AI right now, here's my honest take on how to think about this:</p>
+
+        <ol>
+            <li><strong>Start experimenting with local models today.</strong> Install <a href="https://ollama.com/">Ollama</a>. Pull Qwen 3.5 or Llama 3.3. Run them. Get a feel for what they can and can't do. You'll be surprised at how capable they are.</li>
+            <li><strong>Audit your token spend.</strong> Look at what you're actually sending to frontier APIs. How much of it genuinely needs frontier intelligence? My guess: less than you think.</li>
+            <li><strong>Build for adaptive routing.</strong> Design your systems so you can swap between local and cloud models without rewiring everything. The interface should be model-agnostic.</li>
+            <li><strong>Watch the hardware roadmap.</strong> Apple's M5 chip, Qualcomm's next Snapdragon, Intel's Lunar Lake — these aren't incremental upgrades. Each generation roughly doubles local AI throughput.</li>
+            <li><strong>Don't over-invest in any single provider.</strong> The competitive landscape is shifting fast. The model that's best today might be outperformed by an open-weights model running locally in six months. We learned this firsthand — see <a href="/posts/ai-resilience-planning/">AI Resilience Planning</a> for how we built fallback routing across multiple providers.</li>
+        </ol>
+
+        <h2>The Endgame</h2>
+
+        <p>Here's my prediction: within three years, the default mode of interacting with AI will be local. Your phone, your laptop, your car, your smart home hub — they'll all run capable language models natively. You won't think about "calling an API" any more than you think about "calling a server" when you open your calculator app.</p>
+
+        <p>The cloud will still exist for the hard stuff. When you need to train a new model, orchestrate a hundred agents, or solve a problem no local model can handle — you'll reach for frontier APIs. But that will feel like an escalation, not the default. (We wrote about this shift in <a href="/posts/future-of-content-agentic-data-enrichment/">The Future of Content Is Agentic Data Enrichment</a> — the same pattern applies: local models handle the grunt work, frontier models handle the judgment calls.)</p>
+
+        <p>Token costs won't go to zero because the APIs disappear. They'll go to zero because <strong>most of the tokens will be generated on hardware you already own.</strong></p>
+
+        <blockquote>Better hardware → better local models → adaptive use of frontier models as necessary. The math is simple. The implications are enormous.</blockquote>
+
+        <p>We're already running Qwen 3.5 on a MacBook Air and getting useful results. That's today, March 2026, with a 4B model. Imagine what a 30B model on an M5 MacBook Pro will look like in 2027. Or a 100B model on whatever hardware exists in 2028.</p>
+
+        <p>The future of AI isn't a data center in the desert. It's the device in your hand.</p>
+
+        <section class="faq-section" id="faq">
+            <h2>FAQ</h2>
+
+            <div class="faq-item">
+                <h3>Can local models really replace frontier APIs?</h3>
+                <p>For many tasks, yes — already. Local models like Qwen 3.5 handle summarization, classification, drafting, and coding assistance well. Frontier models remain superior for complex reasoning, novel research, and multi-step agentic workflows. The smart approach is adaptive: run local for 80% of tasks, call frontier APIs only when you need the extra capability.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What hardware do you need to run local models?</h3>
+                <p>A modern laptop with 16GB+ RAM can run 4B-8B parameter models comfortably via Ollama. Apple Silicon Macs are particularly good because of unified memory architecture. For larger models (30B+), you'll want 32-64GB RAM or a dedicated GPU. The bar keeps dropping — hardware that struggled with 7B models two years ago now runs 30B models smoothly.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How much money can you save with local models?</h3>
+                <p>If you're spending $500+/month on API tokens, you could cut that by 60-80% by routing routine tasks to local models. The upfront hardware cost pays for itself within a few months. For individual developers or small teams, local inference is effectively free after the hardware purchase.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Will frontier model companies go out of business?</h3>
+                <p>No — but their business model will evolve. Frontier labs will focus on the hardest problems: bleeding-edge reasoning, multimodal capabilities, and enterprise-scale deployments. Think of it like cloud computing: most people run basic workloads locally, but AWS still prints money because the hardest infrastructure problems are worth paying for.</p>
+            </div>
+        </section>
+    </div>
+</article>
+
+    
+
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+
+</body>
+</html>

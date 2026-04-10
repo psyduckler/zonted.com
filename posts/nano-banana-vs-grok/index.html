@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Nano Banana 2 vs Grok for Concept Art: AI Image Generator Showdown (2026)</title>
+    <meta name="description" content="We tested Nano Banana 2 (Gemini 3.1 Flash) against Grok (xAI) on 8 identical lofi anime art prompts. NB2 scored 9.0/10 vs Grok's 7.7/10 — here's the full comparison with every image.">
+    <link rel="canonical" href="https://zonted.com/posts/nano-banana-vs-grok/">
+    <meta property="og:title" content="Nano Banana 2 vs Grok for Concept Art: AI Image Generator Showdown (2026)">
+    <meta property="og:description" content="We tested Nano Banana 2 (Gemini 3.1 Flash) against Grok (xAI) on 8 identical lofi anime art prompts. NB2 scored 9.0/10 vs Grok's 7.7/10 — here's the full comparison with every image.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://zonted.com/posts/nano-banana-vs-grok/">
+    <meta property="og:image" content="https://img.tabiji.ai/resources/nano-banana-vs-grok/hero-grid.jpg">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Nano Banana 2 vs Grok for Concept Art: AI Image Generator Showdown (2026)",
+      "author":{"@type":"Person","name":"Bernard Huang"},
+      "datePublished": "2026-03-14",
+      "dateModified": "2026-03-14",
+      "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"}},
+      "image": "https://img.tabiji.ai/resources/nano-banana-vs-grok/hero-grid.jpg",
+      "mainEntityOfPage": "https://zonted.com/posts/nano-banana-vs-grok/"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Nano Banana 2 better than Grok for AI image generation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For concept art and lofi anime styles, yes. In our head-to-head test with 8 identical prompts, Nano Banana 2 (Gemini 3.1 Flash Image) scored 9.0/10 vs Grok's 7.7/10. NB2 produced more artistic variety, better emotional accuracy, and more faithful prompt adherence — including correctly rendering 'eyes closed' when asked. Grok produced polished but repetitive outputs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Grok image generation cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Grok offers two image models: grok-imagine-image at ~$0.02/image and grok-imagine-image-pro at ~$0.07/image. The pro model produces higher quality but at 3.5x the cost. By comparison, Nano Banana 2 costs ~$0.02/image and consistently outperformed even Grok's pro model in our lofi anime concept art tests."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Grok generate anime and concept art?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Grok can generate anime-style art through its grok-imagine-image API. It produces clean, polished digital anime with good technical execution. However, in our testing it struggled with artistic variety — both outputs from the same prompt looked nearly identical — and it had difficulty with emotional nuances like 'eyes closed' or 'at peace' expressions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Grok have video generation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Grok offers grok-imagine-video for AI video generation at $0.05/second, supporting 1–15 second clips at up to 720p. It also has a unique video editing feature where you can modify existing videos with prompts. However, the 720p max resolution is a limitation for platforms like Instagram that boost 1080p content."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Nano Banana 2?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nano Banana 2 is a nickname for Google's Gemini 3.1 Flash Image model (gemini-3.1-flash-image-preview). It's a multimodal LLM that generates images as part of its response, costing ~$0.02/image. It excels at stylistic prompt adherence, artistic variety, and emotional accuracy — consistently outperforming dedicated image models in our tests."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+        :root {
+    --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+    --border: #ddd; --border-light: #e8e8e4;
+    --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+    --accent: #1a1a1a; --accent-hover: #000;
+    --green: #2a7a2a; --red: #a33; --blue: #369;
+}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+.article-container { max-width: 660px; margin: 0 auto; padding: 3rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+footer p { color: var(--text-muted); font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .nav-links.open { display: flex; }
+            nav a}
+
+        /* Comparison grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+            margin: 1.5rem 0 2rem;
+        }
+        .comparison-grid.two-col {
+            grid-template-columns: 1fr 1fr;
+        }
+        .comparison-card {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg);
+        }
+        .comparison-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .comparison-card .card-label {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--bg-surface);
+            text-align: center;
+        }
+        .comparison-card .card-label .score {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.1rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 0.35rem;
+        }
+        .comparison-card .card-label .score.high { background: var(--text-muted); }
+        .comparison-card .card-label .score.mid { background: var(--earth); }
+        .comparison-card .card-label .score.low { background: var(--accent); }
+
+        /* Spec table */
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1.5rem 0 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .spec-table {
+            width: 100%;
+            min-width: 520px;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .spec-table th, .spec-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .spec-table th {
+            background: var(--bg-surface);
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .spec-table td { color: var(--text); }
+        .spec-table tr:last-child td { border-bottom: none; }
+        .spec-table .winner { background: rgba(122, 139, 111, 0.08); font-weight: 600; }
+
+        /* Verdict box */
+        .verdict-box {
+            background: var(--bg-surface);
+            border: 2px solid var(--text-muted);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+        .verdict-box h3 {
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .verdict-box p { margin-bottom: 0.75rem; }
+        .verdict-box p:last-child { margin-bottom: 0; }
+
+        /* Hero */
+        .article-hero {
+            margin: -0.5rem -2rem 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .article-hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .article-hero .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            color: white;
+        }
+        .article-hero .hero-overlay span {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* TOC sidebar */
+        .toc-sidebar {
+            padding-top: 3rem;
+            width: 220px; flex-shrink: 0;
+            position: sticky; top: 80px;
+            max-height: calc(100vh - 100px); overflow-y: auto;
+        }
+        .toc-sidebar h2 { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(254, 252, 249, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+
+        .content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 660px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; border-radius: 0; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+            .article-body pre { max-width: 100%; overflow-x: auto; }
+            .comparison-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+            .comparison-grid.two-col { grid-template-columns: 1fr !important; }
+            .comparison-card .card-label { font-size: 0.85rem; padding: 0.6rem 0.75rem; }
+            .spec-table { min-width: 420px; font-size: 0.85rem; }
+            .spec-table th, .spec-table td { padding: 0.5rem 0.65rem; }
+            .table-wrap { max-width: 100%; }
+            .verdict-box { padding: 1rem 1.25rem; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+            .spec-table { min-width: 360px; font-size: 0.8rem; }
+            .spec-table th, .spec-table td { padding: 0.4rem 0.5rem; }
+            .verdict-box { padding: 0.85rem 1rem; }
+            .verdict-box h3 { font-size: 1rem; }
+            .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        }
+
+        .img-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+            .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    </style>
+</head>
+<body>
+    <nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:660px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/reviews/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+        <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:#666;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+    </div>
+</div>
+</nav>
+<div style="max-width: 660px;margin:1.5rem auto 0;padding:0 2rem;">
+    <a href="/posts/" style="color:var(--text-muted);text-decoration:none;font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+</div>
+
+<div class="toc-mobile-wrapper">
+    <div class="toc-mobile-sticky" id="toc-mobile">
+        <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+            <span class="toc-active-label">📑 Contents</span>
+            <span class="toc-chevron">▼</span>
+        </button>
+        <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+            <ul>
+                <li><a href="#tldr" onclick="closeMobileToc()">TL;DR</a></li>
+                <li><a href="#why-we-ran-this-test" onclick="closeMobileToc()">Why We Ran This Test</a></li>
+                <li><a href="#the-models" onclick="closeMobileToc()">The Two Models</a></li>
+                <li><a href="#test-1-indoor" onclick="closeMobileToc()">Test 1: Indoor Capybara</a></li>
+                <li><a href="#test-2-outdoor" onclick="closeMobileToc()">Test 2: Outdoor Capybara</a></li>
+                <li><a href="#prompt-adherence" onclick="closeMobileToc()">The Prompt Adherence Problem</a></li>
+                <li><a href="#pricing" onclick="closeMobileToc()">Pricing Comparison</a></li>
+                <li><a href="#scorecard" onclick="closeMobileToc()">Final Scorecard</a></li>
+                <li><a href="#verdict" onclick="closeMobileToc()">The Verdict</a></li>
+                <li><a href="#when-to-use-grok" onclick="closeMobileToc()">When to Use Grok</a></li>
+                <li><a href="#how-to-use" onclick="closeMobileToc()">Code Examples</a></li>
+                <li><a href="#related" onclick="closeMobileToc()">Related Resources</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#tldr">TL;DR</a></li>
+        <li><a href="#why-we-ran-this-test">Why We Ran This Test</a></li>
+        <li><a href="#the-models">The Two Models</a></li>
+        <li><a href="#test-1-indoor">Test 1: Indoor Capybara</a></li>
+        <li><a href="#test-2-outdoor">Test 2: Outdoor Capybara</a></li>
+        <li><a href="#prompt-adherence">Prompt Adherence</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#scorecard">Final Scorecard</a></li>
+        <li><a href="#verdict">The Verdict</a></li>
+        <li><a href="#when-to-use-grok">When to Use Grok</a></li>
+        <li><a href="#how-to-use">Code Examples</a></li>
+        <li><a href="#related">Related</a></li>
+    </ul>
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>Nano Banana 2 vs Grok for Concept Art: AI Image Generator Showdown</h1>
+        <div class="article-meta">Published March 14, 2026 · Last updated March 14, 2026 · By Bernard Huang</div>
+
+        <div class="article-body">
+
+            <div class="article-hero">
+                <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/hero-grid.jpg" alt="2x2 comparison grid showing Nano Banana 2 vs Grok lofi capybara art — NB2 produces watercolor textures and creative poses while Grok delivers polished but repetitive digital anime" width="1204" height="1204">
+            </div>
+
+            <div class="verdict-box" id="tldr" style="border-color: var(--text); background: linear-gradient(135deg, var(--bg-surface), #faf5ee);">
+                <h3 style="color: var(--text); margin-bottom: 0.5rem;">TL;DR</h3>
+                <p class="dropcap">After testing 8 images across 2 models using identical lofi anime prompts, <strong>Nano Banana 2</strong> (Google Gemini 3.1 Flash) scored <strong>9.0/10</strong> vs Grok's <strong>7.7/10</strong>. NB2 produced genuine artistic range — watercolor textures, creative character poses, and accurate emotional expression. Grok delivered polished digital anime that looked good but repetitive. NB2 costs ~$0.02/image. Grok Pro costs ~$0.07. The only reason to pick Grok: image editing and video generation, which NB2 can't do.</p>
+            </div>
+
+            <p>We build <a href="/">AI-generated travel itineraries</a> at tabiji — and we recently started creating AI-generated concept art for <a href="https://www.instagram.com/tabijiai/">Instagram content</a>. We'd already <a href="/posts/ai-image-generation-comparison/">tested Nano Banana 2 against MiniMax and CogView-4</a> for vintage photography and NB2 dominated. But that was one style. The question: does NB2's edge hold up across completely different aesthetic territory?</p>
+
+            <p>xAI's <strong>Grok</strong> recently launched image generation (and video), so we set up a head-to-head: <strong>Nano Banana 2 vs Grok</strong>, testing lofi anime concept art — a style that's about emotional warmth, texture, and character personality rather than photorealism.</p>
+
+            <p>Same prompt. Two images from each model. Eight total outputs. Here's what happened.</p>
+
+            <h2 id="why-we-ran-this-test">Why We Ran This Test</h2>
+
+            <p>Our <a href="/posts/ai-image-generation-comparison/">previous comparison</a> tested vintage 1970s travel photography across three models. Nano Banana 2 won convincingly — 8.8/10 vs MiniMax's 5.9 and CogView-4's 3.6. But photography is one domain. We wanted to know if NB2's strengths (prompt adherence, artistic variety, emotional accuracy) transfer to a completely different style.</p>
+
+            <p>Lofi anime is the perfect stress test. It's not about photorealism — it's about <em>vibe</em>. The best lofi art has hand-painted textures, a specific color warmth, and characters that convey emotional states through subtle body language. It's the difference between technically correct and emotionally resonant.</p>
+
+            <p>We also wanted to evaluate <strong>Grok</strong> as a newcomer. xAI's image generation API launched recently with competitive pricing and some unique features (image editing, style transfer, video gen). If it could match or beat NB2 on artistic quality, it might earn a spot in our pipeline.</p>
+
+            <h2 id="the-models">The Two Models</h2>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Feature</th><th>Nano Banana 2</th><th>Grok (xAI)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Provider</strong></td><td>Google (Gemini)</td><td>xAI</td></tr>
+                    <tr><td><strong>Model ID</strong></td><td>gemini-3.1-flash-image-preview</td><td>grok-imagine-image / grok-imagine-image-pro</td></tr>
+                    <tr><td><strong>Architecture</strong></td><td>Multimodal LLM (text + image output)</td><td>Dedicated image model (OpenAI-compatible API)</td></tr>
+                    <tr><td><strong>Max Resolution</strong></td><td>Up to 4K</td><td>1024×1024 (standard)</td></tr>
+                    <tr><td><strong>Cost per Image</strong></td><td class="winner">~$0.02</td><td>~$0.02 (standard) / ~$0.07 (pro)</td></tr>
+                    <tr><td><strong>Image Editing</strong></td><td>No</td><td class="winner">Yes (feed reference image + prompt)</td></tr>
+                    <tr><td><strong>Style Transfer</strong></td><td>No</td><td class="winner">Yes</td></tr>
+                    <tr><td><strong>Video Generation</strong></td><td>No (separate Veo 3 model)</td><td class="winner">Yes (grok-imagine-video, 1–15s)</td></tr>
+                    <tr><td><strong>API Style</strong></td><td>Gemini SDK (generate_content)</td><td>OpenAI-compatible REST</td></tr>
+                    <tr><td><strong>Latency</strong></td><td>~8–15 seconds</td><td>~10–20 seconds</td></tr>
+                </tbody>
+            </table></div>
+
+            <p>On paper, Grok has an interesting edge: it's the only model here with built-in image editing, style transfer, and video generation. NB2 is a pure generator — it makes images from text, period. But as we'll see, raw generation quality still matters more than features.</p>
+
+            <h2 id="test-1-indoor">Test 1: Indoor Capybara — The Lofi Studio Test</h2>
+
+            <p><strong>The prompt concept:</strong> A capybara as a lofi girl character — artist painting or sketching in a cozy indoor setting, headphones on, warm lighting, surrounded by plants and books. The classic lofi study-girl setup, but with a capybara.</p>
+
+            <p>We generated two images from each model using the same prompt.</p>
+
+            <div class="comparison-grid two-col">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/nb2-indoor-1.jpg" alt="Nano Banana 2 lofi capybara #1 — sweater-wearing capybara writing in journal with closed eyes, gouache texture, warm emotional lighting, rated 9.4/10" loading="lazy">
+                    <div class="card-label">Nano Banana 2 #1 <span class="score high">9.4/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/nb2-indoor-2.jpg" alt="Nano Banana 2 lofi capybara #2 — ambitious café world-building scene with warm ambient lighting, rated 8.4/10" loading="lazy">
+                    <div class="card-label">Nano Banana 2 #2 <span class="score high">8.4/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/grok-indoor-1.jpg" alt="Grok lofi capybara #1 — competent polished digital anime style, clean but generic execution, rated 8.0/10" loading="lazy">
+                    <div class="card-label">Grok #1 <span class="score mid">8.0/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/grok-indoor-2.jpg" alt="Grok lofi capybara #2 — nearly identical to #1 with minor composition changes, rated 7.8/10" loading="lazy">
+                    <div class="card-label">Grok #2 <span class="score mid">7.8/10</span></div>
+                </div>
+            </div>
+
+            <h3>Nano Banana 2 #1 — 9.4/10</h3>
+
+            <p>This is the image that won the entire comparison. It nails the lofi genre's <em>soul</em>. The capybara wears a chunky knit sweater, eyes gently closed, writing in a journal — not painting, not sketching, but <em>writing</em>. It's an interpretation that adds character. The texture is hand-crafted gouache, warm and imperfect in all the right ways. There's emotional warmth radiating from every detail: the soft lamplight, the plants catching ambient glow, the books stacked with casual domestic comfort.</p>
+
+            <p>This doesn't look AI-generated. It looks like a real illustrator's passion project — the kind of art you'd find on a lofi playlist thumbnail with 50 million views.</p>
+
+            <h3>Nano Banana 2 #2 — 8.4/10</h3>
+
+            <p>The second output went in a completely different direction — ambitious café world-building with more environmental detail. Warm lighting from multiple sources, busy tabletop, architectural depth. It's a more complex scene that demonstrates NB2's range: two images from the same prompt produced genuinely different artistic interpretations. The slight knock: it's maybe too busy. The best lofi art has breathing room, and this one fills every corner.</p>
+
+            <h3>Grok #1 — 8.0/10</h3>
+
+            <p>Competent and safe. Grok produced a clean, polished digital anime capybara — technically well-executed with good lighting and composition. The problem? It looks exactly like what you'd expect from typing "lofi capybara" into any image generator. There's no texture surprise, no creative interpretation, no personality that makes you pause. It's the visual equivalent of a stock photo: professional, generic, forgettable.</p>
+
+            <h3>Grok #2 — 7.8/10</h3>
+
+            <p>And here's the bigger problem: Grok's second output looks almost identical to its first. Same angle, same lighting setup, same character pose, minor variations in background details. When you run the same prompt twice through NB2, you get two different artistic visions. When you run it through Grok, you get the same vision with slightly rearranged furniture.</p>
+
+            <blockquote>This pattern — NB2 producing genuine artistic variety while Grok produces polished clones — repeated in every test we ran.</blockquote>
+
+            <h2 id="test-2-outdoor">Test 2: Outdoor Capybara — The Landscape Test</h2>
+
+            <p><strong>The prompt concept:</strong> A capybara lazing around in a field of grass with mountains in the backdrop, headphones on, eyes closed, at peace — lofi girl vibes but outdoors. We specifically asked for eyes closed and a peaceful, blissful expression.</p>
+
+            <div class="comparison-grid two-col">
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/nb2-outdoor-1.jpg" alt="Nano Banana 2 outdoor capybara #1 — watercolor landscape with eyes closed, winding path to village, poppies in foreground, rated 9/10" loading="lazy">
+                    <div class="card-label">Nano Banana 2 #1 <span class="score high">9/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/nb2-outdoor-2.jpg" alt="Nano Banana 2 outdoor capybara #2 — creative plaid blanket interpretation, capybara leaning back blissfully with hands on belly, rated 9/10" loading="lazy">
+                    <div class="card-label">Nano Banana 2 #2 <span class="score high">9/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/grok-outdoor-1.jpg" alt="Grok outdoor capybara #1 — pretty landscape but capybara has tongue out and eyes aren't closed, rated 7.5/10" loading="lazy">
+                    <div class="card-label">Grok #1 <span class="score mid">7.5/10</span></div>
+                </div>
+                <div class="comparison-card">
+                    <img src="https://img.tabiji.ai/resources/nano-banana-vs-grok/grok-outdoor-2.jpg" alt="Grok outdoor capybara #2 — near-twin of #1 with same tongue-out expression, rated 7.5/10" loading="lazy">
+                    <div class="card-label">Grok #2 <span class="score mid">7.5/10</span></div>
+                </div>
+            </div>
+
+            <h3>Nano Banana 2 #1 — 9/10</h3>
+
+            <p>Watercolor landscape perfection. The capybara's eyes are actually closed — a detail that matters enormously for the "at peace" vibe we requested. There's a winding path leading to a distant village, poppies scattered in the foreground, mountains fading into atmospheric haze. The color palette is dreamy but grounded. This is playlist thumbnail material — the kind of image you'd use for a "3 hours of chill beats to relax to" video.</p>
+
+            <h3>Nano Banana 2 #2 — 9/10</h3>
+
+            <p>The best character work of all eight images. NB2 interpreted "at peace" with a creative twist: the capybara is leaning back on a plaid blanket, hands resting on its belly, wearing an expression of pure bliss. It's a <em>different</em> kind of peaceful than #1 — more playful, more characterful. The plaid blanket is an unprompted creative addition that adds domestic charm. Again: two outputs from the same prompt, two genuinely different artistic visions.</p>
+
+            <h3>Grok #1 — 7.5/10</h3>
+
+            <p>The landscape is pretty. The colors are nice. But look at the capybara: tongue sticking out, eyes that aren't really closed. We asked for "eyes closed, at peace" and got... a cartoon animal making a goofy face. The background is well-rendered, but the character — which is the entire point of the prompt — missed the emotional brief.</p>
+
+            <h3>Grok #2 — 7.5/10</h3>
+
+            <p>Near-identical twin of #1. Same tongue-out expression. Same open-ish eyes. Same angle. Same emotional misread. If you didn't look closely, you might think they were the same image with slightly different cloud arrangements.</p>
+
+            <h2 id="prompt-adherence">The Prompt Adherence Problem</h2>
+
+            <p>This is the most significant finding from our test, and it echoes <a href="/posts/ai-image-generation-comparison/">what we found in the vintage photography comparison</a>: <strong>Nano Banana 2 treats prompts as instructions. Grok treats them as suggestions.</strong></p>
+
+            <p>We specifically asked for "eyes closed" in the outdoor test. NB2 delivered closed eyes in both outputs. Grok delivered open-eyed, tongue-out capybaras in both outputs. This isn't a minor nitpick — "at peace with eyes closed" vs "goofy with tongue out" is a completely different emotional register.</p>
+
+            <p>The pattern extends beyond this specific instruction:</p>
+
+            <ul>
+                <li><strong>Emotional nuance:</strong> NB2 understood and rendered "at peace," "cozy," and "blissful" as distinct emotional states. Grok defaulted to a single "cute anime character" expression regardless of the prompt's emotional specificity.</li>
+                <li><strong>Creative interpretation:</strong> NB2 made creative choices that enhanced the prompt (the journal instead of painting, the plaid blanket, the village in the background). Grok stuck to the most literal, conventional interpretation.</li>
+                <li><strong>Output variety:</strong> NB2's two outputs from each prompt were genuinely different. Grok's were nearly identical. This matters for production — if you need to pick the best from multiple options, variety is essential.</li>
+            </ul>
+
+            <blockquote>If your workflow depends on the model doing what you ask — especially emotional or stylistic nuances — Nano Banana 2 is the only reliable choice between these two.</blockquote>
+
+            <h2 id="pricing">Pricing Comparison</h2>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Cost Factor</th><th>Nano Banana 2</th><th>Grok</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Standard image</strong></td><td class="winner">~$0.02</td><td>~$0.02 (grok-imagine-image)</td></tr>
+                    <tr><td><strong>Pro/high-quality image</strong></td><td class="winner">~$0.02 (same model)</td><td>~$0.07 (grok-imagine-image-pro)</td></tr>
+                    <tr><td><strong>Cost for 8 test images</strong></td><td class="winner">~$0.16</td><td>~$0.56 (using pro)</td></tr>
+                    <tr><td><strong>Max resolution</strong></td><td class="winner">Up to 4K</td><td>1024×1024</td></tr>
+                    <tr><td><strong>Free tier</strong></td><td class="winner">Yes (Gemini API free tier)</td><td>No</td></tr>
+                    <tr><td><strong>Video generation</strong></td><td>Separate (Veo 3, $0.75/sec)</td><td>$0.05/sec (720p max)</td></tr>
+                </tbody>
+            </table></div>
+
+            <p>At the standard tier, both models cost about the same per image. But NB2's standard output quality consistently outperformed Grok's <em>pro</em> output — meaning NB2 delivers better results at 3.5x less cost than Grok Pro. For a production pipeline generating hundreds of images per month, that difference compounds fast.</p>
+
+            <h2 id="scorecard">Final Scorecard</h2>
+
+            <div class="table-wrap"><table class="spec-table">
+                <thead>
+                    <tr><th>Category</th><th>Nano Banana 2</th><th>Grok</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Artistic Quality</strong></td><td class="winner">9.5/10</td><td>7.5/10</td></tr>
+                    <tr><td><strong>Texture &amp; Medium Authenticity</strong></td><td class="winner">9/10</td><td>7/10</td></tr>
+                    <tr><td><strong>Prompt Adherence</strong></td><td class="winner">9.5/10</td><td>6.5/10</td></tr>
+                    <tr><td><strong>Emotional Accuracy</strong></td><td class="winner">9.5/10</td><td>7/10</td></tr>
+                    <tr><td><strong>Output Variety</strong></td><td class="winner">9/10</td><td>5/10</td></tr>
+                    <tr><td><strong>Character Work</strong></td><td class="winner">9/10</td><td>7.5/10</td></tr>
+                    <tr><td><strong>Color &amp; Lighting</strong></td><td class="winner">9/10</td><td>8/10</td></tr>
+                    <tr><td><strong>Composition</strong></td><td class="winner">8.5/10</td><td>8/10</td></tr>
+                    <tr><td><strong>Price-to-Quality</strong></td><td class="winner">10/10</td><td>6/10</td></tr>
+                    <tr style="background: var(--bg-surface);"><td><strong>Overall Average</strong></td><td class="winner"><strong>9.0/10</strong></td><td><strong>7.7/10</strong></td></tr>
+                </tbody>
+            </table></div>
+
+            <h2 id="verdict">The Verdict</h2>
+
+            <div class="verdict-box">
+                <h3>🏆 Winner: Nano Banana 2 (Google Gemini 3.1 Flash Image)</h3>
+                <p>NB2 wins both rounds and it's not particularly close. The gap isn't about technical execution — Grok produces clean, well-rendered images. The gap is about <em>artistry</em>. NB2 generates images that feel like they were made by an illustrator with a specific vision. Grok generates images that feel like they were made by an algorithm that learned what lofi art looks like.</p>
+                <p>The combination of genuine artistic range, emotional accuracy, hand-crafted texture quality, and $0.02/image pricing makes NB2 the obvious choice for anyone doing creative image generation — whether that's lofi anime, vintage photography, or (we suspect) most other artistic styles.</p>
+            </div>
+
+            <div class="verdict-box" style="border-color: var(--text-muted);">
+                <h3>🥈 Runner-Up: Grok (xAI)</h3>
+                <p>Grok isn't bad — a 7.7/10 average means it produces genuinely decent images. The color and lighting work is solid, and the technical execution is clean. But "clean and competent" is a crowded category, and at ~$0.07/image for the pro model, you're paying 3.5x more for noticeably less artistic quality.</p>
+                <p>Where Grok earns its keep is in its <strong>unique capabilities</strong> — image editing, style transfer, and built-in video generation — which we cover below.</p>
+            </div>
+
+            <h2 id="when-to-use-grok">When to Use Grok Instead</h2>
+
+            <p>Despite losing this comparison, Grok has capabilities that NB2 simply doesn't offer:</p>
+
+            <ul>
+                <li><strong>Image editing:</strong> Feed Grok an existing image plus a text prompt, and it can modify the image. Change the background, swap colors, add elements — real image-to-image editing. NB2 is text-to-image only.</li>
+                <li><strong>Style transfer:</strong> Give Grok a reference image and a prompt, and it applies the reference's style to a new scene. This is powerful for maintaining visual consistency across a content series.</li>
+                <li><strong>Video generation:</strong> <code>grok-imagine-video</code> generates 1–15 second clips at $0.05/sec. It also supports video-to-video editing — feeding an existing clip and a modification prompt. The 720p max resolution is a limitation (Instagram boosts 1080p), but the price is competitive: an 8s clip costs $0.40 vs Veo 3's $6.00 (though Veo 3 outputs at much higher quality).</li>
+            </ul>
+
+            <p>If your workflow involves editing existing images, maintaining a consistent visual style across assets, or generating quick video drafts, Grok fills a real gap. For pure text-to-image generation, NB2 is strictly better.</p>
+
+            <h2 id="how-to-use">How to Use These Models (Code Examples)</h2>
+
+            <h3>Nano Banana 2 (Google Gemini 3.1 Flash Image)</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code>import google.generativeai as genai
+
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
+model = genai.GenerativeModel("gemini-3.1-flash-image-preview")
+
+response = model.generate_content(
+    "A capybara as a lofi girl character, wearing a cozy sweater, "
+    "headphones on, eyes gently closed, writing in a journal in a warm "
+    "indoor setting. Plants, books, soft lamplight. Hand-painted gouache "
+    "texture, warm color palette, lofi anime aesthetic.",
+    generation_config=genai.GenerationConfig(
+        response_modalities=["IMAGE", "TEXT"]
+    )
+)
+
+# Save the image
+for part in response.candidates[0].content.parts:
+    if part.inline_data:
+        with open("capybara-lofi.png", "wb") as f:
+            f.write(part.inline_data.data)</code></pre>
+
+            <h3>Grok Image Generation (xAI)</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code># Grok uses an OpenAI-compatible API
+curl -X POST "https://api.x.ai/v1/images/generations" \
+  -H "Authorization: Bearer YOUR_XAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "grok-imagine-image-pro",
+    "prompt": "A capybara as a lofi girl character, wearing a cozy sweater, headphones on, eyes gently closed, writing in a journal in a warm indoor setting. Plants, books, soft lamplight. Hand-painted gouache texture, warm color palette, lofi anime aesthetic.",
+    "n": 1,
+    "response_format": "url"
+  }'</code></pre>
+
+            <h3>Grok Image Editing (xAI)</h3>
+
+            <pre style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.5rem;"><code># Grok's unique feature: image editing with a reference image
+curl -X POST "https://api.x.ai/v1/images/generations" \
+  -H "Authorization: Bearer YOUR_XAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "grok-imagine-image",
+    "prompt": "Change the background to a nighttime scene with stars",
+    "image_url": "https://example.com/your-base-image.jpg",
+    "n": 1,
+    "response_format": "url"
+  }'</code></pre>
+
+            <p>For production use, we recommend starting with <a href="https://ai.google.dev/">Google AI Studio</a> (free tier includes Gemini image generation) for NB2, and the <a href="https://docs.x.ai/docs/image-generation">xAI API docs</a> for Grok.</p>
+
+            <h2 id="related">Related Resources</h2>
+
+            <ul>
+                <li><a href="/posts/ai-image-generation-comparison/">AI Image Generation Compared: Nano Banana 2 vs MiniMax vs CogView-4</a> — our original test using vintage travel photography</li>
+                <li><a href="/posts/veo3-vs-hailuo-minimax/">AI Video Generation Compared: Veo 3 vs MiniMax vs CogVideoX</a> — our companion test of video models</li>
+                <li><a href="/posts/ai-music-generation-comparison/">AI Music Generation Compared</a> — testing music models for Reel soundtracks</li>
+                <li><a href="https://docs.x.ai/docs/image-generation">Grok Image Generation Documentation</a> — xAI's official API docs</li>
+                <li><a href="/posts/">All Posts</a> — more tech comparisons and guides</li>
+            </ul>
+
+            <hr style="border: none; border-top: 1px solid var(--border); margin: 3rem 0;">
+
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem;">All images in this comparison were generated from identical prompts on the same day (March 14, 2026). No post-processing was applied beyond format conversion for web. The images shown are direct outputs from each model's API.</p>
+
+        </div>
+    </div>
+</div>
+</div>
+
+    <div style="max-width:860px;margin:0 auto 2rem;padding:0 2rem;">
+        <div style="background:var(--warm-cream,#F5F0E8);border-left:4px solid var(--terracotta,#1a1a1a);border-radius:10px;padding:1.5rem 2rem;">
+        </div>
+    </div>
+
+    <footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+
+    <script>
+    function closeMobileToc() {
+        var el = document.getElementById('toc-mobile');
+        if (el) el.classList.remove('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var sections = document.querySelectorAll('h2[id]');
+        var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+        var activeLabel = document.querySelector('.toc-active-label');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(function(a) { a.classList.remove('active'); });
+                    var matches = document.querySelectorAll('a[href="#' + entry.target.id + '"]');
+                    matches.forEach(function(a) { a.classList.add('active'); });
+                    if (activeLabel && matches.length > 0) {
+                        activeLabel.textContent = '📑 ' + matches[0].textContent;
+                    }
+                }
+            });
+        }, { rootMargin: '-120px 0px -70% 0px' });
+        sections.forEach(function(s) { observer.observe(s); });
+    });
+    </script>
+</body>
+</html>
