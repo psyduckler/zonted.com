@@ -135,7 +135,7 @@
         .verdict-box h3 { color: var(--green); margin-bottom: 0.75rem; font-size: 1.1rem; }
         .verdict-box p { margin-bottom: 0.75rem; }
         .verdict-box p:last-child { margin-bottom: 0; }
-        .article-hero { position: relative; margin: -0.5rem -2rem 2rem; border-radius: 6px; overflow: hidden; min-height: 280px; display: flex; align-items: flex-end; background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-light) 100%); }
+        .article-hero { position: relative; margin: -0.5rem -2rem 2rem; border-radius: 6px; overflow: hidden; min-height: 280px; display: flex; align-items: flex-end; background: var(--text); color: var(--bg); }
         .article-hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
         .article-hero .hero-overlay { position: relative; z-index: 2; padding: 2rem; width: 100%; }
         .hero-label { display: inline-block; background: var(--accent); color: white; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.3rem 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; }
@@ -170,14 +170,14 @@
         .stat-card .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem; font-weight: 500; }
         .stat-card.green .stat-number { color: var(--green); }
         .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 2rem; }
-        .tier-card { background: var(--bg); border-radius: 6px; padding: 1.25rem; border: 2px solid var(--sand); }
+        .tier-card { background: var(--bg); border-radius: 6px; padding: 1.25rem; border: 2px solid var(--border); }
         .tier-card h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.5rem; }
         .tier-card .tier-name { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
         .tier-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
         .tier-card.primary { border-color: var(--text); }
         .tier-card.fallback { border-color: var(--green); }
         .tier-card.budget { border-color: var(--text-muted); }
-        .cta-box { background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-light) 100%); border-radius: 6px; padding: 2.5rem; text-align: center; margin: 3rem 0; }
+        .cta-box { background: var(--text); color: var(--bg); border-radius: 6px; padding: 2.5rem; text-align: center; margin: 3rem 0; }
         .cta-box h3 { color: white; font-size: 1.4rem; margin-bottom: 0.75rem; }
         .cta-box p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 1.25rem; max-width: 480px; margin-left: auto; margin-right: auto; }
         .cta-box a { display: inline-block; background: var(--accent); color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.15s; }
@@ -261,7 +261,7 @@
 
             <p>We run AI in production every day at tabiji — generating itineraries, creating content, processing data. When Claude goes down, we can't just wait. So we benchmarked our fallback. The results surprised us: the backup model was faster, essentially the same quality, and 62× cheaper. Here's what we learned about building an AI stack that doesn't break.</p>
 
-            <div class="verdict-box" style="border-color: var(--accent); background: linear-gradient(135deg, var(--warm-cream), #faf5ee);">
+            <div class="verdict-box" style="border-color: var(--accent); background: var(--bg-surface);">
                 <h3 style="color: var(--accent); margin-bottom: 0.5rem;">TL;DR — The Data</h3>
                 <p>We ran MiniMax M2.7 and Claude Opus 4.6 head-to-head on identical content generation tasks. MiniMax was <strong>25% faster</strong> (416s vs 559s for 5 pages), quality was <strong>tied</strong> (both 100/100 structural accuracy), and MiniMax cost <strong>$0.004/page vs $0.27/page</strong> — a 62× difference. Having a capable fallback isn't just cost optimization. It's operational insurance.</p>
             </div>

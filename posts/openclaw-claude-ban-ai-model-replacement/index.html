@@ -63,7 +63,7 @@
         .article-container h2 { font-size: 1.4rem; color: var(--text); margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.01em; }
         .article-container h3 { font-size: 1.15rem; color: var(--text); margin-top: 1.75rem; margin-bottom: 0.75rem; }
         .article-meta { font-family:'Inter',system-ui,sans-serif; font-size:0.9rem; color:var(--text-muted); margin-bottom:2rem; }
-        .article-meta .tag { background: var(--sand); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .article-meta .tag { background: var(--bg-raised); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
         .article-meta .date { color: var(--text-muted); font-size: 0.9rem; }
         .article-body { font-size: 1.05rem; color: var(--text); }
         .article-body p { margin-bottom: 1.5rem; }
@@ -73,8 +73,8 @@
         .article-body ul, .article-body ol { margin-bottom: 1.5rem; padding-left: 1.75rem; }
         .article-body li { margin-bottom: 0.5rem; }
         .article-body blockquote { border-left: 4px solid var(--accent); padding-left: 1.25rem; margin: 1.5rem 0; color: var(--text-muted); font-style: italic; }
-        .article-body pre { background: var(--text); color: var(--warm-cream); padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.5rem 0; font-size: 0.9rem; line-height: 1.6; }
-        .article-body code { background: var(--sand); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.88em; color: var(--text); }
+        .article-body pre { background: var(--bg-surface); color: var(--text); padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.5rem 0; font-size: 0.88rem; line-height: 1.6; border: 1px solid var(--border); font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace; }
+        .article-body code { background: var(--bg-raised); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.88em; color: var(--text); font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace; }
         .article-body pre code { background: none; padding: 0; color: inherit; }
         .article-image { margin: 2rem 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
         .article-image img { width: 100%; display: block; }
@@ -87,7 +87,7 @@
         .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
         .comparison-table tr:nth-child(even) td { background: var(--bg-surface); }
         .comparison-table tr:last-child td { border-bottom: none; }
-        .verdict { background: linear-gradient(135deg, var(--indigo), var(--indigo-light)); color: white; border-radius: 6px; padding: 1.5rem; margin: 2rem 0; }
+        .verdict { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 6px; padding: 1.5rem; margin: 2rem 0; }
         .verdict h4 { margin-bottom: 0.5rem; font-size: 1rem; opacity: 0.85; }
         .verdict p { margin-bottom: 0; font-size: 1.05rem; }
         .takeaway { background: var(--green); color: white; border-radius: 6px; padding: 1.5rem; margin: 2rem 0; }
