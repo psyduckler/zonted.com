@@ -206,9 +206,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
             </div>
         </div>
     </nav>
-<div style="max-width: 660px;margin:1.5rem auto 0;padding:0 2rem;">
-    <a href="/posts/" style="color:var(--text-muted);text-decoration:none;font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
-</div>
+
 
 <div class="toc-mobile-wrapper">
 <div class="toc-mobile-sticky" id="toc-mobile">
@@ -244,9 +242,17 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
             <li><a href="#where-we-go-from-here">Where We Go From Here</a></li>
             <li><a href="#what-this-means-for-ai-content">What This Means for AI-Generated Content</a></li>
     </ul>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
 </aside>
 <div class="article-content">
 <article class="article-container">
+        <div style="margin-bottom:1.5rem;padding-top:1rem;">
+        <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+    </div>
         <h1>AI-Generated Instagram Reels, YouTube Shorts, and X Posts: What Actually Works (Real Data from 48 Hours)</h1>
         <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
             <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">

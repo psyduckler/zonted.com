@@ -359,7 +359,7 @@ def generate_feed(articles):
 
 
 # ---------------------------------------------------------------------------
-# Next/prev + share links injection
+# Cleanup: strip nav links and fix back link alignment
 # ---------------------------------------------------------------------------
 
 def strip_nav_links(articles):
@@ -376,6 +376,103 @@ def strip_nav_links(articles):
                 '\n',
                 content,
                 flags=re.DOTALL
+            )
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+
+    return count
+
+
+def fix_back_links(articles):
+    """Move standalone back-link div into article-container so it aligns with body text."""
+    count = 0
+    for article in articles:
+        filepath = article['filepath']
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Match the standalone back-link div (various style patterns)
+        back_link_pattern = re.compile(
+            r'<div style="max-width:\s*660px;[^"]*">\s*'
+            r'<a [^>]*>&larr; Back to Posts</a>\s*'
+            r'</div>',
+            re.DOTALL
+        )
+
+        if not back_link_pattern.search(content):
+            continue
+
+        # Remove the standalone back-link div
+        content = back_link_pattern.sub('', content)
+
+        # Insert back link inside article-container, right before the <h1>
+        back_link_html = (
+            '<div style="margin-bottom:1.5rem;padding-top:1rem;">\n'
+            '        <a href="/posts/" style="font-family:\'Inter\',-apple-system,system-ui,sans-serif;'
+            'color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">'
+            '&larr; Back to Posts</a>\n'
+            '    </div>\n        '
+        )
+
+        content = re.sub(
+            r'(<article class="article-container">\s*)',
+            r'\1' + back_link_html,
+            content
+        )
+
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        count += 1
+
+    return count
+
+
+def inject_copy_link(articles):
+    """Add a copy-link button below the TOC sidebar list."""
+    COPY_LINK_MARKER = '<!-- COPY_LINK -->'
+    COPY_LINK_HTML = (
+        '<!-- COPY_LINK -->\n'
+        '    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">\n'
+        '        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector(\'span\');t.textContent=\'Copied!\';setTimeout(()=>t.textContent=\'Copy Link\',1500)})" '
+        'style="display:inline-flex;align-items:center;gap:0.4rem;font-family:\'Inter\',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" '
+        'onmouseover="this.style.color=\'var(--text)\';this.style.borderColor=\'var(--text)\'" '
+        'onmouseout="this.style.color=\'var(--text-muted)\';this.style.borderColor=\'var(--border)\'">'
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+        '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>'
+        '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'
+        '</svg>'
+        '<span>Copy Link</span></button>\n'
+        '    </div>\n'
+        '    <!-- /COPY_LINK -->'
+    )
+
+    count = 0
+    for article in articles:
+        filepath = article['filepath']
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Skip if already injected
+        if COPY_LINK_MARKER in content:
+            # Replace existing
+            content = re.sub(
+                r'<!-- COPY_LINK -->.*?<!-- /COPY_LINK -->',
+                COPY_LINK_HTML,
+                content,
+                flags=re.DOTALL
+            )
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+            continue
+
+        # Insert before </aside> (end of toc-sidebar)
+        if '</aside>' in content:
+            content = content.replace(
+                '</aside>',
+                COPY_LINK_HTML + '\n</aside>',
+                1
             )
             with open(filepath, 'w', encoding='utf-8') as f:
                 f.write(content)
@@ -406,6 +503,12 @@ def main():
 
     n = strip_nav_links(articles)
     print(f"Stripped nav links from {n} articles")
+
+    n = fix_back_links(articles)
+    print(f"Fixed back link alignment in {n} articles")
+
+    n = inject_copy_link(articles)
+    print(f"Injected copy-link button into {n} articles")
 
 
 if __name__ == '__main__':
