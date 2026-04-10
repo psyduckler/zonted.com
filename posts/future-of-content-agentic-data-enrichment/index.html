@@ -100,7 +100,6 @@
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
@@ -122,7 +121,6 @@
             <li><a href="#the-agent-doesnt-want-your-blog-post">The Agent Doesn't Want Your Blog Post</a></li>
             <li><a href="#apis-are-the-new-content-format">APIs Are the New Content Format</a></li>
             <li><a href="#what-agent-builders-should-invest-in">What Agent Builders Should Invest In</a></li>
-            <li><a href="#what-brands-should-do-about-this">What Brands Should Do About This</a></li>
             <li><a href="#the-transaction-layer-is-coming">The Transaction Layer Is Coming</a></li>
         </ul>
     </div>
@@ -137,7 +135,6 @@
             <li><a href="#the-agent-doesnt-want-your-blog-post">The Agent Doesn't Want Your Blog Post</a></li>
             <li><a href="#apis-are-the-new-content-format">APIs Are the New Content Format</a></li>
             <li><a href="#what-agent-builders-should-invest-in">What Agent Builders Should Invest In</a></li>
-            <li><a href="#what-brands-should-do-about-this">What Brands Should Do About This</a></li>
             <li><a href="#the-transaction-layer-is-coming">The Transaction Layer Is Coming</a></li>
     </ul>
 </aside>
@@ -157,8 +154,6 @@
 
         <p>A large language model already "knows" that Paris has good croissants and that Tokyo's trains run on time. That information is baked into the weights. When an agent searches the web mid-task, it's not looking for general knowledge — it's looking for the specific, fresh, structured data that its training data doesn't contain. A current rating. A live price. A verified phone number. An opening time that's accurate as of this week.</p>
 
-        <p>This distinction matters enormously, and almost nobody is building for it.</p>
-
         <h2 id="the-agent-doesnt-want-your-blog-post">The Agent Doesn't Want Your Blog Post</h2>
 
         <p>Think about how a travel agent — a human one — used to work. They didn't read Lonely Planet cover to cover before booking your trip. They already knew the destinations. What they needed was a supplier database: real-time availability, current pricing, verified contact details. The general knowledge was table stakes. The operational data was the product.</p>
@@ -173,6 +168,8 @@
         </ul>
 
         <p>And it needs this data in a format it can parse programmatically — not buried in paragraph four of a blog post between an anecdote about the author's study abroad semester and an affiliate link.</p>
+
+        <p>We learned this building <a href="https://tabiji.ai">tabiji.ai</a>. Our early travel pages were 2,000-word articles. They ranked well in search. But when AI agents started citing travel recommendations, they weren't pulling from our prose — they were pulling from the Google Places data we'd embedded as structured JSON. The ratings, the hours, the addresses. The 2,000 words of editorial were invisible to agents. The 50 lines of structured data were everything.</p>
 
         <h2 id="apis-are-the-new-content-format">APIs Are the New Content Format</h2>
 
@@ -195,17 +192,13 @@
             <li><strong>Verification loops.</strong> Agents hallucinate. The fix isn't a better model — it's a verification layer. Cross-reference the model's output against structured data sources. If Claude says a restaurant is highly rated, confirm it against the Places API before surfacing it to a user.</li>
         </ol>
 
-        <h2 id="what-brands-should-do-about-this">What Brands Should Do About This</h2>
-
-        <p>If you're on the other side — if you're a brand that wants AI agents to accurately represent your product — the playbook is straightforward: <strong>make your information exhaustively available in structured formats.</strong></p>
-
-        <p>This means API endpoints with your current product catalog, pricing, specifications, and use cases. It means machine-readable documentation that an agent can parse without guessing. It means keeping that data current, because an agent that pulls stale information about your product is worse than an agent that says nothing at all.</p>
-
-        <p>The brands that win in an agentic world won't be the ones with the best SEO. They'll be the ones whose data is easiest for agents to consume and most reliable when consumed.</p>
-
         <h2 id="the-transaction-layer-is-coming">The Transaction Layer Is Coming</h2>
 
-        <p>Right now, most agent-to-data interactions are free — agents scrape the web, call free API tiers, or rely on training data. That won't last. As agents become the primary way people interact with information, the economics will shift toward <strong>agentic transactions</strong>: agents paying for enrichment data on a per-query basis.</p>
+        <p>Right now, most agent-to-data interactions are free — agents scrape the web, call free API tiers, or rely on training data. That won't last.</p>
+
+        <p>We already see the early signals. Our Places API costs at tabiji.ai are $115/month — real money for verified, current data that agents need and can't hallucinate. That's not a subscription to a publication. It's a transaction fee for data accuracy. The publisher who owns verified restaurant hours for Barcelona has something no language model can generate from training data.</p>
+
+        <p>As agents become the primary way people interact with information, the economics will shift toward <strong>agentic transactions</strong>: agents paying for enrichment data on a per-query basis.</p>
 
         <p>This is the business model that replaces advertising. Instead of selling attention (a human eyeball on a page), you sell enrichment (a verified data point in an agent's response). The unit economics are different, the distribution is different, and the competitive dynamics are completely different.</p>
 

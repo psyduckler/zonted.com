@@ -23,70 +23,6 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Best AI Video Generator for Instagram Reels (2026)"}]}
     </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "What is the best AI video generator for Instagram Reels?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "For production use at scale, Hailuo 2.3 (MiniMax) offers the best balance of quality and cost at ~$0.27/clip. For maximum cinematic quality regardless of budget, Google's Veo 3 is the best at ~$4.50/clip. CogVideoX-3 is the cheapest at $0.20/clip with native portrait support. We tested all 5 models — Veo 3, Hailuo, Sora 2, CogVideoX-3, and Grok Imagine — in production."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How much does AI video generation cost per clip?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Veo 3 costs ~$4.50–6.00 per 6–8 second clip ($0.75/second). Sora 2 (OpenAI) costs ~$0.80 per 8-second clip ($0.10/second). Grok Imagine costs ~$0.40 per 8-second clip. Hailuo (MiniMax) costs ~$0.27 per clip via image-to-video mode. CogVideoX-3 (Z.AI) costs $0.20 per video flat rate. At 5–7 Reels per day, Veo 3 would cost ~$2,430/month while Hailuo costs ~$146/month."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Does Hailuo (MiniMax) support portrait 9:16 video for Reels?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Not natively in text-to-video mode — Hailuo T2V always outputs 1366×768 landscape. The workaround is to use image-to-video (I2V) mode with a portrait input image. The output is 1080×1934 (slightly off from true 9:16), requiring an FFmpeg crop to 1080×1920 for Instagram boost eligibility."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Can Veo 3 generate audio with video?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes, Veo 3 generates built-in ambient audio and sound effects (birds chirping, wind, traffic). Sora 2 (OpenAI) and Grok Imagine also generate built-in audio automatically. CogVideoX-3 has built-in AI SFX but at lower quality. Hailuo has no video audio but MiniMax offers a separate Music 2.5+ API for instrumental background tracks."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Which AI video generator has the best quality?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Google's Veo 3 has the highest visual quality — scoring 10/10 for cinematic look and motion realism. It produces video that's nearly indistinguishable from real drone footage. Hailuo 2.3 scores 7/10 (good but clearly AI), and CogVideoX-3 scores 6/10 (decent but sometimes stiff). However, on phone screens scrolled quickly, the quality gap matters less than cost."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How long does AI video generation take?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Grok Imagine is the fastest at ~31 seconds per clip. Hailuo 2.3 takes ~90 seconds. Veo 3 takes ~2–4 minutes. Sora 2 takes ~120 seconds. CogVideoX-3 takes ~3.5 minutes. For multi-clip Reels (5–10 clips), Grok can finish a batch in under 5 minutes while Veo 3 would take 30+ minutes."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Is OpenAI Sora 2 worth it for Instagram Reels?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Sora 2 costs $0.80 per 8-second clip ($0.10/second), making it the most expensive budget option. It offers native 9:16 portrait at 720p, built-in audio generation, and durations up to 16-20 seconds. However, MiniMax Hailuo is 3x cheaper and Grok is 2x cheaper at similar 720p quality. Sora 2 Pro offers 1080p output but at even higher cost. We'd recommend it mainly for teams already using the OpenAI API who want decent quality with built-in audio and don't want to integrate another provider."
-                }
-            }
-        ]
-    }
-    </script>
     <style>
         :root {
     --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
@@ -337,7 +273,6 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
@@ -363,7 +298,6 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
             <li><a href="#capybara-test">The Capybara Test</a></li>
             <li><a href="#published-examples">Published Examples</a></li>
             <li><a href="#cost-at-scale">Cost at Scale</a></li>
-            <li><a href="#technical-reference">Technical Reference</a></li>
             <li><a href="#verdict">The Verdict</a></li>
             <li><a href="#what-we-use">What We Actually Use</a></li>
         </ul>
@@ -382,7 +316,6 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
         <li><a href="#capybara-test">Capybara Test</a></li>
         <li><a href="#published-examples">Published Examples</a></li>
         <li><a href="#cost-at-scale">Cost at Scale</a></li>
-        <li><a href="#technical-reference">Tech Reference</a></li>
         <li><a href="#verdict">The Verdict</a></li>
         <li><a href="#what-we-use">What We Use</a></li>
     </ul>
@@ -655,86 +588,6 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
             </table></div>
 
             <p>Veo 3 at our volume: <strong>$2,430/month</strong>. Hailuo: $146. That's not a rounding error — it's the difference between a viable content operation and an unsustainable one.</p>
-
-            <h2 id="technical-reference">Technical Reference</h2>
-
-            <p>API details, dimensions, audio specifics, and output format — the appendix for developers integrating these models.</p>
-
-            <h3>API &amp; Authentication</h3>
-
-            <div class="table-wrap"><table class="spec-table">
-                <thead>
-                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>API style</strong></td><td>Gemini SDK</td><td>REST</td><td>OpenAI SDK</td><td>REST</td><td>REST</td></tr>
-                    <tr><td><strong>Auth</strong></td><td>API key</td><td>Bearer token</td><td>API key</td><td>API key</td><td>Bearer token</td></tr>
-                    <tr><td><strong>Pattern</strong></td><td>Submit → poll op</td><td>Submit → poll → retrieve file</td><td>POST → poll GET</td><td>POST → poll</td><td>Submit → poll → download</td></tr>
-                    <tr><td><strong>SDK quality</strong></td><td class="winner">Good (google-genai)</td><td>No SDK</td><td class="winner">Good (openai)</td><td>xAI SDK</td><td>Minimal</td></tr>
-                    <tr><td><strong>Error msgs</strong></td><td class="winner">Clear, English</td><td>Mixed</td><td class="winner">Clear</td><td>Clear</td><td>Sometimes Chinese</td></tr>
-                    <tr><td><strong>Rate limits</strong></td><td>Aggressive</td><td class="winner">Generous</td><td>Moderate</td><td>Moderate</td><td>Moderate</td></tr>
-                </tbody>
-            </table></div>
-
-            <h3>API gotchas we discovered</h3>
-            <ul>
-                <li><strong>Veo 3:</strong> <code>person_generation</code> must be <code>"allow_adult"</code> (not <code>"allow_all"</code>) for I2V — undocumented. The <code>generate_audio</code> param only works on Vertex, not Gemini SDK. Hit RESOURCE_EXHAUSTED? Fall back to <code>veo-3.0-fast-generate-001</code> — separate quota pool.</li>
-                <li><strong>Hailuo:</strong> File download endpoint is <code>/v1/files/retrieve?file_id=X</code> → returns JSON with <code>download_url</code> pointing to CDN. Does <em>not</em> return video bytes directly. <code>/v1/files/retrieve_content</code> doesn't exist.</li>
-                <li><strong>Sora 2:</strong> Duration must be passed as a <strong>string</strong>, not integer. POST to <code>/v1/videos</code>, poll at <code>GET /v1/videos/{id}</code>, download at <code>GET /v1/videos/{id}/content</code>. Input image dimensions must exactly match requested <code>size</code>.</li>
-                <li><strong>Grok Imagine:</strong> Poll endpoint is <code>/v1/videos/{request_id}</code> — NOT <code>/v1/videos/generations/{id}</code>. 202 = processing, 200 with <code>status: "done"</code> includes <code>video.url</code>. Cost tracked via <code>usage.cost_in_usd_ticks</code>.</li>
-                <li><strong>CogVideoX-3:</strong> Error messages sometimes return in Chinese. SDK is thinner than competitors — use raw REST.</li>
-            </ul>
-
-            <h3>Dimensions &amp; Portrait Support</h3>
-
-            <div class="table-wrap"><table class="spec-table">
-                <thead>
-                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Native 9:16</strong></td><td class="winner">Yes</td><td>❌</td><td class="winner">Yes</td><td class="winner">Yes</td><td class="winner">Yes</td></tr>
-                    <tr><td><strong>T2V output</strong></td><td>1080×1920</td><td>1366×768 landscape</td><td>720×1280</td><td>720p portrait</td><td>1080×1920</td></tr>
-                    <tr><td><strong>I2V output</strong></td><td>Inherits input</td><td>1080×1934*</td><td>Inherits input</td><td>720p</td><td>1080×1920</td></tr>
-                    <tr><td><strong>Post-processing</strong></td><td class="winner">None</td><td>FFmpeg crop</td><td class="winner">None</td><td class="winner">None</td><td class="winner">None</td></tr>
-                    <tr><td><strong>Aspect ratios</strong></td><td>9:16, 16:9, 1:1</td><td>Landscape only (T2V)</td><td>9:16, 16:9, 1:1</td><td class="winner">7 options</td><td>9:16, 16:9</td></tr>
-                </tbody>
-            </table></div>
-
-            <p><em>*Hailuo I2V outputs 1080×1934. The 14px difference matters for Instagram boost eligibility. Normalize with: <code>scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920</code></em></p>
-
-            <h3>Audio</h3>
-
-            <div class="table-wrap"><table class="spec-table">
-                <thead>
-                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Built-in audio</strong></td><td class="winner">Ambient + SFX</td><td>None</td><td class="winner">Yes</td><td class="winner">Yes</td><td>AI SFX</td></tr>
-                    <tr><td><strong>Quality</strong></td><td class="winner">Excellent</td><td>N/A</td><td>Good</td><td>Good</td><td>Decent</td></tr>
-                    <tr><td><strong>Disable option</strong></td><td>Vertex only</td><td>N/A</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-                    <tr><td><strong>Separate music API</strong></td><td>No</td><td class="winner">Music 2.5+</td><td>No</td><td>No</td><td>No</td></tr>
-                </tbody>
-            </table></div>
-
-            <p>We overlay background music on every Reel regardless, so built-in audio matters less than you'd think. Hailuo's Music 2.5+ API is actually more useful — custom instrumental tracks with mood prompts, mixed at 30% volume with fade in/out.</p>
-
-            <p><strong>Key gotcha:</strong> MiniMax Music 2.0 and 2.5 don't properly support <code>is_instrumental</code> — always use <strong>Music 2.5+</strong> for instrumental tracks. We learned this when our cron started producing budget Reels with random vocals over street food scenes.</p>
-
-            <h3>Output Format</h3>
-
-            <div class="table-wrap"><table class="spec-table">
-                <thead>
-                    <tr><th>Detail</th><th>Veo 3</th><th>Hailuo 2.3</th><th>Sora 2</th><th>Grok Imagine</th><th>CogVideoX-3</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Codec / container</strong></td><td>H.264 MP4</td><td>H.264 MP4</td><td>H.264 MP4</td><td>H.264 MP4</td><td>H.264 MP4</td></tr>
-                    <tr><td><strong>Typical file size (6–8s)</strong></td><td>3–5 MB</td><td class="winner">2–3 MB</td><td>3–5 MB</td><td>9.2 MB</td><td>4–5 MB</td></tr>
-                    <tr><td><strong>Audio track</strong></td><td>Yes</td><td>None</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-                    <tr><td><strong>Instagram-ready out of box</strong></td><td class="winner">Yes</td><td>No (needs crop)</td><td class="winner">Yes</td><td class="winner">Yes</td><td class="winner">Yes</td></tr>
-                </tbody>
-            </table></div>
-
-            <p>All five output standard H.264 MP4 that Instagram accepts without transcoding. The only practical difference: Hailuo clips need an FFmpeg normalization step. Our post-processing pipeline uses FFmpeg regardless, so the extra crop adds ~0.5 seconds per clip.</p>
 
             <h2 id="verdict">The Verdict &amp; Recommendations</h2>
 

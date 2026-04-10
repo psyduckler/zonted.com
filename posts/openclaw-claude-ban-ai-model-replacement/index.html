@@ -131,7 +131,6 @@
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
@@ -154,7 +153,6 @@
             <li><a href="#but-then-we-tried-claude-code">But Then We Tried Claude Code</a></li>
             <li><a href="#the-hybrid-stack-we-landed-on">The Hybrid Stack We Landed On</a></li>
             <li><a href="#what-the-openclaw-ban-taught-us">What the OpenClaw Ban Taught Us</a></li>
-            <li><a href="#faqs">FAQs</a></li>
         </ul>
     </div>
 </div>
@@ -170,7 +168,6 @@
             <li><a href="#but-then-we-tried-claude-code">But Then We Tried Claude Code</a></li>
             <li><a href="#the-hybrid-stack-we-landed-on">The Hybrid Stack We Landed On</a></li>
             <li><a href="#what-the-openclaw-ban-taught-us">What the OpenClaw Ban Taught Us</a></li>
-            <li><a href="#faqs">FAQs</a></li>
     </ul>
 </aside>
 <div class="article-content">
@@ -323,19 +320,6 @@
 
 <p>If you got hit by the OpenClaw ban, the scramble is real. But the silver lining is real too: most of the "replacement" models we tested were good enough, and a few were genuinely better for specific tasks. The constraint forced an <a href="/posts/ai-resilience-planning/">architecture review</a> that most teams put off until they have no choice.</p>
 
-<h2 id="faqs">FAQs</h2>
-
-<h3>Why not just use GPT-5.4 as the replacement?</h3>
-<p>GPT-5.4 is excellent — no question. But at our production scale (thousands of API calls per day), the cost difference between GPT-5.4 and GLM-5.1 is substantial. And in blind tests, our editors couldn't consistently prefer GPT-5.4 output over GLM-5.1 for travel content. When the cheaper option is equally good, cost efficiency wins.</p>
-
-<h3>Is --dangerously-skip-permissions safe?</h3>
-<p>It's safe if you understand what you're doing. Running it on your local dev machine with a contained project directory is reasonable. Running it on a shared production server without sandboxing is not. Treat it like <code>sudo</code> — powerful when used intentionally, dangerous when used carelessly.</p>
-
-<h3>Can't you just use the Claude desktop app with bypass enabled?</h3>
-<p>We tried. The desktop app's permission bypass is unreliable — it still interrupts frequently, sometimes mid-task. The terminal approach with <code>--dangerously-skip-permissions</code> is the only way to get truly uninterrupted autonomous operation. The desktop app is fine for interactive use; it's not designed for automated workflows.</p>
-
-<h3>Will you go back to Claude in OpenClaw if the ban lifts?</h3>
-<p>Possibly — but not as our default. GLM 5.1 works well and costs less. Claude would become a specialized tool for specific tasks, same as Claude Code. The days of single-provider dependency are over for us, and that's a healthier place to be.</p>
 
         </div>
     </div>
@@ -346,7 +330,7 @@
 
 <!-- NAV_LINKS_START -->
 <div style="max-width:660px;margin:3rem auto 0;padding:0 2rem;text-align:center;">
-    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fzonted.com%2Fposts%2Fopenclaw-claude-ban-ai-model-replacement%2F&text=The%20Day%20Claude%20Got%20Banned%3A%20How%20We%20Rebuilt%20Our%20AI%20Stack%20in%2048%20Hours" target="_blank" rel="noopener" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;color:var(--text-dim);text-decoration:none;">Share on X &rarr;</a>
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fzonted.com%2Fposts%2Fopenclaw-claude-ban-ai-model-replacement%2F&text=The%20Day%20Claude%20Got%20Banned%20on%20OpenClaw%3A%20How%20We%20Rebuilt%20Our%20AI%20Stack%20in%2048%20Hours" target="_blank" rel="noopener" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;color:var(--text-dim);text-decoration:none;">Share on X &rarr;</a>
 </div>
 <div style="max-width:660px;margin:2rem auto;padding:0 2rem;display:flex;justify-content:space-between;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">
     <a href="/posts/what-is-ai-reward-hacking/" style="color:var(--text-muted);text-decoration:none;">&larr; What Is AI Reward Hacking? (And How It Silently...</a>

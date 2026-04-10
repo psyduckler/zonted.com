@@ -40,46 +40,6 @@
     }
     </script>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Should I invest time in AI memory persistence systems?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Probably not yet. Context windows are expanding rapidly — from 4K tokens in 2023 to 1M+ in 2026. The memory persistence system you spend weeks building may become unnecessary when the next model update simply remembers everything natively. Build the simplest thing that works today and let infrastructure catch up."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is token optimization worth the engineering effort?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In most cases, no. Token costs have dropped roughly 240x in two years. Engineering time spent shaving tokens is engineering time not spent building features users care about. The exception is if you're operating at massive scale (millions of API calls per day) — but most teams optimizing tokens are nowhere near that threshold."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What should AI builders focus on instead of infrastructure optimization?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Focus on the problem you're solving, not the plumbing. Build the product, ship it with the simplest possible AI integration, learn from real users, and iterate on the experience. The infrastructure layer is being commoditized rapidly — models get cheaper, faster, and more capable every quarter. Your competitive advantage is in what you build on top, not how cleverly you manage the tokens underneath."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How is AI infrastructure optimization like overclocking a computer?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Overclocking was a fascinating hobby in the 1990s and 2000s — you could squeeze meaningful performance gains from hardware by tweaking clock speeds, voltages, and cooling. But Moore's Law made those gains irrelevant within months. The next generation of chips was faster than anything you could overclock to. AI infrastructure optimization is the same dynamic: you can spend weeks building clever prompt caching, token compression, or memory management — and then a model update makes it all unnecessary."
-          }
-        }
-      ]
-    }
-    </script>
 
     
     <style>
@@ -166,7 +126,6 @@
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
@@ -185,7 +144,6 @@
     </button>
     <div class="toc-mobile-dropdown">
         <ul>
-            <li><a href="#key-takeaways">Key Takeaways</a></li>
             <li><a href="#overclocking">The Overclocking Analogy</a></li>
             <li><a href="#memory">The Memory Persistence Trap</a></li>
             <li><a href="#tokens">The Token Optimization Mirage</a></li>
@@ -194,7 +152,6 @@
             <li><a href="#build-ugly">Build Ugly, Ship Fast</a></li>
             <li><a href="#exception">The Exceptions (They're Real, but Rare)</a></li>
             <li><a href="#lesson">The Lesson from Every Technology Shift</a></li>
-            <li><a href="#faq">Frequently Asked Questions</a></li>
         </ul>
     </div>
 </div>
@@ -205,7 +162,6 @@
 <aside class="toc-sidebar">
     <h2>Contents</h2>
     <ul>
-            <li><a href="#key-takeaways">Key Takeaways</a></li>
             <li><a href="#overclocking">The Overclocking Analogy</a></li>
             <li><a href="#memory">The Memory Persistence Trap</a></li>
             <li><a href="#tokens">The Token Optimization Mirage</a></li>
@@ -214,7 +170,6 @@
             <li><a href="#build-ugly">Build Ugly, Ship Fast</a></li>
             <li><a href="#exception">The Exceptions (They're Real, but Rare)</a></li>
             <li><a href="#lesson">The Lesson from Every Technology Shift</a></li>
-            <li><a href="#faq">Frequently Asked Questions</a></li>
     </ul>
 </aside>
 <div class="article-content">
@@ -233,16 +188,6 @@
         <p class="dropcap article-lede">There's a genre of AI work that feels productive but isn't. You spend a week building a memory persistence layer. You burn three days optimizing token usage. You architect an elaborate RAG pipeline with vector databases and reranking. You feel like you're doing serious engineering. And you are — you're just solving the wrong problems.</p>
 
         <p>Here's the uncomfortable truth: most AI infrastructure optimization in 2026 is the equivalent of learning to overclock your Pentium in 1999. It's technically impressive, genuinely interesting, and almost entirely pointless — because the next generation of hardware is going to make your overclock look like a rounding error.</p>
-
-        <div class="key-takeaways" id="key-takeaways">
-            <h2 id="key-takeaways">Key Takeaways</h2>
-            <ul>
-                <li>Models are improving faster than your local optimizations can matter. What takes clever engineering today will be a default capability tomorrow.</li>
-                <li>Token costs have dropped ~240x in two years. Time spent shaving tokens is almost always better spent building features.</li>
-                <li>Context windows went from 4K to 1M+ tokens in three years. Your memory persistence system may become unnecessary with the next model update.</li>
-                <li>The competitive advantage is in <em>what</em> you build, not how cleverly you manage the plumbing underneath.</li>
-            </ul>
-        </div>
 
         <h2 id="overclocking">The Overclocking Analogy</h2>
 
@@ -336,30 +281,6 @@
 
         <blockquote>The builders who win aren't the ones with the cleverest plumbing. They're the ones who figured out what to build while everyone else was still optimizing.</blockquote>
 
-        <h2 id="faq">Frequently Asked Questions</h2>
-
-        <div class="faq-section">
-            <div class="faq-item">
-                <h3>Should I invest time in AI memory persistence systems?</h3>
-                <p>Probably not yet. Context windows are expanding rapidly — from 4K tokens in 2023 to 1M+ in 2026. The memory persistence system you spend weeks building may become unnecessary when the next model update simply remembers everything natively. Build the simplest thing that works today and let infrastructure catch up.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Is token optimization worth the engineering effort?</h3>
-                <p>In most cases, no. Token costs have dropped roughly 240x in two years. Engineering time spent shaving tokens is engineering time not spent building features users care about. The exception is if you're operating at massive scale (millions of API calls per day) — but most teams optimizing tokens are nowhere near that threshold.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What should AI builders focus on instead of infrastructure optimization?</h3>
-                <p>Focus on the problem you're solving, not the plumbing. Build the product, ship it with the simplest possible AI integration, learn from real users, and iterate on the experience. The infrastructure layer is being commoditized rapidly — models get cheaper, faster, and more capable every quarter. Your competitive advantage is in what you build on top, not how cleverly you manage the tokens underneath.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How is AI infrastructure optimization like overclocking a computer?</h3>
-                <p>Overclocking was a fascinating hobby — you could squeeze meaningful performance gains from hardware by tweaking clock speeds, voltages, and cooling. But Moore's Law made those gains irrelevant within months. The next generation of chips was faster than anything you could overclock to. AI infrastructure optimization is the same dynamic: you spend weeks building clever prompt caching or memory management, and then a model update makes it all unnecessary.</p>
-            </div>
-            <div class="faq-item">
-                <h3>When does AI infrastructure optimization actually make sense?</h3>
-                <p>Three scenarios: (1) genuine scale — millions of daily API calls where a 10% cost reduction saves real money; (2) infrastructure is your product — you're building tools for other AI developers; (3) regulatory requirements that demand specific data handling guarantees. If none of these apply, you're likely better off building product instead of plumbing.</p>
-            </div>
-        </div>
 
     </div>
 </article>

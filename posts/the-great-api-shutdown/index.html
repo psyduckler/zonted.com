@@ -41,56 +41,8 @@
     }
     </script>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Why are platforms shutting down their APIs?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Three forces are converging: (1) AI training data wars — platforms realized their free data pipelines were feeding the models that now compete with them; (2) monetization pressure — especially from pre-IPO companies that needed to show revenue growth from developer ecosystems; and (3) competitive consolidation — locking down the API means locking users into the first-party experience. It's rarely one reason, usually all three at once."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happened to Reddit's API?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In June 2023, Reddit changed API pricing to $0.24 per 1,000 calls. The developer behind the popular Apollo app calculated this would cost him $20 million per year to sustain — making the app economically impossible. Reddit was explicit that controlling AI training use was a motivation, and later signed a $60M/year deal with Google for training data access."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is Imgur's API still available?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In practice, no. As of 2025, the API registration page (https://api.imgur.com/oauth2/addclient) silently redirects to the homepage. New developers cannot obtain a Client ID. Imgur still maintains API documentation as if the API is available, but registration is effectively closed with no public announcement explaining the change."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What did Twitter/X do to its API?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In February 2023, Twitter eliminated its free API tier entirely. The new pricing: $100/month for Basic (very limited access) and $5,000/month for Pro. The previously free tier had allowed up to 500,000 tweet reads per month. The change killed thousands of bots, research tools, academic projects, and community utilities that had been built on the free tier."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What can developers do as APIs close?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The practical responses are: (1) diversify data sources aggressively — never build a core product feature on a single third-party API; (2) budget for API costs as a real line item from day one; (3) explore open alternatives (Mastodon instead of Twitter, OpenStreetMap instead of Google Maps); (4) consider building your own data pipelines where feasible; and (5) stay lean on API-dependent features in your core product loop."
-          }
-        }
-      ]
-    }
-    </script>
 
-    
+
     <style>
         :root {
             --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
@@ -180,7 +132,6 @@
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
@@ -205,7 +156,6 @@
             <li><a href="#developers">What This Means for Developers and Startups</a></li>
             <li><a href="#open-web">What This Means for the Open Web</a></li>
             <li><a href="#tabiji">The Tabiji Perspective</a></li>
-            <li><a href="#faq">Frequently Asked Questions</a></li>
         </ul>
     </div>
 </div>
@@ -222,7 +172,6 @@
             <li><a href="#developers">What This Means for Developers and Startups</a></li>
             <li><a href="#open-web">What This Means for the Open Web</a></li>
             <li><a href="#tabiji">The Tabiji Perspective</a></li>
-            <li><a href="#faq">Frequently Asked Questions</a></li>
     </ul>
 </aside>
 <div class="article-content">
@@ -364,38 +313,8 @@
 
         <h2 id="tabiji">The Tabiji Perspective</h2>
 
-        <p>We built tabiji.ai's API because we believe structured travel data should be accessible to developers building useful things. 1,428 JSON files covering 706 destinations, 3,755 curated places, and 324 itineraries — all free, no registration required, no usage limits.</p>
+        <p>We built <a href="https://tabiji.ai/api/">tabiji.ai's API</a> as an open, free alternative — no registration, no usage limits. The more developers build on structured travel data, the more valuable it becomes. That's the opposite bet from the platforms locking down.</p>
 
-        <p>We're aware of the irony: writing about the death of free APIs while running one. But the decision isn't naive. We've watched this industry long enough to understand that the platforms locking down their data aren't doing it from a position of confidence — they're doing it from a position of fear. Fear that the data they've accumulated will be used to build something that competes with them.</p>
-
-        <p>We don't have that fear, because the data is the product. An agent using our API to plan a better itinerary is what we're here for — not a threat to it. The more developers build on top of structured travel data, the more valuable structured travel data becomes.</p>
-
-        <p>That's the bet we're making. <a href="https://tabiji.ai/api/">Explore the Tabiji API →</a></p>
-
-        <h2 id="faq">Frequently Asked Questions</h2>
-
-        <div class="faq-section">
-            <div class="faq-item">
-                <h3>Why are platforms shutting down their APIs?</h3>
-                <p>Three forces are converging: (1) AI training data wars — platforms realized their free data pipelines were feeding the models that now compete with them; (2) monetization pressure — especially from pre-IPO companies that needed to show revenue growth from developer ecosystems; and (3) competitive consolidation — locking down the API means locking users into the first-party experience. It's rarely one reason, usually all three at once.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What happened to Reddit's API?</h3>
-                <p>In June 2023, Reddit changed API pricing to $0.24 per 1,000 calls. The developer behind the popular Apollo app calculated this would cost him $20 million per year to sustain — making the app economically impossible. Reddit was explicit that controlling AI training use was a motivation, and later signed a $60M/year deal with Google for training data access.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Is Imgur's API still available?</h3>
-                <p>In practice, no. As of 2025, the API registration page silently redirects to the homepage. New developers cannot obtain a Client ID. Imgur still maintains API documentation as if the API is available, but registration is effectively closed with no public announcement explaining the change.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What did Twitter/X do to its API?</h3>
-                <p>In February 2023, Twitter eliminated its free API tier entirely. The new pricing: $100/month for Basic (very limited access) and $5,000/month for Pro. The previously free tier had allowed up to 500,000 tweet reads per month. The change killed thousands of bots, research tools, academic projects, and community utilities that had been built on the free tier.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What can developers do as APIs close?</h3>
-                <p>The practical responses: (1) diversify data sources — never build a core product feature on a single third-party API; (2) budget for API costs from day one; (3) explore open alternatives (Mastodon, OpenStreetMap, Lemmy); (4) build your own data pipelines where feasible; and (5) stay lean on API-dependent features in your core product loop.</p>
-            </div>
-        </div>
 
     </div>
 </article>

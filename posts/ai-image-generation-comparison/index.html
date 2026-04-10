@@ -23,62 +23,6 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"AI Image Generation Comparison"}]}
     </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Which AI image generator follows prompts best?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nano Banana 2 (Google Gemini 3.1 Flash Image) is the most prompt-adherent AI image generator we tested. In our 26-image benchmark across 5 models, it was the only one that consistently followed stylistic constraints — including producing true black-and-white when asked, rendering correct Japanese kanji, and adding technically accurate Kodachrome film border markings."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the best AI image generator for travel photography in 2026?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It depends on the scene type. For crowd scenes, landmarks, and anything with text or signage, Nano Banana 2 is the clear winner (9/10 in our crowd benchmark). For intimate portraits and close-up people shots, MiniMax image-01 produces the most convincing human faces (8/10). Grok Aurora is the best all-rounder, finishing top-2 in both categories. GPT/DALL-E 3 finished last."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can AI generate realistic vintage film photography?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes — Nano Banana 2 can generate images that convincingly mimic 1970s Kodachrome film, including accurate film grain, warm color science, scan artifacts, and even film rebate markings. The key is detailed prompt engineering: specifying exact film stock characteristics, era-appropriate composition, and physical scan artifacts rather than generic vintage filter instructions."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much does AI image generation cost per image?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI image generation costs range from $0.02 to $0.08 per image in 2026. Nano Banana 2 (Gemini) and CogView-4 cost ~$0.02/image. MiniMax image-01 costs ~$0.04/image. GPT/DALL-E 3 costs ~$0.04–$0.08/image. Grok Aurora pricing is ~$0.07/image."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is prompt engineering more important than which AI model you choose?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. In our testing, the gap between a lazy prompt and a detailed one was larger than the gap between models. A detailed V2 prompt specifying Kodachrome color science, scan artifacts, and era-appropriate composition unlocked dramatically better output — but only on models that actually follow instructions. Nano Banana 2 rewarded detailed prompts the most."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Which AI model handles Japanese text and kanji best?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nano Banana 2 is the best at rendering Japanese text (kanji). In our Fushimi Inari test, it produced legible and correct kanji. MiniMax rendered blurry, unreadable text. CogView-4 produced garbled nonsense characters. GPT/DALL-E 3 also garbled sign text in our Verona test. For any content involving CJK text or signage, Nano Banana 2 is the only reliable option."
-          }
-        }
-      ]
-    }
-    </script>
     <style>
         :root {
     --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
@@ -219,7 +163,6 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>

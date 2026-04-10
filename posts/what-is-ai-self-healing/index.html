@@ -36,78 +36,6 @@
       ]
     }
     </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is AI self-healing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI self-healing is when an AI agent autonomously detects a failure in a system it manages, diagnoses the root cause, implements a permanent fix (not just a retry), verifies the fix works, and resumes normal operation — all without human intervention. It goes beyond simple error handling or auto-retry logic because the agent makes actual code or configuration changes to prevent the failure from recurring."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How is AI self-healing different from auto-retry or auto-scaling?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Auto-retry just runs the same failed operation again hoping for a different result. Auto-scaling adds more resources when demand spikes. Neither understands WHY something broke. AI self-healing involves an intelligent agent that reads error logs, traces root causes, and makes permanent fixes — like moving a config file from a volatile directory to a permanent one, or updating code to use relative paths instead of hardcoded ones. It's the difference between restarting your car when it stalls vs diagnosing and fixing the fuel pump."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can AI agents really fix their own code?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, and it's already happening in production. In our documented case, an AI agent (running Claude Opus 4.6 via OpenClaw) detected a Python script crash, identified the root cause (a template file stored in a volatile /tmp directory), moved the file to a permanent location, updated the Python script to use path-relative references, committed the fix to git, rebuilt the failed page, and verified the system was healthy — all at 4 AM with no human involvement."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What tools or platforms support AI self-healing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI self-healing requires an agent framework that gives AI models access to monitoring, file systems, git, and deployment pipelines. Platforms like OpenClaw provide this by connecting AI models (Claude, GPT, Gemini) to system tools — shell access, file editing, git operations, and messaging channels for alerts. The key requirement is giving the agent enough access to both observe failures and act on them."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is AI self-healing safe for production systems?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It can be, with proper guardrails. Start with low-risk systems where a bad fix is easily reversible (content generation pipelines, static site builds). Use git for all changes so every fix is auditable and rollback-able. Set boundaries on what the agent can modify — config files and scripts yes, database schemas probably not. Implement escalation rules: if the agent's confidence is low, or the fix involves high-risk components, it should alert a human instead of acting autonomously."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do you prevent an AI agent from making things worse?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Three safeguards: First, version control everything — the agent commits fixes to git, so any bad change can be reverted instantly. Second, implement a verification loop — after applying a fix, the agent must test that the system actually works before declaring success. Third, define escalation boundaries — the agent should know which systems it can safely modify and which require human approval. A cascading bad fix in a content pipeline is annoying; a cascading bad fix in a payment system is catastrophic. Scope the agent's authority accordingly."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are the limitations of AI self-healing today?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Current limitations include: agents can misdiagnose novel failure modes they haven't encountered before; self-healing takes time (minutes to hours, not milliseconds like circuit breakers); agents need broad system access which creates security considerations; and complex multi-service failures with cascading dependencies can exceed an agent's diagnostic ability. AI self-healing works best for well-scoped systems where the agent has deep context — a single codebase, a defined deployment pipeline, clear success criteria."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does AI self-healing relate to DevOps and SRE?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI self-healing is essentially an autonomous SRE. Traditional SRE practices — monitoring, alerting, runbooks, incident response — are all things an AI agent can execute. The difference is speed and availability: the agent is always on, responds in minutes instead of waiting for a human to wake up, and can execute runbook steps programmatically. Think of it as the next evolution: from manual ops → scripted automation → infrastructure-as-code → AI-as-SRE. The agent doesn't replace the SRE team — it handles the 3 AM pages so they don't have to."
-          }
-        }
-      ]
-    }
-    </script>
     
     <style>
         :root {
@@ -239,7 +167,6 @@
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
@@ -263,9 +190,7 @@
             <li><a href="#five-requirements">The 5 Requirements for AI Self-Healing</a></li>
             <li><a href="#spectrum">Self-Healing vs Self-Patching vs Auto-Recovery</a></li>
             <li><a href="#how-to-build">How to Build Self-Healing AI Systems</a></li>
-            <li><a href="#future">The Future: Self-Healing as a Service</a></li>
             <li><a href="#risks">Risks and Guardrails</a></li>
-            <li><a href="#faq">Frequently Asked Questions</a></li>
             <li><a href="#related">Related Resources</a></li>
         </ul>
     </div>
@@ -281,9 +206,7 @@
         <li><a href="#five-requirements">The 5 Requirements for AI Self-Healing</a></li>
         <li><a href="#spectrum">Self-Healing vs Self-Patching vs Auto-Recovery</a></li>
         <li><a href="#how-to-build">How to Build Self-Healing AI Systems</a></li>
-        <li><a href="#future">The Future: Self-Healing as a Service</a></li>
         <li><a href="#risks">Risks and Guardrails</a></li>
-        <li><a href="#faq">Frequently Asked Questions</a></li>
         <li><a href="#related">Related Resources</a></li>
     </ul>
 </aside>
@@ -510,87 +433,16 @@
 
             <p>Don't begin with self-healing on your payment pipeline. Start with content generation, static site builds, report generation — systems where a bad fix is easily reversible and the blast radius is small. Build trust (and debugging experience) before expanding to critical systems.</p>
 
-            <h2 id="future">The Future: Self-Healing as a Service</h2>
-
-            <p>The <code>/tmp</code> incident was a single agent handling a single failure. But the architecture scales to something more systematic — a dedicated error-handling service that manages failures across your entire stack.</p>
-
-            <h3>The architecture</h3>
-
-            <p>Imagine a dedicated error-handling agent that receives <em>all</em> failure signals from your infrastructure. Its job is singular: keep things running.</p>
-
-            <ol>
-                <li><strong>Triage.</strong> Every incoming failure gets categorized: severity (P0 = production down, P3 = cosmetic), type (missing file, API timeout, schema error), and scope (single page, entire pipeline, cross-system).</li>
-                <li><strong>Known-fix lookup.</strong> If the agent has seen this error pattern before, it applies the known fix immediately. "FileNotFoundError in /tmp" → move file to permanent location. No diagnosis needed. Instant resolution.</li>
-                <li><strong>Novel failure diagnosis.</strong> For unknown errors, the agent investigates: reads logs, traces code paths, forms hypotheses. If it reaches a fix with high confidence, it implements it. If confidence is low, it escalates to a human with a detailed analysis of what it found.</li>
-                <li><strong>Post-mortem automation.</strong> After every self-heal event, the agent logs exactly what happened — the failure, the diagnosis, the fix, and the verification. This feeds back into the known-fix database, making future resolutions faster.</li>
-            </ol>
-
-            <p>Over time, the system gets better. Every incident it handles becomes a pattern it can recognize instantly. The first time it sees a specific failure type, it might take an hour to diagnose and fix. The second time? Seconds.</p>
-
-            <h3>Compound value</h3>
-
-            <p>Here's the math that matters: every self-healed failure is one less 3 AM page to a human engineer. One less morning spent writing a post-mortem instead of building features. One less context switch that breaks someone's flow for the rest of the day.</p>
-
-            <p>And unlike human operators, AI agents don't get tired, don't have bad days, and don't go on vacation. The coverage is continuous. The response time is consistent. The fixes are documented and version-controlled.</p>
-
             <h2 id="risks">Risks and Guardrails</h2>
 
-            <p>We're bullish on self-healing AI, but we're not naive about the risks. An agent with write access to production systems is powerful — and power without guardrails is dangerous.</p>
-
-            <h3>The cascading fix problem</h3>
-
-            <p>The biggest risk: the agent misdiagnoses a failure and implements a "fix" that makes things worse. A bad fix can cascade — breaking more systems, triggering more failures, causing the agent to make more "fixes" in a death spiral. This is the AI equivalent of a surgeon operating on the wrong organ.</p>
-
-            <p><strong>Mitigation:</strong> Use git for all changes. Every fix is a commit that can be instantly reverted. Implement a change rate limiter — if the agent is making more than N fixes per hour, something is wrong and it should pause and escalate.</p>
-
-            <h3>Human oversight on high-risk changes</h3>
-
-            <p>Not all systems should allow autonomous fixes. Define a clear boundary: what can the agent fix on its own, and what requires human approval? Content generation scripts? Auto-fix. Database migration files? Escalate. The rule of thumb: if a bad fix could lose data or affect revenue, require human sign-off.</p>
-
-            <h3>Rollback capability</h3>
-
-            <p>Every self-healing fix must be reversible. This is why git is non-negotiable — every change the agent makes is a commit with a clear message. If a fix turns out to be wrong, you can <code>git revert</code> instantly. Without rollback capability, self-healing is a gamble.</p>
-
-            <h3>When to escalate instead of fix</h3>
-
-            <p>A good self-healing agent knows its limits. It should escalate when:</p>
+            <p>An agent with write access to production systems is powerful — and power without guardrails is dangerous. Three things matter most:</p>
 
             <ul>
-                <li>The failure involves systems it doesn't manage (third-party APIs, external services)</li>
-                <li>The root cause is ambiguous and multiple fixes are plausible</li>
-                <li>The fix would modify high-risk components (auth, payments, data stores)</li>
-                <li>The agent has made a fix for this same issue before and it recurred — suggesting a deeper systemic problem</li>
+                <li><strong>Version-control everything.</strong> Every fix the agent makes should be a git commit that can be instantly reverted. Implement a change rate limiter — if the agent is making more than N fixes per hour, something is wrong and it should pause and escalate.</li>
+                <li><strong>Define clear boundaries.</strong> Content generation scripts? Auto-fix. Database migrations or payment logic? Escalate to a human. If a bad fix could lose data or affect revenue, require human sign-off.</li>
+                <li><strong>Know when to escalate.</strong> A good self-healing agent knows its limits — ambiguous root causes, third-party service failures, or high-risk components should all trigger human notification instead of autonomous action.</li>
             </ul>
 
-            <p>Escalation isn't failure. It's the agent doing the responsible thing — surfacing a problem it can't safely solve so a human can make the call.</p>
-
-            <h2 id="faq">Frequently Asked Questions</h2>
-
-            <h3>What is AI self-healing?</h3>
-            <p>AI self-healing is when an AI agent autonomously detects a failure in a system it manages, diagnoses the root cause, implements a permanent fix (not just a retry), verifies the fix works, and resumes normal operation — all without human intervention. It goes beyond simple error handling or auto-retry logic because the agent makes actual code or configuration changes to prevent the failure from recurring.</p>
-
-            <h3>How is AI self-healing different from auto-retry or auto-scaling?</h3>
-            <p>Auto-retry just runs the same failed operation again hoping for a different result. Auto-scaling adds more resources when demand spikes. Neither understands <em>why</em> something broke. AI self-healing involves an intelligent agent that reads error logs, traces root causes, and makes permanent fixes — like moving a config file from a volatile directory to a permanent one, or updating code to use relative paths instead of hardcoded ones. It's the difference between restarting your car when it stalls vs diagnosing and fixing the fuel pump.</p>
-
-            <h3>Can AI agents really fix their own code?</h3>
-            <p>Yes, and it's already happening in production. In our documented case, an AI agent (running Claude Opus 4.6 via OpenClaw) detected a Python script crash, identified the root cause (a template file stored in a volatile <code>/tmp</code> directory), moved the file to a permanent location, updated the Python script to use path-relative references, committed the fix to git (<code>b605c306</code>), rebuilt the failed page, and verified the system was healthy — all at 4 AM with no human involvement.</p>
-
-            <h3>What tools or platforms support AI self-healing?</h3>
-            <p>AI self-healing requires an agent framework that gives AI models access to monitoring, file systems, git, and deployment pipelines. Platforms like <a href="https://openclaw.com" target="_blank" rel="noopener">OpenClaw</a> provide this by connecting AI models (Claude, GPT, Gemini) to system tools — shell access, file editing, git operations, and messaging channels for alerts. The key requirement is giving the agent enough access to both observe failures and act on them.</p>
-
-            <h3>Is AI self-healing safe for production systems?</h3>
-            <p>It can be, with proper guardrails. Start with low-risk systems where a bad fix is easily reversible (content generation pipelines, static site builds). Use git for all changes so every fix is auditable and rollback-able. Set boundaries on what the agent can modify — config files and scripts yes, database schemas probably not. Implement escalation rules: if the agent's confidence is low, or the fix involves high-risk components, it should alert a human instead of acting autonomously.</p>
-
-            <h3>How do you prevent an AI agent from making things worse?</h3>
-            <p>Three safeguards: First, version control everything — the agent commits fixes to git, so any bad change can be reverted instantly. Second, implement a verification loop — after applying a fix, the agent must test that the system actually works before declaring success. Third, define escalation boundaries — the agent should know which systems it can safely modify and which require human approval. A cascading bad fix in a content pipeline is annoying; a cascading bad fix in a payment system is catastrophic. Scope the agent's authority accordingly.</p>
-
-            <h3>What are the limitations of AI self-healing today?</h3>
-            <p>Current limitations include: agents can misdiagnose novel failure modes they haven't encountered before; self-healing takes time (minutes to hours, not milliseconds like circuit breakers); agents need broad system access which creates security considerations; and complex multi-service failures with cascading dependencies can exceed an agent's diagnostic ability. AI self-healing works best for well-scoped systems where the agent has deep context — a single codebase, a defined deployment pipeline, clear success criteria.</p>
-
-            <h3>How does AI self-healing relate to DevOps and SRE?</h3>
-            <p>AI self-healing is essentially an autonomous SRE. Traditional SRE practices — monitoring, alerting, runbooks, incident response — are all things an AI agent can execute. The difference is speed and availability: the agent is always on, responds in minutes instead of waiting for a human to wake up, and can execute runbook steps programmatically. Think of it as the next evolution: from manual ops → scripted automation → infrastructure-as-code → AI-as-SRE. The agent doesn't replace the SRE team — it handles the 3 AM pages so they don't have to.</p>
-
-            
 
             <h2 id="related">Related Resources</h2>
 

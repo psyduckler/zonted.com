@@ -22,70 +22,6 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Suno vs MiniMax Music for Instagram Reels"}]}
     </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "What is the best AI music generator for Instagram Reels?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "For automated production at scale, MiniMax Music 2.5+ is the best choice — it has a proper API, costs ~$0.01/track, and supports true instrumental mode. For standalone music quality (piano covers, original compositions), Suno AI produces significantly better output but requires a reverse-engineered API wrapper since no official API exists."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Does Suno AI have a public API?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "No. As of March 2026, Suno has no public API. We use a local Next.js wrapper that reverse-engineers Suno's internal API via Clerk authentication. The auth flow is: browser cookie → Clerk session → JWT token → API calls. It works but requires maintaining a $10/month Pro subscription and periodically refreshing the auth cookie."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Can Gemini score and analyze AI-generated music?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes — Gemini 2.5 Flash can analyze uploaded audio files and score them on criteria like emotional impact, tone quality, and arrangement sophistication. However, it's too generous: in our tests scoring 10 piano covers, all clips scored 8-9/10 with no meaningful differentiation. You need adversarial or comparative scoring prompts for useful results."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What are Suno's model names?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Suno uses bird codenames, not version numbers. chirp-crow = v5 (best quality), chirp-bluejay = v4.5+, chirp-auk = v4.5, chirp-v4 = v4. Using 'chirp-v5' or 'v5' returns a 403 error — you must use the bird names."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How much does AI music generation cost?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "MiniMax Music API costs approximately $0.01 per track. Suno Pro costs $10/month for 2,500 credits (250 generations = 500 clips), which works out to $0.02 per clip. At scale, both are essentially free compared to music licensing."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Does MiniMax Music support instrumental-only generation?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Only Music 2.5+ properly supports instrumental mode via the is_instrumental: true parameter. Music 2.0 requires lyrics (use 'la la la' as placeholder). Music 2.5 claims to support is_instrumental but returns an error — it's broken."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Can Veo 3 generate music for videos?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Veo 3 generates ambient audio and sound effects (birds, wind, traffic) but not composed music. CogVideoX-3 has AI SFX but the quality is poor. MiniMax Hailuo generates no audio at all. Use a dedicated music model like MiniMax Music 2.5+ or Suno for background tracks."
-                }
-            }
-        ]
-    }
-    </script>
     <style>
         :root {
     --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
@@ -203,7 +139,6 @@ footer p{color:var(--text-muted);font-size:0.85rem}
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>

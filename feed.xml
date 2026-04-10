@@ -24,7 +24,7 @@
       <guid isPermaLink="true">https://zonted.com/reviews/makeugc/</guid>
     </item>
     <item>
-      <title>The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours</title>
+      <title>The Day Claude Got Banned on OpenClaw: How We Rebuilt Our AI Stack in 48 Hours</title>
       <link>https://zonted.com/posts/openclaw-claude-ban-ai-model-replacement/</link>
       <description>OpenClaw banned Claude and Anthropic on Saturday. The community scrambled. We tested GPT 5.4, GLM 5.1, MiniMax M2.7, MIMO, and Qwen 3.6 — and landed on a hybrid setup that actually works better than before.</description>
       <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
@@ -174,14 +174,6 @@
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
       <author>bernard@zonted.com (Bernard Huang)</author>
       <guid isPermaLink="true">https://zonted.com/posts/ai-reels-what-actually-works/</guid>
-    </item>
-    <item>
-      <title>Top Short-Form Video Services &amp; Platforms in 2026 — TikTok vs Instagram Reels vs YouTube Shorts</title>
-      <link>https://zonted.com/posts/best-short-form-video-services/</link>
-      <description>Compare the top short-form video platforms in 2026 — TikTok, Instagram Reels, YouTube Shorts, Snapchat Spotlight, and emerging apps. Plus: AI video production services that create content for all of them.</description>
-      <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-      <author>bernard@zonted.com (Bernard Huang)</author>
-      <guid isPermaLink="true">https://zonted.com/posts/best-short-form-video-services/</guid>
     </item>
   </channel>
 </rss>

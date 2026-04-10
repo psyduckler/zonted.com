@@ -31,63 +31,6 @@
       ]
     }
     </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How much downtime should I expect from major AI providers?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Based on Anthropic's own status page, Claude API had 99.04% uptime over 90 days — that's roughly 14 hours of downtime per quarter. Claude.ai was worse at 98.95% (~22 hours). Even 99.9% uptime means ~2 hours of downtime per quarter. If your production pipeline depends on a single provider, plan for outages measured in hours, not minutes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can cheaper AI models actually replace premium ones like Claude Opus?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "For many production tasks, yes. We benchmarked MiniMax M2.7 against Claude Opus 4.6 on identical content generation tasks — both scored 100/100 on structural accuracy, produced real venue names, and delivered comparable description depth. MiniMax was 25% faster and 62x cheaper ($0.004 vs $0.27 per page). The quality gap for structured content generation is essentially zero."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's the best way to evaluate fallback AI models?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Run identical tasks on both your primary and candidate fallback models, then score objectively. We run the same content generation prompts on multiple models and compare: structural accuracy, factual correctness (real venue names vs hallucinated ones), output speed, and cost per task. Automate this as a recurring benchmark — model quality changes with updates."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How many AI models should a production stack include?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "At minimum, two: a primary and a fallback from a different provider. Ideally three: a primary model for complex/critical tasks, a fallback model with comparable quality from a different provider, and a budget model for high-volume cost-sensitive work. We run Claude Opus for complex reasoning, MiniMax M2.7 for content generation, and Gemini for image generation."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is 99% uptime good enough for AI-dependent operations?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. 99% uptime means ~22 hours of downtime per quarter — nearly a full day. For context, that's roughly 3.6 days per year your AI-dependent workflows would be offline. If you're running content generation, customer support, or any revenue-generating pipeline on AI, you need either 99.99% uptime (which no AI provider currently guarantees) or a multi-provider fallback strategy."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do you handle automatic failover between AI models?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Implement a model router that detects failures (HTTP 500s, timeouts, rate limits) and automatically retries with your fallback model. Key design patterns: set aggressive timeouts (30s for content generation), implement circuit breakers that switch providers after 2-3 consecutive failures, and ensure your prompts are model-agnostic enough to work across providers. Most orchestration frameworks (LangChain, LiteLLM) support this natively."
-          }
-        }
-      ]
-    }
-    </script>
-    
     <style>
         :root {
             --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
@@ -223,7 +166,6 @@
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
@@ -247,7 +189,6 @@
             <li><a href="#benchmark">Our Benchmark: MiniMax M2.7 vs Claude Opus 4.6</a></li>
             <li><a href="#resilient-stack">Building a Resilient AI Stack</a></li>
             <li><a href="#our-stack">What We Actually Run</a></li>
-            <li><a href="#faq">Frequently Asked Questions</a></li>
             <li><a href="#related">Related Resources</a></li>
         </ul>
     </div>
@@ -263,7 +204,6 @@
         <li><a href="#benchmark">Our Benchmark: MiniMax M2.7 vs Claude Opus 4.6</a></li>
         <li><a href="#resilient-stack">Building a Resilient AI Stack</a></li>
         <li><a href="#our-stack">What We Actually Run</a></li>
-        <li><a href="#faq">Frequently Asked Questions</a></li>
         <li><a href="#related">Related Resources</a></li>
     </ul>
 </aside>
@@ -451,26 +391,6 @@
             <p>The key insight: this isn't about finding one "best" model. It's about matching models to tasks and ensuring no single provider failure takes down the whole operation. When <a href="/posts/openclaw-claude-ban-ai-model-replacement/">Claude went down</a> for 4 hours last month, our content pipeline didn't even notice — MiniMax handled it. When MiniMax had a brief API hiccup, Claude picked up the slack.</p>
 
             <p><strong>Resilience isn't a feature you add. It's an architecture you design from the start.</strong></p>
-
-            <h2 id="faq">Frequently Asked Questions</h2>
-
-            <h3>How much downtime should I expect from major AI providers?</h3>
-            <p>Based on Anthropic's own status page, Claude API had 99.04% uptime over 90 days — that's roughly 14 hours of downtime per quarter. Claude.ai was worse at 98.95% (~22 hours). Even 99.9% uptime means ~2 hours of downtime per quarter. If your production pipeline depends on a single provider, plan for outages measured in hours, not minutes.</p>
-
-            <h3>Can cheaper AI models actually replace premium ones like Claude Opus?</h3>
-            <p>For many production tasks, yes. We benchmarked MiniMax M2.7 against Claude Opus 4.6 on identical content generation tasks — both scored 100/100 on structural accuracy, produced real venue names, and delivered comparable description depth. MiniMax was 25% faster and 62× cheaper ($0.004 vs $0.27 per page). The quality gap for structured content generation is essentially zero. For complex reasoning and multi-step analysis, premium models still have a meaningful edge.</p>
-
-            <h3>What's the best way to evaluate fallback AI models?</h3>
-            <p>Run identical tasks on both your primary and candidate fallback models, then score objectively. Use real production workflows, not toy examples. We run the same content generation prompts on multiple models and compare: structural accuracy, factual correctness (real venue names vs hallucinated ones), output speed, and cost per task. Automate this as a recurring benchmark — model quality changes with updates.</p>
-
-            <h3>How many AI models should a production stack include?</h3>
-            <p>At minimum, two: a primary and a fallback from a different provider. Ideally three: a primary model for complex/critical tasks, a fallback model with comparable quality from a different provider, and a budget model for high-volume cost-sensitive work. We run Claude Opus for complex reasoning, MiniMax M2.7 for content generation, and Gemini for image generation. Each serves a purpose.</p>
-
-            <h3>Is 99% uptime good enough for AI-dependent operations?</h3>
-            <p>No. 99% uptime means ~22 hours of downtime per quarter — nearly a full day. For context, that's roughly 3.6 days per year your AI-dependent workflows would be offline. If you're running content generation, customer support, or any revenue-generating pipeline on AI, you need either 99.99% uptime (which no AI provider currently guarantees) or a multi-provider fallback strategy.</p>
-
-            <h3>How do you handle automatic failover between AI models?</h3>
-            <p>Implement a model router that detects failures (HTTP 500s, timeouts, rate limits) and automatically retries with your fallback model. Key design patterns: set aggressive timeouts (30s for content generation), implement circuit breakers that switch providers after 2–3 consecutive failures, and ensure your prompts are model-agnostic enough to work across providers. Most orchestration frameworks (LangChain, LiteLLM) support this natively.</p>
 
             <h2 id="related">Related Resources</h2>
 
