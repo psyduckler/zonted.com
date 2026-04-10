@@ -12,7 +12,6 @@ import os
 import re
 import html
 from datetime import datetime
-from urllib.parse import quote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_URL = "https://zonted.com"
@@ -363,82 +362,24 @@ def generate_feed(articles):
 # Next/prev + share links injection
 # ---------------------------------------------------------------------------
 
-def truncate(text, max_len=50):
-    if len(text) <= max_len:
-        return text
-    return text[:max_len - 3].rstrip() + '...'
-
-
-def inject_nav_links(articles):
-    """Inject share-on-X + next/prev nav links into each article."""
+def strip_nav_links(articles):
+    """Remove share-on-X + next/prev nav links from all articles."""
     count = 0
-    for i, article in enumerate(articles):
+    for article in articles:
         filepath = article['filepath']
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Build share link
-        share_url = f'{SITE_URL}/{article["slug"]}/'
-        tweet_text = quote(article['title'])
-        share_html = (
-            f'<div style="max-width:660px;margin:3rem auto 0;padding:0 2rem;text-align:center;">\n'
-            f'    <a href="https://twitter.com/intent/tweet?url={quote(share_url, safe="")}&text={tweet_text}" '
-            f'target="_blank" rel="noopener" '
-            f'style="font-family:\'Inter\',system-ui,sans-serif;font-size:0.85rem;color:var(--text-dim);text-decoration:none;">'
-            f'Share on X &rarr;</a>\n'
-            f'</div>'
-        )
-
-        # Build prev/next links
-        nav_parts = []
-        if i < len(articles) - 1:
-            prev_article = articles[i + 1]  # older = previous (list is newest first)
-            prev_title = truncate(prev_article['title'])
-            nav_parts.append(
-                f'    <a href="/{prev_article["slug"]}/" '
-                f'style="color:var(--text-muted);text-decoration:none;">'
-                f'&larr; {html.escape(prev_title)}</a>'
-            )
-        else:
-            nav_parts.append('    <span></span>')
-
-        if i > 0:
-            next_article = articles[i - 1]  # newer = next
-            next_title = truncate(next_article['title'])
-            nav_parts.append(
-                f'    <a href="/{next_article["slug"]}/" '
-                f'style="color:var(--text-muted);text-decoration:none;">'
-                f'{html.escape(next_title)} &rarr;</a>'
-            )
-        else:
-            nav_parts.append('    <span></span>')
-
-        nav_html = (
-            f'<div style="max-width:660px;margin:2rem auto;padding:0 2rem;display:flex;justify-content:space-between;'
-            f'font-family:\'Inter\',system-ui,sans-serif;font-size:0.85rem;">\n'
-            + '\n'.join(nav_parts) + '\n'
-            + '</div>'
-        )
-
-        full_nav = f'<!-- NAV_LINKS_START -->\n{share_html}\n{nav_html}\n<!-- NAV_LINKS_END -->'
-
-        # Replace existing markers or insert before <footer
         if '<!-- NAV_LINKS_START -->' in content and '<!-- NAV_LINKS_END -->' in content:
             content = re.sub(
-                r'<!-- NAV_LINKS_START -->.*?<!-- NAV_LINKS_END -->',
-                full_nav,
+                r'\n*<!-- NAV_LINKS_START -->.*?<!-- NAV_LINKS_END -->\n*',
+                '\n',
                 content,
                 flags=re.DOTALL
             )
-        else:
-            # Insert before the first <footer tag
-            footer_match = re.search(r'\n*<footer', content)
-            if footer_match:
-                content = content[:footer_match.start()] + '\n\n' + full_nav + '\n\n' + content[footer_match.start():]
-
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(content)
-        count += 1
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
 
     return count
 
@@ -463,8 +404,8 @@ def main():
     n = generate_feed(articles)
     print(f"Generated feed.xml ({n} items)")
 
-    n = inject_nav_links(articles)
-    print(f"Injected next/prev + share links into {n} articles")
+    n = strip_nav_links(articles)
+    print(f"Stripped nav links from {n} articles")
 
 
 if __name__ == '__main__':
