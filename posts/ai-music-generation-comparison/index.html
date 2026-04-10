@@ -13,18 +13,13 @@
     <meta property="og:image" content="https://img.zonted.com/tabiji-owl-logo.png">
     <meta property="og:url" content="https://zonted.com/posts/ai-music-generation-comparison/">
     <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Suno vs MiniMax Music for Instagram Reels (2026): AI Music Generation Compared",
-        "author":{"@type":"Person","name":"Bernard Huang"},
-        "datePublished": "2026-03-11",
-        "dateModified": "2026-03-14",
-        "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"}},
-        "description": "Production comparison of Suno AI and MiniMax Music 2.0, 2.5, 2.5+ for AI background music in travel Reels. Includes reverse-engineering Suno's API, Gemini 2.5 Flash audio scoring, piano cover experiments, and full production pipeline with code.",
-        "mainEntityOfPage": "https://zonted.com/posts/ai-music-generation-comparison/"
-    }
+    {"@context":"https://schema.org","@type":"Article","headline":"Suno vs MiniMax Music for Instagram Reels (2026): AI Music Generation Compared","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-03-11","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/ai-music-generation-comparison/","description":"We tested Suno AI and MiniMax Music 2.0/2.5/2.5+ in production across 200+ Instagram Reels. Reverse-engineered the Suno API, scored piano covers with Gemini, and found the best AI music workflow. Real audio samples, costs, and code."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Suno vs MiniMax Music for Instagram Reels"}]}
     </script>
     <script type="application/ld+json">
     {
@@ -263,7 +258,7 @@ footer p{color:var(--text-muted);font-size:0.85rem}
     <div class="article-body">
 
         <h2 id="tldr">TL;DR</h2>
-        <p class="dropcap">We produce dozens of Instagram Reels and YouTube Shorts per week at <a href="/">tabiji.ai</a>. Every one needs background music. We tested two AI music generators in production: <strong>MiniMax Music API</strong> (three models: 2.0, 2.5, 2.5+) and <strong>Suno AI</strong> (reverse-engineered API, bird-codename models, piano covers scored by Gemini).</p>
+        <p class="dropcap">We produce dozens of <a href="/posts/ai-reels-what-actually-works/">Instagram Reels</a> and YouTube Shorts per week at <a href="/">tabiji.ai</a>. Every one needs background music. We tested two AI music generators in production: <strong>MiniMax Music API</strong> (three models: 2.0, 2.5, 2.5+) and <strong>Suno AI</strong> (reverse-engineered API, bird-codename models, piano covers scored by Gemini).</p>
         <p>The punchline: <strong>Suno produces significantly better music</strong> (8.5/10) but has no public API — we had to reverse-engineer it. <strong>MiniMax produces good-enough music</strong> (7/10) with a real API at ~$0.01/track. We built infrastructure for both, then ended up using MiniMax for daily production because it's simpler. We use Suno when music quality actually matters.</p>
         <p>Along the way, we also built a <strong>Gemini 2.5 Flash audio scorer</strong> to evaluate AI-generated piano covers — and discovered that Gemini is too polite to be a useful music critic. Every sample on this page is a real production artifact. Press play.</p>
 
@@ -597,7 +592,7 @@ if __name__ == "__main__":
         <h2 id="native-video-audio">Native Video Audio: Veo 3, CogVideoX, Hailuo</h2>
         <p>Before settling on separate music generation, we tested whether video generation models themselves could produce usable audio.</p>
 
-        <h3>Google Veo 3 — Decent SFX, Not Music</h3>
+        <h3>Google <a href="/posts/veo3-vs-hailuo-minimax/">Veo 3</a> — Decent SFX, Not Music</h3>
         <p>Veo 3's <code>generate_audio</code> parameter produces synchronized audio: ambient street noise, wind, water, footsteps. For establishing shots it adds atmosphere. But it can't produce composed background music. We disable it for most Reels.</p>
 
         <h3>Z.AI CogVideoX-3 — Synthetic and Unusable</h3>
@@ -647,7 +642,7 @@ if __name__ == "__main__":
 
         <h2 id="alternatives">Other Alternatives We Explored</h2>
 
-        <h3>Pixabay Royalty-Free Library — Our Fallback</h3>
+        <h3>Pixabay Royalty-Free Library — Our <a href="/posts/ai-resilience-planning/">Fallback</a></h3>
         <p>We downloaded 21 royalty-free tracks from Pixabay, organized by mood (adventure, dreamy, tropical, cinematic, cultural). Zero latency, zero cost, predictable quality. When MiniMax's API has issues, we fall back to these. <strong>Cons:</strong> Only 21 tracks. After a week of 4 Reels/day, your audience has heard each one multiple times.</p>
 
         <h3>Trending Instagram Audio Pipeline</h3>

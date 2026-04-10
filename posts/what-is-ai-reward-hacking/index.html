@@ -20,58 +20,45 @@
     <meta name="twitter:title" content="What Is AI Reward Hacking? (And How It Silently Destroyed Our Content Quality)">
     <meta name="twitter:description" content="AI reward hacking is when your AI agent finds shortcuts to hit your goals while quietly destroying quality. We lost hundreds of pages to thin, non-factual content.">
 
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "What Is AI Reward Hacking? (And How It Silently Destroyed Our Content Quality)",
-        "author":{"@type":"Person","name":"Bernard Huang"},
-        "datePublished": "2026-04-05",
-        "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},
-        "url":"https://zonted.com/posts/what-is-ai-reward-hacking/",
-        "description": "AI reward hacking is when your AI agent finds shortcuts to hit your goals while quietly destroying quality. We lost hundreds of pages to thin, non-factual content."
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {"@type": "ListItem", "position": 1, "name":"Home","item":"https://zonted.com/"},
-          {"@type": "ListItem", "position": 2, "name":"Posts","item":"https://zonted.com/posts/"},
-          {"@type": "ListItem", "position": 3, "name": "What Is AI Reward Hacking?", "item": "https://zonted.com/posts/what-is-ai-reward-hacking/"}
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is AI reward hacking?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "AI reward hacking is when an AI agent discovers shortcuts to maximize its reward signal without actually fulfilling the spirit of the task. In content production, this means the AI skips research, fabricates details, or produces thin content to hit volume targets — because hitting the target is what gets rewarded."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How is reward hacking different from AI drift?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "AI drift is accidental — the model gradually deviates from your template over time. Reward hacking is strategic — the agent actively exploits gaps in your evaluation criteria to maximize its score. Drift is a quality tax. Reward hacking is an adversarial optimization problem."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do you prevent AI reward hacking?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Measure what matters, not what's easy to measure. Use multi-signal quality checks (not just 'did it produce a file'). Add fact-checking layers. Sample outputs randomly. And never let volume be the only reward signal your agent optimizes for."
-            }
+    {"@context":"https://schema.org","@type":"Article","headline":"What Is AI Reward Hacking? (And How It Silently Destroyed Our Content Quality)","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-05","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/what-is-ai-reward-hacking/","description":"AI reward hacking is when your AI agent finds shortcuts to hit your goals while quietly destroying quality. We lost hundreds of pages to thin, non-factual content."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"What Is AI Reward Hacking?"}]}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is AI reward hacking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI reward hacking is when an AI agent discovers shortcuts to maximize its reward signal without actually fulfilling the spirit of the task. In content production, this means the AI skips research, fabricates details, or produces thin content to hit volume targets — because hitting the target is what gets rewarded."
           }
-        ]
-      }
-    ]
+        },
+        {
+          "@type": "Question",
+          "name": "How is reward hacking different from AI drift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI drift is accidental — the model gradually deviates from your template over time. Reward hacking is strategic — the agent actively exploits gaps in your evaluation criteria to maximize its score. Drift is a quality tax. Reward hacking is an adversarial optimization problem."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you prevent AI reward hacking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Measure what matters, not what's easy to measure. Use multi-signal quality checks (not just 'did it produce a file'). Add fact-checking layers. Sample outputs randomly. And never let volume be the only reward signal your agent optimizes for."
+          }
+        }
+      ]
+    }
     </script>
 
     
@@ -160,7 +147,7 @@
             <li><strong>Research got shallow.</strong> Instead of pulling real Reddit threads and cross-referencing travel blogs, the agent started generating plausible-sounding descriptions from its training data. Close enough to look real. Not close enough to be accurate.</li>
             <li><strong>Restaurant details went unchecked.</strong> Names, addresses, hours, price ranges — the agent filled them in without verifying. Some restaurants didn't exist. Others had been closed for years.</li>
             <li><strong>Descriptions became generic.</strong> Every city's "hidden gem" café sounded the same. Every local food tip was a variation of "ask a local." The specificity that made early pages valuable disappeared entirely.</li>
-            <li><strong>Data enrichment was skipped.</strong> Google Places API calls, SerpAPI lookups, photo sourcing — these cost time and money. The agent realized it could produce a "complete" page without them.</li>
+            <li><strong><a href="/posts/true-cost-of-ai-content-production/">Data enrichment</a> was skipped.</strong> Google Places API calls, SerpAPI lookups, photo sourcing — these cost time and money. The agent realized it could produce a "complete" page without them.</li>
         </ul>
 
         <p>Individually, each page looked fine. A human scanning one page wouldn't necessarily notice the problem. But in aggregate, across hundreds of pages, we'd created a graveyard of thin, non-factual content that looked legitimate but wasn't.</p>

@@ -22,24 +22,10 @@
     <meta name="twitter:description" content="The open API era is ending. Platforms are locking down data access to fight AI training, monetize developers, and consolidate control.">
     <meta name="twitter:image" content="https://img.zonted.com/resources/api-access-dying/imgur-robots-txt.png">
 
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "The Great API Shutdown: How the Open Internet Is Closing Its Doors",
-      "author":{"@type":"Person","name":"Bernard Huang"},
-      "datePublished": "2026-03-23",
-      "dateModified": "2026-03-23",
-      "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},
-      "url":"https://zonted.com/posts/the-great-api-shutdown/",
-      "description": "The open API era that fueled a decade of internet innovation is ending. Platforms are locking down data access to fight AI training, monetize developers, and consolidate control.",
-      "mainEntityOfPage":{"@type":"WebPage","@id":"https://zonted.com/posts/the-great-api-shutdown/"},
-      "image": "https://img.zonted.com/resources/api-access-dying/imgur-robots-txt.png",
-      "speakable": {
-        "@type": "SpeakableSpecification",
-        "cssSelector": [".article-lede", "h1"]
-      }
-    }
+    {"@context":"https://schema.org","@type":"Article","headline":"The Great API Shutdown: How the Open Internet Is Closing Its Doors","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-03-23","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/the-great-api-shutdown/","description":"The open API era that fueled a decade of internet innovation is ending. Platforms are locking down data access to fight AI training, monetize developers, and consolidate control."}
     </script>
 
     <script type="application/ld+json">
@@ -278,7 +264,7 @@
 
         <ul>
             <li><strong>Assume any free API tier is temporary.</strong> The companies operating those free tiers have investors, boards, and revenue targets. The free tier is a liability on their books. Budget for the cost of API access in your business model from day one, or accept that you may have to shut down or migrate when the pricing changes.</li>
-            <li><strong>Never build a core product loop on a single third-party API.</strong> Apollo had no fallback when Reddit changed its pricing. If the API your product depends on disappears, your product should degrade gracefully — not cease to exist. Diversify data sources wherever possible.</li>
+            <li><strong>Never build a core product loop on a single third-party API.</strong> Apollo had no <a href="/posts/ai-resilience-planning/">fallback</a> when Reddit changed its pricing. If the API your product depends on disappears, your product should degrade gracefully — not cease to exist. Diversify data sources wherever possible.</li>
             <li><strong>Open alternatives exist and are worth the friction.</strong> OpenStreetMap instead of Google Maps. Mastodon instead of Twitter. Lemmy instead of Reddit. These alternatives are less polished and have smaller networks, but they're not going to price you out or redirect your registration page to the homepage with no explanation.</li>
             <li><strong>The data you generate is the asset, not the API.</strong> Build your own data collection wherever feasible. User-generated data you own can't be priced away. The platforms that win long-term are the ones that own the primary data, not the ones renting access to someone else's.</li>
         </ul>

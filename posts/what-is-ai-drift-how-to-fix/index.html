@@ -19,74 +19,61 @@
     <meta name="twitter:title" content="What Is AI Drift? (And How to Fix It Before It Wrecks Your Content)">
     <meta name="twitter:description" content="AI drift is what happens when AI-generated content gradually deviates from your template, tone, and quality standard at scale. Here's what it costs, why it happens, and how to eliminate it.">
 
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "What Is AI Drift? (And How to Fix It Before It Wrecks Your Content)",
-        "author": {"@type": "Person", "name": "Bernard Huang"},
-        "datePublished": "2026-03-19",
-        "publisher": {"@type": "Person", "name": "Bernard Huang", "url": "https://zonted.com"},
-        "url": "https://zonted.com/posts/what-is-ai-drift-how-to-fix/",
-        "description": "AI drift is what happens when AI-generated content gradually deviates from your template, tone, and quality standard at scale. Here's what it costs, why it happens, and how to eliminate it."
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://zonted.com/"},
-          {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://zonted.com/posts/"},
-          {"@type": "ListItem", "position": 3, "name": "What Is AI Drift?", "item": "https://zonted.com/posts/what-is-ai-drift-how-to-fix/"}
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is AI drift?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "AI drift is the phenomenon where AI-generated content gradually deviates from an intended format, template, tone, or quality standard over time — especially when producing content at scale. Like a game of telephone, each generation drifts slightly from the spec, and after dozens or hundreds of outputs, you end up with wildly inconsistent content."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Why does AI drift happen?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "AI models are probabilistic, not deterministic — the same prompt produces slightly different outputs every time. Prompts also degrade as they're copied or modified. Context windows lose earlier constraints. And there's no enforcement mechanism between your spec and the output, so variance compounds with every page produced."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do you fix AI drift?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The most effective fix is a JSON-first architecture: separate content from presentation. AI generates structured data, a deterministic renderer handles the HTML layout. Format drift becomes impossible because the AI never touches the template. Pair this with validators and periodic batch audits of existing content."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How much does AI drift cost in practice?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "AI drift is invisible on any single output — each page looks 'close enough.' But it compounds. We discovered this at tabiji.ai with 386 popular-picks pages: what should have been one template family had grown into six, with broken canonicals, missing schema markup, and 36 missing API JSON files. The cleanup was enormous."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does AI drift only affect content?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. AI drift applies to any workflow producing structured outputs at scale: code generation, data pipelines, email templates, automated reports. The fix is always the same — constrain the structure, free the content. Give AI creative latitude on what to say, but zero latitude on how it's packaged."
-            }
+    {"@context":"https://schema.org","@type":"Article","headline":"What Is AI Drift? (And How to Fix It Before It Wrecks Your Content)","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-03-19","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/what-is-ai-drift-how-to-fix/","description":"AI drift is what happens when AI-generated content gradually deviates from your template, tone, and quality standard at scale. Here's what it costs, why it happens, and how to eliminate it."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"What Is AI Drift?"}]}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is AI drift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI drift is the phenomenon where AI-generated content gradually deviates from an intended format, template, tone, or quality standard over time — especially when producing content at scale. Like a game of telephone, each generation drifts slightly from the spec, and after dozens or hundreds of outputs, you end up with wildly inconsistent content."
           }
-        ]
-      }
-    ]
+        },
+        {
+          "@type": "Question",
+          "name": "Why does AI drift happen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI models are probabilistic, not deterministic — the same prompt produces slightly different outputs every time. Prompts also degrade as they're copied or modified. Context windows lose earlier constraints. And there's no enforcement mechanism between your spec and the output, so variance compounds with every page produced."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you fix AI drift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most effective fix is a JSON-first architecture: separate content from presentation. AI generates structured data, a deterministic renderer handles the HTML layout. Format drift becomes impossible because the AI never touches the template. Pair this with validators and periodic batch audits of existing content."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does AI drift cost in practice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI drift is invisible on any single output — each page looks 'close enough.' But it compounds. We discovered this at tabiji.ai with 386 popular-picks pages: what should have been one template family had grown into six, with broken canonicals, missing schema markup, and 36 missing API JSON files. The cleanup was enormous."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does AI drift only affect content?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. AI drift applies to any workflow producing structured outputs at scale: code generation, data pipelines, email templates, automated reports. The fix is always the same — constrain the structure, free the content. Give AI creative latitude on what to say, but zero latitude on how it's packaged."
+          }
+        }
+      ]
+    }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -154,7 +141,7 @@
 
         <ul>
             <li><strong>Format drift</strong> — The HTML structure diverges from the canonical template. Some pages have a section others don't. Heading levels shift. CSS classes get renamed or omitted.</li>
-            <li><strong>Quality drift</strong> — Outputs gradually become lazier and more generic. Early pages had vivid, specific descriptions. Later pages have boilerplate filler because the prompt has been slightly softened or the model is taking the path of least resistance.</li>
+            <li><strong>Quality drift</strong> — Outputs gradually become lazier and more generic. Early pages had vivid, specific descriptions. Later pages have boilerplate filler because the prompt has been slightly softened or the model is taking the path of least resistance. (When this becomes deliberate, it's <a href="/posts/what-is-ai-reward-hacking/">reward hacking</a> — a related but distinct problem.)</li>
             <li><strong>Voice drift</strong> — Tone and personality erode over time. The early pages sound like a knowledgeable local. The late pages sound like a press release.</li>
             <li><strong>Structural drift</strong> — Required sections appear and disappear. Schema markup fields go missing. Fields that should always be populated start turning up empty.</li>
         </ul>

@@ -20,8 +20,13 @@
     <meta name="twitter:title" content="The True Cost of AI Content Production Isn't Tokens — It's Data Enrichment">
     <meta name="twitter:description" content="Everyone obsesses over model costs and token prices. After producing 400+ pages and 200+ videos with AI, we learned the real expense is data enrichment — not generation.">
 
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Article","headline":"The True Cost of AI Content Production Isn't Tokens — It's Data Enrichment","author":{"@type":"Person","name":"Bernard Huang"},"datePublished":"2026-03-18","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/true-cost-of-ai-content-production/","description":"Everyone obsesses over model costs and token prices. After producing 400+ pages and 200+ videos with AI, we learned the real expense is data enrichment — Google Places API, SerpAPI, Reddit scraping, and the infrastructure that makes AI output actually useful."}
+    {"@context":"https://schema.org","@type":"Article","headline":"The True Cost of AI Content Production Isn't Tokens — It's Data Enrichment","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-03-18","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/true-cost-of-ai-content-production/","description":"Everyone obsesses over model costs and token prices. After producing 400+ pages and 200+ videos with AI, we learned the real expense is data enrichment — Google Places API, SerpAPI, Reddit scraping, and the infrastructure that makes AI output actually useful."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"The True Cost of AI Content Production"}]}
     </script>
     <style>
         :root {
@@ -162,7 +167,7 @@
 
         <p>This cost structure is actually good news if you understand what it means: <strong>data enrichment is a moat.</strong></p>
 
-        <p>Anyone can prompt Claude to write "10 Best Restaurants in Barcelona." The output will be plausible, generic, and indistinguishable from a thousand other AI-generated listicles. But nobody else has our dataset: 3,755 places with live Google ratings, real Reddit quotes with upvotes and dates, verified opening hours, and curated photos — all cross-referenced and kept current.</p>
+        <p>Anyone can prompt Claude to write "10 Best Restaurants in Barcelona." The output will be plausible, generic, and indistinguishable from a thousand other <a href="/posts/slop-iterate-curate-ai-content/">AI-generated listicles</a>. But nobody else has our dataset: 3,755 places with live Google ratings, real Reddit quotes with upvotes and dates, verified opening hours, and curated photos — all cross-referenced and kept current.</p>
 
         <p>We learned this the hard way. Our early itineraries were pure LLM output — well-written, structurally sound, and utterly generic. The recommendations were the same ones every travel blog regurgitates because that's what the training data contains. The moment we started enriching with real-time data from Google Places, Reddit, and Foursquare, the content became something models can't hallucinate: <em>verifiably accurate</em>.</p>
 
@@ -194,7 +199,7 @@
 
         <p>We publish our data as a <a href="https://tabiji.ai/api/">free static API</a> — 1,428 JSON files covering 706 destinations and 3,755 curated places. The data cost us orders of magnitude more to assemble than the AI cost us to write about it. And that's exactly why it's valuable.</p>
 
-        <p>Stop optimizing for tokens. Start investing in data.</p>
+        <p>Stop optimizing for tokens. Start investing in data. And if you want to understand why models <a href="/posts/what-is-ai-drift-how-to-fix/">drift from your templates at scale</a>, that's the other half of the quality problem.</p>
     </div>
 </article>
 

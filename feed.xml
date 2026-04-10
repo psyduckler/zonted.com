@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zonted — Bernard Huang's AI Lab</title>
+    <link>https://zonted.com/</link>
+    <description>I test AI tools so you don't have to.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 10 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>MakeUGC Review 2026: AI UGC Video Ads Worth $10 Per Clip?</title>
+      <link>https://zonted.com/reviews/makeugc/</link>
+      <description>Hands-on review of MakeUGC, an AI-powered UGC video ad generator. We test quality, pricing, and whether it's worth $10 per clip.</description>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/reviews/makeugc/</guid>
+    </item>
+    <item>
+      <title>The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours</title>
+      <link>https://zonted.com/posts/openclaw-claude-ban-ai-model-replacement/</link>
+      <description>OpenClaw banned Claude. Here's how we rebuilt our entire AI stack in 48 hours.</description>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/openclaw-claude-ban-ai-model-replacement/</guid>
+    </item>
+    <item>
+      <title>What Is AI Reward Hacking?</title>
+      <link>https://zonted.com/posts/what-is-ai-reward-hacking/</link>
+      <description>AI reward hacking is when your AI agent finds shortcuts that technically satisfy your metrics but completely miss the point.</description>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/what-is-ai-reward-hacking/</guid>
+    </item>
+    <item>
+      <title>What is AI Self-Healing?</title>
+      <link>https://zonted.com/posts/what-is-ai-self-healing/</link>
+      <description>AI self-healing is when an AI agent detects, diagnoses, and fixes problems automatically without human intervention.</description>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/what-is-ai-self-healing/</guid>
+    </item>
+    <item>
+      <title>When Token Costs Hit Zero</title>
+      <link>https://zonted.com/posts/local-models-free-tokens/</link>
+      <description>Frontier models spend billions on training and inference. Local models are making token costs approach zero.</description>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/local-models-free-tokens/</guid>
+    </item>
+    <item>
+      <title>AI Resilience Planning</title>
+      <link>https://zonted.com/posts/ai-resilience-planning/</link>
+      <description>Claude API was down 14 hours. Here's how to build AI resilience into your stack.</description>
+      <pubDate>Fri, 27 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/ai-resilience-planning/</guid>
+    </item>
+    <item>
+      <title>Stop Optimizing Your AI Infrastructure</title>
+      <link>https://zonted.com/posts/stop-optimizing-ai-infrastructure/</link>
+      <description>Token optimization is a trap. Stop optimizing AI infrastructure that will be obsolete in 6 months.</description>
+      <pubDate>Mon, 23 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/stop-optimizing-ai-infrastructure/</guid>
+    </item>
+    <item>
+      <title>The Great API Shutdown</title>
+      <link>https://zonted.com/posts/the-great-api-shutdown/</link>
+      <description>The open API era is ending. Platforms are locking down access and what it means for AI builders.</description>
+      <pubDate>Mon, 23 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/the-great-api-shutdown/</guid>
+    </item>
+    <item>
+      <title>OpenClaw Is an MMORPG</title>
+      <link>https://zonted.com/posts/openclaw-skill-tree/</link>
+      <description>A fresh OpenClaw install is a level 0 character. Here's how to think about building your AI agent's skill tree.</description>
+      <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/openclaw-skill-tree/</guid>
+    </item>
+    <item>
+      <title>The Future Is Synthetic</title>
+      <link>https://zonted.com/posts/the-future-is-synthetic/</link>
+      <description>We run 4 AI agents that produce synthetic content at scale. Here's what we've learned.</description>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/the-future-is-synthetic/</guid>
+    </item>
+    <item>
+      <title>What Is AI Drift?</title>
+      <link>https://zonted.com/posts/what-is-ai-drift-how-to-fix/</link>
+      <description>AI drift is what happens when AI-generated content gradually deviates from your brand voice and quality standards.</description>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/what-is-ai-drift-how-to-fix/</guid>
+    </item>
+    <item>
+      <title>The Future of Content Is Agentic Data Enrichment</title>
+      <link>https://zonted.com/posts/future-of-content-agentic-data-enrichment/</link>
+      <description>AI agents don't search the web to learn. They enrich structured data. The future of content is agentic data enrichment.</description>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/future-of-content-agentic-data-enrichment/</guid>
+    </item>
+    <item>
+      <title>The Economics of the Internet Are Broken</title>
+      <link>https://zonted.com/posts/the-economics-of-the-internet-are-broken/</link>
+      <description>AI agents killed the publisher incentive model. The economics of the internet are broken.</description>
+      <pubDate>Thu, 19 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/the-economics-of-the-internet-are-broken/</guid>
+    </item>
+    <item>
+      <title>Slop Iterate Curate</title>
+      <link>https://zonted.com/posts/slop-iterate-curate-ai-content/</link>
+      <description>The goal isn't to avoid AI slop. It's to slop, iterate, and curate until you have something worth publishing.</description>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/slop-iterate-curate-ai-content/</guid>
+    </item>
+    <item>
+      <title>The True Cost of AI Content Production</title>
+      <link>https://zonted.com/posts/true-cost-of-ai-content-production/</link>
+      <description>Everyone obsesses over model costs. The true cost of AI content production is human time, not tokens.</description>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/true-cost-of-ai-content-production/</guid>
+    </item>
+    <item>
+      <title>Nano Banana 2 vs Grok</title>
+      <link>https://zonted.com/posts/nano-banana-vs-grok/</link>
+      <description>We tested Nano Banana 2 against Grok on 8 identical prompts to see which AI model produces better results.</description>
+      <pubDate>Sat, 14 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/nano-banana-vs-grok/</guid>
+    </item>
+    <item>
+      <title>AI-Generated Instagram Reels: What Actually Works</title>
+      <link>https://zonted.com/posts/ai-reels-what-actually-works/</link>
+      <description>We tested 100% AI-generated Reels to find out what actually gets views and engagement on Instagram.</description>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/ai-reels-what-actually-works/</guid>
+    </item>
+    <item>
+      <title>Best AI Video Generator for Reels</title>
+      <link>https://zonted.com/posts/veo3-vs-hailuo-minimax/</link>
+      <description>We tested 5 AI video models across 50+ Reels to find the best AI video generator for short-form content.</description>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/veo3-vs-hailuo-minimax/</guid>
+    </item>
+    <item>
+      <title>AI Image Generation Comparison</title>
+      <link>https://zonted.com/posts/ai-image-generation-comparison/</link>
+      <description>We tested GPT, Grok, Gemini, MiniMax, and CogView-4 across 26 images to compare AI image generation quality.</description>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/ai-image-generation-comparison/</guid>
+    </item>
+    <item>
+      <title>AI Music Generation Comparison</title>
+      <link>https://zonted.com/posts/ai-music-generation-comparison/</link>
+      <description>We tested Suno AI and MiniMax Music in production to compare AI music generation for short-form video content.</description>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/ai-music-generation-comparison/</guid>
+    </item>
+    <item>
+      <title>Top Short-Form Video Services 2026</title>
+      <link>https://zonted.com/posts/best-short-form-video-services/</link>
+      <description>Compare the top short-form video platforms in 2026 for creators, marketers, and businesses.</description>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid>https://zonted.com/posts/best-short-form-video-services/</guid>
+    </item>
+  </channel>
+</rss>

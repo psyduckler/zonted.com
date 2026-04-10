@@ -14,18 +14,10 @@
     <meta property="og:image" content="https://img.zonted.com/resources/ai-resilience-planning/hero-bg.jpg">
     <meta name="robots" content="index, follow, max-image-preview:large">
 
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "AI Resilience Planning: Why Your AI Stack Needs a Fallback (2026)",
-      "author":{"@type":"Person","name":"Bernard Huang"},
-      "datePublished": "2026-03-27",
-      "dateModified": "2026-03-27",
-      "publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"}},
-      "image": "https://img.zonted.com/resources/ai-resilience-planning/hero-bg.jpg",
-      "mainEntityOfPage":"https://zonted.com/posts/ai-resilience-planning/"
-    }
+    {"@context":"https://schema.org","@type":"Article","headline":"AI Resilience Planning: Why Your AI Stack Needs a Fallback (2026)","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-03-27","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/ai-resilience-planning/","description":"Claude API was down 14 hours last quarter. We benchmarked MiniMax M2.7 vs Claude Opus 4.6 on identical tasks — here's how to build a resilient AI stack."}
     </script>
     <script type="application/ld+json">
     {
@@ -423,7 +415,7 @@
                 </tbody>
             </table></div>
 
-            <p>The key insight: this isn't about finding one "best" model. It's about matching models to tasks and ensuring no single provider failure takes down the whole operation. When Claude went down for 4 hours last month, our content pipeline didn't even notice — MiniMax handled it. When MiniMax had a brief API hiccup, Claude picked up the slack.</p>
+            <p>The key insight: this isn't about finding one "best" model. It's about matching models to tasks and ensuring no single provider failure takes down the whole operation. When <a href="/posts/openclaw-claude-ban-ai-model-replacement/">Claude went down</a> for 4 hours last month, our content pipeline didn't even notice — MiniMax handled it. When MiniMax had a brief API hiccup, Claude picked up the slack.</p>
 
             <p><strong>Resilience isn't a feature you add. It's an architecture you design from the start.</strong></p>
 
@@ -450,6 +442,8 @@
             <h2 id="related">Related Resources</h2>
 
             <ul>
+                <li><a href="/posts/openclaw-claude-ban-ai-model-replacement/">The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours</a> -- what happens when resilience planning becomes an emergency</li>
+                <li><a href="/posts/what-is-ai-self-healing/">What is AI Self-Healing?</a> -- when your AI agents fix their own failures autonomously</li>
                 <li><a href="/posts/ai-image-generation-comparison/">AI Image Generation Comparison: 5 Models, 26 Images, Real Results</a> -- our companion benchmark of image generation models</li>
                 <li><a href="/posts/">All Resources</a> -- more AI and travel tech comparisons</li>
             </ul>

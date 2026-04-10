@@ -3,19 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tool Reviews — Zonted</title>
-    <meta name="description" content="Hands-on testing of AI tools — pricing, quality, and whether they're worth your money.">
-    <link rel="canonical" href="https://zonted.com/reviews/">
-    <meta property="og:title" content="AI Tool Reviews — Zonted">
-    <meta property="og:description" content="Hands-on testing of AI tools — pricing, quality, and whether they're worth your money.">
-    <meta property="og:url" content="https://zonted.com/reviews/">
-    <meta property="og:type" content="website">
+    <title>About — Zonted</title>
+    <meta name="description" content="I'm Bernard Huang. I build things with AI. Founder of tabiji.ai, co-founder of Clearscope. This is where I test AI tools and share what I learn.">
+    <link rel="canonical" href="https://zonted.com/about/">
+    <meta property="og:title" content="About — Zonted">
+    <meta property="og:description" content="I'm Bernard Huang. I build things with AI. Founder of tabiji.ai, co-founder of Clearscope. This is where I test AI tools and share what I learn.">
+    <meta property="og:url" content="https://zonted.com/about/">
+    <meta property="og:type" content="profile">
+    <meta property="og:image" content="https://img.zonted.com/og/zonted-og.png">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="AI Tool Reviews — Zonted">
-    <meta name="twitter:description" content="Hands-on testing of AI tools — pricing, quality, and whether they're worth your money.">
+    <meta name="twitter:title" content="About — Zonted">
+    <meta name="twitter:description" content="I'm Bernard Huang. I build things with AI. Founder of tabiji.ai, co-founder of Clearscope. This is where I test AI tools and share what I learn.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bernard Huang",
+        "url": "https://zonted.com/about/",
+        "sameAs": [
+            "https://x.com/bernardjhuang",
+            "https://github.com/bernardhuang",
+            "https://www.linkedin.com/in/bernardhuang/"
+        ],
+        "jobTitle": "Founder",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "tabiji.ai",
+            "url": "https://tabiji.ai"
+        },
+        "description": "I test AI tools so you don't have to. Founder of tabiji.ai, co-founder of Clearscope."
+    }
+    </script>
     <style>
         :root {
             --bg: #fcfcfa;
@@ -28,9 +49,6 @@
             --text-dim: #999;
             --accent: #1a1a1a;
             --accent-hover: #000;
-            --green: #2a7a2a;
-            --red: #a33;
-            --blue: #369;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -89,7 +107,6 @@
         }
 
         .nav-links a:hover { color: var(--text); }
-        .nav-links a.active { color: var(--text); }
 
         /* Layout */
         .container {
@@ -98,80 +115,67 @@
             padding: 0 24px;
         }
 
-        /* Page header */
-        .page-header {
-            padding: 48px 0 40px;
-        }
-
-        .page-header h1 {
-            font-family: 'Source Serif 4', Georgia, serif;
+        /* Page title */
+        .page-title {
+            padding: 48px 0 2rem;
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            line-height: 1.2;
-            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        /* Content */
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            font-weight: 700;
+            margin-right: 8px;
+            margin-top: 6px;
             color: var(--text);
         }
 
-        .page-header p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            line-height: 1.7;
+        /* Elsewhere */
+        .elsewhere {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
         }
 
-        /* Entry list */
-        .entry-list {
+        .elsewhere h2 {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .elsewhere ul {
             list-style: none;
         }
 
-        .entry-row {
-            display: flex;
-            align-items: baseline;
-            gap: 16px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            transition: background 0.15s;
+        .elsewhere li {
+            padding: 6px 0;
         }
 
-        .entry-row:hover {
-            background: rgba(0,0,0,0.015);
-        }
-
-        .entry-row.upcoming {
-            color: var(--text-dim);
-        }
-
-        .entry-row.upcoming:hover {
-            background: none;
-        }
-
-        .entry-date {
-            flex: 0 0 100px;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            white-space: nowrap;
-            letter-spacing: 0.01em;
-        }
-
-        .entry-title {
-            flex: 1;
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-size: 1rem;
-        }
-
-        .entry-row a.entry-title {
+        .elsewhere a {
             color: var(--text);
             text-decoration: underline;
         }
 
-        .entry-row a.entry-title:hover {
+        .elsewhere a:hover {
             color: var(--accent-hover);
-        }
-
-        .entry-row.upcoming .entry-title {
-            color: var(--text-dim);
-            text-decoration: none;
         }
 
         /* Footer */
@@ -207,9 +211,7 @@
 
         /* Mobile */
         @media (max-width: 768px) {
-            .entry-date { display: none; }
-            .page-header { padding: 32px 0 28px; }
-            .page-header h1 { font-size: 1.7rem; }
+            .page-title { padding: 32px 0 1.5rem; font-size: 1.75rem; }
         }
     </style>
 </head>
@@ -218,7 +220,7 @@
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
             <div class="nav-links">
-                <a href="/reviews/" class="active">Reviews</a>
+                <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
                 <a href="/about/">About</a>
             </div>
@@ -226,33 +228,29 @@
     </nav>
 
     <div class="container">
-        <div class="page-header">
-            <h1>Reviews</h1>
-            <p>Hands-on testing of AI tools — pricing, quality, and whether they're worth your money.</p>
+        <h1 class="page-title">About</h1>
+
+        <div class="content">
+            <p class="dropcap">I'm Bernard Huang. I build things with AI.</p>
+
+            <p>I run <a href="https://tabiji.ai">tabiji.ai</a>, a travel planning platform that uses Reddit data and AI to generate real itineraries. It's grown to thousands of pages, all built with AI agents.</p>
+
+            <p>Before that, I co-founded Clearscope, an SEO content optimization platform used by enterprise teams.</p>
+
+            <p>This site — Zonted — is where I document my experiments with AI tools. I test video generators, image models, music APIs, and content production pipelines, then write honest reviews and share what I learn.</p>
+
+            <p>I'm not a journalist or a reviewer by trade. I'm a builder who got tired of reading surface-level takes on AI tools. So I started testing them myself and publishing the results.</p>
         </div>
 
-        <ul class="entry-list">
-            <li class="entry-row">
-                <span class="entry-date">Apr 9, 2026</span>
-                <a href="/reviews/makeugc/" class="entry-title">MakeUGC Review 2026: AI UGC Video Ads Worth $10 Per Clip?</a>
-            </li>
-            <li class="entry-row upcoming">
-                <span class="entry-date">Coming soon</span>
-                <span class="entry-title">Arcads Review</span>
-            </li>
-            <li class="entry-row upcoming">
-                <span class="entry-date">Coming soon</span>
-                <span class="entry-title">Creatify Review</span>
-            </li>
-            <li class="entry-row upcoming">
-                <span class="entry-date">Coming soon</span>
-                <span class="entry-title">HeyGen Review</span>
-            </li>
-            <li class="entry-row upcoming">
-                <span class="entry-date">Coming soon</span>
-                <span class="entry-title">Synthesia Review</span>
-            </li>
-        </ul>
+        <div class="elsewhere">
+            <h2>Elsewhere</h2>
+            <ul>
+                <li><a href="https://tabiji.ai">tabiji.ai</a></li>
+                <li><a href="https://x.com/bernardjhuang" rel="me">X / @bernardjhuang</a></li>
+                <li><a href="https://github.com/bernardhuang" rel="me">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/bernardhuang/" rel="me">LinkedIn</a></li>
+            </ul>
+        </div>
     </div>
 
     <footer>
@@ -262,6 +260,7 @@
                 <a href="https://tabiji.ai">tabiji.ai</a>
                 <a href="https://x.com/bernardjhuang">X</a>
                 <a href="https://github.com/bernardhuang">GitHub</a>
+                <a href="/about/">About</a>
             </div>
         </div>
     </footer>
