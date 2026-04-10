@@ -32,15 +32,15 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Source Serif 4', Georgia, serif;
             background: var(--bg);
             color: var(--text);
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.85;
+            font-feature-settings: 'kern' 1, 'liga' 1;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -57,7 +57,7 @@
         }
 
         .nav-inner {
-            max-width: 960px;
+            max-width: 660px;
             margin: 0 auto;
             padding: 0 24px;
             height: 60px;
@@ -88,91 +88,29 @@
 
         .nav-links a:hover { color: var(--text); }
 
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--text-muted);
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-
-        .mobile-menu {
-            display: none;
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-        }
-
-        .mobile-menu.active { display: block; }
-
-        .mobile-menu a {
-            display: block;
-            padding: 12px 0;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .mobile-menu a:last-child { border-bottom: none; }
-
         /* Layout */
         .container {
-            max-width: 720px;
+            max-width: 660px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* Hero */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
+        /* Intro */
+        .intro {
+            padding: 48px 0 3rem;
+            font-size: 1.15rem;
+            line-height: 1.7;
         }
 
-        .hero h1 {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-size: 3.2rem;
+        .intro em {
+            font-style: italic;
+        }
+
+        .intro strong {
             font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-
-        .hero h2 {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--text);
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .hero h2 .highlight { color: var(--text); }
-
-        .hero p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 520px;
-            margin: 0 auto;
-            line-height: 1.8;
         }
 
         /* Section */
-        section { padding: 60px 0; }
-
         .section-title {
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
             font-size: 0.8rem;
@@ -180,140 +118,81 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--text-dim);
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
-        /* Cards */
-        .card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 28px;
-            transition: box-shadow 0.2s;
-            display: block;
-            text-decoration: none;
+        /* Entry list */
+        .entry-list {
+            list-style: none;
         }
 
-        .card:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .card + .card { margin-top: 16px; }
-
-        .card-badge {
-            display: inline-block;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            background: var(--bg-raised);
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-bottom: 12px;
-        }
-
-        .card-title {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            margin-bottom: 8px;
-            line-height: 1.35;
-            color: var(--text);
-        }
-
-        .card-desc {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .card-meta {
+        .entry-row {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s;
+        }
+
+        .entry-row:hover {
+            background: rgba(0,0,0,0.015);
+        }
+
+        .entry-row.upcoming {
+            color: var(--text-dim);
+        }
+
+        .entry-row.upcoming:hover {
+            background: none;
+        }
+
+        .entry-date {
+            flex: 0 0 100px;
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
             font-size: 0.8rem;
             color: var(--text-dim);
+            white-space: nowrap;
+            letter-spacing: 0.01em;
         }
 
-        .card-score {
-            font-weight: 700;
-            color: var(--text);
-            background: var(--bg-raised);
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .entry-title {
+            flex: 1;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1rem;
         }
 
-        .card-placeholder {
-            background: var(--bg);
-            border: 1px dashed var(--border);
-            border-radius: 8px;
-            padding: 28px;
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 0.92rem;
-            margin-top: 16px;
-        }
-
-        /* About */
-        .about p {
-            font-size: 1.02rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        .about a {
+        .entry-row a.entry-title {
             color: var(--text);
             text-decoration: underline;
         }
 
-        /* Browse */
-        .browse-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+        .entry-row a.entry-title:hover {
+            color: var(--accent-hover);
         }
 
-        .browse-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 32px 28px;
-            transition: box-shadow 0.2s;
-            display: block;
+        .entry-row.upcoming .entry-title {
+            color: var(--text-dim);
             text-decoration: none;
         }
 
-        .browse-card:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .browse-card h3 {
-            font-family: 'Source Serif 4', Georgia, serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-
-        .browse-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .browse-card .arrow {
-            display: inline-block;
-            margin-top: 16px;
-            color: var(--text-muted);
+        .entry-type {
+            flex: 0 0 auto;
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            background: var(--bg-raised);
+            padding: 2px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .entry-row.upcoming .entry-type {
+            color: var(--text-dim);
+            background: var(--bg-surface);
         }
 
         /* Footer */
@@ -321,6 +200,7 @@
             border-top: 1px solid var(--border);
             padding: 40px 0;
             text-align: center;
+            margin-top: 60px;
         }
 
         .footer-top {
@@ -348,16 +228,8 @@
 
         /* Mobile */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hamburger { display: block; }
-
-            .hero { padding: 64px 0 48px; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero h2 { font-size: 1.2rem; }
-
-            .browse-grid { grid-template-columns: 1fr; }
-
-            section { padding: 40px 0; }
+            .entry-date { display: none; }
+            .intro { padding: 32px 0 2.5rem; }
         }
     </style>
 </head>
@@ -369,56 +241,48 @@
                 <a href="/reviews/">Reviews</a>
                 <a href="/posts/">Posts</a>
             </div>
-            <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('active')" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-        <div class="mobile-menu">
-            <a href="/reviews/">Reviews</a>
-            <a href="/posts/">Posts</a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="hero">
-            <h1>I'm Bernard.</h1>
-            <h2>I test <span class="highlight">AI tools</span> so you don't have to.</h2>
-            <p>Honest reviews, real data, and opinions from someone who actually builds with this stuff.</p>
+        <div class="intro">
+            <em>I test AI tools so you don't have to.</em> — <strong>Bernard Huang</strong>
         </div>
 
         <section>
-            <div class="section-title">Latest</div>
-            <a href="/reviews/makeugc/" class="card">
-                <span class="card-badge">Review</span>
-                <div class="card-title">MakeUGC Review 2026: AI UGC Video Ads Worth $10 Per Clip?</div>
-                <div class="card-desc">Hands-on review of MakeUGC — the AI UGC ad platform with 300+ avatars, Seedance 2.0, and Veo3 access.</div>
-                <div class="card-meta">
-                    <span>April 9, 2026 &middot; 9 min read</span>
-                    <span class="card-score">7/10</span>
-                </div>
-            </a>
-            <div class="card-placeholder">More reviews coming — Arcads, Creatify, HeyGen, Synthesia</div>
-        </section>
-
-        <section class="about">
-            <div class="section-title">About</div>
-            <p>I'm Bernard Huang. I run <a href="https://tabiji.ai" style="color:var(--text);">tabiji.ai</a>, a travel planning platform. I've been deep in the AI space — building production pipelines with Veo3, Seedance, MiniMax, and a dozen other models. This site is where I document what actually works, what doesn't, and what's worth your money.</p>
-        </section>
-
-        <section>
-            <div class="section-title">Browse</div>
-            <div class="browse-grid">
-                <a href="/reviews/" class="browse-card">
-                    <h3>Reviews</h3>
-                    <p>Hands-on AI tool reviews with honest scores</p>
-                    <span class="arrow">Browse reviews &rarr;</span>
-                </a>
-                <a href="/posts/" class="browse-card">
-                    <h3>Posts</h3>
-                    <p>Thought leadership, data teardowns, and opinions</p>
-                    <span class="arrow">Browse posts &rarr;</span>
-                </a>
-            </div>
+            <div class="section-title">All Writing</div>
+            <ul class="entry-list">
+                <li class="entry-row">
+                    <span class="entry-date">Apr 9, 2026</span>
+                    <a href="/reviews/makeugc/" class="entry-title">MakeUGC Review 2026: AI UGC Video Ads Worth $10 Per Clip?</a>
+                    <span class="entry-type">Review</span>
+                </li>
+                <li class="entry-row upcoming">
+                    <span class="entry-date">Coming soon</span>
+                    <span class="entry-title">Arcads Review</span>
+                    <span class="entry-type">Review</span>
+                </li>
+                <li class="entry-row upcoming">
+                    <span class="entry-date">Coming soon</span>
+                    <span class="entry-title">Creatify Review</span>
+                    <span class="entry-type">Review</span>
+                </li>
+                <li class="entry-row upcoming">
+                    <span class="entry-date">Coming soon</span>
+                    <span class="entry-title">AI-Generated Instagram Reels: What Actually Works</span>
+                    <span class="entry-type">Post</span>
+                </li>
+                <li class="entry-row upcoming">
+                    <span class="entry-date">Coming soon</span>
+                    <span class="entry-title">Veo3 vs Hailuo vs CogVideoX: Best AI Video Generator</span>
+                    <span class="entry-type">Post</span>
+                </li>
+                <li class="entry-row upcoming">
+                    <span class="entry-date">Coming soon</span>
+                    <span class="entry-title">The Future Is Synthetic</span>
+                    <span class="entry-type">Post</span>
+                </li>
+            </ul>
         </section>
     </div>
 

@@ -49,18 +49,16 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { width: 100%; }
-        body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--text); font-size: 1.05rem; line-height: 1.8; }
+        body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--text); font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; }
         img, video { max-width: 100%; height: auto; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; position: fixed; top: 0; left: 0; right: 0; background: rgba(252,252,250,0.95); z-index: 100; border-bottom: 1px solid var(--border); }
-        .logo { text-decoration: none; font-family: 'Source Serif 4', Georgia, serif; font-size: 1.3rem; font-weight: 700; color: var(--text); }
-        .logo span { color: var(--text-muted); }
-        .article-container { max-width: 720px; margin: 0 auto; padding: 7rem 2rem 3rem; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(252,252,250,0.95); z-index: 100; border-bottom: 1px solid var(--border); }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 7rem 2rem 3rem; }
         .article-container h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-        .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 3.5rem 0 1.25rem; letter-spacing: -0.01em; }
         .article-body h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
-        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.8; color: var(--text); }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
         .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
-        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.8; color: var(--text); }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.85; color: var(--text); }
         .article-body a { color: var(--text); text-decoration: underline; }
         .article-body a:hover { color: var(--accent-hover); }
         .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -70,15 +68,41 @@
         footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
         footer a { color: var(--text-muted); text-decoration: underline; }
 
-        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-        .nav-links a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
-        .nav-links a:hover { color: var(--text); }
-        .hamburger { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; }
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            padding-top: 0.1em;
+            font-weight: 700;
+            color: var(--text);
+        }
 
-        @media (max-width: 768px) {
-            .hamburger { display: block; }
-            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(252,252,250,0.98); border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; }
-            .nav-links.open { display: flex; }
+        /* Sidenotes */
+        .sidenote {
+            float: right;
+            clear: right;
+            width: 200px;
+            margin: 0 -240px 1rem 1.5rem;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            border-left: 2px solid var(--border);
+            padding-left: 12px;
+        }
+        @media (max-width: 1100px) {
+            .sidenote {
+                float: none;
+                width: 100%;
+                margin: 1rem 0;
+                padding: 0.75rem 1rem;
+                background: var(--bg-surface);
+                border-left: 2px solid var(--border);
+                border-radius: 0 4px 4px 0;
+            }
         }
 
         /* Floating TOC */
@@ -103,8 +127,8 @@
         .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
         .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
 
-        .content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
-        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 780px; }
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
         .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
 
         @media (max-width: 900px) {
@@ -139,31 +163,22 @@
         .verdict-neutral .verdict-label { color: #666; }
         .verdict p { margin-bottom: 0; font-size: 0.97rem; }
 
-        /* Stat callout */
-        .stat-row { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
-        .stat-box { flex: 1; min-width: 120px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; text-align: center; }
-        .stat-box .stat-num { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text); line-height: 1; }
-        .stat-box .stat-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
-
-        @media (max-width: 600px) {
-            .stat-row { gap: 0.75rem; }
-            .stat-box .stat-num { font-size: 1.4rem; }
-        }
         @media (max-width: 480px) {
             .content-wrapper .article-content .article-container { padding: 4.5rem 1.25rem 1.5rem; }
             .article-container h1 { font-size: 1.25rem; }
             .article-body p, .article-body li { font-size: 0.9rem; }
-            nav { padding: 0.75rem 1rem; }
+            nav { padding: 0; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="/" class="logo">Zonted<span>.</span></a>
-        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
-        <div class="nav-links">
-            <a href="/reviews/">Reviews</a>
-            <a href="/posts/">Posts</a>
+        <div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+            <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em;">Zonted.</a>
+            <div style="display:flex;gap:1.5rem;">
+                <a href="/reviews/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Reviews</a>
+                <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+            </div>
         </div>
     </nav>
 <div style="max-width:800px;margin:5.5rem auto 0;padding:0 2rem;">
@@ -233,21 +248,22 @@
 
     <div class="article-body">
 
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:2rem;"><em>Last tested: April 9, 2026. Pricing and features may have changed since this review was published.</em></p>
+        <div style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.82rem;color:var(--text-dim);margin-bottom:2.5rem;padding:0.6rem 0;border-bottom:1px solid var(--border);">Last tested: April 9, 2026 &middot; Pricing and features may have changed.</div>
 
         <h2 id="what-is-makeugc">What Is MakeUGC?</h2>
-        <p>I've been deep in the AI video space lately — testing platforms, comparing models, trying to figure out what actually works and what's just hype. The ecosystem is genuinely confusing right now: you've got diffusion models, Chinese models, self-hosted options, API brokers popping up weekly, and very little quality written content to help people navigate any of it. So I'm doing it myself. Testing these tools, documenting the experience, and publishing honest reviews.</p>
+        <p class="dropcap">I've been deep in the AI video space lately — testing platforms, comparing models, trying to figure out what actually works and what's just hype. The ecosystem is genuinely confusing right now: you've got diffusion models, Chinese models, self-hosted options, API brokers popping up weekly, and very little quality written content to help people navigate any of it. So I'm doing it myself. Testing these tools, documenting the experience, and publishing honest reviews.</p>
         <p><a href="https://www.makeugc.ai/?ref=psy" target="_blank" rel="noopener">MakeUGC</a> is one of the first platforms I put through the gauntlet. It's an AI video platform that generates UGC-style ad content using realistic AI avatars — think of it as a production studio replacement for DTC brands that need talking-head product ads but don't want to hire creators, coordinate shoots, or deal with the unpredictability of real humans.</p>
         <p>The platform gives you access to over 300 AI avatars, 35+ languages, and — as of early 2026 — integrations with some of the most capable video generation models available: Seedance 2.0 and Google's <a href="/posts/veo3-vs-hailuo-minimax/">Veo3</a>. It also includes tools for B-roll generation, image creation, batch processing, and a curated content library of templates organized by industry.</p>
         <p>The pitch is simple: type a script, pick an avatar, generate a professional-looking UGC ad in minutes. The reality, as I found out, is a bit more nuanced.</p>
 
         <h2 id="getting-started">Getting Started</h2>
+        <aside class="sidenote">For comparison, Arcads starts at $100/mo with no trial. Creatify offers a free tier but restricts features heavily.</aside>
         <p>MakeUGC offers a <strong>$1 trial for 3 days</strong>, which immediately sets it apart from platforms that want $50+ upfront before you can touch anything. In the current AI landscape — where new tools appear weekly and half of them feel like thin wrappers around the same APIs — a low-risk trial is genuinely appreciated. You get full platform access, but only 1 video credit to actually generate content.</p>
         <p>That single credit created an interesting dynamic: I found myself nervous to actually use it. You want to explore the platform, understand how everything works, pick the right model, write a good prompt — but you know you only get one shot. It's like being handed a single bullet and told to hit a bullseye you've never aimed at before. I ended up spending way more time in the tutorials and content library than I probably would have if I had 3-5 credits to experiment with.</p>
         <p>Sign-up itself is straightforward. You land in a workspace with folders, a sidebar for navigation, and the ability to start a new project right away. The dashboard is clean and modern, but there's a lot going on: Tutorials, Content Library, Video Agent, AI Ads editor, Settings — it feels like a tool built by a team that's been shipping features fast, and the sheer volume of options can be overwhelming on first visit.</p>
         <p>The good news is that MakeUGC ships a solid set of <strong>video tutorials</strong> covering every major feature: Talking Actor, Product In Hand, B-roll, Sora integration, Gestures, Custom Avatars, and their new Video Agent. For a platform with this many moving parts, having guided walkthroughs isn't a luxury — it's a necessity. And they deliver here.</p>
 
-        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/tutorials.jpg" alt="MakeUGC tutorials page showing video walkthroughs for Talking Actor, Product In Hand, B-roll, Sora, and more" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">MakeUGC's tutorials page — video walkthroughs for every major feature.</figcaption></figure>
+        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/tutorials.jpg" alt="MakeUGC tutorials page showing video walkthroughs for Talking Actor, Product In Hand, B-roll, Sora, and more" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">MakeUGC's tutorials page — video walkthroughs for every major feature.</figcaption></figure>
 
         <h2 id="pricing">Pricing Breakdown</h2>
         <p>Here's where things get interesting — or painful, depending on your perspective.</p>
@@ -296,8 +312,9 @@
             </table>
         </div>
 
-        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/pricing.jpg" alt="MakeUGC pricing plans — Startup $49/mo, Growth $69/mo, Pro $119/mo, Enterprise custom" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">MakeUGC pricing as of April 2026. The $1 trial gives full access for 3 days.</figcaption></figure>
+        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/pricing.jpg" alt="MakeUGC pricing plans — Startup $49/mo, Growth $69/mo, Pro $119/mo, Enterprise custom" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">MakeUGC pricing as of April 2026. The $1 trial gives full access for 3 days.</figcaption></figure>
 
+        <aside class="sidenote">Raw Veo3 API calls cost roughly $0.50–$1.00 per generation. The ~$10 MakeUGC price includes the platform, avatars, and templates on top.</aside>
         <p>The per-video cost ranges from roughly <strong>$6 to $10</strong> depending on your plan. For context, hiring a real UGC creator typically runs $150–$500+ per video, so the AI route is significantly cheaper in absolute terms. But compared to accessing the underlying models directly via API (where a Veo3 generation might cost under $1), you're paying a substantial markup for the platform layer.</p>
         <p>The real question is whether the convenience — the avatar library, templates, batch processing, and polished UI — justifies the 5-10x premium over raw API costs. For a DTC brand without a developer on staff, the answer is probably yes. For a technically savvy team that already has API pipelines, it's harder to justify.</p>
 
@@ -320,17 +337,17 @@
         </ul>
         <p>The inclusion of Seedance 2.0 and Veo3 across all tiers is the standout here. Many competitors either don't offer these models at all, or lock them behind their highest-priced plans. MakeUGC makes them available from the $49 Startup plan, which means even budget-conscious brands get access to genuinely cutting-edge generation.</p>
 
-        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/seedance-popup.png" alt="MakeUGC Seedance 2.0 video feature — generate videos from text or reference images" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Seedance 2.0 is available on all plans — text-to-video and image-to-video with 10s or 15s durations.</figcaption></figure>
+        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/seedance-popup.png" alt="MakeUGC Seedance 2.0 video feature — generate videos from text or reference images" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Seedance 2.0 is available on all plans — text-to-video and image-to-video with 10s or 15s durations.</figcaption></figure>
 
         <h2 id="content-library">The Content Library</h2>
         <p>One of MakeUGC's strongest selling points is its curated content library — a collection of ready-to-use UGC ad templates organized by industry vertical. Categories include Accessories, Apparel, Beauty &amp; Personal Care, Food &amp; Beverage, Health &amp; Fitness, Tech &amp; Electronics, and more.</p>
         <p>Browsing through the library, it's clear where MakeUGC's users actually are: <strong>beauty, fashion, and physical consumer goods dominate</strong>. These categories have dozens of templates each, with polished avatar setups that look like they could pass for real creator content.</p>
         <p>Here's the thing though — I was looking for travel and leisure templates since that's my world. There are none. Zero. If you're in hospitality, tourism, SaaS, consulting, or really anything outside of physical consumer products, the content library isn't going to do much for you.</p>
-        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/content-library.jpg" alt="MakeUGC content library showing dozens of UGC avatar templates across beauty, fashion, and ecommerce categories" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">The content library is packed for ecommerce verticals — beauty, fashion, and physical products dominate.</figcaption></figure>
+        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/content-library.jpg" alt="MakeUGC content library showing dozens of UGC avatar templates across beauty, fashion, and ecommerce categories" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">The content library is packed for ecommerce verticals — beauty, fashion, and physical products dominate.</figcaption></figure>
 
         <p>Even the "Services" category — the closest match to something like travel — had just a single template when I checked. One.</p>
 
-        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/content-library-services.jpg" alt="MakeUGC content library filtered to Services category showing only a single template" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Filter by "Services" and the selection drops to a single template. Niche categories are underdeveloped.</figcaption></figure>
+        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/content-library-services.jpg" alt="MakeUGC content library filtered to Services category showing only a single template" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Filter by "Services" and the selection drops to a single template. Niche categories are underdeveloped.</figcaption></figure>
 
         <div class="verdict verdict-win">
             <div class="verdict-label">Content Library</div>
@@ -344,11 +361,11 @@
         <h3>The Prompt Iteration Process</h3>
         <p>Getting a good result from Seedance 2.0 wasn't a one-shot affair. I went through multiple prompt revisions — testing ideas in a separate chat first — to dial in something that looked genuinely authentic rather than over-produced. Here's how that process actually looked:</p>
 
-        <figure style="margin:1.5rem 0 1rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/prompt-iteration-1.png" alt="First prompt attempt — initial concept for a NYC street scam scene with Seedance 2.0" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Starting point — the initial prompt concept. Broad strokes, setting the scene.</figcaption></figure>
+        <figure style="margin:1.5rem 0 1rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/prompt-iteration-1.png" alt="First prompt attempt — initial concept for a NYC street scam scene with Seedance 2.0" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Starting point — the initial prompt concept. Broad strokes, setting the scene.</figcaption></figure>
 
-        <figure style="margin:1rem 0 1rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/prompt-iteration-2.png" alt="Second prompt iteration — refined to feel more like raw phone camera footage" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Second pass — ditched the cinematography jargon, rewrote it to feel like raw phone footage. No "shallow DOF," no "anamorphic flares."</figcaption></figure>
+        <figure style="margin:1rem 0 1rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/prompt-iteration-2.png" alt="Second prompt iteration — refined to feel more like raw phone camera footage" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Second pass — ditched the cinematography jargon, rewrote it to feel like raw phone footage. No "shallow DOF," no "anamorphic flares."</figcaption></figure>
 
-        <figure style="margin:1rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/prompt-iteration-3.png" alt="Final maxed-out prompt version — hyper-detailed cinematic scene description" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">The maxed-out version — hyper-detailed, every beat of the scene choreographed. This is what produced the final output below.</figcaption></figure>
+        <figure style="margin:1rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/prompt-iteration-3.png" alt="Final maxed-out prompt version — hyper-detailed cinematic scene description" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">The maxed-out version — hyper-detailed, every beat of the scene choreographed. This is what produced the final output below.</figcaption></figure>
 
         <p>The takeaway: <strong>prompt quality matters enormously</strong> with these models. A lazy one-liner gets you generic output. Detailed, authentic prompting — describing the scene beat by beat, specifying camera behavior, avoiding AI-sounding jargon — makes the difference between something that looks AI-generated and something that could pass for real footage.</p>
 
@@ -357,7 +374,7 @@
                 <source src="https://img.tabiji.ai/resources/makeugc-review/seedance-example.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Our Seedance 2.0 test output from MakeUGC — generated with a single credit during the $1 trial.</figcaption>
+            <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Our Seedance 2.0 test output from MakeUGC — generated with a single credit during the $1 trial.</figcaption>
         </figure>
 
         <p>That said — and this is important — <strong>the quality here isn't unique to MakeUGC</strong>. Seedance 2.0 produces the same caliber of output regardless of which platform serves it. I've <a href="/posts/ai-reels-what-actually-works/">tested these models independently</a> and the generation quality is the model's doing, not the platform's. What MakeUGC adds is the wrapper: the avatar selection, the script-to-video pipeline, the template system.</p>
@@ -382,7 +399,7 @@
             <li><strong>API access is Enterprise-only.</strong> This is a bigger deal than it sounds. API access is what lets you connect MakeUGC to AI agents, automation tools like Claude Code, or your own production pipelines. Without it, every video requires manual clicks in the dashboard. In 2026, where agentic workflows are becoming standard for content production, locking API access behind a "talk to sales" wall feels like a missed opportunity. This alone could be a dealbreaker for technical teams who want to automate video generation at scale.</li>
         </ul>
 
-        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/enterprise-api.png" alt="MakeUGC Enterprise plan showing API Access listed as an Enterprise-only feature" loading="lazy" style="border-radius:6px;border:1px solid var(--border);max-width:320px;"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">API Access is buried at the bottom of the Enterprise tier. No self-serve API on Startup, Growth, or Pro.</figcaption></figure>
+        <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/enterprise-api.png" alt="MakeUGC Enterprise plan showing API Access listed as an Enterprise-only feature" loading="lazy" style="border-radius:6px;border:1px solid var(--border);max-width:320px;"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">API Access is buried at the bottom of the Enterprise tier. No self-serve API on Startup, Growth, or Pro.</figcaption></figure>
 
         <h2 id="vs-alternatives">How It Compares</h2>
         <p>MakeUGC sits in a crowded space. Here's how it stacks up against the main alternatives you're likely evaluating. Full disclosure: I haven't done hands-on testing of all of these yet — reviews for Arcads, Creatify, HeyGen, and Synthesia are coming. These comparisons are based on publicly available information and my experience evaluating the AI video space.</p>
@@ -443,72 +460,43 @@
             <p style="margin-top:0.75rem;">What would make this an 8 or 9? More trial credits (3-5 minimum), broader template categories beyond ecommerce, lower per-video pricing, and a self-serve cancel button. None of those are hard to fix — which tells me MakeUGC could get significantly better with a few product decisions.</p>
         </div>
 
-        <div class="stat-row">
-            <div class="stat-box">
-                <div class="stat-num">7</div>
-                <div class="stat-label">Overall / 10</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-num">8</div>
-                <div class="stat-label">Features</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-num">6</div>
-                <div class="stat-label">Value</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-num">7</div>
-                <div class="stat-label">Ease of Use</div>
-            </div>
-        </div>
+        <p style="font-size:1.05rem;margin-top:1rem;"><strong>Overall: 7/10</strong> — worth trying for DTC brands, but the per-video economics and single trial credit hold it back. If they shipped 3 trial credits, broader templates, and a self-serve cancel button, this would be an easy 9.</p>
 
         <p style="margin-top:1.5rem;">If you want to see for yourself, the $1 trial is genuinely low-risk — just remember you only get 1 credit, so have your prompt ready before you generate. And set a reminder to cancel before day 3 if you're not sure.</p>
-        <p style="text-align:center;margin-top:1.5rem;"><a href="https://www.makeugc.ai/?ref=psy" target="_blank" rel="noopener" style="display:inline-block;background:var(--text);color:var(--bg);padding:0.85rem 2rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:1.05rem;">Try MakeUGC for $1 &rarr;</a></p>
+        <p style="margin-top:1.5rem;"><a href="https://www.makeugc.ai/?ref=psy" target="_blank" rel="noopener">Try MakeUGC for $1 &rarr;</a> — genuinely low-risk, just have your prompt ready and set a cancel reminder.</p>
 
         <h2 id="faq">FAQ</h2>
 
-        <details style="margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;padding:0;">
-            <summary style="padding:1rem 1.25rem;cursor:pointer;font-family:'Source Serif 4',Georgia,serif;font-weight:600;color:var(--text);font-size:1rem;">Is MakeUGC worth it for small DTC brands?</summary>
-            <div style="padding:0 1.25rem 1rem;">
-                <p>If you sell physical products — yes, it's worth trying. At $49/month for 5 videos (~$10/video), it's significantly cheaper than hiring a real UGC creator ($150–$500+ per video). But here's my honest advice: don't subscribe until you have 3-5 product scripts ready to go so you actually use all your credits. Paying $10 for a single test video because you weren't prepared is a waste.</p>
-            </div>
-        </details>
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Is MakeUGC worth it for small DTC brands?</h3>
+            <p>If you sell physical products — yes, it's worth trying. At $49/month for 5 videos (~$10/video), it's significantly cheaper than hiring a real UGC creator ($150–$500+ per video). But here's my honest advice: don't subscribe until you have 3-5 product scripts ready to go so you actually use all your credits. Paying $10 for a single test video because you weren't prepared is a waste.</p>
+        </div>
 
-        <details style="margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;padding:0;">
-            <summary style="padding:1rem 1.25rem;cursor:pointer;font-family:'Source Serif 4',Georgia,serif;font-weight:600;color:var(--text);font-size:1rem;">How does MakeUGC compare to Arcads, Creatify, and HeyGen?</summary>
-            <div style="padding:0 1.25rem 1rem;">
-                <p>MakeUGC is most directly comparable to Arcads and Creatify — all three focus on AI-generated UGC-style ads for ecommerce. MakeUGC differentiates with Seedance 2.0 and Veo3 access on all plans, plus a large content library. HeyGen and Synthesia are more enterprise-focused. I haven't done hands-on testing of the alternatives yet (those reviews are coming), so take the comparison with a grain of salt — but based on publicly available info, MakeUGC's model access at the $49 tier is the strongest value proposition in the group.</p>
-            </div>
-        </details>
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">How does MakeUGC compare to Arcads, Creatify, and HeyGen?</h3>
+            <p>MakeUGC is most directly comparable to Arcads and Creatify — all three focus on AI-generated UGC-style ads for ecommerce. MakeUGC differentiates with Seedance 2.0 and Veo3 access on all plans, plus a large content library. HeyGen and Synthesia are more enterprise-focused. I haven't done hands-on testing of the alternatives yet (those reviews are coming), so take the comparison with a grain of salt — but based on publicly available info, MakeUGC's model access at the $49 tier is the strongest value proposition in the group.</p>
+        </div>
 
-        <details style="margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;padding:0;">
-            <summary style="padding:1rem 1.25rem;cursor:pointer;font-family:'Source Serif 4',Georgia,serif;font-weight:600;color:var(--text);font-size:1rem;">What AI models does MakeUGC use?</summary>
-            <div style="padding:0 1.25rem 1rem;">
-                <p>MakeUGC integrates Seedance 2.0 and Google's Veo3 for video generation (up to 25 seconds). Seedance 2.0 supports text-to-video and image-to-video with multiple aspect ratios. Both models are available on all plans, including the $49/month Startup tier — which is notable because many competitors restrict newer models to higher tiers or don't offer them at all.</p>
-            </div>
-        </details>
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">What AI models does MakeUGC use?</h3>
+            <p>MakeUGC integrates Seedance 2.0 and Google's Veo3 for video generation (up to 25 seconds). Seedance 2.0 supports text-to-video and image-to-video with multiple aspect ratios. Both models are available on all plans, including the $49/month Startup tier — which is notable because many competitors restrict newer models to higher tiers or don't offer them at all.</p>
+        </div>
 
-        <details style="margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;padding:0;">
-            <summary style="padding:1rem 1.25rem;cursor:pointer;font-family:'Source Serif 4',Georgia,serif;font-weight:600;color:var(--text);font-size:1rem;">Can I try MakeUGC before committing?</summary>
-            <div style="padding:0 1.25rem 1rem;">
-                <p>Yes — MakeUGC offers a $1 trial for 3 days with full platform access but only 1 video credit. My advice: spend the first day exploring tutorials and the content library, then use your single credit on day 2 once you've written a solid prompt. And set a calendar reminder for day 3 to cancel if you're not sure — the auto-renewal kicks in at $49/month.</p>
-            </div>
-        </details>
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">Can I try MakeUGC before committing?</h3>
+            <p>Yes — MakeUGC offers a $1 trial for 3 days with full platform access but only 1 video credit. My advice: spend the first day exploring tutorials and the content library, then use your single credit on day 2 once you've written a solid prompt. And set a calendar reminder for day 3 to cancel if you're not sure — the auto-renewal kicks in at $49/month.</p>
+        </div>
 
-        <details style="margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;padding:0;">
-            <summary style="padding:1rem 1.25rem;cursor:pointer;font-family:'Source Serif 4',Georgia,serif;font-weight:600;color:var(--text);font-size:1rem;">How do you cancel MakeUGC?</summary>
-            <div style="padding:0 1.25rem 1rem;">
-                <p>There's no self-serve cancel button — you have to email their support team. I emailed them with a simple "cancel my plan please" and they responded in about 35 minutes with an immediate cancellation. So it's painless in practice, just annoying that you can't do it yourself. Make sure to email before your trial's 3 days are up if you don't want to be charged $49.</p>
-                <figure style="margin:1rem 0 0.5rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/cancellation-email.png" alt="MakeUGC cancellation email — support responded in 35 minutes confirming immediate cancellation" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">MakeUGC support cancelled my account in about 35 minutes (April 2026).</figcaption></figure>
-            </div>
-        </details>
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">How do you cancel MakeUGC?</h3>
+            <p>There's no self-serve cancel button — you have to email their support team. I emailed them with a simple "cancel my plan please" and they responded in about 35 minutes with an immediate cancellation. So it's painless in practice, just annoying that you can't do it yourself. Make sure to email before your trial's 3 days are up if you don't want to be charged $49.</p>
+            <figure style="margin:1rem 0 0.5rem;"><img src="https://img.tabiji.ai/resources/makeugc-review/cancellation-email.png" alt="MakeUGC cancellation email — support responded in 35 minutes confirming immediate cancellation" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">MakeUGC support cancelled my account in about 35 minutes (April 2026).</figcaption></figure>
+        </div>
 
-        <details style="margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;padding:0;">
-            <summary style="padding:1rem 1.25rem;cursor:pointer;font-family:'Source Serif 4',Georgia,serif;font-weight:600;color:var(--text);font-size:1rem;">What is MakeUGC's content library?</summary>
-            <div style="padding:0 1.25rem 1rem;">
-                <p>The content library is a curated collection of UGC-style video templates organized by industry (Beauty, Fashion, Food &amp; Beverage, Health, Tech, etc.). Each template features a pre-built AI avatar and script structure you can customize. Coverage is excellent for beauty, fashion, and physical consumer goods. But if you're in travel, SaaS, consulting, or services — expect slim pickings. The "Services" category had a single template when I checked.</p>
-            </div>
-        </details>
+        <div style="margin-bottom:2rem;">
+            <h3 style="font-size:1.05rem;margin-bottom:0.5rem;">What is MakeUGC's content library?</h3>
+            <p>The content library is a curated collection of UGC-style video templates organized by industry (Beauty, Fashion, Food &amp; Beverage, Health, Tech, etc.). Each template features a pre-built AI avatar and script structure you can customize. Coverage is excellent for beauty, fashion, and physical consumer goods. But if you're in travel, SaaS, consulting, or services — expect slim pickings. The "Services" category had a single template when I checked.</p>
+        </div>
 
     </div>
 </article>
