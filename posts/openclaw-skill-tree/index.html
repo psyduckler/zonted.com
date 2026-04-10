@@ -66,6 +66,36 @@
         .back-link { font-family: 'Inter', system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
         .back-link:hover { color: var(--text); }
         .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    
+.toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+.toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+.toc-sidebar li { margin-bottom: 0.4rem; }
+.toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; transition: color 0.2s; }
+.toc-sidebar a:hover { color: var(--text); }
+.toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+.toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+.toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+.toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter',system-ui,sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+.toc-mobile-toggle .toc-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; }
+.toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+.toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; border-top: 1px solid var(--border); }
+.toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+.toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+.toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter',system-ui,sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+.toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+.toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; }
+.content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+.content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+.content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+@media (max-width: 900px) {
+    .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+    .toc-sidebar { display: none; }
+    .toc-mobile-wrapper { display: block; }
+    .article-content { max-width: 100%; width: 100%; }
+    .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; }
+}
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
@@ -85,6 +115,35 @@
     <a href="/posts/" class="back-link">&larr; Back to Posts</a>
 </div>
 
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open')">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-talent-branches">The Talent Branches</a></li>
+            <li><a href="#the-build-analogy">The Build Analogy</a></li>
+            <li><a href="#the-combination-is-the-moat">The Combination Is the Moat</a></li>
+            <li><a href="#the-tree-is-infinite">The Tree Is Infinite</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+            <li><a href="#the-talent-branches">The Talent Branches</a></li>
+            <li><a href="#the-build-analogy">The Build Analogy</a></li>
+            <li><a href="#the-combination-is-the-moat">The Combination Is the Moat</a></li>
+            <li><a href="#the-tree-is-infinite">The Tree Is Infinite</a></li>
+    </ul>
+</aside>
+<div class="article-content">
 <article class="article-container">
     <h1>OpenClaw Is an MMORPG: Your AI Agent's Skill Tree</h1>
     <div class="article-meta">By Bernard Huang &middot; March 22, 2026 &middot; 6 min read</div>
@@ -108,7 +167,7 @@
 
         <p>Here's what the talent tree actually looks like in practice.</p>
 
-        <h2>The Talent Branches</h2>
+        <h2 id="the-talent-branches">The Talent Branches</h2>
 
         <div class="skill-branch">
             <h3>Voice &amp; Communication Branch</h3>
@@ -189,7 +248,7 @@
             </ul>
         </div>
 
-        <h2>The Build Analogy</h2>
+        <h2 id="the-build-analogy">The Build Analogy</h2>
 
         <p>Just like any good MMO, different builds emerge from the same talent pool. You're not supposed to max everything — you spec into what your character needs.</p>
 
@@ -199,7 +258,7 @@
 
         <p><strong>The Trader</strong>: FMP + SEC EDGAR + FRED + Kalshi = automated financial analysis and market monitoring. The agent tracks earnings, pulls economic indicators, models valuation scenarios, and monitors prediction markets for macro events. Analysis that used to take an analyst days now takes seconds.</p>
 
-        <h2>The Combination Is the Moat</h2>
+        <h2 id="the-combination-is-the-moat">The Combination Is the Moat</h2>
 
         <p>Here's what most people miss when they look at this: <strong>none of these integrations are impressive in isolation.</strong></p>
 
@@ -209,7 +268,7 @@
 
         <blockquote>The question isn't what OpenClaw can do. It's what build you want to run.</blockquote>
 
-        <h2>The Tree Is Infinite</h2>
+        <h2 id="the-tree-is-infinite">The Tree Is Infinite</h2>
 
         <p>New APIs launch every week. New AI models ship that unlock capabilities that didn't exist six months ago. New skills get published to <a href="https://clawhub.com" target="_blank" rel="noopener">ClawHub</a> that wrap complex workflows into a single install.</p>
 
@@ -222,6 +281,8 @@
         <p>&rarr; <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener">OpenClaw on GitHub</a> &middot; <a href="https://clawhub.com" target="_blank" rel="noopener">Browse skills on ClawHub</a> &middot; <a href="https://discord.com/invite/clawd" target="_blank" rel="noopener">Join the Discord</a></p>
     </div>
 </article>
+</div>
+</div>
 
 <!-- NAV_LINKS_START -->
 <div style="max-width:660px;margin:3rem auto 0;padding:0 2rem;text-align:center;">
@@ -235,6 +296,27 @@
 
 
 
-<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
+<script>
+(function(){
+    var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    var sections = [];
+    tocLinks.forEach(function(link){
+        var id = link.getAttribute('href').replace('#','');
+        var el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el});
+    });
+    function update(){
+        var current = sections[0];
+        for(var i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current) document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+})();
+</script>
 </body>
 </html>

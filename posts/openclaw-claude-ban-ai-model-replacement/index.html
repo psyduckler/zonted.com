@@ -91,6 +91,36 @@
         @media (max-width: 768px) {
 }
     .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    
+.toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+.toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+.toc-sidebar li { margin-bottom: 0.4rem; }
+.toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; transition: color 0.2s; }
+.toc-sidebar a:hover { color: var(--text); }
+.toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+.toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+.toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+.toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter',system-ui,sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+.toc-mobile-toggle .toc-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; }
+.toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+.toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; border-top: 1px solid var(--border); }
+.toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+.toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+.toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter',system-ui,sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+.toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+.toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; }
+.content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+.content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+.content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+@media (max-width: 900px) {
+    .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+    .toc-sidebar { display: none; }
+    .toc-mobile-wrapper { display: block; }
+    .article-content { max-width: 100%; width: 100%; }
+    .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; }
+}
     </style>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
@@ -110,9 +140,40 @@
 <div style="max-width:660px;margin:0 auto;padding:1.5rem 2rem 0;">
     <a href="/posts/" style="font-family:'Inter',system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
 </div>
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open')">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-models-we-tested">The Models We Tested</a></li>
+            <li><a href="#but-then-we-tried-claude-code">But Then We Tried Claude Code</a></li>
+            <li><a href="#the-hybrid-stack-we-landed-on">The Hybrid Stack We Landed On</a></li>
+            <li><a href="#what-the-openclaw-ban-taught-us">What the OpenClaw Ban Taught Us</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
     
 
-    <div class="article-container">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+            <li><a href="#the-models-we-tested">The Models We Tested</a></li>
+            <li><a href="#but-then-we-tried-claude-code">But Then We Tried Claude Code</a></li>
+            <li><a href="#the-hybrid-stack-we-landed-on">The Hybrid Stack We Landed On</a></li>
+            <li><a href="#what-the-openclaw-ban-taught-us">What the OpenClaw Ban Taught Us</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+    </ul>
+</aside>
+<div class="article-content">
+<div class="article-container">
         <h1>The Day Claude Got Banned: How We Rebuilt Our AI Stack in 48 Hours</h1>
         <div class="article-meta">
             <span class="tag">AI Infrastructure</span>
@@ -129,7 +190,7 @@
 
 <p>What happened next was a 48-hour sprint through every mainstream model on the market. Here's exactly what we tested, what we found, and why our final setup is — honestly — better than what we had before.</p>
 
-<h2>The Models We Tested</h2>
+<h2 id="the-models-we-tested">The Models We Tested</h2>
 
 <p>No cherry-picking. We ran identical tasks across all models: Reddit research synthesis, itinerary generation, Instagram caption writing, cron job scheduling logic, and video script production. We evaluated on three axes: <strong>output quality</strong>, <strong>token efficiency</strong>, and <strong>reliability</strong>.</p>
 
@@ -187,7 +248,7 @@
     <p><strong>GLM 5.1 won on every axis that matters</strong> — quality comparable to Claude, cost a fraction of GPT-5.4, and it didn't hallucinates the way Qwen occasionally does on creative tasks.</p>
 </div>
 
-<h2>But Then We Tried Claude Code</h2>
+<h2 id="but-then-we-tried-claude-code">But Then We Tried Claude Code</h2>
 
 <p>While benchmarking replacement models, we started experimenting with something else: <strong>Claude Code</strong> — Anthropic's CLI tool for autonomous coding and task execution.</p>
 
@@ -224,7 +285,7 @@
     <p><code>--dangerously-skip-permissions</code> allows Claude Code to execute arbitrary shell commands, write files, and run scripts without confirmation. Only use this in contained environments (CI/CD, isolated containers, or local dev machines where you understand the blast radius). Never run this on shared systems or production servers without proper safeguards.</p>
 </div>
 
-<h2>The Hybrid Stack We Landed On</h2>
+<h2 id="the-hybrid-stack-we-landed-on">The Hybrid Stack We Landed On</h2>
 
 <p>After a week of testing, our stack isn't a pure replacement — it's a deliberate split based on what each tool does best:</p>
 
@@ -244,7 +305,7 @@
     <p>We didn't just recover from the ban. We improved our cost structure and reliability in the process.</p>
 </div>
 
-<h2>What the OpenClaw Ban Taught Us</h2>
+<h2 id="what-the-openclaw-ban-taught-us">What the OpenClaw Ban Taught Us</h2>
 
 <p>The real lesson isn't about Claude or Anthropic. It's about <strong>vendor lock-in in the AI agent layer</strong>.</p>
 
@@ -260,7 +321,7 @@
 
 <p>If you got hit by the OpenClaw ban, the scramble is real. But the silver lining is real too: most of the "replacement" models we tested were good enough, and a few were genuinely better for specific tasks. The constraint forced an <a href="/posts/ai-resilience-planning/">architecture review</a> that most teams put off until they have no choice.</p>
 
-<h2>FAQs</h2>
+<h2 id="faqs">FAQs</h2>
 
 <h3>Why not just use GPT-5.4 as the replacement?</h3>
 <p>GPT-5.4 is excellent — no question. But at our production scale (thousands of API calls per day), the cost difference between GPT-5.4 and GLM-5.1 is substantial. And in blind tests, our editors couldn't consistently prefer GPT-5.4 output over GLM-5.1 for travel content. When the cheaper option is equally good, cost efficiency wins.</p>
@@ -276,6 +337,8 @@
 
         </div>
     </div>
+</div>
+</div>
 
     
 
@@ -289,6 +352,27 @@
 </div>
 <!-- NAV_LINKS_END -->
 
-<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
+<script>
+(function(){
+    var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    var sections = [];
+    tocLinks.forEach(function(link){
+        var id = link.getAttribute('href').replace('#','');
+        var el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el});
+    });
+    function update(){
+        var current = sections[0];
+        for(var i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current) document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+})();
+</script>
 </body>
 </html>

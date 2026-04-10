@@ -72,6 +72,36 @@
         .back-link { font-family: 'Inter', system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
         .back-link:hover { color: var(--text); }
         .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    
+.toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+.toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+.toc-sidebar li { margin-bottom: 0.4rem; }
+.toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; transition: color 0.2s; }
+.toc-sidebar a:hover { color: var(--text); }
+.toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+.toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+.toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+.toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter',system-ui,sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+.toc-mobile-toggle .toc-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; }
+.toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+.toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; border-top: 1px solid var(--border); }
+.toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+.toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+.toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter',system-ui,sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+.toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+.toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; }
+.content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+.content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+.content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+@media (max-width: 900px) {
+    .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+    .toc-sidebar { display: none; }
+    .toc-mobile-wrapper { display: block; }
+    .article-content { max-width: 100%; width: 100%; }
+    .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; }
+}
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
@@ -91,6 +121,47 @@
     <a href="/posts/" class="back-link">&larr; Back to Posts</a>
 </div>
 
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open')">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-deal-that-held-the-internet-together">The Deal That Held the Internet Together</a></li>
+            <li><a href="#the-traffic-that-stopped-coming">The Traffic That Stopped Coming</a></li>
+            <li><a href="#the-production-cost-collapse">The Production Cost Collapse</a></li>
+            <li><a href="#why-paying-to-promote-a-030-video-makes-no-sense">Why Paying to Promote a $0.30 Video Makes No Sense</a></li>
+            <li><a href="#three-eras-of-internet-economics">Three Eras of Internet Economics</a></li>
+            <li><a href="#what-happens-to-publishers">What Happens to Publishers</a></li>
+            <li><a href="#what-happens-to-advertising">What Happens to Advertising</a></li>
+            <li><a href="#the-weird-place-were-in-right-now">The Weird Place We're In Right Now</a></li>
+            <li><a href="#so-what-replaces-it">So What Replaces It?</a></li>
+            <li><a href="#the-itunes-lesson">The iTunes Lesson</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+            <li><a href="#the-deal-that-held-the-internet-together">The Deal That Held the Internet Together</a></li>
+            <li><a href="#the-traffic-that-stopped-coming">The Traffic That Stopped Coming</a></li>
+            <li><a href="#the-production-cost-collapse">The Production Cost Collapse</a></li>
+            <li><a href="#why-paying-to-promote-a-030-video-makes-no-sense">Why Paying to Promote a $0.30 Video Makes No Sense</a></li>
+            <li><a href="#three-eras-of-internet-economics">Three Eras of Internet Economics</a></li>
+            <li><a href="#what-happens-to-publishers">What Happens to Publishers</a></li>
+            <li><a href="#what-happens-to-advertising">What Happens to Advertising</a></li>
+            <li><a href="#the-weird-place-were-in-right-now">The Weird Place We're In Right Now</a></li>
+            <li><a href="#so-what-replaces-it">So What Replaces It?</a></li>
+            <li><a href="#the-itunes-lesson">The iTunes Lesson</a></li>
+    </ul>
+</aside>
+<div class="article-content">
 <article class="article-container">
     <h1>The Economics of the Internet Are Broken</h1>
     <div class="article-meta">By Bernard Huang &middot; March 19, 2026 &middot; 8 min read</div>
@@ -102,7 +173,7 @@
 
         <p><strong>The same thing is happening to the entire internet right now.</strong> And almost nobody is talking about it clearly.</p>
 
-        <h2>The Deal That Held the Internet Together</h2>
+        <h2 id="the-deal-that-held-the-internet-together">The Deal That Held the Internet Together</h2>
 
         <p>For 25 years, the internet ran on a simple bargain:</p>
 
@@ -117,7 +188,7 @@
 
         <p>AI agents broke that flywheel.</p>
 
-        <h2>The Traffic That Stopped Coming</h2>
+        <h2 id="the-traffic-that-stopped-coming">The Traffic That Stopped Coming</h2>
 
         <p>When someone asks ChatGPT "best restaurants in Barcelona," it doesn't send them to your blog post. It synthesizes an answer from training data, maybe cites a source, and the user never clicks through to anything. The query was satisfied. The publisher got nothing.</p>
 
@@ -127,7 +198,7 @@
 
         <p>And here's the part that makes it irreversible: <strong>the users prefer it.</strong> Getting an instant answer is better than clicking through three ad-laden pages to find what you need. You can't put that genie back in the bottle. The old distribution model isn't coming back, the same way nobody's going back to buying individual MP3s.</p>
 
-        <h2>The Production Cost Collapse</h2>
+        <h2 id="the-production-cost-collapse">The Production Cost Collapse</h2>
 
         <p>The broken traffic model is one side of the equation. The other side is even more disruptive: <strong>the cost of producing content just fell off a cliff.</strong></p>
 
@@ -180,7 +251,7 @@
 
         <p>When content costs $0.30 to produce, every assumption about internet economics falls apart.</p>
 
-        <h2>Why Paying to Promote a $0.30 Video Makes No Sense</h2>
+        <h2 id="three-eras-of-internet-economics">Why Paying to Promote a $0.30 Video Makes No Sense</h2>
 
         <p>This is the part that really breaks people's brains.</p>
 
@@ -196,7 +267,7 @@
 
         <blockquote>When production costs approach zero, the optimal strategy inverts: produce more, promote less. Volume becomes the distribution strategy.</blockquote>
 
-        <h2>Three Eras of Internet Economics</h2>
+        <h2 id="what-happens-to-publishers">Three Eras of Internet Economics</h2>
 
         <div class="era-timeline">
             <div class="era">
@@ -215,7 +286,7 @@
 
         <p>Each era didn't just change how content was priced — it changed who had power. Era 1 favored labels and publishers (they controlled production). Era 2 favored platforms (they controlled distribution). Era 3 favors <strong>whoever has the best agents and the best taste</strong> — because the production and distribution bottlenecks are both collapsing simultaneously.</p>
 
-        <h2>What Happens to Publishers</h2>
+        <h2 id="what-happens-to-advertising">What Happens to Publishers</h2>
 
         <p>Let me be blunt: most publishers — the ones whose entire business is "write articles, get traffic, sell ads" — are in serious trouble. Not because their content is bad. Because their business model assumed two things that are no longer true:</p>
 
@@ -232,7 +303,7 @@
             <li><strong>Transactional value.</strong> If your content leads to a booking, a purchase, or a signup, AI agents will still need you in the loop. If your content is purely informational, you're training data.</li>
         </ul>
 
-        <h2>What Happens to Advertising</h2>
+        <h2 id="the-weird-place-were-in-right-now">What Happens to Advertising</h2>
 
         <p>The $600 billion digital advertising industry is built on an assumption: <strong>human attention is scarce and can be interrupted.</strong> You're reading an article, an ad loads, maybe you click.</p>
 
@@ -242,7 +313,7 @@
 
         <p>The advertising industry will adapt, obviously. It always does. But the adaptation will be painful, and it'll probably look like: ads inside the AI interface itself (Google is already testing this), sponsored agent responses, and paid data partnerships where brands pay to be in the training data or enrichment pipeline. The one thing it won't look like is the current model of "get traffic, show ads." That's the 99-cent MP3.</p>
 
-        <h2>The Weird Place We're In Right Now</h2>
+        <h2 id="so-what-replaces-it">The Weird Place We're In Right Now</h2>
 
         <p>Here's what makes this moment strange: we're between eras, and most of the industry is pretending we're not.</p>
 
@@ -252,7 +323,7 @@
 
         <p>I don't say this to be smug. I say it because the delta between what's possible and what most people are doing is enormous. And deltas like that don't last. The market corrects. When it does, the people who were already operating in Era 3 will have a multi-year head start.</p>
 
-        <h2>So What Replaces It?</h2>
+        <h2 id="the-itunes-lesson">So What Replaces It?</h2>
 
         <p>I don't have a clean answer. Nobody does yet. But here's what I think the early signals point to:</p>
 
@@ -280,6 +351,8 @@
         <p>So far, the math checks out.</p>
     </div>
 </article>
+</div>
+</div>
 
 <!-- NAV_LINKS_START -->
 <div style="max-width:660px;margin:3rem auto 0;padding:0 2rem;text-align:center;">
@@ -293,6 +366,27 @@
 
 
 
-<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
+<script>
+(function(){
+    var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    var sections = [];
+    tocLinks.forEach(function(link){
+        var id = link.getAttribute('href').replace('#','');
+        var el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el});
+    });
+    function update(){
+        var current = sections[0];
+        for(var i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current) document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+})();
+</script>
 </body>
 </html>

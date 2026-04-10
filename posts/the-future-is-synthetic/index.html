@@ -69,6 +69,36 @@
         .back-link { font-family: 'Inter', system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
         .back-link:hover { color: var(--text); }
         .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    
+.toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+.toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+.toc-sidebar li { margin-bottom: 0.4rem; }
+.toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; transition: color 0.2s; }
+.toc-sidebar a:hover { color: var(--text); }
+.toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+.toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+.toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+.toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter',system-ui,sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+.toc-mobile-toggle .toc-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; }
+.toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+.toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; border-top: 1px solid var(--border); }
+.toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+.toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+.toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter',system-ui,sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+.toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+.toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; }
+.content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+.content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+.content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+@media (max-width: 900px) {
+    .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+    .toc-sidebar { display: none; }
+    .toc-mobile-wrapper { display: block; }
+    .article-content { max-width: 100%; width: 100%; }
+    .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; }
+}
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
@@ -88,6 +118,39 @@
     <a href="/posts/" class="back-link">&larr; Back to Posts</a>
 </div>
 
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open')">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#what-synthetic-actually-means">What "Synthetic" Actually Means</a></li>
+            <li><a href="#the-personalization-endgame">The Personalization Endgame</a></li>
+            <li><a href="#what-were-actually-running">What We're Actually Running</a></li>
+            <li><a href="#the-good-and-the-uncomfortable">The Good and the Uncomfortable</a></li>
+            <li><a href="#the-uncomfortable-middle">The Uncomfortable Middle</a></li>
+            <li><a href="#where-this-goes">Where This Goes</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+            <li><a href="#what-synthetic-actually-means">What "Synthetic" Actually Means</a></li>
+            <li><a href="#the-personalization-endgame">The Personalization Endgame</a></li>
+            <li><a href="#what-were-actually-running">What We're Actually Running</a></li>
+            <li><a href="#the-good-and-the-uncomfortable">The Good and the Uncomfortable</a></li>
+            <li><a href="#the-uncomfortable-middle">The Uncomfortable Middle</a></li>
+            <li><a href="#where-this-goes">Where This Goes</a></li>
+    </ul>
+</aside>
+<div class="article-content">
 <article class="article-container">
     <h1>The Future Is Synthetic</h1>
     <div class="article-meta">By Bernard Huang &middot; March 19, 2026 &middot; 7 min read</div>
@@ -99,7 +162,7 @@
 
         <p>I'm telling you this not to brag — it's honestly kind of absurd — but because I think what we're doing at small scale is a preview of what's about to happen to all media, all content, all digital experiences. <strong>The future is synthetic.</strong> And it's arriving faster than most people realize.</p>
 
-        <h2>What "Synthetic" Actually Means</h2>
+        <h2 id="what-synthetic-actually-means">What "Synthetic" Actually Means</h2>
 
         <p>When people hear "AI-generated content," they picture <a href="/posts/slop-iterate-curate-ai-content/">slop</a>. Low-effort SEO spam. Uncanny valley images. Robot voices reading Wikipedia. And yeah — a lot of that exists. But that's not what synthetic means in 2026.</p>
 
@@ -111,7 +174,7 @@
 
         <p>That's the shift. Quality crossed the threshold. The question isn't "can AI make this?" anymore. It's "does this make me feel something?"</p>
 
-        <h2>The Personalization Endgame</h2>
+        <h2 id="the-personalization-endgame">The Personalization Endgame</h2>
 
         <p>Here's where it gets really interesting — and where most people's imaginations haven't caught up yet.</p>
 
@@ -123,7 +186,7 @@
 
         <p>We're not there yet. But we can see it from here. And everything we're building is a stepping stone toward it.</p>
 
-        <h2>What We're Actually Running</h2>
+        <h2 id="what-were-actually-running">What We're Actually Running</h2>
 
         <p>People ask how this works practically, so here's the honest breakdown:</p>
 
@@ -142,7 +205,7 @@
 
         <p>$500 a month. For a content operation that runs 24/7, publishes to five platforms, and would cost six figures a year with a human team. And it gets better every week because the agents learn — not in a mystical AGI sense, but because every failure gets logged, every lesson gets encoded into the system, every prompt gets refined.</p>
 
-        <h2>The Good and the Uncomfortable</h2>
+        <h2 id="the-good-and-the-uncomfortable">The Good and the Uncomfortable</h2>
 
         <p>I'm not naive about what this means. Synthetic media at scale has real implications, and I think about them constantly.</p>
 
@@ -167,7 +230,7 @@
             </div>
         </div>
 
-        <h2>The Uncomfortable Middle</h2>
+        <h2 id="the-uncomfortable-middle">The Uncomfortable Middle</h2>
 
         <p>I think a lot of the discourse around AI content is weirdly binary. Either it's "AI will destroy everything" or "AI will save everything." The reality is messier and more interesting than either take.</p>
 
@@ -179,7 +242,7 @@
 
         <p>If the answer is yes, I think it deserves to exist. Regardless of how it was made.</p>
 
-        <h2>Where This Goes</h2>
+        <h2 id="where-this-goes">Where This Goes</h2>
 
         <p>In five years, I think the idea of a "content team" will feel as quaint as a "typing pool." Not because humans won't be involved — they will — but because the ratio will be completely inverted. Instead of 20 people producing 10 pieces of content a week, it'll be 1 person directing AI agents that produce 100 pieces a day.</p>
 
@@ -196,6 +259,8 @@
         <p>Especially then.</p>
     </div>
 </article>
+</div>
+</div>
 
 <!-- NAV_LINKS_START -->
 <div style="max-width:660px;margin:3rem auto 0;padding:0 2rem;text-align:center;">
@@ -209,6 +274,27 @@
 
 
 
-<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
+<script>
+(function(){
+    var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    var sections = [];
+    tocLinks.forEach(function(link){
+        var id = link.getAttribute('href').replace('#','');
+        var el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el});
+    });
+    function update(){
+        var current = sections[0];
+        for(var i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current) document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+})();
+</script>
 </body>
 </html>

@@ -61,6 +61,36 @@
         .back-link { font-family: 'Inter', system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
         .back-link:hover { color: var(--text); }
         .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    
+.toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+.toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+.toc-sidebar li { margin-bottom: 0.4rem; }
+.toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; transition: color 0.2s; }
+.toc-sidebar a:hover { color: var(--text); }
+.toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+.toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+.toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+.toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter',system-ui,sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+.toc-mobile-toggle .toc-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; }
+.toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+.toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; border-top: 1px solid var(--border); }
+.toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+.toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+.toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter',system-ui,sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+.toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+.toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; }
+.content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+.content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+.content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+@media (max-width: 900px) {
+    .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+    .toc-sidebar { display: none; }
+    .toc-mobile-wrapper { display: block; }
+    .article-content { max-width: 100%; width: 100%; }
+    .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; }
+}
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
@@ -80,6 +110,37 @@
     <a href="/posts/" class="back-link">&larr; Back to Posts</a>
 </div>
 
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open')">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-agent-doesnt-want-your-blog-post">The Agent Doesn't Want Your Blog Post</a></li>
+            <li><a href="#apis-are-the-new-content-format">APIs Are the New Content Format</a></li>
+            <li><a href="#what-agent-builders-should-invest-in">What Agent Builders Should Invest In</a></li>
+            <li><a href="#what-brands-should-do-about-this">What Brands Should Do About This</a></li>
+            <li><a href="#the-transaction-layer-is-coming">The Transaction Layer Is Coming</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+            <li><a href="#the-agent-doesnt-want-your-blog-post">The Agent Doesn't Want Your Blog Post</a></li>
+            <li><a href="#apis-are-the-new-content-format">APIs Are the New Content Format</a></li>
+            <li><a href="#what-agent-builders-should-invest-in">What Agent Builders Should Invest In</a></li>
+            <li><a href="#what-brands-should-do-about-this">What Brands Should Do About This</a></li>
+            <li><a href="#the-transaction-layer-is-coming">The Transaction Layer Is Coming</a></li>
+    </ul>
+</aside>
+<div class="article-content">
 <article class="article-container">
     <h1>The Future of Content Is Agentic Data Enrichment</h1>
     <div class="article-meta">By Bernard Huang &middot; March 19, 2026 &middot; 4 min read</div>
@@ -91,7 +152,7 @@
 
         <p>This distinction matters enormously, and almost nobody is building for it.</p>
 
-        <h2>The Agent Doesn't Want Your Blog Post</h2>
+        <h2 id="the-agent-doesnt-want-your-blog-post">The Agent Doesn't Want Your Blog Post</h2>
 
         <p>Think about how a travel agent — a human one — used to work. They didn't read Lonely Planet cover to cover before booking your trip. They already knew the destinations. What they needed was a supplier database: real-time availability, current pricing, verified contact details. The general knowledge was table stakes. The operational data was the product.</p>
 
@@ -106,7 +167,7 @@
 
         <p>And it needs this data in a format it can parse programmatically — not buried in paragraph four of a blog post between an anecdote about the author's study abroad semester and an affiliate link.</p>
 
-        <h2>APIs Are the New Content Format</h2>
+        <h2 id="apis-are-the-new-content-format">APIs Are the New Content Format</h2>
 
         <p>If you're building agents, this is the shift to pay attention to: <strong>the most valuable content on the internet is moving from pages to endpoints.</strong></p>
 
@@ -116,7 +177,7 @@
 
         <p>This is already happening. Agents that need weather data don't scrape weather.com — they call the OpenWeatherMap API. Agents that need flight prices don't parse Kayak results — they hit a flight pricing endpoint. The agents that are most useful are the ones with the best data integrations, not the ones with the cleverest prompts.</p>
 
-        <h2>What Agent Builders Should Invest In</h2>
+        <h2 id="what-agent-builders-should-invest-in">What Agent Builders Should Invest In</h2>
 
         <p>If you're building agents that need to produce accurate, trustworthy output, here's where the money and effort should go:</p>
 
@@ -127,7 +188,7 @@
             <li><strong>Verification loops.</strong> Agents hallucinate. The fix isn't a better model — it's a verification layer. Cross-reference the model's output against structured data sources. If Claude says a restaurant is highly rated, confirm it against the Places API before surfacing it to a user.</li>
         </ol>
 
-        <h2>What Brands Should Do About This</h2>
+        <h2 id="what-brands-should-do-about-this">What Brands Should Do About This</h2>
 
         <p>If you're on the other side — if you're a brand that wants AI agents to accurately represent your product — the playbook is straightforward: <strong>make your information exhaustively available in structured formats.</strong></p>
 
@@ -135,7 +196,7 @@
 
         <p>The brands that win in an agentic world won't be the ones with the best SEO. They'll be the ones whose data is easiest for agents to consume and most reliable when consumed.</p>
 
-        <h2>The Transaction Layer Is Coming</h2>
+        <h2 id="the-transaction-layer-is-coming">The Transaction Layer Is Coming</h2>
 
         <p>Right now, most agent-to-data interactions are free — agents scrape the web, call free API tiers, or rely on training data. That won't last. As agents become the primary way people interact with information, the economics will shift toward <strong>agentic transactions</strong>: agents paying for enrichment data on a per-query basis.</p>
 
@@ -146,6 +207,8 @@
         <p>Every piece of content you produce should answer one question: can an agent use this to make its output more accurate, more current, or more specific? If the answer is no, you're building for a distribution channel that's shrinking. If the answer is yes, you're building for the one that's growing.</p>
     </div>
 </article>
+</div>
+</div>
 
 <!-- NAV_LINKS_START -->
 <div style="max-width:660px;margin:3rem auto 0;padding:0 2rem;text-align:center;">
@@ -159,6 +222,27 @@
 
 
 
-<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
+<script>
+(function(){
+    var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    var sections = [];
+    tocLinks.forEach(function(link){
+        var id = link.getAttribute('href').replace('#','');
+        var el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el});
+    });
+    function update(){
+        var current = sections[0];
+        for(var i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current) document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+})();
+</script>
 </body>
 </html>

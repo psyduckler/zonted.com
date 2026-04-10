@@ -72,6 +72,36 @@ nav a.cost-table { font-size: 0.85rem; }
             .cost-table th, .cost-table td { padding: 0.5rem 0.6rem; }
         }
             .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+    
+.toc-sidebar { padding-top: 7rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+.toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+.toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+.toc-sidebar li { margin-bottom: 0.4rem; }
+.toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; transition: color 0.2s; }
+.toc-sidebar a:hover { color: var(--text); }
+.toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+.toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+.toc-mobile-sticky { background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+.toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter',system-ui,sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+.toc-mobile-toggle .toc-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; }
+.toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+.toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s; border-top: 1px solid var(--border); }
+.toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+.toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+.toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter',system-ui,sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+.toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+.toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; }
+.content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+.content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+.content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+@media (max-width: 900px) {
+    .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+    .toc-sidebar { display: none; }
+    .toc-mobile-wrapper { display: block; }
+    .article-content { max-width: 100%; width: 100%; }
+    .content-wrapper .article-content .article-container { padding: 5rem 1.25rem 2rem; }
+}
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
@@ -91,6 +121,37 @@ nav a.cost-table { font-size: 0.85rem; }
     <a href="/posts/" style="color:var(--text-muted);text-decoration:none;font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
 </div>
 
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open')">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-numbers-nobody-talks-about">The Numbers Nobody Talks About</a></li>
+            <li><a href="#why-a-48-star-rating-costs-more-than-a-1000-word-article">Why a 4.8-Star Rating Costs More Than a 1,000-Word Article</a></li>
+            <li><a href="#the-data-moat-nobody-sees">The Data Moat Nobody Sees</a></li>
+            <li><a href="#video-makes-it-even-more-obvious">Video Makes It Even More Obvious</a></li>
+            <li><a href="#what-this-means-for-anyone-building-with-ai">What This Means for Anyone Building with AI</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+            <li><a href="#the-numbers-nobody-talks-about">The Numbers Nobody Talks About</a></li>
+            <li><a href="#why-a-48-star-rating-costs-more-than-a-1000-word-article">Why a 4.8-Star Rating Costs More Than a 1,000-Word Article</a></li>
+            <li><a href="#the-data-moat-nobody-sees">The Data Moat Nobody Sees</a></li>
+            <li><a href="#video-makes-it-even-more-obvious">Video Makes It Even More Obvious</a></li>
+            <li><a href="#what-this-means-for-anyone-building-with-ai">What This Means for Anyone Building with AI</a></li>
+    </ul>
+</aside>
+<div class="article-content">
 <article class="article-container">
     <h1>The True Cost of AI Content Production Isn't Tokens — It's Data Enrichment</h1>
     <div class="article-meta">March 18, 2026 · 6 min read</div>
@@ -102,7 +163,7 @@ nav a.cost-table { font-size: 0.85rem; }
 
         <p>We've spent the last six weeks building <a href="/">tabiji.ai</a> — 386 local restaurant and activity guides, 324 travel itineraries, 706 destination pages, and 200+ short-form videos. All AI-assisted. And after looking at where the money actually goes, we can tell you: <strong>token costs are a rounding error. Data enrichment is the real expense.</strong></p>
 
-        <h2>The Numbers Nobody Talks About</h2>
+        <h2 id="the-numbers-nobody-talks-about">The Numbers Nobody Talks About</h2>
 
         <p>Here's our actual monthly cost breakdown for producing content at scale:</p>
 
@@ -160,7 +221,7 @@ nav a.cost-table { font-size: 0.85rem; }
             <figcaption style="text-align:center;font-family:'Inter',system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);font-style:italic;margin-top:0.5rem;">Our actual Google Cloud bill — March 1-18, 2026. Gemini API: $209.60. Places API: $126.04. The data enrichment layer is real.</figcaption>
         </figure>
 
-        <h2>Why a 4.8-Star Rating Costs More Than a 1,000-Word Article</h2>
+        <h2 id="the-data-moat-nobody-sees">Why a 4.8-Star Rating Costs More Than a 1,000-Word Article</h2>
 
         <p>Consider what it takes to produce a single <a href="https://tabiji.ai/popular-picks/">local restaurant guide</a>. The AI can write beautiful prose about "the best ramen in Tokyo" in seconds. That's the easy part. The hard part — the part that makes the content actually trustworthy — is enrichment:</p>
 
@@ -173,7 +234,7 @@ nav a.cost-table { font-size: 0.85rem; }
 
         <p>A single popular-picks page costs roughly $0.50 in Places API calls, $0.30 in search/photo sourcing, and maybe $0.02 in LLM tokens for the actual writing. <strong>The "AI" part is 4% of the unit cost. The data layer is 96%.</strong></p>
 
-        <h2>The Data Moat Nobody Sees</h2>
+        <h2 id="video-makes-it-even-more-obvious">The Data Moat Nobody Sees</h2>
 
         <p>This cost structure is actually good news if you understand what it means: <strong>data enrichment is a moat.</strong></p>
 
@@ -183,7 +244,7 @@ nav a.cost-table { font-size: 0.85rem; }
 
         <p>When a page shows that Klimataria in Athens has a 4.5 rating from 3,200 reviews and is open until 11 PM on Thursdays — that's not AI creativity. That's an API call. And it's the thing that makes a visitor trust the recommendation enough to actually go there.</p>
 
-        <h2>Video Makes It Even More Obvious</h2>
+        <h2 id="what-this-means-for-anyone-building-with-ai">Video Makes It Even More Obvious</h2>
 
         <p>Our <a href="/posts/ai-reels-what-actually-works/">Instagram Reels pipeline</a> produces 20+ videos per day across 10 formats. The cost breakdown is even more skewed:</p>
 
@@ -212,6 +273,8 @@ nav a.cost-table { font-size: 0.85rem; }
         <p>Stop optimizing for tokens. Start investing in data. And if you want to understand why models <a href="/posts/what-is-ai-drift-how-to-fix/">drift from your templates at scale</a>, that's the other half of the quality problem.</p>
     </div>
 </article>
+</div>
+</div>
 
     
 
@@ -227,7 +290,28 @@ nav a.cost-table { font-size: 0.85rem; }
 
 
 
-<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a></p></footer>
+<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
 
+<script>
+(function(){
+    var tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    var sections = [];
+    tocLinks.forEach(function(link){
+        var id = link.getAttribute('href').replace('#','');
+        var el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el});
+    });
+    function update(){
+        var current = sections[0];
+        for(var i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current) document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+})();
+</script>
 </body>
 </html>
