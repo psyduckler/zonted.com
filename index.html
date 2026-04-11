@@ -30,8 +30,8 @@
             --border: #ddd;
             --border-light: #e8e8e4;
             --text: #1a1a1a;
-            --text-muted: #666;
-            --text-dim: #999;
+            --text-muted: #595959;
+            --text-dim: #767676;
             --accent: #1a1a1a;
             --accent-hover: #000;
             --green: #2a7a2a;
@@ -239,16 +239,47 @@
 
         .footer-links a:hover { color: var(--text-muted); }
 
+        /* Featured */
+        .featured-section { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+        .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .featured-card { display: block; padding: 16px; background: var(--bg-surface); border-radius: 8px; text-decoration: none; transition: background 0.15s, border-color 0.15s; border: 1px solid transparent; }
+        .featured-card:hover { background: var(--bg-raised); border-color: var(--border); }
+        .featured-badge { font-family: 'Inter', system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); background: var(--bg-raised); padding: 2px 8px; border-radius: 3px; display: inline-block; margin-bottom: 8px; }
+        .featured-title { display: block; font-family: 'Source Serif 4', Georgia, serif; font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 6px; }
+        .featured-desc { display: block; font-family: 'Inter', system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* Social proof */
+        .social-proof { font-family: 'Inter', system-ui, sans-serif; font-size: 0.82rem; color: var(--text-dim); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 0.75rem; }
+        .social-proof a { color: var(--text-muted); text-decoration: underline; }
+
+        /* Filter bar */
+        .filter-bar { margin-bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-btn { font-family: 'Inter', system-ui, sans-serif; font-size: 0.8rem; font-weight: 500; padding: 8px 14px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+        .filter-btn:hover { border-color: var(--text-muted); }
+        .filter-btn.active, .filter-btn[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+        /* Skip nav + focus */
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Footer */
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text-muted); }
+
         /* Mobile */
         @media (max-width: 768px) {
             .entry-date { display: none; }
             .intro { padding: 32px 0 2.5rem; }
+            .featured-grid { grid-template-columns: 1fr; }
         }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
@@ -260,25 +291,54 @@
         </div>
     </nav>
 
+    <main id="main">
     <div class="container">
         <div class="intro" style="display:flex;gap:1.5rem;align-items:flex-start;">
             <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:72px;height:72px;border-radius:50%;flex-shrink:0;margin-top:0.2rem;">
             <div>
                 <div style="font-size:1.15rem;line-height:1.7;margin-bottom:0.5rem;"><em>I spend my days building AI content pipelines &mdash; video, images, music, SEO &mdash; and figuring out <a href="/metrics/" style="color:var(--text);">what actually works</a> in production. When I learn something useful, I write it up here.</em></div>
                 <div style="font-size:1rem;line-height:1.7;color:var(--text-muted);">Glad you're here.<br><a href="/about/" style="font-family:'Pacifico',cursive;color:var(--text);text-decoration:none;font-size:1.1rem;">&mdash; Bernard</a></div>
+                <div class="social-proof">
+                    <span>6.2M+ video views</span>
+                    <span>&middot;</span>
+                    <span>23 articles</span>
+                    <span>&middot;</span>
+                    <a href="/metrics/">See all metrics &rarr;</a>
+                </div>
             </div>
         </div>
+
+        <section class="featured-section">
+            <div class="section-title">Start Here</div>
+            <div class="featured-grid">
+                <a href="/posts/makeugc/" class="featured-card">
+                    <span class="featured-badge">Review</span>
+                    <span class="featured-title">MakeUGC Review: AI UGC Ads Worth $10 a Clip?</span>
+                    <span class="featured-desc">Detailed tool review with pricing breakdown and prompt iteration process.</span>
+                </a>
+                <a href="/posts/ai-reels-what-actually-works/" class="featured-card">
+                    <span class="featured-badge">Production</span>
+                    <span class="featured-title">AI Reels: What Actually Works</span>
+                    <span class="featured-desc">Real data from testing AI-generated Reels across Instagram, YouTube, and X.</span>
+                </a>
+                <a href="/posts/slop-iterate-curate-ai-content/" class="featured-card">
+                    <span class="featured-badge">Opinion</span>
+                    <span class="featured-title">Why AI Slop Is Necessary</span>
+                    <span class="featured-desc">My framework for AI content production — start bad to get good.</span>
+                </a>
+            </div>
+        </section>
 
         <section>
             <div class="section-title">All Writing</div>
             <!-- ENTRY_LIST_START -->
-            <div class="filter-bar" style="margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;">
-                <button class="filter-btn active" data-filter="all" style="font-family:'Inter',system-ui,sans-serif;font-size:0.8rem;font-weight:500;padding:4px 12px;border:1px solid var(--border);border-radius:4px;background:var(--text);color:var(--bg);cursor:pointer;">All</button>
-                <button class="filter-btn" data-filter="reviews" style="font-family:'Inter',system-ui,sans-serif;font-size:0.8rem;font-weight:500;padding:4px 12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text-muted);cursor:pointer;">Reviews</button>
-                <button class="filter-btn" data-filter="comparisons" style="font-family:'Inter',system-ui,sans-serif;font-size:0.8rem;font-weight:500;padding:4px 12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text-muted);cursor:pointer;">Comparisons</button>
-                <button class="filter-btn" data-filter="guides" style="font-family:'Inter',system-ui,sans-serif;font-size:0.8rem;font-weight:500;padding:4px 12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text-muted);cursor:pointer;">Guides</button>
-                <button class="filter-btn" data-filter="production" style="font-family:'Inter',system-ui,sans-serif;font-size:0.8rem;font-weight:500;padding:4px 12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text-muted);cursor:pointer;">Production</button>
-                <button class="filter-btn" data-filter="opinion" style="font-family:'Inter',system-ui,sans-serif;font-size:0.8rem;font-weight:500;padding:4px 12px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text-muted);cursor:pointer;">Opinion</button>
+            <div class="filter-bar" role="toolbar" aria-label="Filter posts by category">
+                <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                <button class="filter-btn" data-filter="reviews" aria-pressed="false">Reviews</button>
+                <button class="filter-btn" data-filter="comparisons" aria-pressed="false">Comparisons</button>
+                <button class="filter-btn" data-filter="guides" aria-pressed="false">Guides</button>
+                <button class="filter-btn" data-filter="production" aria-pressed="false">Production</button>
+                <button class="filter-btn" data-filter="opinion" aria-pressed="false">Opinion</button>
             </div>
             <ul class="entry-list">
                 <li class="entry-row" data-category="opinion">
@@ -378,9 +438,23 @@
         </section>
     </div>
 
+    </main>
+
     <footer>
         <div class="container">
             <div class="footer-top">&copy; 2026 Bernard Huang &middot; zonted.com</div>
+            <div class="footer-links">
+                <a href="/posts/">Posts</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/feed.xml">RSS</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://x.com/bernardjhuang">X</a>
+                <a href="https://github.com/bernardjhuang">GitHub</a>
+                <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+                <a href="https://tabiji.ai">tabiji.ai</a>
+            </div>
         </div>
     </footer>
 <!-- FILTER_JS_START -->
@@ -389,13 +463,11 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
         document.querySelectorAll('.filter-btn').forEach(b => {
-            b.style.background = 'var(--bg)';
-            b.style.color = 'var(--text-muted)';
             b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
         });
-        btn.style.background = 'var(--text)';
-        btn.style.color = 'var(--bg)';
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         document.querySelectorAll('.entry-row').forEach(row => {
             if (filter === 'all' || row.dataset.category === filter) {
                 row.style.display = '';

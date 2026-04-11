@@ -60,8 +60,8 @@
             --border: #ddd;
             --border-light: #e8e8e4;
             --text: #1a1a1a;
-            --text-muted: #666;
-            --text-dim: #999;
+            --text-muted: #595959;
+            --text-dim: #767676;
             --accent: #1a1a1a;
             --accent-hover: #000;
             --green: #2a7a2a;
@@ -83,7 +83,7 @@
         .article-body a { color: var(--text); text-decoration: underline; }
         .article-body a:hover { color: var(--accent-hover); }
         .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid #999; padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid #767676; padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
         .article-body strong { color: var(--text); }
         footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
         footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
@@ -165,11 +165,11 @@
         .verdict { border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
         .verdict-win { background: rgba(42,122,42,0.05); border-left: 4px solid var(--green); }
         .verdict-lose { background: rgba(170,51,51,0.05); border-left: 4px solid var(--red); }
-        .verdict-neutral { background: var(--bg-surface); border-left: 4px solid #999; }
+        .verdict-neutral { background: var(--bg-surface); border-left: 4px solid #767676; }
         .verdict-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
         .verdict-win .verdict-label { color: var(--green); }
         .verdict-lose .verdict-label { color: var(--red); }
-        .verdict-neutral .verdict-label { color: #666; }
+        .verdict-neutral .verdict-label { color: #595959; }
         .verdict p { margin-bottom: 0; font-size: 0.97rem; }
 
         @media (max-width: 480px) {
@@ -178,11 +178,20 @@
             .article-body p, .article-body li { font-size: 0.9rem; }
             nav { padding: 0; }
         }
+
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
             <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em;">Zonted.</a>
@@ -220,6 +229,7 @@
 </div>
 </div>
 
+<main id="main">
 <div class="content-wrapper">
 <aside class="toc-sidebar">
     <h2>Contents</h2>
@@ -247,7 +257,7 @@
         </div>
     </div>
 
-    <div style="background:var(--bg-surface);border-left:3px solid #999;padding:1.25rem 1.5rem;border-radius:0 6px 6px 0;margin:0 0 2rem 0;">
+    <div style="background:var(--bg-surface);border-left:3px solid #767676;padding:1.25rem 1.5rem;border-radius:0 6px 6px 0;margin:0 0 2rem 0;">
         <strong style="color:var(--text);font-size:1.05rem;">Key Takeaways</strong>
         <ul style="margin:0.75rem 0 0 1.25rem;color:var(--text);">
             <li><strong>{{KEY_TAKEAWAY_1_BOLD}}</strong> — {{KEY_TAKEAWAY_1_TEXT}}</li>
@@ -410,9 +420,24 @@
     <!-- <a href="/posts/{{NEXT_SLUG}}/" style="color:var(--text-muted);text-decoration:none;">{{NEXT_TITLE}} &rarr;</a> -->
 </div>
 <!-- NAV_LINKS_END -->
+</main>
 
 <footer>
-    <p>&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com">zonted.com</a> &middot; <a href="https://tabiji.ai">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" target="_blank" rel="noopener">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" target="_blank" rel="noopener">LinkedIn</a></p>
+    <div style="max-width:660px;margin:0 auto;">
+        <p style="color:var(--text-dim);font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;margin-bottom:12px;">&copy; 2026 Bernard Huang &middot; zonted.com</p>
+        <div style="display:flex;gap:20px;justify-content:center;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;">
+            <a href="/posts/" style="color:var(--text-dim);text-decoration:none;">Posts</a>
+            <a href="/metrics/" style="color:var(--text-dim);text-decoration:none;">Metrics</a>
+            <a href="/about/" style="color:var(--text-dim);text-decoration:none;">About</a>
+            <a href="/feed.xml" style="color:var(--text-dim);text-decoration:none;">RSS</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://github.com/bernardjhuang">GitHub</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            <a href="https://tabiji.ai">tabiji.ai</a>
+        </div>
+    </div>
 </footer>
 
 <script>

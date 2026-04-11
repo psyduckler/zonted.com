@@ -23,8 +23,8 @@
             --border: #ddd;
             --border-light: #e8e8e4;
             --text: #1a1a1a;
-            --text-muted: #666;
-            --text-dim: #999;
+            --text-muted: #595959;
+            --text-dim: #767676;
             --accent: #1a1a1a;
             --green: #2a7a2a;
             --blue: #369;
@@ -293,7 +293,32 @@
             font-family: 'Inter', system-ui, sans-serif;
             font-size: 0.85rem;
             color: var(--text-dim);
+            margin-bottom: 12px;
         }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--text-muted); }
+
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text-muted); }
 
         @media (max-width: 768px) {
             .summary-grid { grid-template-columns: 1fr 1fr; }
@@ -306,6 +331,7 @@
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
@@ -317,6 +343,7 @@
         </div>
     </nav>
 
+    <main id="main">
     <div class="container">
         <div class="page-header">
             <h1>Tabiji Metrics</h1>
@@ -695,10 +722,23 @@
         </div>
 
     </div>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-top">&copy; 2026 Bernard Huang &middot; zonted.com</div>
+            <div class="footer-links">
+                <a href="/posts/">Posts</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/feed.xml">RSS</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://x.com/bernardjhuang">X</a>
+                <a href="https://github.com/bernardjhuang">GitHub</a>
+                <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+                <a href="https://tabiji.ai">tabiji.ai</a>
+            </div>
         </div>
     </footer>
 </body>

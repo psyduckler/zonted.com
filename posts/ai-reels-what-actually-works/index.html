@@ -29,7 +29,7 @@
         :root {
     --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
     --border: #ddd; --border-light: #e8e8e4;
-    --text: #1a1a1a; --text-muted: #666; --text-dim: #999;
+    --text: #1a1a1a; --text-muted: #595959; --text-dim: #767676;
     --accent: #1a1a1a; --accent-hover: #000;
     --green: #2a7a2a; --red: #a33; --blue: #369;
 }
@@ -163,7 +163,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
         .verdict { border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
         .verdict-win { background: rgba(42, 122, 42, 0.08); border-left: 4px solid #2a7a2a; }
         .verdict-lose { background: rgba(163, 51, 51, 0.08); border-left: 4px solid #a33; }
-        .verdict-neutral { background: var(--bg-surface); border-left: 4px solid #999; }
+        .verdict-neutral { background: var(--bg-surface); border-left: 4px solid #767676; }
         .verdict-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
         .verdict-win .verdict-label { color: #2a7a2a; }
         .verdict-lose .verdict-label { color: #a33; }
@@ -191,11 +191,29 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
             .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
         }
             .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .share-buttons { display: flex; align-items: center; gap: 10px; margin: 2.5rem 0 1.5rem; padding: 1.25rem 0; border-top: 1px solid var(--border); }
+        .share-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-right: 4px; }
+        .share-btn { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; color: var(--text-muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; cursor: pointer; text-decoration: none; transition: color 0.2s, border-color 0.2s; display: inline-flex; align-items: center; }
+        .share-btn:hover { color: var(--text); border-color: var(--text); }
+        .related-posts { margin: 0 0 2rem; padding: 1.25rem 0; }
+        .related-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 12px; }
+        .related-list { list-style: none; }
+        .related-list li { padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+        .related-list li:last-child { border-bottom: none; }
+        .related-list a { font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; color: var(--text); text-decoration: underline; }
+        .related-list a:hover { color: var(--accent-hover); }
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text-muted); }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
@@ -206,6 +224,7 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
             </div>
         </div>
     </nav>
+<main id="main">
 
 
 <div class="toc-mobile-wrapper">
@@ -805,6 +824,21 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
             <p>We'll keep running experiments and sharing what we find. This pipeline is cheap to operate, fast to iterate, and produces real signal. The 48-hour snapshot above represents something like 80+ Reels published across formats and destinations — the kind of A/B test scale that would have cost thousands of dollars and months of production time in the old world of travel content creation.</p>
 
             <p>Whether that's exciting or unnerving probably depends on which side of the camera you're usually on.</p>
+        <div class="share-buttons">
+            <span class="share-label">Share</span>
+            <a href="https://x.com/intent/tweet?url=https%3A%2F%2Fzonted.com%2Fposts%2Fai-reels-what-actually-works%2F&text=AI%20Reels%3A%20What%20Actually%20Works" target="_blank" rel="noopener" class="share-btn">X</a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fzonted.com%2Fposts%2Fai-reels-what-actually-works%2F" target="_blank" rel="noopener" class="share-btn">LinkedIn</a>
+            <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const s=this.querySelector('span');s.textContent='Copied!';setTimeout(()=>s.textContent='Copy Link',1500)})" class="share-btn"><span>Copy Link</span></button>
+        </div>
+        <div class="related-posts">
+            <div class="related-label">Keep Reading</div>
+            <ul class="related-list">
+                <li><a href="/posts/veo3-vs-hailuo-minimax/">5 AI Video Generators, 50 Reels</a></li>
+                <li><a href="/posts/wavespeed/">Wavespeed Review: The Best AI Video API</a></li>
+                <li><a href="/posts/slop-iterate-curate-ai-content/">Why AI Slop Is Necessary</a></li>
+            </ul>
+        </div>
+
 
         </div>
     </article>
@@ -814,7 +848,24 @@ footer p { color: var(--text-muted); font-size: 0.85rem; }
     
 
     
-<footer style="text-align:center;padding:3rem 2rem;border-top:1px solid #ddd;"><p style="color:#999;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">&copy; 2026 Bernard Huang &middot; <a href="https://zonted.com" style="color:#999;">zonted.com</a> &middot; <a href="https://tabiji.ai" style="color:#999;">tabiji.ai</a> &middot; <a href="https://x.com/bernardjhuang" style="color:#999;">X</a> · <a href="https://www.linkedin.com/in/bernardjhuang/" style="color:#999;">LinkedIn</a></p></footer>
+</main>
+<footer>
+    <div style="max-width:660px;margin:0 auto;padding:0 24px;text-align:center;">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;color:var(--text-dim);margin-bottom:12px;">&copy; 2026 Bernard Huang &middot; zonted.com</div>
+        <div style="display:flex;gap:20px;justify-content:center;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">
+            <a href="/posts/" style="color:var(--text-dim);text-decoration:none;">Posts</a>
+            <a href="/metrics/" style="color:var(--text-dim);text-decoration:none;">Metrics</a>
+            <a href="/about/" style="color:var(--text-dim);text-decoration:none;">About</a>
+            <a href="/feed.xml" style="color:var(--text-dim);text-decoration:none;">RSS</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://github.com/bernardjhuang">GitHub</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            <a href="https://tabiji.ai">tabiji.ai</a>
+        </div>
+    </div>
+</footer>
 <script>
 // TOC active state tracking
 const sections = document.querySelectorAll('[id]');

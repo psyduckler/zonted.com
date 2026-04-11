@@ -47,8 +47,8 @@
             --border: #ddd;
             --border-light: #e8e8e4;
             --text: #1a1a1a;
-            --text-muted: #666;
-            --text-dim: #999;
+            --text-muted: #595959;
+            --text-dim: #767676;
             --accent: #1a1a1a;
             --accent-hover: #000;
         }
@@ -211,6 +211,14 @@
 
         .footer-links a:hover { color: var(--text-muted); }
 
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text-muted); }
+
         /* Mobile */
         @media (max-width: 768px) {
             .page-title { padding: 32px 0 1.5rem; font-size: 1.75rem; }
@@ -220,6 +228,7 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="/" class="nav-logo">Zonted.</a>
@@ -231,6 +240,7 @@
         </div>
     </nav>
 
+    <main id="main">
     <div class="container">
         <h1 class="page-title">About</h1>
 
@@ -264,16 +274,22 @@
             </ul>
         </div>
     </div>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-top">&copy; 2026 Bernard Huang &middot; zonted.com</div>
             <div class="footer-links">
-                <a href="https://tabiji.ai">tabiji.ai</a>
-                <a href="https://x.com/bernardjhuang">X</a>
-                <a href="https://github.com/bernardjhuang">GitHub</a>
+                <a href="/posts/">Posts</a>
                 <a href="/metrics/">Metrics</a>
                 <a href="/about/">About</a>
+                <a href="/feed.xml">RSS</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://x.com/bernardjhuang">X</a>
+                <a href="https://github.com/bernardjhuang">GitHub</a>
+                <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+                <a href="https://tabiji.ai">tabiji.ai</a>
             </div>
         </div>
     </footer>
