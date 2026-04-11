@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Best AI Video Models in 2026: I Tested 6 Text-to-Video APIs for Travel Reels — Zonted</title>
+    <meta name="description" content="I tested Wan 2.7, Kling 3.0, Kling O3, Seedance 2.0, Veo 3.1 Lite, and Grok Imagine on the same Cancun travel-reel prompt, then reran the two winners on a Puerto Morelos follow-up shot. Here are the exact prompts, outputs, and my split verdict.">
+    <link rel="canonical" href="https://zonted.com/posts/best-ai-video-models/">
+    <meta property="og:title" content="Best AI Video Models in 2026: I Tested 6 Text-to-Video APIs for Travel Reels">
+    <meta property="og:description" content="I tested 6 text-to-video models on the same travel-reel prompt, uploaded the exact outputs, and came away with a split verdict: Seedance 2.0 and Veo 3.1 Lite are both excellent.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://zonted.com/posts/best-ai-video-models/">
+    <meta property="og:image" content="https://img.zonted.com/resources/best-ai-video-models-2026/og-best-ai-video-models-2026.jpg">
+    <meta property="article:published_time" content="2026-04-11">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Best AI Video Models in 2026: I Tested 6 Text-to-Video APIs for Travel Reels">
+    <meta name="twitter:description" content="I tested 6 text-to-video models on the same travel-reel prompt, uploaded the exact outputs, and came away with a split verdict: Seedance 2.0 and Veo 3.1 Lite are both excellent.">
+    <meta name="twitter:image" content="https://img.zonted.com/resources/best-ai-video-models-2026/og-best-ai-video-models-2026.jpg">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Best AI Video Models in 2026: I Tested 6 Text-to-Video APIs for Travel Reels","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-11","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/best-ai-video-models/","description":"I tested Wan 2.7, Kling 3.0, Kling O3, Seedance 2.0, Veo 3.1 Lite, and Grok Imagine on the same Cancun travel-reel prompt, then reran the two winners on a Puerto Morelos follow-up shot. Here are the exact prompts, outputs, and my split verdict.","image":"https://img.zonted.com/resources/best-ai-video-models-2026/og-best-ai-video-models-2026.jpg"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Best AI Video Models in 2026"}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #767676;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --blue: #295f8a; --amber: #8a6417;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(252,252,250,0.95); border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1040px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: pre-wrap; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .dropcap::first-letter { float:left; font-family:'Source Serif 4',Georgia,serif; font-size:3.5rem; line-height:0.8; padding-right:0.1em; padding-top:0.1em; font-weight:700; color:#1a1a1a; }
+        .article-hero { margin: -0.5rem -2rem 2rem; border-radius: 12px; overflow: hidden; }
+        .article-hero img { width: 100%; height: auto; display: block; }
+        .article-meta { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+        .toc-sidebar { padding-top: 3rem; width: 220px; flex-shrink: 0; position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; }
+        .toc-sidebar h2 { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul, .toc-mobile-dropdown ul, .related-list { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(254, 252, 249, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .note-box, .verdict-box { background: var(--bg-surface); border-radius: 12px; padding: 1.35rem 1.5rem; margin: 1.5rem 0 2rem; }
+        .note-box { border: 1px solid var(--border); }
+        .verdict-box { border: 2px solid var(--text-muted); }
+        .verdict-box h3, .note-box h3 { margin-top: 0; font-size: 1.05rem; }
+        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5rem 0 2rem; border-radius: 10px; border: 1px solid var(--border); }
+        .spec-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 0.95rem; }
+        .spec-table th, .spec-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .spec-table th { background: var(--bg-surface); color: var(--text); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+        .spec-table tr:last-child td { border-bottom: none; }
+        .winner { background: rgba(42, 122, 42, 0.08); }
+        .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 2rem; }
+        .video-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-surface); }
+        .video-card video { width: 100%; aspect-ratio: 9 / 16; display: block; background: #111; object-fit: cover; }
+        .video-card .card-body { padding: 0.9rem 1rem 1rem; }
+        .video-card h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+        .video-card p { margin: 0.4rem 0 0.7rem; font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); }
+        .video-card .meta { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.78rem; letter-spacing: 0.02em; color: var(--text-dim); }
+        .video-card .raw-link { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; }
+        details { margin: 1.25rem 0 1.75rem; border: 1px solid var(--border); background: var(--bg-surface); border-radius: 10px; overflow: hidden; }
+        summary { cursor: pointer; list-style: none; padding: 0.95rem 1rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; }
+        details[open] summary { border-bottom: 1px solid var(--border); }
+        details .details-inner { padding: 1rem; }
+        .share-buttons { display: flex; align-items: center; gap: 10px; margin: 2.5rem 0 1.5rem; padding: 1.25rem 0; border-top: 1px solid var(--border); }
+        .share-label, .related-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-right: 4px; }
+        .share-btn { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; color: var(--text-muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; cursor: pointer; text-decoration: none; transition: color 0.2s, border-color 0.2s; display: inline-flex; align-items: center; }
+        .share-btn:hover { color: var(--text); border-color: var(--text); }
+        .related-posts { margin: 0 0 2rem; padding: 1.25rem 0; }
+        .related-list li { padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+        .related-list li:last-child { border-bottom: none; }
+        .related-list a { font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; color: var(--text); text-decoration: underline; }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-dim); text-decoration: none; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-hero { margin-left: -1.25rem; margin-right: -1.25rem; border-radius: 0; }
+        }
+        @media (max-width: 640px) {
+            .article-container h1 { font-size: 1.35rem; line-height: 1.3; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .video-grid { grid-template-columns: 1fr; }
+            .spec-table { min-width: 520px; font-size: 0.85rem; }
+            .spec-table th, .spec-table td { padding: 0.55rem 0.7rem; }
+            .verdict-box, .note-box { padding: 1rem 1.1rem; }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">Zonted.</a>
+        <div class="nav-links">
+            <a href="/posts/">Posts</a>
+            <a href="/metrics/">Metrics</a>
+            <a href="/about/">About</a>
+        </div>
+    </div>
+</nav>
+<main id="main">
+<div class="toc-mobile-wrapper">
+    <div class="toc-mobile-sticky" id="toc-mobile">
+        <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+            <span class="toc-active-label">📑 Contents</span>
+            <span class="toc-chevron">▼</span>
+        </button>
+        <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+            <ul>
+                <li><a href="#why-i-ran-this" onclick="closeMobileToc()">Why I ran this test</a></li>
+                <li><a href="#what-i-tested" onclick="closeMobileToc()">What I tested</a></li>
+                <li><a href="#transparency" onclick="closeMobileToc()">Transparency notes</a></li>
+                <li><a href="#prompt-1" onclick="closeMobileToc()">The Cancun prompt</a></li>
+                <li><a href="#results" onclick="closeMobileToc()">All 6 outputs</a></li>
+                <li><a href="#winner-round" onclick="closeMobileToc()">Winner round: clip 2</a></li>
+                <li><a href="#prompt-lessons" onclick="closeMobileToc()">What I learned</a></li>
+                <li><a href="#verdict" onclick="closeMobileToc()">My split verdict</a></li>
+                <li><a href="#related" onclick="closeMobileToc()">Related reading</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#why-i-ran-this">Why I ran this test</a></li>
+        <li><a href="#what-i-tested">What I tested</a></li>
+        <li><a href="#transparency">Transparency notes</a></li>
+        <li><a href="#prompt-1">The Cancun prompt</a></li>
+        <li><a href="#results">All 6 outputs</a></li>
+        <li><a href="#winner-round">Winner round: clip 2</a></li>
+        <li><a href="#prompt-lessons">What I learned</a></li>
+        <li><a href="#verdict">My split verdict</a></li>
+        <li><a href="#related">Related reading</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form action="https://zonted.substack.com/api/v1/free?nojs=true" method="post" target="_blank" style="display:flex;flex-direction:column;gap:6px;">
+            <input type="email" name="email" placeholder="your@email.com" required style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;width:100%;">
+            <button type="submit" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;font-weight:600;padding:8px 10px;border:none;border-radius:6px;background:var(--text);color:var(--bg);cursor:pointer;transition:background 0.2s;">Subscribe</button>
+        </form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>Best AI Video Models in 2026: I Tested 6 Text-to-Video APIs for Travel Reels</h1>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+            <div>
+                <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">April 11, 2026</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+            <div class="article-hero">
+                <img src="https://img.zonted.com/resources/best-ai-video-models-2026/hero-comparison-grid.jpg" alt="Six-way comparison grid of Wan 2.7, Kling 3.0, Kling O3, Seedance 2.0, Veo 3.1 Lite, and Grok Imagine on the same Cancun travel-reel prompt" width="1200" height="1600">
+            </div>
+
+            <p class="dropcap">I wanted a brutally practical answer to a simple question: <strong>what are the best AI video models right now if I am actually trying to build travel reels, not just admire pretty demos?</strong> So I ran six text-to-video models through the exact same handheld Cancun travel prompt, uploaded the outputs, then reran the two clear winners on a second Puerto Morelos “local alternative” shot.</p>
+
+            <p>The result was not a one-model blowout. It was a split decision. <strong>Seedance 2.0</strong> and <strong>Veo 3.1 Lite</strong> were both excellent, but for slightly different reasons. Seedance gave me the more lived-in, local-feeling output in the second round. Veo 3.1 Lite gave me the cleanest overall production baseline and the safest starting point if I just want a model that keeps doing the obvious thing well.</p>
+
+            <div class="verdict-box">
+                <h3>TL;DR</h3>
+                <p><strong>If I am doing fast model bake-offs or building an agentic content pipeline, I would start with WaveSpeed.</strong> It gives me one surface to hit a lot of strong models quickly.</p>
+                <p><strong>If I specifically want Veo 3.1 Lite in production, I would still use Gemini directly for reliability.</strong> WaveSpeed's timeout window is tight at 180 seconds, which is workable for testing but not my favorite thing to bet a production pipeline on.</p>
+                <p><strong>My split verdict:</strong> Veo 3.1 Lite is the best general default. Seedance 2.0 is the model I would reach for when I want more texture, messiness, and “this actually feels like phone footage” energy.</p>
+            </div>
+
+            <h2 id="why-i-ran-this">Why I ran this test</h2>
+            <p>I am rebuilding a travel-reel format from scratch, starting with a very specific hook: the moment a traveler realizes the polished all-inclusive version of Mexico is not what they actually wanted. That meant I did not want generic cinematic beauty. I wanted <strong>prompt adherence, handheld believability, emotional clarity, and footage I could actually use in a short-form reel pipeline</strong>.</p>
+            <p>The first shot was a Cancun “tourist mistake” scene. The second shot, which I only ran on the winners, was the emotional opposite: a Puerto Morelos local-food-and-waterfront scene that feels calmer, truer, and more lived in. That is a much better stress test than asking models to render abstract fantasy prompts or glossy marketing footage.</p>
+
+            <h2 id="what-i-tested">What I tested</h2>
+            <div class="table-wrap">
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Endpoint</th>
+                            <th>Run config</th>
+                            <th>My quick take</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Wan 2.7</strong></td>
+                            <td><code>alibaba/wan-2.7/text-to-video</code></td>
+                            <td>720p, 6s, 9:16</td>
+                            <td>Surprisingly believable handheld energy, but it skewed more generic resort than emotionally precise regret.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kling 3.0</strong></td>
+                            <td><code>kwaivgi/kling-v3.0-std/text-to-video</code></td>
+                            <td>6s, 9:16</td>
+                            <td>Decent, but it felt cleaner and flatter than I wanted for this format.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kling O3</strong></td>
+                            <td><code>kwaivgi/kling-video-o3-std/text-to-video</code></td>
+                            <td>6s, 9:16</td>
+                            <td>More polished than Kling 3.0, still not the winner for this handheld travel use case.</td>
+                        </tr>
+                        <tr class="winner">
+                            <td><strong>Seedance 2.0 Fast</strong></td>
+                            <td><code>bytedance/seedance-2.0-fast/text-to-video</code></td>
+                            <td>480p, 5s, 9:16</td>
+                            <td>One of the two winners. Best “lived-in” feel in the second round.</td>
+                        </tr>
+                        <tr class="winner">
+                            <td><strong>Veo 3.1 Lite</strong></td>
+                            <td><code>google/veo3.1-lite/text-to-video</code></td>
+                            <td>720p, 6s, 9:16</td>
+                            <td>One of the two winners. Best all-around default and strongest overall structure.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grok Imagine Video</strong></td>
+                            <td><code>x-ai/grok-imagine-video/text-to-video</code></td>
+                            <td>720p, 6s, 9:16</td>
+                            <td>Interesting budget option, but it did not hang with the top two for this benchmark.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="transparency">Transparency notes</h2>
+            <div class="note-box">
+                <h3>What this article is, and is not</h3>
+                <ul>
+                    <li>Every example in this post is an <strong>actual output from my test runs</strong>, rehosted on <code>zonted-media</code> so it can be served directly from this article.</li>
+                    <li>I ran the <strong>Cancun mistake prompt</strong> on all six models.</li>
+                    <li>I ran the <strong>Puerto Morelos local prompt</strong> only on the top two models, because by that point the first round had already narrowed the field.</li>
+                    <li>This is <strong>not</strong> a universal ranking for every possible video use case. It is a ranking for <strong>handheld travel-reel footage with strong prompt constraints</strong>.</li>
+                    <li>I initially tried Kling 3.0 and Kling O3 with <code>shot_type: intelligent</code> because that was one of the settings I wanted to test. WaveSpeed rejected that value, so I reran both without that field. I am calling that out because “as transparent as possible” means including the integration friction too.</li>
+                    <li>My scoring bias here is simple: if a clip is prettier but less usable for a real short-form travel narrative, I will rank the more usable clip higher.</li>
+                </ul>
+            </div>
+
+            <h2 id="prompt-1">The exact Cancun prompt</h2>
+            <p>This is the full prompt I used for the first round. I wanted a raw iPhone disappointment clip, not a luxury ad.</p>
+            <details open>
+                <summary>Show the full Cancun “tourist mistake” prompt</summary>
+                <div class="details-inner"><pre><code>Handheld phone camera, 9:16 vertical portrait. A tourist in a Cancun Hotel Zone all-inclusive resort is filming their own disappointment. The shot opens tight on a plate of sad resort food, a rubbery taco with fluorescent orange cheese sauce, wilted lettuce, a scoop of bland rice, sitting on a white plastic tray under harsh fluorescent overhead lights. The person holding the phone slowly pans the camera up and to the right, past the buffet line, chafing dishes with steam trays, a sneeze guard reflecting the harsh ceiling lights, a family in matching neon wristbands loading plates without enthusiasm. The camera continues panning past the buffet toward the floor-to-ceiling windows and the camera momentarily refocuses on the glass reflection, the filmmaker&#x27;s own tired face visible for a split second, overhead fluorescents catching in their eyes. Then the focus shifts through the glass to reveal the resort pool area outside, rows and rows of identical blue lounge chairs packed shoulder to shoulder under a blazing Caribbean sun, a giant inflatable beer bottle floating in a crowded pool, a staff member in a resort polo setting up yet another generic pool game, bass from outdoor speakers you can almost feel through the glass. Every single person visible wears the same colored all-inclusive wristband. There is zero Mexican culture anywhere in frame, no local food, no Spanish signage, no sense of place, no authenticity. This could be a generic resort anywhere. The lighting shifts from harsh indoor fluorescent wash to overexposed Caribbean sunlight bleeding through the window, creating a blown-out, unappealing contrast. Slight camera wobble throughout, visible digital noise, iPhone snapshot aesthetic, raw, unpolished, a tourist documenting their own regret. Shot duration about 5 to 6 seconds. Emotional arc: plate of disappointment, mechanical buffet line, tired self-reflection in glass, then the resort prison revealed outside. Color palette is deliberately unappetizing, institutional white walls, fluorescent yellow-white light, plastic surfaces, garish tropical colors outside that feel fake rather than inviting.</code></pre></div>
+            </details>
+
+            <h2 id="results">All 6 outputs from the same prompt</h2>
+            <p>Here are the exact model outputs side by side. If you care about direct inspection, each card also links to the raw MP4 I uploaded.</p>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/wan-2-7-cancun-mistake.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/wan-2-7-cancun-mistake.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Wan 2.7</h3><div class="meta">720p · 6s · Cancun mistake prompt</div><p>Wan gave me one of the more believable handheld-feeling results. I liked the wristband detail and buffet POV, but it still felt a little too generic-resort to be the final winner.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/wan-2-7-cancun-mistake.mp4">Raw MP4</a></div>
+                </div>
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/kling-3-0-cancun-mistake.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/kling-3-0-cancun-mistake.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Kling 3.0</h3><div class="meta">6s · Cancun mistake prompt</div><p>Kling 3.0 was competent, but it read a bit flatter and more generic to me. It also came with the API quirk I mentioned above, which matters if I am judging operational smoothness too.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/kling-3-0-cancun-mistake.mp4">Raw MP4</a></div>
+                </div>
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/kling-o3-cancun-mistake.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/kling-o3-cancun-mistake.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Kling O3</h3><div class="meta">6s · Cancun mistake prompt</div><p>Kling O3 looked more polished than Kling 3.0, but not in a way that helped this format. I wanted raw, emotional, handheld regret, and O3 still felt slightly too composed.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/kling-o3-cancun-mistake.mp4">Raw MP4</a></div>
+                </div>
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/seedance-2-0-cancun-mistake.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/seedance-2-0-cancun-mistake.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Seedance 2.0 Fast</h3><div class="meta">480p · 5s · Cancun mistake prompt</div><p>Seedance immediately felt competitive. Even at 480p, it looked convincingly photographic and it carried the “real person documenting a bad choice” vibe well enough to make the final round.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/seedance-2-0-cancun-mistake.mp4">Raw MP4</a></div>
+                </div>
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/veo-3-1-lite-cancun-mistake.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/veo-3-1-lite-cancun-mistake.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Veo 3.1 Lite</h3><div class="meta">720p · 6s · Cancun mistake prompt</div><p>Veo 3.1 Lite was the cleanest “yes, this understood the assignment” result. It had the strongest overall structure and was the safest production-ready default from round one.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/veo-3-1-lite-cancun-mistake.mp4">Raw MP4</a></div>
+                </div>
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/grok-imagine-cancun-mistake.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/grok-imagine-cancun-mistake.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Grok Imagine Video</h3><div class="meta">720p · 6s · Cancun mistake prompt</div><p>Grok was not embarrassing, which is more than I expected, but it was still clearly behind the top two. For this benchmark it felt more like an interesting cheap test path than a serious winner.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/grok-imagine-cancun-mistake.mp4">Raw MP4</a></div>
+                </div>
+            </div>
+
+            <h3>My round-one ranking</h3>
+            <ol>
+                <li><strong>Veo 3.1 Lite</strong> for overall prompt adherence and usable structure.</li>
+                <li><strong>Seedance 2.0</strong> for realism-per-dollar and strong handheld energy.</li>
+                <li><strong>Wan 2.7</strong> for believable handheld texture, even if it was less emotionally precise.</li>
+                <li><strong>Kling O3</strong> for polish, but not enough usable advantage.</li>
+                <li><strong>Kling 3.0</strong> for being decent but unremarkable here.</li>
+                <li><strong>Grok Imagine</strong> for staying in the conversation, but not seriously threatening the leaders.</li>
+            </ol>
+
+            <h2 id="winner-round">Winner round: Puerto Morelos local shot</h2>
+            <p>Once the first round narrowed the field, I wanted a second prompt that flipped the emotional polarity. Instead of “tourist regret in a generic resort,” I wanted “quiet relief after escaping the trap.” This is the exact prompt I used for clip 2.</p>
+            <details>
+                <summary>Show the full Puerto Morelos “local alternative” prompt</summary>
+                <div class="details-inner"><pre><code>Handheld phone camera, 9:16 vertical portrait. A traveler has just stepped off a cheap colectivo in Puerto Morelos, Mexico and is filming the moment they realize this is the experience they were actually looking for. The shot opens tight on a paper plate of fresh local ceviche at a small beachfront palapa, glossy lime-marinated fish, sliced red onion, cilantro, avocado, and bright green salsa, beads of condensation running down a cold glass bottle of Mexican Coke beside it on a weathered turquoise table. Natural ocean breeze lightly stirs the napkins. The person holding the phone slowly pans the camera up and to the left, revealing a relaxed open-air seafood stand with hand-painted signs in Spanish, a local woman behind the counter squeezing fresh lime over another plate, sun-faded Coca-Cola crates stacked near a cooler, a few plastic chairs, a sandy floor, and no polished resort aesthetics anywhere. The camera keeps moving past the palapa toward the street and briefly catches a passing white colectivo van, dusty from the road, then swings back toward the beach where the whole mood opens up, small colorful fishing boats anchored in shallow turquoise water, a few locals talking casually near the dock, palm shadows moving across the sand, and only a handful of beachgoers spread out peacefully with plenty of space. No spring break chaos, no giant pool floats, no matching wristbands, no fake entertainment energy. The place feels lived-in, local, calm, and unmistakably Mexican. The lighting is soft late-morning Caribbean sun, warm but natural, with bright reflections dancing on the water and gentle shade under the palapa roof. Slight camera wobble throughout, iPhone travel footage aesthetic, candid and unpolished, like someone documenting the exact moment they realize they escaped the tourist trap. Shot duration about 5 to 6 seconds. Emotional arc: fresh ceviche up close, humble local food stand, glimpse of the colectivo that got them here, then the peaceful Puerto Morelos waterfront revealed in full. Color palette is natural and inviting, turquoise water, faded painted wood, citrus greens, sun-worn whites, sandy beige, and the vivid colors of real coastal Mexico.</code></pre></div>
+            </details>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/seedance-2-0-puerto-morelos-local.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/seedance-2-0-puerto-morelos-local.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Seedance 2.0, clip 2</h3><div class="meta">Puerto Morelos local prompt</div><p>This is where Seedance really won me over. It felt more lived-in, more candid, and more like someone actually stumbled into the right place with their phone out.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/seedance-2-0-puerto-morelos-local.mp4">Raw MP4</a></div>
+                </div>
+                <div class="video-card">
+                    <video controls playsinline preload="metadata" poster="https://img.zonted.com/resources/best-ai-video-models-2026/veo-3-1-lite-puerto-morelos-local.jpg"><source src="https://img.zonted.com/resources/best-ai-video-models-2026/veo-3-1-lite-puerto-morelos-local.mp4" type="video/mp4"></video>
+                    <div class="card-body"><h3>Veo 3.1 Lite, clip 2</h3><div class="meta">Puerto Morelos local prompt</div><p>Veo still looked excellent here, but in a more polished, slightly more arranged way. If I wanted the prettier thumbnail, I could absolutely argue for this output.</p><a class="raw-link" href="https://img.zonted.com/resources/best-ai-video-models-2026/veo-3-1-lite-puerto-morelos-local.mp4">Raw MP4</a></div>
+                </div>
+            </div>
+
+            <p>If I phrase the second-round difference simply: <strong>Seedance looked more discovered, Veo looked more designed.</strong> Both are useful. Which one is “better” depends on whether I value lived-in authenticity or polished controllability a bit more.</p>
+
+            <h2 id="prompt-lessons">What I learned from doing it this way</h2>
+            <p><strong>1. A real benchmark prompt is more revealing than a flashy prompt.</strong> Travel reels break models in very specific ways. You are asking for phone-camera realism, environmental storytelling, culturally specific cues, messy public spaces, and emotional continuity inside a five-to-six second window. That is much harder than “cinematic woman in the rain.”</p>
+            <p><strong>2. Handheld realism is still a separating skill.</strong> A lot of models can produce something impressive. Fewer can produce something that feels like it was actually filmed by a person on location rather than composed by a tasteful machine.</p>
+            <p><strong>3. Operational friction matters.</strong> I do not just care about how a model looks in a vacuum. I care about whether I can hit it repeatedly, compare runs, and trust the wrapper. Kling's rejected <code>shot_type</code> value and WaveSpeed's 180-second timeout ceiling both belong in the evaluation, because production systems fail on boring details long before they fail on aesthetics.</p>
+            <p><strong>4. Seedance and Veo 3.1 Lite are not redundant winners.</strong> They win for different reasons. Seedance is the more textured and human-feeling option in this test. Veo 3.1 Lite is the model I trust most when I want a clean, coherent baseline that is easy to ship.</p>
+
+            <h2 id="verdict">My split verdict</h2>
+            <p>If someone asked me today for the <strong>best AI video models</strong>, I would not give a fake one-word answer. I would give two answers.</p>
+            <blockquote>
+                <p><strong>Best platform for creators and agentic builders:</strong> <a href="/posts/wavespeed/">WaveSpeed</a>. I like having multi-model access in one place when I am doing comparison work like this, or when I want to keep an automated content pipeline flexible.</p>
+                <p><strong>Best reliability recommendation for Veo 3.1 Lite specifically:</strong> use Gemini directly. The model is excellent, and I would rather not make a production system depend on a wrapper with a tight 180-second timeout if I have a cleaner direct path.</p>
+            </blockquote>
+            <p>At the model level, my answer is also split:</p>
+            <ul>
+                <li><strong>Veo 3.1 Lite</strong> is my pick if I want the best all-around default.</li>
+                <li><strong>Seedance 2.0</strong> is my pick if I want the most lived-in, local, human-feeling result for this kind of reel.</li>
+            </ul>
+            <p>That is why I am calling this a real split verdict instead of hedging. <strong>Both are excellent.</strong> Veo 3.1 Lite won the first-round benchmark for me. Seedance won the second-round authenticity test for me. If I were building a serious travel content machine right now, I would keep both in rotation.</p>
+
+            <h2 id="related">Related reading</h2>
+            <div class="related-posts">
+                <div class="related-label">Keep Reading</div>
+                <ul class="related-list">
+                    <li><a href="/posts/wavespeed/">Wavespeed Review: The Best AI Video API</a></li>
+                    <li><a href="/posts/veo3-vs-hailuo-minimax/">5 AI Video Generators, 50 Reels: What Actually Works</a></li>
+                    <li><a href="/posts/ai-image-generation-comparison/">AI Image Generation: 5 Models, 26 Real Results</a></li>
+                </ul>
+            </div>
+
+            <div class="share-buttons">
+                <span class="share-label">Share</span>
+                <a href="https://x.com/intent/tweet?url=https%3A%2F%2Fzonted.com%2Fposts%2Fbest-ai-video-models%2F&text=Best%20AI%20Video%20Models%20in%202026" target="_blank" rel="noopener" class="share-btn">X</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fzonted.com%2Fposts%2Fbest-ai-video-models%2F" target="_blank" rel="noopener" class="share-btn">LinkedIn</a>
+                <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const s=this.querySelector('span');s.textContent='Copied!';setTimeout(()=>s.textContent='Copy Link',1500)})" class="share-btn"><span>Copy Link</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</main>
+<footer>
+    <div style="max-width:660px;margin:0 auto;padding:0 24px;text-align:center;">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;color:var(--text-dim);margin-bottom:12px;">&copy; 2026 Bernard Huang &middot; zonted.com</div>
+        <div style="display:flex;gap:20px;justify-content:center;font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;">
+            <a href="/posts/" style="color:var(--text-dim);text-decoration:none;">Posts</a>
+            <a href="/metrics/" style="color:var(--text-dim);text-decoration:none;">Metrics</a>
+            <a href="/about/" style="color:var(--text-dim);text-decoration:none;">About</a>
+            <a href="/feed.xml" style="color:var(--text-dim);text-decoration:none;">RSS</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://github.com/bernardjhuang">GitHub</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            <a href="https://tabiji.ai">tabiji.ai</a>
+        </div>
+    </div>
+</footer>
+<script>
+function closeMobileToc() { document.getElementById('toc-mobile').classList.remove('open'); }
+(function(){
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const sections = [];
+    tocLinks.forEach(function(link){
+        const id = link.getAttribute('href').replace('#','');
+        const el = document.getElementById(id);
+        if(el) sections.push({id:id, el:el, link:link});
+    });
+    function updateActive(){
+        let current = sections[0];
+        for(let i=0;i<sections.length;i++){
+            if(sections[i].el.getBoundingClientRect().top <= 120) current = sections[i];
+        }
+        tocLinks.forEach(function(l){l.classList.remove('active');});
+        if(current){
+            document.querySelectorAll('[href="#'+current.id+'"]').forEach(function(l){l.classList.add('active');});
+            const label = document.querySelector('.toc-active-label');
+            if(label && current.link) label.textContent = current.link.textContent;
+        }
+    }
+    window.addEventListener('scroll', updateActive, {passive:true});
+    updateActive();
+})();
+</script>
+</body>
+</html>

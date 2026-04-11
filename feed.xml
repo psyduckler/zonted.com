@@ -5,8 +5,16 @@
     <link>https://zonted.com/</link>
     <description>I test AI tools so you don't have to. Honest reviews, real data, and opinions from someone who actually builds with this stuff.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Best AI Video Models in 2026: I Tested 6 Text-to-Video APIs for Travel Reels</title>
+      <link>https://zonted.com/posts/best-ai-video-models/</link>
+      <description>I tested Wan 2.7, Kling 3.0, Kling O3, Seedance 2.0, Veo 3.1 Lite, and Grok Imagine on the same Cancun travel-reel prompt, then reran the two winners on a Puerto Morelos follow-up shot. Here are the exact prompts, outputs, and my split verdict.</description>
+      <pubDate>Sat, 11 Apr 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/best-ai-video-models/</guid>
+    </item>
     <item>
       <title>Human-in-the-Loop</title>
       <link>https://zonted.com/posts/human-in-the-loop/</link>
