@@ -473,5 +473,21 @@ function closeMobileToc() { document.getElementById('toc-mobile').classList.remo
     updateActive();
 })();
 </script>
+<!-- NEWSLETTER_REDIRECT -->
+<script>
+(function(){
+  document.querySelectorAll('form[action*="substack.com"]').forEach(function(form){
+    var iframe=document.createElement("iframe");
+    iframe.name="substack-frame";
+    iframe.style.display="none";
+    document.body.appendChild(iframe);
+    form.target="substack-frame";
+    form.addEventListener("submit",function(){
+      setTimeout(function(){window.location.href="/subscribe/confirmed/";},300);
+    });
+  });
+})();
+</script>
+<!-- /NEWSLETTER_REDIRECT -->
 </body>
 </html>

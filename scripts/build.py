@@ -481,6 +481,62 @@ def inject_copy_link(articles):
     return count
 
 
+def inject_newsletter_redirect(articles):
+    """Intercept substack forms to submit via hidden iframe and redirect to confirmation page."""
+    REDIRECT_MARKER = '<!-- NEWSLETTER_REDIRECT -->'
+    REDIRECT_SCRIPT = (
+        '<!-- NEWSLETTER_REDIRECT -->\n'
+        '<script>\n'
+        '(function(){\n'
+        '  document.querySelectorAll(\'form[action*="substack.com"]\').forEach(function(form){\n'
+        '    var iframe=document.createElement("iframe");\n'
+        '    iframe.name="substack-frame";\n'
+        '    iframe.style.display="none";\n'
+        '    document.body.appendChild(iframe);\n'
+        '    form.target="substack-frame";\n'
+        '    form.addEventListener("submit",function(){\n'
+        '      setTimeout(function(){window.location.href="/subscribe/confirmed/";},300);\n'
+        '    });\n'
+        '  });\n'
+        '})();\n'
+        '</script>\n'
+        '<!-- /NEWSLETTER_REDIRECT -->'
+    )
+
+    count = 0
+    for article in articles:
+        filepath = article['filepath']
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        if 'substack.com' not in content:
+            continue
+
+        if REDIRECT_MARKER in content:
+            content = re.sub(
+                r'<!-- NEWSLETTER_REDIRECT -->.*?<!-- /NEWSLETTER_REDIRECT -->',
+                REDIRECT_SCRIPT,
+                content,
+                flags=re.DOTALL
+            )
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+            continue
+
+        if '</body>' in content:
+            content = content.replace(
+                '</body>',
+                REDIRECT_SCRIPT + '\n</body>',
+                1
+            )
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+
+    return count
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -509,6 +565,9 @@ def main():
 
     n = inject_copy_link(articles)
     print(f"Injected copy-link button into {n} articles")
+
+    n = inject_newsletter_redirect(articles)
+    print(f"Injected newsletter redirect into {n} articles")
 
 
 if __name__ == '__main__':
