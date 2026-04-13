@@ -5,8 +5,16 @@
     <link>https://zonted.com/</link>
     <description>I test AI tools so you don't have to. Honest reviews, real data, and opinions from someone who actually builds with this stuff.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rise of AI Influencers &amp; Fall of Trust on the Internet — Fake Until Proven Real</title>
+      <link>https://zonted.com/posts/rise-of-the-ai-influencer/</link>
+      <description>A fake AI monk has 2.6 million followers and made $300K in 90 days. 76% of the people consuming AI content are over 45. The internet is becoming synthetic faster than we can label it.</description>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/rise-of-the-ai-influencer/</guid>
+    </item>
     <item>
       <title>Best AI Video Models in 2026: I Tested 6 Text-to-Video APIs for Travel Reels</title>
       <link>https://zonted.com/posts/best-ai-video-models/</link>
