@@ -13,6 +13,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
     <style>
@@ -179,6 +180,31 @@
             margin-bottom: 1.25rem;
         }
 
+        /* Chart section */
+        .chart-section {
+            margin-bottom: 3rem;
+            padding-top: 0.5rem;
+        }
+
+        .chart-section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 280px;
+            margin: 1.5rem 0;
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
         /* Metric rows */
         .metric-row {
             display: flex;
@@ -316,13 +342,14 @@
         .skip-link:focus { transform: translateY(0); }
         a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
         .footer-social a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
         .footer-social a:hover { color: var(--text-muted); }
 
         @media (max-width: 768px) {
             .summary-grid { grid-template-columns: 1fr 1fr; }
             .page-header h1 { font-size: 1.6rem; }
+            .chart-container { height: 240px; padding: 12px; }
         }
 
         @media (max-width: 480px) {
@@ -348,22 +375,43 @@
         <div class="page-header">
             <h1>Tabiji Metrics</h1>
             <p>Real performance data for <a href="https://tabiji.ai">tabiji.ai</a> — an AI-powered travel site running on automated content pipelines. All data from the last 90 days.</p>
-            <div class="updated-badge">Updated April 10, 2026</div>
+            <div class="updated-badge">Updated April 16, 2026</div>
         </div>
 
         <!-- Summary Cards -->
         <div class="summary-grid">
             <div class="summary-card">
-                <div class="value">4,216</div>
+                <div class="value">6,186</div>
                 <div class="label">GA Sessions</div>
             </div>
             <div class="summary-card">
-                <div class="value">6.23M</div>
+                <div class="value">7.9M</div>
                 <div class="label">IG Views (90d)</div>
             </div>
             <div class="summary-card">
-                <div class="value">2,233</div>
+                <div class="value">2,508</div>
                 <div class="label">IG Followers</div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="chart-section">
+            <h2><span class="icon">📈</span> Trends (90d)</h2>
+
+            <div class="chart-container">
+                <canvas id="ga4Chart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="scChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="igChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="pinChart"></canvas>
             </div>
         </div>
 
@@ -374,46 +422,46 @@
 
             <div class="metric-row">
                 <span class="metric-label">Sessions</span>
-                <span class="metric-value">4,216</span>
+                <span class="metric-value">6,186</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Users</span>
-                <span class="metric-value">3,301</span>
+                <span class="metric-value">5,117</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Pageviews</span>
-                <span class="metric-value">10,362</span>
+                <span class="metric-value">12,511</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Avg. Session Duration</span>
-                <span class="metric-value">3m 34s</span>
+                <span class="metric-value">2m 44s</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Engagement Rate</span>
-                <span class="metric-value">28.8%</span>
+                <span class="metric-value">25.8%</span>
             </div>
 
             <hr class="section-divider">
             <div class="subsection-label">Top 5 Channels</div>
             <div class="metric-row">
                 <span class="metric-label">Direct</span>
-                <span class="metric-value">2,795 sessions</span>
+                <span class="metric-value">3,596 sessions</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Organic Search</span>
-                <span class="metric-value">556 sessions</span>
+                <span class="metric-value">879 sessions</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Organic Social</span>
-                <span class="metric-value">367 sessions</span>
+                <span class="metric-value">377 sessions</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Unassigned</span>
-                <span class="metric-value">267 sessions</span>
+                <span class="metric-value">353 sessions</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Referral</span>
-                <span class="metric-value">229 sessions</span>
+                <span class="metric-value">267 sessions</span>
             </div>
 
             <hr class="section-divider">
@@ -423,35 +471,35 @@
                     <span class="top-rank">1</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/">Homepage</a></div>
-                        <div class="top-stats"><span>2,189 views</span> <span>1,025 sessions</span></div>
+                        <div class="top-stats"><span>2,043 views</span> <span>996 sessions</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">2</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/plan">Trip Planner</a></div>
-                        <div class="top-stats"><span>492 views</span> <span>329 sessions</span></div>
+                        <div class="top-stats"><span>537 views</span> <span>376 sessions</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">3</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/popular-picks/">Popular Picks</a></div>
-                        <div class="top-stats"><span>415 views</span> <span>153 sessions</span></div>
+                        <div class="top-stats"><span>400 views</span> <span>150 sessions</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">4</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/find/">Find</a></div>
-                        <div class="top-stats"><span>410 views</span> <span>66 sessions</span></div>
+                        <div class="top-stats"><span>396 views</span> <span>65 sessions</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">5</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/success">Success</a></div>
-                        <div class="top-stats"><span>318 views</span> <span>225 sessions</span></div>
+                        <div class="top-stats"><span>272 views</span> <span>203 sessions</span></div>
                     </div>
                 </li>
             </ul>
@@ -464,19 +512,19 @@
 
             <div class="metric-row">
                 <span class="metric-label">Clicks</span>
-                <span class="metric-value">248</span>
+                <span class="metric-value">501</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Impressions</span>
-                <span class="metric-value">66,080</span>
+                <span class="metric-value">119,571</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">CTR</span>
-                <span class="metric-value">0.38%</span>
+                <span class="metric-value">0.42%</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Avg. Position</span>
-                <span class="metric-value">10.6</span>
+                <span class="metric-value">11.5</span>
             </div>
 
             <hr class="section-divider">
@@ -486,35 +534,35 @@
                     <span class="top-rank">1</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/">tabiji.ai</a></div>
-                        <div class="top-stats"><span>28 clicks</span> <span>359 impressions</span> <span>Pos 4.4</span></div>
+                        <div class="top-stats"><span>29 clicks</span> <span>442 impressions</span> <span>Pos 4.1</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">2</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/popular-picks/tallinn-rooftop-bars/">Tallinn Rooftop Bars</a></div>
-                        <div class="top-stats"><span>6 clicks</span> <span>405 impressions</span> <span>Pos 7.9</span></div>
+                        <div class="top-stats"><span>8 clicks</span> <span>587 impressions</span> <span>Pos 7.9</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">3</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/barcelona-night-markets/">Barcelona Night Markets</a></div>
-                        <div class="top-stats"><span>3 clicks</span> <span>59 impressions</span> <span>Pos 6.9</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/scams/vienna/">Vienna Scams</a></div>
+                        <div class="top-stats"><span>7 clicks</span> <span>165 impressions</span> <span>Pos 6.6</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">4</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/beijing-food-halls/">Beijing Food Halls</a></div>
-                        <div class="top-stats"><span>3 clicks</span> <span>34 impressions</span> <span>Pos 6.9</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/amman-bookshops/">Amman Bookshops</a></div>
+                        <div class="top-stats"><span>5 clicks</span> <span>120 impressions</span> <span>Pos 9.0</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">5</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/casablanca-bookshops/">Casablanca Bookshops</a></div>
-                        <div class="top-stats"><span>3 clicks</span> <span>43 impressions</span> <span>Pos 9.5</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/almaty-bookshops/">Almaty Bookshops</a></div>
+                        <div class="top-stats"><span>4 clicks</span> <span>192 impressions</span> <span>Pos 10.8</span></div>
                     </div>
                 </li>
             </ul>
@@ -527,27 +575,27 @@
 
             <div class="metric-row">
                 <span class="metric-label">Followers</span>
-                <span class="metric-value">2,233</span>
+                <span class="metric-value">2,508</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Total Media</span>
-                <span class="metric-value">687</span>
+                <span class="metric-value">785</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Views (90d)</span>
-                <span class="metric-value">6,234,725</span>
+                <span class="metric-value">7.90M</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Reach (90d)</span>
-                <span class="metric-value">1,981,438</span>
+                <span class="metric-value">3.31M</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Accounts Engaged (90d)</span>
-                <span class="metric-value">55,678</span>
+                <span class="metric-value">59,039</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Total Interactions (90d)</span>
-                <span class="metric-value">115,106</span>
+                <span class="metric-value">59,039</span>
             </div>
 
             <hr class="section-divider">
@@ -556,36 +604,36 @@
                 <li class="top-item">
                     <span class="top-rank">1</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DWzKJTYkyp_/">His badge is fake. Red Square, Moscow police. 🇷🇺</a></div>
-                        <div class="top-stats"><span>38,650 views</span> <span>17 likes</span></div>
+                        <div class="top-title"><a href="https://www.instagram.com/reel/18395856895194329/">3 people. 4 seconds. The Barcelona Metro scam. 🇪🇸</a></div>
+                        <div class="top-stats"><span>1.27M views</span> <span>1,051 likes</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">2</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DWuB_kbDnV1/">The #1 mistake tourists make in Paris 🇫🇷</a></div>
-                        <div class="top-stats"><span>11,977 views</span> <span>16 likes</span></div>
+                        <div class="top-title"><a href="https://www.instagram.com/reel/17969788118871750/">The #1 mistake tourists make in Rome 🇮🇹❌</a></div>
+                        <div class="top-stats"><span>706,323 views</span> <span>2,494 likes</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">3</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DWzCoWzkoVS/">One second you have it. La Rambla phone grab. 🇪🇸</a></div>
-                        <div class="top-stats"><span>7,428 views</span> <span>4 likes</span></div>
+                        <div class="top-title"><a href="https://www.instagram.com/reel/18083980601349957/">The #1 mistake tourists make in Rome 🇮🇹❌</a></div>
+                        <div class="top-stats"><span>701,906 views</span> <span>2,347 likes</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">4</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DW7LlrwjIwq/">Putting your towel on the private beach in Nice? 🇫🇷</a></div>
-                        <div class="top-stats"><span>5,174 views</span> <span>5 likes</span></div>
+                        <div class="top-title"><a href="https://www.instagram.com/reel/17892535953442035/">⚠️ Tourist Menu Dual Pricing — Istanbul 🇹🇷</a></div>
+                        <div class="top-stats"><span>589,889 views</span> <span>916 likes</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">5</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DWwfPFmjcSQ/">Barcelona airport rental lot — check your car 🇪🇸</a></div>
-                        <div class="top-stats"><span>4,338 views</span> <span>5 likes</span></div>
+                        <div class="top-title"><a href="https://www.instagram.com/reel/18099526315933919/">The #1 mistake tourists make in Rome 🇮🇹❌</a></div>
+                        <div class="top-stats"><span>380,408 views</span> <span>535 likes</span></div>
                     </div>
                 </li>
             </ul>
@@ -598,11 +646,11 @@
 
             <div class="metric-row">
                 <span class="metric-label">Subscribers</span>
-                <span class="metric-value">46</span>
+                <span class="metric-value">56</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Videos</span>
-                <span class="metric-value">498</span>
+                <span class="metric-value">595</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Channel Views</span>
@@ -610,41 +658,41 @@
             </div>
 
             <hr class="section-divider">
-            <div class="subsection-label">Top 5 Shorts by Views</div>
+            <div class="subsection-label">Top Shorts by Views (Recent)</div>
             <ul class="top-list">
                 <li class="top-item">
                     <span class="top-rank">1</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://youtube.com/shorts/hfDAw5vf2h0">Buying Fake Tartan Souvenirs in Scotland</a></div>
-                        <div class="top-stats"><span>17K views</span></div>
+                        <div class="top-title"><a href="https://youtube.com/shorts/seNPcYkyazk">Something hit her shoulder. Then her wallet vanished.</a></div>
+                        <div class="top-stats"><span>590 views</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">2</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://youtube.com/shorts/C48p27KXjFQ">The scam every tourist falls for in Bali 🇮🇩</a></div>
-                        <div class="top-stats"><span>9.4K views</span></div>
+                        <div class="top-title"><a href="https://youtube.com/shorts/ThQhHpJhK1Q">The #1 mistake tourists make in Prague</a></div>
+                        <div class="top-stats"><span>333 views</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">3</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://youtube.com/shorts/WoDT5e6xBlU">3 Restaurant Red Flags in Lisbon 🚩</a></div>
-                        <div class="top-stats"><span>3K views</span></div>
+                        <div class="top-title"><a href="https://youtube.com/shorts/y4RrvJdOXtU">The Timeshare Presentation Trap in Puerto Vallarta, Mexico 🇲🇽 #travelscam #puert</a></div>
+                        <div class="top-stats"><span>141 views</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">4</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://youtube.com/shorts/iV207rs5vBQ">The #1 mistake tourists make in Rome</a></div>
-                        <div class="top-stats"><span>2.9K views</span></div>
+                        <div class="top-title"><a href="https://youtube.com/shorts/ThQhHpJhK1Q">The #1 mistake tourists make in Aswan 🇪🇬❌</a></div>
+                        <div class="top-stats"><span>116 views</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">5</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://youtube.com/shorts/0EKsCkGELvA">The #2 Mistake Tourists Make in Taipei 🇹🇼</a></div>
-                        <div class="top-stats"><span>2.7K views</span></div>
+                        <div class="top-title"><a href="https://youtube.com/shorts/ThQhHpJhK1Q">The #1 mistake tourists make in San Juan, Puerto Rico</a></div>
+                        <div class="top-stats"><span>83 views</span></div>
                     </div>
                 </li>
             </ul>
@@ -657,7 +705,7 @@
 
             <div class="metric-row">
                 <span class="metric-label">Pins</span>
-                <span class="metric-value">2,675</span>
+                <span class="metric-value">3,009</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Boards</span>
@@ -665,57 +713,57 @@
             </div>
             <div class="metric-row">
                 <span class="metric-label">Monthly Views</span>
-                <span class="metric-value">16,129</span>
+                <span class="metric-value">22,365</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Impressions (90d)</span>
-                <span class="metric-value">16,205</span>
+                <span class="metric-value">23,098</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Saves (90d)</span>
-                <span class="metric-value">74</span>
+                <span class="metric-value">99</span>
             </div>
             <div class="metric-row">
-                <span class="metric-label">Clicks (90d)</span>
-                <span class="metric-value">909</span>
+                <span class="metric-label">Outbound Clicks (90d)</span>
+                <span class="metric-value">19</span>
             </div>
 
             <hr class="section-divider">
-            <div class="subsection-label">Top 5 Pins by Impressions</div>
+            <div class="subsection-label">Top Recent Pins</div>
             <ul class="top-list">
                 <li class="top-item">
                     <span class="top-rank">1</span>
                     <div class="top-info">
-                        <div class="top-title">POV: you just landed in Bangkok. It's 1975.</div>
-                        <div class="top-stats"><span>1,193 impressions</span> <span>4 saves</span> <span>21 clicks</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/scams/istanbul/">Scam #5: Fake Police / ID Check Robbery — Istanbul</a></div>
+                        <div class="top-stats"></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">2</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DV45dYekiJZ/">Instagram Reel cross-post</a></div>
-                        <div class="top-stats"><span>329 impressions</span> <span>2 saves</span> <span>5 clicks</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/scams/istanbul/">Scam #4: Carpet Shop Pressure Selling — Istanbul</a></div>
+                        <div class="top-stats"></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">3</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DWHso6oglI4/">Instagram Reel cross-post</a></div>
-                        <div class="top-stats"><span>252 impressions</span> <span>0 saves</span> <span>7 clicks</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/scams/istanbul/">Scam #3: Taxi Overcharge and Route Manipulation — Istanbul</a></div>
+                        <div class="top-stats"></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">4</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/p/DU1bFXQEt1U/">Instagram post cross-post</a></div>
-                        <div class="top-stats"><span>237 impressions</span> <span>0 saves</span> <span>7 clicks</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/scams/istanbul/">Scam #2: Let's Have a Drink Bar Bill Shock — Istanbul</a></div>
+                        <div class="top-stats"></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">5</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://www.instagram.com/reel/DV44h7eCkvv/">Instagram Reel cross-post</a></div>
-                        <div class="top-stats"><span>229 impressions</span> <span>2 saves</span> <span>28 clicks</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/scams/istanbul/">Scam #1: The Shoe Shine Drop Trick — Istanbul</a></div>
+                        <div class="top-stats"></div>
                     </div>
                 </li>
             </ul>
@@ -741,5 +789,214 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    // Chart data
+    const chartData = {"ga4Sessions":{"labels":["Feb 9","Feb 10","Feb 11","Feb 12","Feb 13","Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16"],"sessions":[4,34,26,15,15,42,51,32,52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,124],"users":[4,27,18,14,7,29,28,16,41,39,14,19,15,12,34,48,28,39,54,35,21,20,20,19,15,14,18,34,26,33,23,31,23,21,18,13,13,26,14,23,22,13,21,17,22,9,13,21,20,26,30,131,129,425,420,143,235,312,238,188,298,359,387,281,295,281,118]},"searchConsole":{"labels":["Feb 10","Feb 11","Feb 12","Feb 13","Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14"],"clicks":[0,0,0,0,1,1,2,1,0,0,0,0,0,0,1,1,1,1,2,0,0,1,0,1,1,0,0,1,6,0,0,0,2,1,2,3,3,1,4,2,2,2,1,0,0,1,3,4,0,2,4,4,15,51,34,34,33,19,21,39,45,38,58,52],"impressions":[0,5,2,1,1,6,2,3,26,26,14,13,10,6,13,34,43,55,36,22,48,30,31,33,35,44,34,51,93,94,156,174,185,247,199,238,255,276,241,299,308,278,272,470,282,314,400,595,696,669,916,967,3539,9924,11894,11450,11040,8985,8239,8126,8492,9068,10015,9551]},"igReach":{"labels":["Jan 16","Jan 17","Jan 18","Jan 19","Jan 20","Jan 21","Jan 22","Jan 23","Jan 24","Jan 25","Jan 26","Jan 27","Jan 28","Jan 29","Jan 30","Jan 31","Feb 1","Feb 2","Feb 3","Feb 4","Feb 5","Feb 6","Feb 7","Feb 8","Feb 9","Feb 10","Feb 11","Feb 12","Feb 13","Feb 14","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15"],"reach":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,8,130,374,1390,409,375,273,315,174,149,257,302,334,471,105,209,338,964,2052,5225,7354,6473,8395,30772,93073,103909,146000,92857,114717,116517,94593,129108,163122,129795,88823,88264,82586,84381,130587,178926,132246,118801,97002,85456,74844,131626,113828,92449,70464,60646,50552,47452,52872,69338,59635,72487,74757]},"pinterestImpressions":{"labels":["Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16"],"impressions":[76,80,323,138,112,0,126,144,398,84,359,105,203,287,577,578,495,437,430,389,445,778,912,825,1022,1239,1020,1082,1130,1216,1195,1450,1294,1033,1660,1456,0,0,0]}};
+
+    // Shared chart options
+    const sharedOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                backgroundColor: '#1a1a1a',
+                titleFont: { family: 'Inter', size: 12 },
+                bodyFont: { family: 'Inter', size: 12 },
+                padding: 10,
+                cornerRadius: 4,
+                displayColors: false,
+            }
+        },
+        scales: {
+            x: {
+                grid: { display: false },
+                ticks: {
+                    font: { family: 'Inter', size: 10 },
+                    color: '#767676',
+                    maxTicksLimit: 8,
+                    maxRotation: 0,
+                },
+                border: { color: '#ddd' }
+            },
+            y: {
+                grid: { color: '#e8e8e4' },
+                ticks: {
+                    font: { family: 'Inter', size: 10 },
+                    color: '#767676',
+                    callback: function(value) {
+                        if (value >= 1000000) return (value/1000000).toFixed(1) + 'M';
+                        if (value >= 1000) return (value/1000).toFixed(0) + 'K';
+                        return value;
+                    }
+                },
+                border: { display: false },
+                beginAtZero: true,
+            }
+        },
+        elements: {
+            point: { radius: 0, hoverRadius: 4 },
+            line: { tension: 0.3, borderWidth: 2 }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
+    };
+
+    // GA4 Sessions Chart
+    new Chart(document.getElementById('ga4Chart'), {
+        type: 'line',
+        data: {
+            labels: chartData.ga4Sessions.labels,
+            datasets: [{
+                label: 'Sessions',
+                data: chartData.ga4Sessions.sessions,
+                borderColor: '#2a7a2a',
+                backgroundColor: 'rgba(42,122,42,0.08)',
+                fill: true,
+            }]
+        },
+        options: {
+            ...sharedOptions,
+            plugins: {
+                ...sharedOptions.plugins,
+                title: {
+                    display: true,
+                    text: 'GA4 Sessions',
+                    font: { family: 'Inter', size: 13, weight: 600 },
+                    color: '#1a1a1a',
+                    padding: { bottom: 12 },
+                    align: 'start',
+                }
+            }
+        }
+    });
+
+    // Search Console Chart (dual axis)
+    new Chart(document.getElementById('scChart'), {
+        type: 'line',
+        data: {
+            labels: chartData.searchConsole.labels,
+            datasets: [{
+                label: 'Impressions',
+                data: chartData.searchConsole.impressions,
+                borderColor: '#369',
+                backgroundColor: 'rgba(51,102,153,0.08)',
+                fill: true,
+                yAxisID: 'y',
+            }, {
+                label: 'Clicks',
+                data: chartData.searchConsole.clicks,
+                borderColor: '#2a7a2a',
+                backgroundColor: 'rgba(42,122,42,0.08)',
+                fill: false,
+                yAxisID: 'y1',
+            }]
+        },
+        options: {
+            ...sharedOptions,
+            plugins: {
+                ...sharedOptions.plugins,
+                legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        font: { family: 'Inter', size: 11 },
+                        color: '#595959',
+                        boxWidth: 12,
+                        boxHeight: 2,
+                        padding: 12,
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Search Console Clicks & Impressions',
+                    font: { family: 'Inter', size: 13, weight: 600 },
+                    color: '#1a1a1a',
+                    padding: { bottom: 4 },
+                    align: 'start',
+                }
+            },
+            scales: {
+                x: sharedOptions.scales.x,
+                y: {
+                    ...sharedOptions.scales.y,
+                    position: 'left',
+                    title: {
+                        display: false,
+                    }
+                },
+                y1: {
+                    ...sharedOptions.scales.y,
+                    position: 'right',
+                    grid: { display: false },
+                }
+            }
+        }
+    });
+
+    // IG Reach Chart
+    new Chart(document.getElementById('igChart'), {
+        type: 'line',
+        data: {
+            labels: chartData.igReach.labels,
+            datasets: [{
+                label: 'Reach',
+                data: chartData.igReach.reach,
+                borderColor: '#2a7a2a',
+                backgroundColor: 'rgba(42,122,42,0.08)',
+                fill: true,
+            }]
+        },
+        options: {
+            ...sharedOptions,
+            plugins: {
+                ...sharedOptions.plugins,
+                title: {
+                    display: true,
+                    text: 'Instagram Reach',
+                    font: { family: 'Inter', size: 13, weight: 600 },
+                    color: '#1a1a1a',
+                    padding: { bottom: 12 },
+                    align: 'start',
+                }
+            }
+        }
+    });
+
+    // Pinterest Impressions Chart
+    new Chart(document.getElementById('pinChart'), {
+        type: 'line',
+        data: {
+            labels: chartData.pinterestImpressions.labels,
+            datasets: [{
+                label: 'Impressions',
+                data: chartData.pinterestImpressions.impressions,
+                borderColor: '#c00',
+                backgroundColor: 'rgba(204,0,0,0.08)',
+                fill: true,
+            }]
+        },
+        options: {
+            ...sharedOptions,
+            plugins: {
+                ...sharedOptions.plugins,
+                title: {
+                    display: true,
+                    text: 'Pinterest Impressions',
+                    font: { family: 'Inter', size: 13, weight: 600 },
+                    color: '#1a1a1a',
+                    padding: { bottom: 12 },
+                    align: 'start',
+                }
+            }
+        }
+    });
+    </script>
 </body>
 </html>
