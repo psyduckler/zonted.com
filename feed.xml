@@ -5,8 +5,16 @@
     <link>https://zonted.com/</link>
     <description>I test AI tools so you don't have to. Honest reviews, real data, and opinions from someone who actually builds with this stuff.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AEO Is Not SEO — Here's the Playbook</title>
+      <link>https://zonted.com/posts/aeo-answer-engine-optimization/</link>
+      <description>Traffic is declining and it's not coming back. The new game isn't ranking — it's influencing what AI says about you. Here's the AEO playbook I've been testing.</description>
+      <pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/aeo-answer-engine-optimization/</guid>
+    </item>
     <item>
       <title>Rise of AI Influencers &amp; Fall of Trust on the Internet — Fake Until Proven Real</title>
       <link>https://zonted.com/posts/rise-of-the-ai-influencer/</link>
