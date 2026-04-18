@@ -16,6 +16,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="Bernard Huang">
     <meta property="article:published_time" content="2026-04-18">
+    <meta property="article:section" content="AI &amp; Technology">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://img.zonted.com/resources/ai-comics-dos-donts/og-hero.jpg">
     <meta name="twitter:title" content="AI Comics: Do's &amp; Don'ts, 5+ Models Tested">
@@ -179,20 +180,29 @@
     <!-- /COPY_LINK -->
 </aside>
 <div class="article-content">
-    <div class="article-container">
+    <article class="article-container">
+        <div style="margin-bottom:1.5rem;padding-top:1rem;">
+            <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+        </div>
         <h1>AI Comics: Do's &amp; Don'ts, 5+ Models Tested</h1>
-        <div class="article-meta">April 18, 2026 &middot; By Bernard Huang &middot; 14 min read</div>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+            <div>
+                <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">April 18, 2026 &middot; 14 min read</div>
+            </div>
+        </div>
 
         <div class="article-body">
 
             <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
                 <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
-                <p><strong>We needed 50 four-panel comic illustrations for the tabiji.ai scam-warning pages — one per scam, older-female audience, English speech bubbles. We tested Midjourney across five styles (watercolor won), then pitted Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro against the same prompt. Nano Banana Pro won by a landslide. We then locked three things — a watercolor style block, four canonical character sheets, and a reference-image anchor — and fired 42 parallel generations in 90 seconds. Total cost under $15. Full prompts, scripts, and both the wins and the dead-ends are below.</strong></p>
+                <p><strong>We needed 50 four-panel comic illustrations for the tabiji.ai scam-warning pages — one per scam, older-female audience, English speech bubbles. We tested Midjourney across five styles (watercolor won), then pitted Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro against the same prompt. Nano Banana Pro won by a landslide. We then locked three things — a watercolor style block, four canonical character sheets, and a reference-image anchor — and fired 42 parallel generations in 90 seconds. Total cost under $10. Full prompts, scripts, and both the wins and the dead-ends are below.</strong></p>
             </div>
 
-            <p class="dropcap">This is a long post because this is not a simple problem. "Make a four-panel comic" is easy; "make fifty four-panel comics that look like they came from the same illustrator, feature the same recurring cast, render English speech bubbles correctly, and don't drift into generic AI-slop" is a completely different project. The difference is entirely about consistency, and consistency is the thing almost every AI image tool is currently bad at.</p>
+            <p class="dropcap">"Make a four-panel comic" is easy. "Make fifty four-panel comics that look like they came from the same illustrator, feature the same recurring cast, render English speech bubbles correctly, and don't drift into generic AI-slop" is a completely different project. The difference is entirely about consistency, and consistency is the thing almost every AI image tool is currently bad at.</p>
 
-            <p>Here's the route we took, what worked, what didn't, and the exact recipe — model choices, prompt structure, API endpoints, and gotchas — that got us from "Midjourney keeps writing <em>SARPER TOLT</em> in the speech bubbles" to fifty production comics shipped to <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a> on a Saturday afternoon.</p>
+            <p>Below: the route we took, what worked, what didn't, and the exact recipe — model choices, prompt structure, API endpoints, and gotchas — that got us from "Midjourney keeps writing <em>SARPER TOLT</em> in the speech bubbles" to fifty production comics shipped to <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a> on a Saturday afternoon.</p>
 
             <h2 id="why">Why comics, and why this is hard</h2>
 
@@ -278,7 +288,7 @@
                 <p><strong>Nano Banana Pro wins decisively for any comic project that needs English text in speech bubbles. It's 4&times; the price of Seedream and 4.7&times; Qwen, but the English fidelity and character consistency mean zero manual touch-ups — which at fifty-comic scale is a much bigger cost than the ten-cent-per-image delta.</strong></p>
             </div>
 
-            <p>Google's Gemini 2.5 Flash Image (what Wavespeed exposes as Nano Banana Pro) is doing something structurally different than the other three. It's a native multimodal transformer, not a diffusion model with a text-encoder stapled on. That architectural difference is why it can generate legible, correctly-spelled text inside images — it's treating the text regions as text, not as "text-shaped pixels." Every other model in this test is a diffusion model guessing at letterforms. That's also why Nano Banana Pro is the clear leader for logos, signage, and any prompt where you specified the exact string.</p>
+            <p>Google's Gemini 3 Pro Image (what Wavespeed exposes as Nano Banana Pro) is doing something structurally different than the other three. It's a native multimodal transformer, not a diffusion model with a text-encoder stapled on. That architectural difference is why it can generate legible, correctly-spelled text inside images — it's treating the text regions as text, not as "text-shaped pixels." Every other model in this test is a diffusion model guessing at letterforms. That's also why Nano Banana Pro is the clear leader for logos, signage, and any prompt where you specified the exact string.</p>
 
             <h2 id="consistency">The three consistency locks</h2>
 
@@ -394,7 +404,7 @@ reuse characters from the reference images.</code></pre>
     -H "Content-Type: application/json" \
     -d @"$f" \
     "https://api.wavespeed.ai/api/v3/google/nano-banana-pro/edit" \
-    | jq -r '.data.id' &gt; "$(dirname $f)/$(basename $f .json).id"
+    | jq -r '.data.id' &gt; "$(dirname "$f")/$(basename "$f" .json).id"
   ) &amp;
 done
 wait</code></pre>
@@ -523,10 +533,10 @@ wait</code></pre>
 
             <p>If you want to see the full fifty comics in production, the Thailand hub is at <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a>. Click into any city to see the comics in context.</p>
 
-            <p style="text-align:center;color:var(--text-muted);font-size:0.95rem;margin-top:3rem;">Questions, corrections, or better recipes? Reply on <a href="https://x.com/bernardjhuang">X</a> or subscribe for the next build log.</p>
+            <p style="text-align:center;color:var(--text-muted);font-size:0.95rem;margin-top:3rem;">Questions, corrections, or better recipes? Reply on <a href="https://x.com/bernardjhuang">X</a> or <a href="/subscribe/">subscribe</a> for the next build log.</p>
 
         </div>
-    </div>
+    </article>
 </div>
 </div>
 
