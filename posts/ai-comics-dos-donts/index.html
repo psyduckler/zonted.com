@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>AI Comics: Do's &amp; Don'ts, 5+ Models Tested — Zonted</title>
+    <meta name="description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production. Full prompts, scripts, costs, and the character-consistency pattern that actually works.">
+    <link rel="canonical" href="https://zonted.com/posts/ai-comics-dos-donts/">
+    <meta property="og:title" content="AI Comics: Do's &amp; Don'ts, 5+ Models Tested">
+    <meta property="og:description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production. Full prompts, scripts, costs, and the character-consistency pattern that actually works.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.tabiji.ai/scams/bangkok/scam-2.jpg">
+    <meta property="og:url" content="https://zonted.com/posts/ai-comics-dos-donts/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-04-18">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://img.tabiji.ai/scams/bangkok/scam-2.jpg">
+    <meta name="twitter:title" content="AI Comics: Do's &amp; Don'ts, 5+ Models Tested">
+    <meta name="twitter:description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production.">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"AI Comics: Do's & Don'ts, 5+ Models Tested","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-18","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/ai-comics-dos-donts/","description":"We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production. Full prompts, scripts, costs, and the character-consistency pattern that actually works."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"AI Comics: Do's & Don'ts, 5+ Models Tested"}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #767676;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: 8px; padding: 1rem 1.25rem; margin: 1.25rem 0 1.75rem; font-size: 0.85rem; line-height: 1.55; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); background: none; padding: 0; border-radius: 0; font-size: 0.85rem; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        .article-meta { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+        .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
+
+        .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5rem 0 2rem; border-radius: 10px; border: 1px solid var(--border); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .data-table th { background: var(--bg-surface); color: var(--text); padding: 0.65rem 1rem; text-align: left; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.02em; }
+        .data-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); background: #fff; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:nth-child(even) td { background: var(--bg-surface); }
+
+        .toc-sidebar { width: 220px; position: sticky; top: 80px; flex-shrink: 0; align-self: flex-start; padding: 1rem 0; }
+        .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.75rem; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(252,252,250,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+        <a href="/metrics/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Metrics</a>
+        <a href="/about/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">About</a>
+    </div>
+</div>
+</nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#why">Why comics, and why this is hard</a></li>
+            <li><a href="#midjourney">Round 1: Midjourney — good styles, broken text</a></li>
+            <li><a href="#wavespeed">Round 2: Wavespeed four-model showdown</a></li>
+            <li><a href="#consistency">The three consistency locks</a></li>
+            <li><a href="#scale">Scaling to 50 comics</a></li>
+            <li><a href="#costs">Cost, time, and the final recipe</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#why">Why comics</a></li>
+        <li><a href="#midjourney">Midjourney</a></li>
+        <li><a href="#wavespeed">Four-model showdown</a></li>
+        <li><a href="#consistency">Consistency locks</a></li>
+        <li><a href="#scale">Scaling to 50</a></li>
+        <li><a href="#costs">Costs &amp; recipe</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form action="https://zonted.substack.com/api/v1/free?nojs=true" method="post" target="_blank" style="display:flex;flex-direction:column;gap:6px;">
+            <input type="email" name="email" placeholder="your@email.com" required style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;width:100%;">
+            <button type="submit" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;font-weight:600;padding:8px 10px;border:none;border-radius:6px;background:var(--text);color:var(--bg);cursor:pointer;transition:background 0.2s;">Subscribe</button>
+        </form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>AI Comics: Do's &amp; Don'ts, 5+ Models Tested</h1>
+        <div class="article-meta">April 18, 2026 &middot; By Bernard Huang &middot; 14 min read</div>
+
+        <div class="article-body">
+
+            <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
+                <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
+                <p><strong>We needed 50 four-panel comic illustrations for the tabiji.ai scam-warning pages — one per scam, older-female audience, English speech bubbles. We tested Midjourney across five styles (watercolor won), then pitted Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro against the same prompt. Nano Banana Pro won by a landslide. We then locked three things — a watercolor style block, four canonical character sheets, and a reference-image anchor — and fired 42 parallel generations in 90 seconds. Total cost under $15. Full prompts, scripts, and both the wins and the dead-ends are below.</strong></p>
+            </div>
+
+            <p class="dropcap">This is a long post because this is not a simple problem. "Make a four-panel comic" is easy; "make fifty four-panel comics that look like they came from the same illustrator, feature the same recurring cast, render English speech bubbles correctly, and don't drift into generic AI-slop" is a completely different project. The difference is entirely about consistency, and consistency is the thing almost every AI image tool is currently bad at.</p>
+
+            <p>Here's the route we took, what worked, what didn't, and the exact recipe — model choices, prompt structure, API endpoints, and gotchas — that got us from "Midjourney keeps writing <em>SARPER TOLT</em> in the speech bubbles" to fifty production comics shipped to <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a> on a Saturday afternoon.</p>
+
+            <h2 id="why">Why comics, and why this is hard</h2>
+
+            <p>We build <a href="https://tabiji.ai" target="_blank" rel="noopener">tabiji.ai</a>, a travel-safety site. One of the things we publish is per-city scam pages — "the twenty-five scams you'll encounter in Bangkok," broken down with red flags, how-to-avoid tips, and Reddit source links. They're useful. They're also dense walls of text, and we've watched real users bounce when confronted with eight consecutive scam write-ups without a single visual break.</p>
+
+            <p>The audience for these pages skews older and slightly female — think the couple planning their first Thailand trip, not the 24-year-old backpacker. That demographic rewards warmth and storytelling over edginess. A cautionary tale rendered as a cozy watercolor comic would do something a sidebar callout can't: communicate the <em>shape</em> of the scam — the friendly stranger, the tuk-tuk, the too-good deal, the regret — in five seconds of scanning.</p>
+
+            <p>So the brief was clear: one four-panel comic per scam, 2&times;2 grid, warm hand-painted watercolor, English speech bubbles that tell the story, a recurring cast of four characters we could rotate across fifty scams without the faces drifting into twenty-five different strangers. Simple to describe. Deceptively hard to produce.</p>
+
+            <p>Three things make this hard at scale:</p>
+
+            <ul>
+                <li><strong>Text rendering.</strong> Most image models mangle English. You get speech bubbles full of plausible-looking gibberish. This is the #1 reason AI comics have never worked.</li>
+                <li><strong>Character consistency.</strong> Generate the same "silver-haired 60-something woman in a straw hat" twice and you'll get two different women. Now do it fifty times.</li>
+                <li><strong>Style drift.</strong> Every generation nudges the palette, linework, and paper texture slightly. Over fifty comics that drift becomes visible — the first ten look like one illustrator, the last ten like a different one.</li>
+            </ul>
+
+            <p>Everything below is how we solved each of those three problems.</p>
+
+            <h2 id="midjourney">Round 1: Midjourney — good styles, broken text</h2>
+
+            <p>We started where most people start: <a href="https://www.midjourney.com" target="_blank" rel="noopener">Midjourney</a>. Since we were driving it through automation, we used the <a href="https://www.apify.com?fpr=bernard" target="_blank" rel="noopener">Apify</a> <code>imageaibot/midjourney-bot</code> actor, which wraps Midjourney's Discord API behind a normal HTTP endpoint. Submit via <code>action=imagine</code>, poll via <code>action=getTask</code>, retrieve the image URL.</p>
+
+            <p>We generated the same four-panel Grand Palace scam story in five different styles to find the right aesthetic for our audience:</p>
+
+            <ol>
+                <li><strong>Warm watercolor storybook</strong> — Beatrix Potter-ish, soft pastels</li>
+                <li><strong>Hergé / Tintin ligne claire</strong> — clean black outlines, bright flats</li>
+                <li><strong>New Yorker editorial cartoon</strong> — refined ink with watercolor wash</li>
+                <li><strong>Studio Ghibli / Miyazaki</strong> — warm painterly anime</li>
+                <li><strong>Mid-century travel poster</strong> — bold flat color blocks, 1950s screen-print texture</li>
+            </ol>
+
+            <p>Each prompt described the same 4-panel story (palace "closed" → tuk-tuk → gem shop → regret at home) so we could compare styles apples-to-apples. Here's what Midjourney returned for the watercolor version — what we picked as the winning aesthetic:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/scam-comics/thailand/style-tests/style1-watercolor.png" alt="Midjourney's 4-variation grid for the watercolor storybook style" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Midjourney v6: warm watercolor storybook. Midjourney's native output is a 2&times;2 variation grid, so each quadrant is its own interpretation of the prompt, and each of those interpretations is in turn a mini-comic. The bottom-right quadrant was the strongest.</figcaption></figure>
+
+            <p>The watercolor look was right: warm, unthreatening, legible faces, a silver-haired protagonist that read as ~60. The four other styles had their moments — the Tintin had stronger architecture, the New Yorker had the most sophisticated faces — but they all skewed more masculine-adventure or more editorial-arch than our audience wanted.</p>
+
+            <p>Style locked. Now add the speech bubbles.</p>
+
+            <h3>The thing Midjourney cannot do</h3>
+
+            <p>We rewrote the prompt with explicit speech bubble content: <em>"Speech bubble reads: PALACE CLOSED TODAY FOR ROYAL CEREMONY!"</em> and so on for each panel. This is what Midjourney returned:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/scam-comics/thailand/style-tests/watercolor-speechbubbles.png" alt="Midjourney's attempt at rendering English speech bubbles — most of the text is gibberish" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Midjourney v6 understood that we wanted speech bubbles in the right <em>places</em>. The text inside them reads: <em>"SARPER TOLT," "BEETAL COCOCELS TOUS NT ST REGRSAAL," "FALLET GOLL!"</em> — confident, legible-looking gibberish.</figcaption></figure>
+
+            <p>This is the fundamental Midjourney limitation for comics. It is excellent at the <em>look</em> of text — weight, kerning, bubble shape, speech tails. It just can't reliably spell what you asked for. Post-v6 models have improved on short logos and signs, but custom dialogue longer than a few words is still a coin flip. For our fifty-comic project, that was fatal. We could have generated the art in Midjourney and composited bubbles in Photoshop, but that's ~200 manual touch-ups, and fifty comics across a cast of four characters also demands the next thing Midjourney is bad at: character consistency at scale.</p>
+
+            <p>So we moved the entire pipeline to <a href="https://wavespeed.ai/?ref=bernard" target="_blank" rel="noopener">Wavespeed</a>, which gives us unified API access to a bunch of current image models under one billing account. Time to shop.</p>
+
+            <h2 id="wavespeed">Round 2: Wavespeed four-model showdown</h2>
+
+            <p>We fed the same watercolor-storybook comic prompt — complete with explicit speech bubbles — into four different current models, all via Wavespeed's HTTP API:</p>
+
+            <ul>
+                <li><strong>Seedream v5 Lite</strong> (ByteDance) — <code>bytedance/seedream-v5.0-lite</code></li>
+                <li><strong>Wan 2.7 Pro</strong> (Alibaba) — <code>alibaba/wan-2.7/text-to-image-pro</code></li>
+                <li><strong>Qwen Image 2.0</strong> (Alibaba) — <code>wavespeed-ai/qwen-image-2.0/text-to-image</code></li>
+                <li><strong>Nano Banana Pro</strong> (Google Gemini 2.5 Flash Image) — <code>google/nano-banana-pro/text-to-image</code></li>
+            </ul>
+
+            <p>Each one got a <code>POST /api/v3/{model_id}</code> with <code>{"prompt": ..., "aspect_ratio": "1:1"}</code>. Results polled via <code>GET /api/v3/predictions/{id}/result</code>. All four submitted in parallel. All four came back in under 90 seconds. Here's what they produced:</p>
+
+            <h3>Seedream v5 Lite ($0.035/image)</h3>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/scam-comics/thailand/style-tests/ws-seedream.jpeg" alt="Seedream v5 Lite's four-panel comic — speech bubbles are clean and correctly spelled" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Seedream v5 Lite. Perfect spelling across all four bubbles, clean 2&times;2 grid with panel numbers, consistent protagonist. The watercolor is slightly more saturated than we wanted but very usable.</figcaption></figure>
+
+            <h3>Wan 2.7 Pro ($0.075/image)</h3>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/scam-comics/thailand/style-tests/ws-wan27.png" alt="Wan 2.7 Pro's four-panel comic — one spelling typo visible" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Wan 2.7 Pro. Strong composition, readable text, consistent character — but introduced <em>"dollares"</em> in panel 4. Tiny, but the kind of thing that means you're still proofreading every generation.</figcaption></figure>
+
+            <h3>Qwen Image 2.0 ($0.03/image)</h3>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/scam-comics/thailand/style-tests/ws-qwen20.png" alt="Qwen Image 2.0's four-panel comic — lower resolution output" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Qwen Image 2.0. Decent composition and correctly-spelled text, but the default output is noticeably lower resolution and the linework is softer than we wanted.</figcaption></figure>
+
+            <h3>Nano Banana Pro ($0.14/image)</h3>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.tabiji.ai/scam-comics/thailand/style-tests/ws-nanopro.jpeg" alt="Nano Banana Pro's four-panel comic — cleanest result across all models" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Nano Banana Pro. Perfect spelling, the strongest character consistency, the warmest watercolor palette, and the most <em>compositionally</em> sophisticated result — notice how panel 2 captures the boarding action, panel 4 is a believable kitchen, not just four talking-head shots.</figcaption></figure>
+
+            <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
+                <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">The Verdict</h3>
+                <p><strong>Nano Banana Pro wins decisively for any comic project that needs English text in speech bubbles. It's 4&times; the price of Seedream and 4.7&times; Qwen, but the English fidelity and character consistency mean zero manual touch-ups — which at fifty-comic scale is a much bigger cost than the ten-cent-per-image delta.</strong></p>
+            </div>
+
+            <p>Google's Gemini 2.5 Flash Image (what Wavespeed exposes as Nano Banana Pro) is doing something structurally different than the other three. It's a native multimodal transformer, not a diffusion model with a text-encoder stapled on. That architectural difference is why it can generate legible, correctly-spelled text inside images — it's treating the text regions as text, not as "text-shaped pixels." Every other model in this test is a diffusion model guessing at letterforms. That's also why Nano Banana Pro is the clear leader for logos, signage, and any prompt where you specified the exact string.</p>
+
+            <h2 id="consistency">The three consistency locks</h2>
+
+            <p>Picking the right model solves text rendering. It does not solve character consistency. That's the harder problem, and it's where most AI comic projects fall apart — your protagonist morphs slightly every generation, and over fifty panels the series feels like fifty strangers wearing similar costumes.</p>
+
+            <p>Here's the three-layer lock we settled on, in order of impact:</p>
+
+            <h3>1. A locked style block</h3>
+
+            <p>One reusable paragraph describing the visual style, pasted verbatim at the top of every generation. Zero variation between scams. The Thailand block we used:</p>
+
+            <pre><code>A single illustrated comic book page in warm soft watercolor
+storybook style, showing four sequential panels arranged in a 2x2
+grid with small numbers 1, 2, 3, 4 in the upper-left corner of
+each panel, separated by thin clean white gutters. Hand-painted
+watercolor textures with visible paper grain, muted pastel palette
+warmed by golden Thai sunlight, gentle expressive faces with soft
+pencil linework, delicate shadows, unhurried storybook pacing.
+Each panel contains one clean white rounded speech bubble with a
+small pointer tail, holding short printed English dialogue in
+simple black lettering — text must be legible and correctly
+spelled. Square 1:1 composition, 2K resolution.</code></pre>
+
+            <p>This is ~100 words that never change. Every word does work: "warm soft watercolor storybook" (not just "watercolor"), "visible paper grain" (prevents the model from going glossy), "muted pastel palette warmed by golden Thai sunlight" (nudges the palette, locks regional feel), "text must be legible and correctly spelled" (this is a real-enough prompt hint — Gemini responds to it).</p>
+
+            <h3>2. Canonical character sheets</h3>
+
+            <p>Four protagonists, one reusable paragraph each, pasted verbatim as the <code>CHARACTER:</code> block of every prompt. They rotate across scams by scam type: trust-based scams go to the trusting older woman; transit scams go to the savvy 30-something who pushes back; charm/map scams go to the affable older man; nightlife scams go to the young curious traveler.</p>
+
+            <p>Here's one of them — Margie, the headline protagonist:</p>
+
+            <pre><code>A 62-year-old Western woman with shoulder-length silver-gray hair
+worn under a woven straw sun hat with a cream ribbon, warm blue
+eyes behind tortoiseshell reading glasses often perched on her
+head, light olive complexion with gentle laugh lines and a
+friendly curious expression. She wears a cream linen blouse, tan
+wide-leg travel pants, and white canvas sneakers, with a small
+tan leather crossbody bag and a coral scarf. Gracious, cheerful,
+a little too trusting.</code></pre>
+
+            <p>A few rules that matter:</p>
+
+            <ul>
+                <li><strong>Signature visual anchors.</strong> Straw hat with cream ribbon, coral scarf, tan crossbody bag. These are what the model latches onto. "Silver hair" alone isn't enough — the hat is the lock.</li>
+                <li><strong>Skin tone and features should be concrete.</strong> "Light olive complexion with gentle laugh lines" renders more reliably than "friendly older woman."</li>
+                <li><strong>A personality clause.</strong> "Gracious, cheerful, a little too trusting" — this influences expressions across panels. You'll get more consistent warm smiles in panel 1 and a believable worried look in panel 4.</li>
+                <li><strong>Never paraphrase.</strong> Paste the paragraph exactly. Changing one adjective between generations creates detectable drift.</li>
+            </ul>
+
+            <p>The cast — Margie 62F, Priya 34F, Harry 64M, Marcus 34M — is deliberately balanced 2&times;2 on age and gender, with mixed ethnicity for representation and audience identification. Margie gets the most scams because she matches the demo anchor, but every character shows up enough that the series has variety.</p>
+
+            <h3>3. Reference images (the big lock)</h3>
+
+            <p>This is the biggest consistency lever, and the one most people miss. Once you have one or two generations you're happy with, <strong>feed them back in as reference images on every subsequent generation</strong>. Nano Banana Pro on Wavespeed exposes this through the <code>edit</code> endpoint:</p>
+
+            <pre><code>POST https://api.wavespeed.ai/api/v3/google/nano-banana-pro/edit
+{
+  "prompt": "&lt;style block&gt;\n\nCHARACTER: &lt;Priya paragraph&gt;\n\nSCENE:\nPanel 1: ...\nPanel 2: ...",
+  "images": [
+    "https://img.tabiji.ai/scams/bangkok/scam-1.jpg",
+    "https://img.tabiji.ai/scams/bangkok/scam-2.jpg",
+    "https://img.tabiji.ai/scams/bangkok/scam-4.jpg"
+  ],
+  "aspect_ratio": "1:1",
+  "output_format": "jpeg"
+}</code></pre>
+
+            <p>The <code>images</code> array is the lock. Pass in 2–3 prior comics and Gemini uses them as style anchors — it matches the palette, the linework, the paper grain, and (in our case) even the way speech bubbles are rendered. It does <em>not</em> reuse the characters from the references — because the <code>CHARACTER:</code> block in your prompt explicitly describes a different protagonist.</p>
+
+            <p>You need to be explicit about this separation in your prompt, though. We ended the style block with:</p>
+
+            <pre><code>Match the watercolor palette, linework, paper texture, and
+lettering style of the reference images exactly; the protagonist
+must be the NEW character described in CHARACTER below — do not
+reuse characters from the reference images.</code></pre>
+
+            <p>Without that clause, Gemini will sometimes put one of the reference-image characters into the new scene. With it, the style carries over and the character stays new. This one paragraph is what made our fifty-comic scale run work.</p>
+
+            <h3>The <code>edit-multi</code> gotcha</h3>
+
+            <p>Wavespeed exposes two reference-image endpoints for Nano Banana Pro: <code>edit</code> and <code>edit-multi</code>. We burned a test generation figuring this out so you don't have to: <strong>only <code>edit</code> supports <code>aspect_ratio: "1:1"</code></strong>. If your comic is square, <code>edit-multi</code> will reject the request with <em>"value is not one of the allowed values [3:2, 2:3, 3:4, 4:3]"</em>. Use <code>edit</code>. Its <code>images</code> array accepts multiple references just fine.</p>
+
+            <h2 id="scale">Scaling to 50 comics</h2>
+
+            <p>Once the recipe was locked, scaling was mechanical. We extracted every scam title + location + first-paragraph summary from the existing HTML of nine Thai city pages (Bangkok, Chiang Mai, Chiang Rai, Koh Phangan, Koh Samui, Krabi, Pai, Pattaya, Phuket), then wrote a Python dict mapping each (city, scam number) to (character, four-panel script):</p>
+
+            <pre><code>SCENES = {
+  ("chiang-mai", 5, "margie"): panels(
+    ("Margie looks at a colorful Chiang Mai flyer advertising "
+     "'Ethical Elephant Sanctuary — Bathing &amp; Riding' with happy "
+     "elephant photos.",
+     "Ethical elephant sanctuary — sounds lovely!"),
+    ("Margie arrives at a dusty roadside camp with chained elephants "
+     "and tourists taking rides, shocked expression.",
+     "These elephants look unhappy!"),
+    ("A staff member at the camp shrugs dismissively; another tourist "
+     "climbs on for a ride.",
+     "All elephants like rides here!"),
+    ("Margie at a real ethical sanctuary later, watching elephants "
+     "bathing freely in a river, smiling.",
+     "Real sanctuaries don't chain elephants!"),
+  ),
+  # ... 41 more
+}</code></pre>
+
+            <p>For each scam, the builder pastes the locked style block + the correct character paragraph + the four-panel scene into one prompt. All 42 bodies get written to <code>/tmp/th_*.json</code>, each referencing the same three Bangkok comics as style anchors.</p>
+
+            <p>Then it's a single parallel burst:</p>
+
+            <pre><code>for f in /tmp/th_*.json; do
+  (curl -s -X POST \
+    -H "Authorization: Bearer $WS_KEY" \
+    -H "Content-Type: application/json" \
+    -d @"$f" \
+    "https://api.wavespeed.ai/api/v3/google/nano-banana-pro/edit" \
+    | jq -r '.data.id' &gt; "$(dirname $f)/$(basename $f .json).id"
+  ) &amp;
+done
+wait</code></pre>
+
+            <p>All 42 submitted in under three seconds. The polling loop ran in parallel too (6-second poll interval per job), so wall time was capped by the slowest single generation — which turned out to be ~90 seconds. <strong>Forty-two production-quality comics produced in about a minute and a half.</strong></p>
+
+            <h3>The negative-cache gotcha</h3>
+
+            <p>One last production detail that ate me for twenty minutes: if you <code>HEAD</code>-check an image URL before it exists (we were verifying the R2 path structure before uploading), Cloudflare will cache the 404 for a minute or two. Later requests — even after you've successfully uploaded the file — will keep getting 404s until the negative cache expires.</p>
+
+            <p>Workarounds, in order of preference:</p>
+
+            <ol>
+                <li>Just wait 60–120 seconds. The negative cache is short.</li>
+                <li>Append <code>?v=1</code> to the URL in your HTML — instant cache bust.</li>
+                <li>Use Cloudflare's zone-scoped API token to call <code>purge_cache</code>. Our R2-scoped token couldn't do this, which is exactly the limitation you want in production, but annoying during development.</li>
+            </ol>
+
+            <p>Also: Cloudflare's WAF returns <code>403</code> to requests with the default <code>Python-urllib/3.x</code> User-Agent. Verify your URLs with a browser UA in <code>curl</code> or <code>requests</code>, or you'll chase a ghost.</p>
+
+            <h2 id="costs">Cost, time, and the final recipe</h2>
+
+            <p>Full project cost, generator-side only (we're not counting our time):</p>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Model</th>
+                            <th>Calls</th>
+                            <th>Unit</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Style exploration</td>
+                            <td>Midjourney (Apify)</td>
+                            <td>7</td>
+                            <td>~$0.25</td>
+                            <td>~$1.75</td>
+                        </tr>
+                        <tr>
+                            <td>Model showdown</td>
+                            <td>Seedream v5 Lite</td>
+                            <td>1</td>
+                            <td>$0.035</td>
+                            <td>$0.04</td>
+                        </tr>
+                        <tr>
+                            <td>Model showdown</td>
+                            <td>Wan 2.7 Pro</td>
+                            <td>1</td>
+                            <td>$0.075</td>
+                            <td>$0.08</td>
+                        </tr>
+                        <tr>
+                            <td>Model showdown</td>
+                            <td>Qwen Image 2.0</td>
+                            <td>1</td>
+                            <td>$0.03</td>
+                            <td>$0.03</td>
+                        </tr>
+                        <tr>
+                            <td>Production</td>
+                            <td>Nano Banana Pro (text-to-image)</td>
+                            <td>2</td>
+                            <td>$0.14</td>
+                            <td>$0.28</td>
+                        </tr>
+                        <tr>
+                            <td>Production</td>
+                            <td>Nano Banana Pro (<code>edit</code> with refs)</td>
+                            <td>48</td>
+                            <td>$0.14</td>
+                            <td>$6.72</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td></td>
+                            <td><strong>60</strong></td>
+                            <td></td>
+                            <td><strong>~$8.90</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Under nine dollars for fifty production comics across nine city pages. That's <strong>seventeen cents per comic, all-in</strong>, including every exploration generation and every false start. A freelance illustrator delivering the same in watercolor would be $200–400 per comic, easily six weeks of turnaround on a fifty-comic series. This isn't a subtle productivity difference.</p>
+
+            <h3>The final recipe, one screen</h3>
+
+            <p>If you want to reproduce this for your own content project, here's the distilled version:</p>
+
+            <ol>
+                <li><strong>Pick the style on a cheap model first.</strong> Generate 3–5 aesthetic variants at low cost before committing. Midjourney is great for style exploration because it takes creative risks; we just didn't ship it.</li>
+                <li><strong>Use Nano Banana Pro for production</strong> whenever you need English text rendered inside the image. Via <a href="https://wavespeed.ai/?ref=bernard" target="_blank" rel="noopener">Wavespeed</a>, endpoint <code>google/nano-banana-pro/edit</code>, 1:1 aspect ratio.</li>
+                <li><strong>Write one locked style block.</strong> ~100 words, specific and non-negotiable. Paste it verbatim at the top of every prompt.</li>
+                <li><strong>Write canonical character sheets.</strong> One per recurring protagonist. Include visual anchors (hat, bag, clothing color). Paste verbatim.</li>
+                <li><strong>Anchor with reference images.</strong> Your first generation or two (from the same style + same character recipe) becomes the style lock for everything that follows. Pass them via the <code>images</code> array.</li>
+                <li><strong>Be explicit about character substitution.</strong> Tell the model to use the reference images for style only and the NEW character described in your prompt.</li>
+                <li><strong>Batch and parallelize.</strong> The Wavespeed API handles 40+ concurrent requests without rate-limit issues. Wall time is capped by the slowest single generation.</li>
+            </ol>
+
+            <h3>What I'd do differently</h3>
+
+            <p>Two small things, for v2:</p>
+
+            <ul>
+                <li><strong>A richer character sheet with pose cues.</strong> We got character drift in a few scams where the protagonist needed to do something unusual (lie down on a beach, climb stairs). Adding a "typical poses" section to each character sheet would help.</li>
+                <li><strong>Per-scam dialogue length discipline.</strong> Anything over ~8 words per bubble occasionally mis-spelled even on Nano Banana Pro. Keep bubbles short — it's better comic-writing anyway.</li>
+            </ul>
+
+            <p>And one big thing for v3: start producing <em>per-country</em> styles. Thailand is watercolor because the audience and the tropical setting called for warmth. Japan will be manga. Italy will be <em>fumetti</em>. USA will be classic American comic-book style. The pipeline stays identical — cast, style block, reference-image anchor — the style block just changes. The goal is for anyone who sees a tabiji scam page to recognize the country before they read the title.</p>
+
+            <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+            <h3>Tools referenced in this post</h3>
+
+            <ul>
+                <li><a href="https://wavespeed.ai/?ref=bernard" target="_blank" rel="noopener"><strong>Wavespeed</strong></a> — unified API access to 1000+ AI models including all four we tested, under one billing account. Pricing at <a href="https://wavespeed.ai/pricing" target="_blank" rel="noopener">wavespeed.ai/pricing</a>. This is the single highest-leverage tool in this pipeline.</li>
+                <li><a href="https://www.apify.com?fpr=bernard" target="_blank" rel="noopener"><strong>Apify</strong></a> — the <code>imageaibot/midjourney-bot</code> actor we used for Midjourney automation via Discord.</li>
+                <li><a href="https://claude.ai/referral/IDrXculiTA" target="_blank" rel="noopener"><strong>Claude Code</strong></a> — the agentic coding environment we wrote and ran this entire pipeline through. Wrote the prompts, fired the Wavespeed calls, uploaded to R2, injected into HTML, ran the git workflow, merged the PR. One conversation, under two hours of wall time, fifty comics shipped.</li>
+            </ul>
+
+            <p>If you want to see the full fifty comics in production, the Thailand hub is at <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a>. Click into any city to see the comics in context.</p>
+
+            <p style="text-align:center;color:var(--text-muted);font-size:0.95rem;margin-top:3rem;">Questions, corrections, or better recipes? Reply on <a href="https://x.com/bernardjhuang">X</a> or subscribe for the next build log.</p>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div style="max-width:660px;margin:2rem auto;padding:0 2rem;text-align:center;">
+    <a href="https://x.com/intent/tweet?text=AI%20Comics%3A%20Do%27s%20%26%20Don%27ts%2C%205%2B%20Models%20Tested%20%E2%80%94%20the%20prompts%2C%20scripts%2C%20and%20costs%20behind%20shipping%2050%20comics%20in%20an%20afternoon&url=https://zonted.com/posts/ai-comics-dos-donts/" target="_blank" rel="noopener" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Share on X &rarr;</a>
+</div>
+
+</main>
+
+<footer>
+    <div style="max-width:660px;margin:0 auto;">
+        <p style="color:var(--text-dim);font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;margin-bottom:12px;">&copy; 2026 Bernard Huang &middot; zonted.com</p>
+        <div style="display:flex;gap:20px;justify-content:center;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;">
+            <a href="/posts/" style="color:var(--text-dim);text-decoration:none;">Posts</a>
+            <a href="/metrics/" style="color:var(--text-dim);text-decoration:none;">Metrics</a>
+            <a href="/about/" style="color:var(--text-dim);text-decoration:none;">About</a>
+            <a href="/feed.xml" style="color:var(--text-dim);text-decoration:none;">RSS</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://github.com/bernardjhuang">GitHub</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            <a href="https://tabiji.ai">tabiji.ai</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                const label = document.querySelector('.toc-active-label');
+                if (label) {
+                    const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                    if (activeLink) label.textContent = activeLink.textContent;
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
+<!-- NEWSLETTER_REDIRECT -->
+<script>
+(function(){
+  document.querySelectorAll('form[action*="substack.com"]').forEach(function(form){
+    var iframe=document.createElement("iframe");
+    iframe.name="substack-frame";
+    iframe.style.display="none";
+    document.body.appendChild(iframe);
+    form.target="substack-frame";
+    form.addEventListener("submit",function(){
+      setTimeout(function(){window.location.href="/subscribe/confirmed/";},300);
+    });
+  });
+})();
+</script>
+<!-- /NEWSLETTER_REDIRECT -->
+</body>
+</html>

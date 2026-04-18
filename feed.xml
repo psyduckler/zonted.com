@@ -5,12 +5,20 @@
     <link>https://zonted.com/</link>
     <description>I test AI tools so you don't have to. Honest reviews, real data, and opinions from someone who actually builds with this stuff.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AEO Is Not SEO — Here's the Playbook</title>
+      <title>AI Comics: Do&#x27;s &amp; Don&#x27;ts, 5+ Models Tested</title>
+      <link>https://zonted.com/posts/ai-comics-dos-donts/</link>
+      <description>We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production. Full prompts, scripts, costs, and the character-consistency pattern that actually works.</description>
+      <pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/ai-comics-dos-donts/</guid>
+    </item>
+    <item>
+      <title>AEO Is Not SEO — Here&#x27;s the Playbook</title>
       <link>https://zonted.com/posts/aeo-answer-engine-optimization/</link>
-      <description>Traffic is declining and it's not coming back. The new game isn't ranking — it's influencing what AI says about you. Here's the AEO playbook I've been testing.</description>
+      <description>Traffic is declining and it</description>
       <pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate>
       <author>bernard@zonted.com (Bernard Huang)</author>
       <guid isPermaLink="true">https://zonted.com/posts/aeo-answer-engine-optimization/</guid>
