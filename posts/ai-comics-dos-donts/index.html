@@ -6,10 +6,10 @@
     <meta name="theme-color" content="#fcfcfa">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <title>AI Comics: Do's &amp; Don'ts, 5+ Models Tested — Zonted</title>
-    <meta name="description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production. Full prompts, scripts, costs, and the character-consistency pattern that actually works.">
+    <meta name="description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro — then shipped 733 comics across eight countries. Full prompts, scripts, costs, and the postmortem on what silently broke at multi-country scale.">
     <link rel="canonical" href="https://zonted.com/posts/ai-comics-dos-donts/">
     <meta property="og:title" content="AI Comics: Do's &amp; Don'ts, 5+ Models Tested">
-    <meta property="og:description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production. Full prompts, scripts, costs, and the character-consistency pattern that actually works.">
+    <meta property="og:description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro — then shipped 733 comics across eight countries. Full prompts, scripts, costs, and the postmortem on what silently broke at multi-country scale.">
     <meta property="og:type" content="article">
     <meta property="og:image" content="https://img.zonted.com/resources/ai-comics-dos-donts/og-hero.jpg">
     <meta property="og:url" content="https://zonted.com/posts/ai-comics-dos-donts/">
@@ -20,12 +20,12 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://img.zonted.com/resources/ai-comics-dos-donts/og-hero.jpg">
     <meta name="twitter:title" content="AI Comics: Do's &amp; Don'ts, 5+ Models Tested">
-    <meta name="twitter:description" content="We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production.">
+    <meta name="twitter:description" content="Tested 5 models, shipped 733 comics across 8 countries, and broke the pipeline in the middle. Full postmortem + the rebuild.">
 
     <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Article","headline":"AI Comics: Do's & Don'ts, 5+ Models Tested","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-18","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/ai-comics-dos-donts/","description":"We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro on the same 4-panel comic prompt — then shipped 50 comics to production. Full prompts, scripts, costs, and the character-consistency pattern that actually works."}
+    {"@context":"https://schema.org","@type":"Article","headline":"AI Comics: Do's & Don'ts, 5+ Models Tested","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-18","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/ai-comics-dos-donts/","description":"We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro — then shipped 733 comics across eight countries. Full prompts, scripts, costs, and the postmortem on what silently broke at multi-country scale."}
     </script>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"AI Comics: Do's & Don'ts, 5+ Models Tested"}]}
@@ -149,6 +149,9 @@
             <li><a href="#consistency">The three consistency locks</a></li>
             <li><a href="#scale">Scaling to 50 comics</a></li>
             <li><a href="#costs">Cost, time, and the final recipe</a></li>
+            <li><a href="#what-broke">Scaling past Thailand: what silently broke</a></li>
+            <li><a href="#v2-rebuild">V2: Gemini writes the script</a></li>
+            <li><a href="#lessons">Seven lessons for AI-illustration pipelines</a></li>
         </ul>
     </div>
 </div>
@@ -165,6 +168,9 @@
         <li><a href="#consistency">Consistency locks</a></li>
         <li><a href="#scale">Scaling to 50</a></li>
         <li><a href="#costs">Costs &amp; recipe</a></li>
+        <li><a href="#what-broke">What broke at scale</a></li>
+        <li><a href="#v2-rebuild">V2 rebuild</a></li>
+        <li><a href="#lessons">Seven lessons</a></li>
     </ul>
     <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
         <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
@@ -189,7 +195,7 @@
             <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
             <div>
                 <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
-                <div style="font-size:0.85rem;color:var(--text-muted);">April 18, 2026 &middot; 14 min read</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">April 18, 2026 &middot; 18 min read</div>
             </div>
         </div>
 
@@ -197,12 +203,12 @@
 
             <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
                 <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
-                <p><strong>We needed 50 four-panel comic illustrations for the tabiji.ai scam-warning pages — one per scam, older-female audience, English speech bubbles. We tested Midjourney across five styles (watercolor won), then pitted Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro against the same prompt. Nano Banana Pro won by a landslide. We then locked three things — a watercolor style block, four canonical character sheets, and a reference-image anchor — and fired 42 parallel generations in 90 seconds. Total cost under $10. Full prompts, scripts, and both the wins and the dead-ends are below.</strong></p>
+                <p><strong>We needed 50 four-panel comic illustrations for the tabiji.ai scam-warning pages — and ultimately shipped 733 of them across eight countries. Nano Banana Pro won the model showdown; we locked a style block, four canonical characters, and reference-image anchoring. Thailand shipped in 90 seconds. Then we tried to scale the pipeline to seven more countries with a keyword classifier, which silently misrouted 9% of scams (the Brandenburger Tor petition rendered as a U-Bahn pickpocket). V2 rebuild: Gemini 2.5 Pro writes a bespoke four-panel script per scam under a strict JSON schema, plus a fail-loud quality gate. 733 comics total, ~$15 per country, zero silent fallbacks. Full pipeline, prompts, and seven generalizable lessons below.</strong></p>
             </div>
 
             <p class="dropcap">"Make a four-panel comic" is easy. "Make fifty four-panel comics that look like they came from the same illustrator, feature the same recurring cast, render English speech bubbles correctly, and don't drift into generic AI-slop" is a completely different project. The difference is entirely about consistency, and consistency is the thing almost every AI image tool is currently bad at.</p>
 
-            <p>Below: the route we took, what worked, what didn't, and the exact recipe — model choices, prompt structure, API endpoints, and gotchas — that got us from "Midjourney keeps writing <em>SARPER TOLT</em> in the speech bubbles" to fifty production comics shipped to <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a> on a Saturday afternoon.</p>
+            <p>Below: the route we took, what worked, what didn't, and the exact recipe — model choices, prompt structure, API endpoints, and gotchas — that got us from "Midjourney keeps writing <em>SARPER TOLT</em> in the speech bubbles" to fifty production comics shipped to <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a> on a Saturday afternoon — and then what silently broke (and what we rebuilt) when we tried to scale that pipeline past a single country to 733 comics across eight of them.</p>
 
             <h2 id="why">Why comics, and why this is hard</h2>
 
@@ -373,7 +379,7 @@ reuse characters from the reference images.</code></pre>
 
             <h2 id="scale">Scaling to 50 comics</h2>
 
-            <p>Once the recipe was locked, scaling was mechanical. We extracted every scam title + location + first-paragraph summary from the existing HTML of nine Thai city pages (Bangkok, Chiang Mai, Chiang Rai, Koh Phangan, Koh Samui, Krabi, Pai, Pattaya, Phuket), then wrote a Python dict mapping each (city, scam number) to (character, four-panel script):</p>
+            <p>Once the recipe was locked, Thailand's scaling was mechanical — and hand-authored. We extracted every scam title + location + first-paragraph summary from the existing HTML of nine Thai city pages (Bangkok, Chiang Mai, Chiang Rai, Koh Phangan, Koh Samui, Krabi, Pai, Pattaya, Phuket), then wrote a Python dict mapping each (city, scam number) to (character, four-panel script):</p>
 
             <pre><code>SCENES = {
   ("chiang-mai", 5, "margie"): panels(
@@ -410,6 +416,8 @@ done
 wait</code></pre>
 
             <p>All 42 submitted in under three seconds. The polling loop ran in parallel too (6-second poll interval per job), so wall time was capped by the slowest single generation — which turned out to be ~90 seconds. <strong>Forty-two production-quality comics produced in about a minute and a half.</strong></p>
+
+            <p>This worked cleanly for one country. Fifty comics, hand-authored scripts, watercolor style locked, shipped in an afternoon. It did not survive scaling to eight countries — which turned out to be the most important lesson of the whole project.</p>
 
             <h3>The negative-cache gotcha</h3>
 
@@ -496,6 +504,8 @@ wait</code></pre>
 
             <p>Under nine dollars for fifty production comics across nine city pages. That's <strong>seventeen cents per comic, all-in</strong>, including every exploration generation and every false start. A freelance illustrator delivering the same in watercolor would be $200–400 per comic, easily six weeks of turnaround on a fifty-comic series. This isn't a subtle productivity difference.</p>
 
+            <p>At multi-country scale the math shifts slightly. Each comic gets a Gemini 2.5 Pro synthesis call (~$0.01–0.05) on top of the Nano Banana Pro render — more on why in a minute. That nudges per-country cost from ~$10 to ~$15. Across eight countries and 733 comics, the total has been about $110. Still multiple orders of magnitude below the freelance baseline.</p>
+
             <h3>The final recipe, one screen</h3>
 
             <p>If you want to reproduce this for your own content project, here's the distilled version:</p>
@@ -508,18 +518,182 @@ wait</code></pre>
                 <li><strong>Anchor with reference images.</strong> Your first generation or two (from the same style + same character recipe) becomes the style lock for everything that follows. Pass them via the <code>images</code> array.</li>
                 <li><strong>Be explicit about character substitution.</strong> Tell the model to use the reference images for style only and the NEW character described in your prompt.</li>
                 <li><strong>Batch and parallelize.</strong> The Wavespeed API handles 40+ concurrent requests without rate-limit issues. Wall time is capped by the slowest single generation.</li>
+                <li><strong>Synthesize each script with an LLM, not a keyword classifier.</strong> Past a single batch, ask Gemini 2.5 Pro (or Claude, or GPT-4) with a strict <code>responseSchema</code> to write each four-panel prompt from the source content. Routing to pre-written templates by keyword-match will silently mis-categorize ambiguous inputs — the specifics of <em>why</em> are below.</li>
+                <li><strong>Fail loud, not soft.</strong> If a generation fails twice, flag for manual review. Never silently substitute a template, never reuse an old version. A missing comic beats a wrong comic every time.</li>
             </ol>
 
-            <h3>What I'd do differently</h3>
+            <h2 id="what-broke">Scaling past Thailand: what silently broke</h2>
 
-            <p>Two small things, for v2:</p>
+            <p>The Thailand pipeline worked because I hand-wrote all 42 four-panel scripts in Python. At 50 comics, that's an afternoon of work. At 733 comics across 130+ cities, it isn't.</p>
+
+            <p>So the first scale-up swap was to route each scam to a pre-written template based on keywords in the title. Extract scam titles from HTML, classify into a template (pickpocket, petition, fake-police, bracelet, etc.), fill in <code>{city}</code> and <code>{landmark}</code> placeholders, generate. It was fast — Germany's 88 comics shipped in about an hour.</p>
+
+            <p>It was also quietly, catastrophically wrong.</p>
+
+            <p>The cascade looked like this:</p>
+
+            <pre><code>PATTERNS = [
+    (r"shell game|three.?card",          t_shell_game),
+    (r"pickpocket|u-bahn|s-bahn|metro",  t_pickpocket),   # &lt;-- landmine
+    (r"fake police|polizei|document",    t_fake_police),
+    (r"petition|deaf|clipboard",         t_petition),
+    # ...30 more patterns...
+    (r".*",                              t_pickpocket),   # fallback
+]
+def classify(title):
+    for pattern, template in PATTERNS:
+        if re.search(pattern, title.lower()):
+            return template</code></pre>
+
+            <p>Berlin scam #3 was titled <strong>"Brandenburger Tor Petition &amp; Bracelet Pickpocket Distraction"</strong> — a charity-worker at the Brandenburg Gate hands you a clipboard while accomplices slip a woven bracelet onto your wrist and lift your wallet. The classifier matched "pickpocket" first, routed to the generic-transit-pickpocket template, and generated a comic of Priya on a U-Bahn.</p>
+
+            <p>Beautiful comic. Beautiful watercolor. Completely wrong scam.</p>
+
+            <p><strong>Eight of 88 Germany comics were mis-routed this way</strong> — a 9% error rate on a single country. I didn't notice because three quiet failures stacked:</p>
+
+            <ol>
+                <li>The API returned <code>status: completed</code> on every generation.</li>
+                <li>The programmatic quality gate — valid JPEG header, file size ≥ 120 KB — passed every one.</li>
+                <li>Nothing in the image itself says "this is wrong" unless you read it alongside the scam title.</li>
+            </ol>
+
+            <p>I spot-checked six comics at deploy. All six happened to be correctly routed. Confidence high, shipping green. A human reviewer found the bug by scrolling through the live Berlin page and going <em>"why is there a subway in the Brandenburger Tor scam?"</em></p>
+
+            <h3>Why first-match cascades are structurally unsafe</h3>
+
+            <p>Reordering the patterns doesn't fix this. Any title with overlapping mechanics lands badly somewhere in a first-match cascade, no matter how you order it:</p>
 
             <ul>
-                <li><strong>A richer character sheet with pose cues.</strong> We got character drift in a few scams where the protagonist needed to do something unusual (lie down on a beach, climb stairs). Adding a "typical poses" section to each character sheet would help.</li>
-                <li><strong>Per-scam dialogue length discipline.</strong> Anything over ~8 words per bubble occasionally mis-spelled even on Nano Banana Pro. Keep bubbles short — it's better comic-writing anyway.</li>
+                <li><em>"Lucky Face" Indian Hair Supplement &amp; Fortune Teller</em> — fortune teller, hair supplement, or lucky face?</li>
+                <li><em>Patpong Ping Pong Show Drink Bill</em> — nightlife, bill shock, or ping-pong?</li>
+                <li><em>Fake Elephant Sanctuary &amp; Tiger Petting Trap</em> — elephant ethics or animal welfare?</li>
             </ul>
 
-            <p>And one big thing for v3: start producing <em>per-country</em> styles. Thailand is watercolor because the audience and the tropical setting called for warmth. Japan will be manga. Italy will be <em>fumetti</em>. USA will be classic American comic-book style. The pipeline stays identical — cast, style block, reference-image anchor — the style block just changes. The goal is for anyone who sees a tabiji scam page to recognize the country before they read the title.</p>
+            <p>Every new template you add introduces new keyword collisions with the existing set. It's an additive-complexity trap.</p>
+
+            <p>And the deeper issue: a pre-indexed template library <strong>can't encode this specific scam</strong>. Even if "bracelet" had matched first, the bracelet template has a hardcoded script — "lucky bracelet tied on wrist, twenty euros demanded, cut off with pocketknife." It doesn't know this is the Brandenburger Tor variant with "deaf children" as the distraction layer. Right category, wrong details. The comic is in the neighborhood, and in this business "in the neighborhood" is worse than silence.</p>
+
+            <h2 id="v2-rebuild">V2: Gemini writes the script</h2>
+
+            <p>The fix was to stop routing scams to pre-written templates and start writing a bespoke four-panel script for every single scam.</p>
+
+            <p>For each scam, the v2 pipeline:</p>
+
+            <ol>
+                <li>Extracts title, location, and the first one or two story paragraphs from the HTML.</li>
+                <li>Sends it to Gemini 2.5 Pro with a system prompt describing the four-member cast and their scam-fit pairings, the specific scam's content, and a <strong>strict JSON response schema</strong> — enforced server-side via the <code>responseSchema</code> parameter, not a "please return JSON" prayer:</li>
+            </ol>
+
+            <pre><code>RESPONSE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "character": {"type": "string", "enum": ["margie", "priya", "harry", "marcus"]},
+        "character_reason": {"type": "string"},
+        "panels": {
+            "type": "array", "minItems": 4, "maxItems": 4,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "scene": {"type": "string"},
+                    "dialogue": {"type": "string"},
+                },
+                "required": ["scene", "dialogue"],
+            },
+        },
+    },
+    "required": ["character", "character_reason", "panels"],
+}</code></pre>
+
+            <p>Gemini returns a four-panel script tailored to that exact scam. The pipeline then assembles <code>STYLE + CHARACTER + SCENE</code> as before and fires Nano Banana Pro.</p>
+
+            <p>Here's what Gemini writes for the Brandenburger Tor Petition scam:</p>
+
+            <pre><code>{
+  "character": "margie",
+  "character_reason": "This scam preys on politeness and a desire
+   to help a fake charity, which is Margie's key vulnerability.",
+  "panels": [
+    {"scene": "Margie stands smiling before Berlin's Brandenburg
+     Gate. A young woman approaches, holding a clipboard with a
+     sign that reads 'HELP FOR DEAF CHILDREN'.",
+     "dialogue": "A signature for the children?"},
+    {"scene": "Margie focuses on signing. An accomplice's hand
+     slips a woven bracelet onto her wrist while a third hand
+     lifts the wallet from her purse.",
+     "dialogue": "Of course, I'm happy to help."},
+    {"scene": "The petition-holder is gone. The accomplice
+     aggressively points to the bracelet on Margie's arm.
+     Margie looks at her empty, open purse in shock.",
+     "dialogue": "The clipboard is just a distraction."},
+    {"scene": "Margie speaks to a German Polizei officer. In
+     the background, other tourists are being approached by a
+     similar clipboard group.",
+     "dialogue": "Lesson learned."}
+  ]
+}</code></pre>
+
+            <p>The resulting comic shows the clipboard, the bracelet, the pickpocket, and the Polizei report. Brandenburg Gate as backdrop. Panel 3's bubble literally names the scam mechanic. It's a comic that actually matches this specific scam.</p>
+
+            <h3>Fail loud, not soft</h3>
+
+            <p>V1 had a silent fallback: if a generation failed, substitute a generic template and keep going. That masked routing errors on top of everything else.</p>
+
+            <p>V2's contract: <strong>if a comic makes it into the output folder, it was generated specifically for this scam. No silent substitutions, ever.</strong></p>
+
+            <ul>
+                <li><strong>First failure</strong> → auto-retry once via the <code>/text-to-image</code> endpoint (Nano Banana Pro's <code>/edit</code> endpoint's content filter is slightly stricter; this recovers most filter trips).</li>
+                <li><strong>Second failure</strong> → <strong>flag</strong> for manual review. Write the scam to a flagged log. Do not substitute. Do not reuse an old version.</li>
+            </ul>
+
+            <p>A missing comic is vastly better than a wrong comic. The reviewer sees the flag, regenerates manually, and the output is always known-good.</p>
+
+            <h3>The cast-distribution tell</h3>
+
+            <p>V1 and V2 disagree sharply about which character should appear in German scams, and the shape of that disagreement is diagnostic:</p>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Germany cast distribution (88 comics)</th>
+                            <th>V1</th>
+                            <th>V2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Margie (trusting 62-year-old)</td><td>10</td><td><strong>42</strong></td></tr>
+                        <tr><td>Priya (savvy 34-year-old)</td><td><strong>68</strong></td><td>28</td></tr>
+                        <tr><td>Harry (charmed 64-year-old)</td><td>6</td><td>17</td></tr>
+                        <tr><td>Marcus (curious 34-year-old)</td><td>4</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>V1's generic-pickpocket fallback swept up every unmatched scam and handed it to Priya — she's the savvy-skeptic-on-transit protagonist, perfect for pickpockets, badly miscast for clipboard petitions. V2 picks character based on actual scam mechanics, and Margie (the politeness-target) correctly dominates because German scams skew heavily toward trust-based mechanics — fake charity, restaurant overcharge, fake officials. The 10 → 42 Margie shift isn't a reshuffle. It's v1's systematic misrouting becoming visible in aggregate.</p>
+
+            <h2 id="lessons">Seven lessons for AI-illustration pipelines</h2>
+
+            <p>If you're building something like this at any scale past a single batch, these are the things our 733-comic year cost us to learn:</p>
+
+            <ol>
+                <li><strong>Keyword classifiers fail silently on ambiguous input.</strong> First-match priority cascades are deceptively simple and dangerous. Every new category introduces collisions with existing ones. You will not notice until a human reviewer spots a mismatch.</li>
+                <li><strong>Content specificity beats style quality.</strong> A beautifully-rendered comic that's wrong about the subject is worse than a sketchy one that's right. AI image models will keep getting prettier. The specificity problem is upstream of that, in how you route source content to a prompt.</li>
+                <li><strong>Per-item bespoke synthesis is worth the ~$0.05.</strong> Adding an LLM step to write each prompt is rounding error against the cost of reprinting a book or losing credibility. Speed-vs-quality inverts the moment output is customer-visible.</li>
+                <li><strong>Structured JSON output is non-negotiable.</strong> Gemini, Claude, GPT-4 all support response schemas. Use them. Don't parse "here is the JSON you requested" — it will break on the one comic where the model decides to add a preamble.</li>
+                <li><strong>Silent fallback is a bug, not a feature.</strong> If your pipeline can't produce a valid output for an item, it should refuse to produce <em>any</em> output for that item. Flag and surface. "We generated 88 comics" should mean exactly that, not "we generated 80 comics + 8 templates."</li>
+                <li><strong>File-size and format checks catch ~90% of API failures and 0% of semantic failures.</strong> A comic that rendered a subway instead of a clipboard will pass every programmatic check. You cannot automate your way out of needing a semantic-correctness pass — but you can push correctness <em>upstream</em> by making the LLM explicitly name the mechanic in the script it writes.</li>
+                <li><strong>When it breaks, regenerate — don't patch.</strong> The temptation to "fix the classifier and re-run only the affected comics" is real but hollow. Rebuilding the whole country's set with v2 also gave us a higher baseline for <em>every</em> comic, not just the broken ones. ~$15 and one hour per country. Cheap.</li>
+            </ol>
+
+            <h3>What's next</h3>
+
+            <p>Three things still on the list:</p>
+
+            <ul>
+                <li><strong>A semantic-correctness pass.</strong> File-size and JPEG-header checks pass wrong comics. An LLM-as-judge — hand the generated image and the scam text to Gemini and ask "does this comic show X?" — would catch semantic drift that v2's upstream scripting can't fully prevent.</li>
+                <li><strong>Richer pose cues in character sheets.</strong> Characters occasionally drift when they have to do something unusual — lie on a beach, climb stairs, ride a tuk-tuk. A "typical poses" subsection per character would tighten this.</li>
+                <li><strong>Per-scam dialogue length discipline.</strong> Anything over ~8 words per bubble still occasionally mis-spells, even on Nano Banana Pro. Keep bubbles short. It's better comic-writing anyway.</li>
+            </ul>
 
             <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
 
@@ -527,11 +701,12 @@ wait</code></pre>
 
             <ul>
                 <li><a href="https://wavespeed.ai/?ref=bernard" target="_blank" rel="noopener"><strong>Wavespeed</strong></a> — unified API access to 1000+ AI models including all four we tested, under one billing account. Pricing at <a href="https://wavespeed.ai/pricing" target="_blank" rel="noopener">wavespeed.ai/pricing</a>. This is the single highest-leverage tool in this pipeline.</li>
+                <li><a href="https://ai.google.dev/gemini-api/docs/structured-output" target="_blank" rel="noopener"><strong>Gemini 2.5 Pro</strong></a> — the LLM we use for per-scam script synthesis in v2. The key feature is the <code>responseSchema</code> parameter, which server-side enforces a JSON shape on every response. Claude's and OpenAI's equivalents work just as well; pick your poison.</li>
                 <li><a href="https://www.apify.com?fpr=bernard" target="_blank" rel="noopener"><strong>Apify</strong></a> — the <code>imageaibot/midjourney-bot</code> actor we used for Midjourney automation via Discord.</li>
-                <li><a href="https://claude.ai/referral/IDrXculiTA" target="_blank" rel="noopener"><strong>Claude Code</strong></a> — the agentic coding environment we wrote and ran this entire pipeline through. Wrote the prompts, fired the Wavespeed calls, uploaded to R2, injected into HTML, ran the git workflow, merged the PR. One conversation, under two hours of wall time, fifty comics shipped.</li>
+                <li><a href="https://claude.ai/referral/IDrXculiTA" target="_blank" rel="noopener"><strong>Claude Code</strong></a> — the agentic coding environment we wrote and ran this entire pipeline through. Wrote the prompts, fired the Wavespeed calls, uploaded to R2, injected into HTML, ran the git workflow, merged the PR. One conversation, under two hours of wall time, fifty comics shipped. Then, a few weeks later, one more conversation to rebuild v2 after the scale-up failure.</li>
             </ul>
 
-            <p>If you want to see the full fifty comics in production, the Thailand hub is at <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">tabiji.ai/scams/country/th/</a>. Click into any city to see the comics in context.</p>
+            <p>If you want to see all 733 comics in production, the country hubs are at <a href="https://tabiji.ai/scams/country/th/" target="_blank" rel="noopener">Thailand</a>, <a href="https://tabiji.ai/scams/country/fr/" target="_blank" rel="noopener">France</a>, <a href="https://tabiji.ai/scams/country/de/" target="_blank" rel="noopener">Germany</a>, <a href="https://tabiji.ai/scams/country/gr/" target="_blank" rel="noopener">Greece</a>, <a href="https://tabiji.ai/scams/country/es/" target="_blank" rel="noopener">Spain</a>, <a href="https://tabiji.ai/scams/country/cn/" target="_blank" rel="noopener">China</a>, <a href="https://tabiji.ai/scams/country/id/" target="_blank" rel="noopener">Indonesia</a>, and <a href="https://tabiji.ai/scams/country/ca/" target="_blank" rel="noopener">Canada</a>. Click any city to see the comics in context — and each country has its own locked visual style.</p>
 
             <p style="text-align:center;color:var(--text-muted);font-size:0.95rem;margin-top:3rem;">Questions, corrections, or better recipes? Reply on <a href="https://x.com/bernardjhuang">X</a> or <a href="/subscribe/">subscribe</a> for the next build log.</p>
 
