@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Content Traffic is Vanity. Training Data is the Moat. — Zonted</title>
+    <meta name="description" content="Our forgotten API is 83% Meta crawler. Flattering, wrong metric. I uploaded tabiji's entire dataset to Hugging Face — here's why training data beats web-search citations as an AEO lever.">
+    <link rel="canonical" href="https://zonted.com/posts/training-data-is-the-moat/">
+    <meta property="og:title" content="Content Traffic is Vanity. Training Data is the Moat.">
+    <meta property="og:description" content="Our forgotten API is 83% Meta crawler. Flattering, wrong metric. I uploaded tabiji's entire dataset to Hugging Face — here's why training data beats web-search citations as an AEO lever.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/resources/training-data-is-the-moat/cf-api-traffic.png">
+    <meta property="og:url" content="https://zonted.com/posts/training-data-is-the-moat/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-04-24">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://img.zonted.com/resources/training-data-is-the-moat/cf-api-traffic.png">
+    <meta name="twitter:title" content="Content Traffic is Vanity. Training Data is the Moat.">
+    <meta name="twitter:description" content="Our dormant API is 83% Meta crawler. Flattering, wrong metric. Why I uploaded tabiji's whole database to Hugging Face.">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Content Traffic is Vanity. Training Data is the Moat.","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-24","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/training-data-is-the-moat/","description":"Our forgotten API is 83% Meta crawler. Flattering, wrong metric. I uploaded tabiji's entire dataset to Hugging Face — here's why training data beats web-search citations as an AEO lever."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Content Traffic is Vanity. Training Data is the Moat."}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #767676;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+        .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
+
+        .toc-sidebar { width: 220px; position: sticky; top: 80px; flex-shrink: 0; align-self: flex-start; padding: 1rem 0; }
+        .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.75rem; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(252,252,250,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+        <a href="/metrics/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Metrics</a>
+        <a href="/about/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">About</a>
+    </div>
+</div>
+</nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#two-layers">Two layers: web search vs. training data</a></li>
+            <li><a href="#moat">Why training data is a moat</a></li>
+            <li><a href="#hf">The move: Hugging Face</a></li>
+            <li><a href="#measure">How I&rsquo;ll know it worked</a></li>
+            <li><a href="#playbook">The broader play</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#two-layers">Web search vs. training data</a></li>
+        <li><a href="#moat">Why training data is a moat</a></li>
+        <li><a href="#hf">The Hugging Face move</a></li>
+        <li><a href="#measure">How I&rsquo;ll know it worked</a></li>
+        <li><a href="#playbook">The broader play</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form action="https://zonted.substack.com/api/v1/free?nojs=true" method="post" target="_blank" style="display:flex;flex-direction:column;gap:6px;">
+            <input type="email" name="email" placeholder="your@email.com" required style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;width:100%;">
+            <button type="submit" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;font-weight:600;padding:8px 10px;border:none;border-radius:6px;background:var(--text);color:var(--bg);cursor:pointer;transition:background 0.2s;">Subscribe</button>
+        </form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <article class="article-container">
+        <div style="margin-bottom:1.5rem;padding-top:1rem;">
+            <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+        </div>
+        <h1>Content Traffic is Vanity. Training Data is the Moat.</h1>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+            <div>
+                <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">April 24, 2026 &middot; 6 min read</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+
+            <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
+                <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
+                <p><strong>I was cleaning up abandoned experiments on tabiji.ai and noticed our dormant public API is getting 4,667 requests a week &mdash; 83% of it Meta&rsquo;s crawler. Flattering, but the wrong metric. AI web search (what the crawler is doing) only patches gaps in a model&rsquo;s training data &mdash; yesterday&rsquo;s pricing, this week&rsquo;s news. Training data itself is where brand presence compounds, and frontier training runs cost hundreds of millions of dollars and refresh every 6&ndash;18 months. So I uploaded tabiji&rsquo;s whole dataset &mdash; 8,799 records, 11.2 MB, Parquet, CC-BY-4.0 &mdash; to <a href="https://huggingface.co/datasets/tabiji/tabiji-travel-safety-guides" target="_blank" rel="noopener">Hugging Face</a>, where OpenAI, Anthropic, Meta, and Mistral source their training corpora. One upload, permanent citation, zero ongoing bandwidth. Full play below.</strong></p>
+            </div>
+
+            <p class="dropcap">I was going through old tabiji.ai experiments last week, decluttering. The public <code>/api/</code> endpoint was in there &mdash; an afterthought we shipped early, barely marketed, mostly forgot about. Before I killed it, I pulled up the Cloudflare dashboard to see what, if anything, it was doing.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/training-data-is-the-moat/cf-api-traffic.png" alt="Cloudflare traffic breakdown for /api/ over 8 days: 4,667 requests, 60 human visits, 83% Meta external crawler, long tail of AI crawlers" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Eight days of traffic on our forgotten <code>/api/</code> endpoint. The humans are the noise. The bots are the signal.</figcaption></figure>
+
+            <p><strong>4,667 requests over 8 days. 60 human visits. 83% of the non-visit traffic is Meta&rsquo;s external crawler.</strong> GPTBot, PerplexityBot, Applebot, Bytespider, and the long tail of AI crawlers account for roughly another 50. The rest is LeakIX / <code>.env</code> probes, internal <code>curl</code>, and scattered browsers. The API we forgot about was, quietly, an LLM-feeding endpoint.</p>
+
+            <p>My first reaction was to feel flattered. My second reaction was to ask whether &ldquo;the LLM crawlers are reading my API&rdquo; is actually the metric I want to be chasing.</p>
+
+            <p>It&rsquo;s not.</p>
+
+            <h2 id="two-layers">Two layers: web search vs. training data</h2>
+
+            <p>The <a href="/posts/aeo-answer-engine-optimization/">AEO post</a> I wrote a couple weeks back broke down the three layers of an AI response &mdash; training data, validation search, and memory. What the Meta crawler hitting my API represents is the <em>validation</em> layer: agents fetching fresh data at query time to fill gaps in their training corpus. &ldquo;Is tabiji&rsquo;s pricing still current? Did any advisories change this week?&rdquo; That&rsquo;s useful, and the brand can show up in the answer for that specific query. But it&rsquo;s single-turn impact &mdash; the model isn&rsquo;t <em>learning</em> anything about tabiji from one JSON response during inference.</p>
+
+            <p>The training-data layer is the one that compounds. Content that makes it into the corpus gets baked into the model weights. Every query against that model &mdash; for the next year or so, until the next refresh &mdash; has some probability of surfacing your entity, your framing, your voice. You don&rsquo;t have to be fetched again. You&rsquo;re <em>already in there</em>.</p>
+
+            <h2 id="moat">Why training data is a moat</h2>
+
+            <p>Training runs are expensive and infrequent. Epoch AI pegs GPT-4.5&rsquo;s training cost around <strong>$340 million</strong> and Grok 4&rsquo;s around <strong>$390 million</strong>. The widely-circulated claim that Anthropic&rsquo;s &ldquo;Mythos&rdquo; cost $10 billion traces back to a single tweet, not to Anthropic &mdash; the real number&rsquo;s murkier, but every credible estimate puts frontier runs in the hundreds of millions, minimum.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/training-data-is-the-moat/mythos-ai-overview.png" alt="Google AI Overview for the query '10b mythos cost' stating the Anthropic Mythos model training cost is estimated around $10 billion, citing LinkedIn" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Aside, too on-the-nose to skip: Google&rsquo;s AI Overview happily quotes the $10B figure as fact, sourced from LinkedIn. Which is exactly the point &mdash; the AI layer propagates whatever made it into its pipeline, verified or not. Including about itself.</figcaption></figure>
+
+            <p>What that cost means for you: training corpora don&rsquo;t get refreshed casually. Data cutoffs run 6&ndash;18 months behind model release dates. Whatever made it into the corpus is riding a very long wave. Whatever didn&rsquo;t is waiting at least another refresh cycle, usually longer.</p>
+
+            <p>If your content exists on a website &mdash; a normal 2,000&ndash;5,000-word blog post written for humans to read &mdash; crawlers may or may not pick it up, may or may not clean it into a useful training row, may or may not deduplicate it against other sources that said the same thing louder. It&rsquo;s a lottery ticket with unknown odds.</p>
+
+            <h2 id="hf">The move: Hugging Face</h2>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/training-data-is-the-moat/hf-recommendation.png" alt="Recommendation text: Hugging Face dataset is the biggest lever. HF is where OpenAI, Meta, Anthropic, Mistral source training corpora. One upload equals broad reach, permanent citation, zero ongoing bandwidth cost." loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">The shortlist of non-API ways to serve the data. Hugging Face was #1 by a wide margin.</figcaption></figure>
+
+            <p>The single highest-leverage thing I could do &mdash; and the thing I did &mdash; was upload tabiji&rsquo;s whole dataset to <a href="https://huggingface.co/datasets/tabiji/tabiji-travel-safety-guides" target="_blank" rel="noopener">Hugging Face</a>. HF is where OpenAI, Anthropic, Meta, and Mistral literally source training corpora. It&rsquo;s not a crawl target where your content <em>might</em> make it through preprocessing &mdash; it&rsquo;s a pre-curated, license-tagged, schema-clean distribution point that&rsquo;s already in the pipeline.</p>
+
+            <p>What I uploaded:</p>
+
+            <ul>
+                <li><strong>6,498 destinations</strong> &mdash; climate, currency, language, plug type, tap-water safety, tipping, visa notes, coordinates</li>
+                <li><strong>443 itineraries</strong> &mdash; day-by-day activities with logistics and timing</li>
+                <li><strong>396 city-level scam guides</strong> &mdash; how each scam works, how to avoid, police contacts (the same content <a href="/posts/ai-comics-dos-donts/">the 733 AI-generated comics</a> illustrate)</li>
+                <li><strong>250 countries</strong>, <strong>55 safety profiles</strong>, <strong>208 travel advisories</strong> (aggregated from US State Dept. and UK FCDO), and <strong>949 head-to-head destination comparisons</strong> with Reddit quotes and verdicts</li>
+            </ul>
+
+            <p>Total: 8,799 records, 11.2 MB, Parquet, CC-BY-4.0. One upload. Permanent citation back to tabiji.ai. Zero ongoing bandwidth cost.</p>
+
+            <p>The deeper shift is in serving format. The content on tabiji.ai was <em>written for humans</em> &mdash; long-form articles with hooks, narrative, and words like &ldquo;probably.&rdquo; The HF dataset is the same knowledge re-expressed in the shape agents actually consume &mdash; structured rows with explicit fields and source provenance. Same information, different serving format. The website stays for humans. The dataset ships for machines.</p>
+
+            <h2 id="measure">How I&rsquo;ll know it worked</h2>
+
+            <p>Honestly, I don&rsquo;t know yet. The measurement layer for training-data influence is primitive. I added a GA4 annotation on the upload date so I can line up forward metrics against the intervention, and I&rsquo;ll watch a few signals:</p>
+
+            <ul>
+                <li><strong>Leading:</strong> citations of tabiji.ai in ChatGPT / Claude / Gemini answers to travel-safety queries. Direct-traffic spikes on specific destinations that match dataset rows.</li>
+                <li><strong>Lagging:</strong> the next Llama, Claude, and Gemini training runs. If tabiji made it into the corpus, brand mentions downstream should go up without any new content effort.</li>
+            </ul>
+
+            <p>Ask me in twelve months whether it worked. The AEO playbook as a field is unfolding fast enough that the honest answer to &ldquo;how do you measure this&rdquo; is &ldquo;improvise, and annotate the graph.&rdquo;</p>
+
+            <h2 id="playbook">The broader play</h2>
+
+            <p>Hugging Face is the biggest lever, not the only one. The pattern is simple: ask where training data actually comes from, then show up there.</p>
+
+            <ul>
+                <li><strong>Structured data on GitHub</strong> &mdash; also crawled, also cleaned, also attributed.</li>
+                <li><strong>Wikipedia citations</strong> where genuinely appropriate &mdash; high training-data signal per citation.</li>
+                <li><strong>Reddit presence</strong> &mdash; Reddit&rsquo;s data is <a href="https://www.reuters.com/technology/artificial-intelligence/reddit-ai-training-deal-with-google-worth-60-million-per-year-source-says-2024-02-22/" target="_blank" rel="noopener">explicitly licensed to Google</a> and is heavily weighted in most frontier corpora.</li>
+                <li><strong>Internet Archive mirrors</strong> &mdash; preserves content through URL changes and site shutdowns, increasing the odds it gets crawled cleanly.</li>
+            </ul>
+
+            <p>The internet was built for humans to read. Agents read it differently. If your content strategy is still &ldquo;rank on Google for keywords,&rdquo; you&rsquo;re optimizing for a consumption surface the new buyer doesn&rsquo;t use.</p>
+
+            <p>Put your data where models go shopping.</p>
+
+            <p style="text-align:center;color:var(--text-muted);font-size:0.95rem;margin-top:3rem;">Already uploading yours, or thinking about it? Reply on <a href="https://x.com/bernardjhuang">X</a> or <a href="/subscribe/">subscribe</a> for the next build log.</p>
+
+        </div>
+    </article>
+</div>
+</div>
+
+</main>
+
+<footer>
+    <div style="max-width:660px;margin:0 auto;">
+        <p style="color:var(--text-dim);font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;margin-bottom:12px;">&copy; 2026 Bernard Huang &middot; zonted.com</p>
+        <div style="display:flex;gap:20px;justify-content:center;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;">
+            <a href="/posts/" style="color:var(--text-dim);text-decoration:none;">Posts</a>
+            <a href="/metrics/" style="color:var(--text-dim);text-decoration:none;">Metrics</a>
+            <a href="/about/" style="color:var(--text-dim);text-decoration:none;">About</a>
+            <a href="/feed.xml" style="color:var(--text-dim);text-decoration:none;">RSS</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://github.com/bernardjhuang">GitHub</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            <a href="https://tabiji.ai">tabiji.ai</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                const label = document.querySelector('.toc-active-label');
+                if (label) {
+                    const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                    if (activeLink) label.textContent = activeLink.textContent;
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
+<!-- NEWSLETTER_REDIRECT -->
+<script>
+(function(){
+  document.querySelectorAll('form[action*="substack.com"]').forEach(function(form){
+    var iframe=document.createElement("iframe");
+    iframe.name="substack-frame";
+    iframe.style.display="none";
+    document.body.appendChild(iframe);
+    form.target="substack-frame";
+    form.addEventListener("submit",function(){
+      setTimeout(function(){window.location.href="/subscribe/confirmed/";},300);
+    });
+  });
+})();
+</script>
+<!-- /NEWSLETTER_REDIRECT -->
+</body>
+</html>

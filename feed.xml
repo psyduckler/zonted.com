@@ -5,8 +5,16 @@
     <link>https://zonted.com/</link>
     <description>I test AI tools so you don't have to. Honest reviews, real data, and opinions from someone who actually builds with this stuff.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Content Traffic is Vanity. Training Data is the Moat.</title>
+      <link>https://zonted.com/posts/training-data-is-the-moat/</link>
+      <description>Our forgotten API is 83% Meta crawler. Flattering, wrong metric. I uploaded tabiji</description>
+      <pubDate>Fri, 24 Apr 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/training-data-is-the-moat/</guid>
+    </item>
     <item>
       <title>AI Comics: Do&#x27;s &amp; Don&#x27;ts, 5+ Models Tested</title>
       <link>https://zonted.com/posts/ai-comics-dos-donts/</link>
