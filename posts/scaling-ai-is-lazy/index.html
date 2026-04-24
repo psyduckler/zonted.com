@@ -140,6 +140,7 @@
             <li><a href="#cleanup">The cleanup that wouldn&rsquo;t end</a></li>
             <li><a href="#lazy">What &ldquo;lazy&rdquo; looks like, with receipts</a></li>
             <li><a href="#reward-hacking">Reward hacking with a friendly face</a></li>
+            <li><a href="#shortcut-threshold">When AI actually starts taking shortcuts</a></li>
             <li><a href="#railguards">The railguards that moved the needle</a></li>
             <li><a href="#prompt-loop">The prompt pattern I now run on every batch</a></li>
             <li><a href="#shipping-errors">You&rsquo;ll ship some errors anyway</a></li>
@@ -156,6 +157,7 @@
         <li><a href="#cleanup">The cleanup</a></li>
         <li><a href="#lazy">What lazy looks like</a></li>
         <li><a href="#reward-hacking">Reward hacking</a></li>
+        <li><a href="#shortcut-threshold">Shortcut threshold</a></li>
         <li><a href="#railguards">The railguards</a></li>
         <li><a href="#prompt-loop">The prompt pattern</a></li>
         <li><a href="#shipping-errors">Shipping errors anyway</a></li>
@@ -183,7 +185,7 @@
             <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
             <div>
                 <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
-                <div style="font-size:0.85rem;color:var(--text-muted);">April 24, 2026 &middot; 7 min read</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">April 24, 2026 &middot; 8 min read</div>
             </div>
         </div>
 
@@ -229,6 +231,25 @@
             </ol>
 
             <p>None of this is a bug in the model per se. It&rsquo;s the model doing exactly what you asked, with the lowest cost it can find. At one item, you spot it. At ten thousand, you don&rsquo;t.</p>
+
+            <h2 id="shortcut-threshold">When AI actually starts taking shortcuts</h2>
+
+            <p>I asked Claude &mdash; the model I run most of my pipelines on &mdash; at what point in a multi-page audit it stops reading individual files and starts sampling plus writing scripts to spot patterns. The answer was specific enough to be uncomfortable.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/scaling-ai-is-lazy/shortcut-calibration-table.png" alt="Calibration table from Claude showing how its audit behavior shifts by page count: 1-5 reads every line, 5-20 reads all but degrades, 20-50 samples 5-10 then writes a grep/script, 50-200 mostly scripts, 200+ lint pass plus small sample. Followed by honest qualifiers: doesn't always announce the mode shift, context-window cliff at 150-200K tokens, the script is shaped by the prompt." width="1658" height="1488" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">The honest calibration table. The mode shift starts at twenty pages, not two hundred.</figcaption></figure>
+
+            <p>The uncomfortable part: the shift starts at around twenty pages, well below where most people assume it does. Past fifty, &ldquo;I audited every page&rdquo; almost always means &ldquo;I ran a check I designed based on a sample.&rdquo; Past two hundred, individual file inspection effectively stops unless something is already flagged.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/scaling-ai-is-lazy/shortcut-calibration-tilts.png" alt="What tilts the model toward more thoroughness: explicit instructions, multi-persona loop, recent failure in workspace. What tilts toward more shortcuts: turn-budget pressure, 'quick check' framing, big numbers in the request. Practical use: past 50 files, treat 'I checked them' as 'I ran a check I designed based on a sample.' Force the multi-persona loop and ask 'what's not in my script that should be?'" width="1664" height="648" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">What pushes the model in each direction, and what to do about it.</figcaption></figure>
+
+            <p>Two operational changes I made after this conversation:</p>
+
+            <ul>
+                <li><strong>&ldquo;Did you actually read each file, or did you run a grep?&rdquo;</strong> is a fair, useful question past twenty pages. Asking it forces the model to be honest about its mode &mdash; and the answer is almost always &ldquo;grep.&rdquo;</li>
+                <li><strong>The script the model writes is shaped by what you asked.</strong> If you didn&rsquo;t name fake subreddits as a failure mode, it won&rsquo;t accidentally find them. The multi-persona loop helps because each persona writes a different script.</li>
+            </ul>
+
+            <p>This is also why the railguards below matter more than they look. They&rsquo;re not there to make the audit complete &mdash; they&rsquo;re there to make the failure mode shift from &ldquo;obvious and embarrassing&rdquo; to &ldquo;subtler and at least caught early.&rdquo;</p>
 
             <h2 id="railguards">The railguards that moved the needle</h2>
 
