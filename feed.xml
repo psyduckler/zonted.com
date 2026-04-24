@@ -16,6 +16,14 @@
       <guid isPermaLink="true">https://zonted.com/posts/training-data-is-the-moat/</guid>
     </item>
     <item>
+      <title>Scaling with AI is Hard because AI is Lazy</title>
+      <link>https://zonted.com/posts/scaling-ai-is-lazy/</link>
+      <description>Fifty cleanup PRs in five weeks. Fake restaurants, fake subreddits, 4,270 null-island coordinates, 5,096 fabricated Reddit quotes. Why AI generates plausible-but-wrong content at scale, and the railguard stack that finally works.</description>
+      <pubDate>Fri, 24 Apr 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/scaling-ai-is-lazy/</guid>
+    </item>
+    <item>
       <title>AI Comics: Do&#x27;s &amp; Don&#x27;ts, 5+ Models Tested</title>
       <link>https://zonted.com/posts/ai-comics-dos-donts/</link>
       <description>We tested Midjourney, Seedream v5 Lite, Wan 2.7 Pro, Qwen Image 2.0, and Nano Banana Pro — then shipped 733 comics across eight countries. Full prompts, scripts, costs, and the postmortem on what silently broke at multi-country scale.</description>
