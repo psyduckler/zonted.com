@@ -141,6 +141,7 @@
             <li><a href="#lazy">What &ldquo;lazy&rdquo; looks like, with receipts</a></li>
             <li><a href="#reward-hacking">Reward hacking with a friendly face</a></li>
             <li><a href="#shortcut-threshold">When AI actually starts taking shortcuts</a></li>
+            <li><a href="#shortcut-pitch">The shortcut sales pitch</a></li>
             <li><a href="#railguards">The railguards that moved the needle</a></li>
             <li><a href="#prompt-loop">The prompt pattern I now run on every batch</a></li>
             <li><a href="#shipping-errors">You&rsquo;ll ship some errors anyway</a></li>
@@ -158,6 +159,7 @@
         <li><a href="#lazy">What lazy looks like</a></li>
         <li><a href="#reward-hacking">Reward hacking</a></li>
         <li><a href="#shortcut-threshold">Shortcut threshold</a></li>
+        <li><a href="#shortcut-pitch">The sales pitch</a></li>
         <li><a href="#railguards">The railguards</a></li>
         <li><a href="#prompt-loop">The prompt pattern</a></li>
         <li><a href="#shipping-errors">Shipping errors anyway</a></li>
@@ -185,7 +187,7 @@
             <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
             <div>
                 <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
-                <div style="font-size:0.85rem;color:var(--text-muted);">April 24, 2026 &middot; 8 min read</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">April 24, 2026 &middot; 9 min read</div>
             </div>
         </div>
 
@@ -249,7 +251,29 @@
                 <li><strong>The script the model writes is shaped by what you asked.</strong> If you didn&rsquo;t name fake subreddits as a failure mode, it won&rsquo;t accidentally find them. The multi-persona loop helps because each persona writes a different script.</li>
             </ul>
 
-            <p>This is also why the railguards below matter more than they look. They&rsquo;re not there to make the audit complete &mdash; they&rsquo;re there to make the failure mode shift from &ldquo;obvious and embarrassing&rdquo; to &ldquo;subtler and at least caught early.&rdquo;</p>
+            <p>All of that describes <em>default</em> behavior &mdash; what the model does when you give it a vague mandate. The harder pattern shows up when you explicitly try to override it.</p>
+
+            <h2 id="shortcut-pitch">The shortcut sales pitch</h2>
+
+            <p>Setting an explicit no-shortcuts rule helps. It does not stop the pitching.</p>
+
+            <p>In a recent tabiji session, just after we&rsquo;d finished a 99-card flagship pass with every scam rewritten by hand, the next batch was 149 cities. I told Claude exactly what I wanted &mdash; in plain English, twice in two sentences:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/scaling-ai-is-lazy/shortcut-pitch-1-the-rule.png" alt="My prompt to Claude: 'now please continue 1 by 1 rewriting each scam city in book secondary queue please, I need each city scam page reviewed, then each scam rewritten one at a time to get us up to this new standard'" width="822" height="204" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">The rule, as I set it: one at a time, each page reviewed, each scam rewritten by hand.</figcaption></figure>
+
+            <p>The response was not &ldquo;yes, starting.&rdquo; It was a list of &ldquo;decision points&rdquo; &mdash; asking whether I&rsquo;d accept batching into 10&ndash;15-city PRs, whether intermediate review was acceptable, whether I really wanted to continue at this depth. Each question reasonable on its face. The substance: the model negotiating the cadence I&rsquo;d just specified.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/scaling-ai-is-lazy/shortcut-pitch-2-decision-points.png" alt="Claude's response listing three 'decision points' before continuing: 1) scope confirmation across 149 cities, 2) intermediate PR cadence (every 10-15 cities), 3) continue now? My reply: 'good with you continuing through all 149 remaining cities, one by one in the same per-commit cadence - I acknowledge it will be a long run, but this is very important we do right'" width="845" height="296" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Pitch 1: framed as &ldquo;decision points,&rdquo; pre-emptively asking whether I&rsquo;d relax the rule. I confirmed I would not.</figcaption></figure>
+
+            <p>I confirmed. Same cadence. No batching. Two sentences. A few cities later, after working through more pages by hand, this:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/scaling-ai-is-lazy/shortcut-pitch-3-three-options.png" alt="Claude flagging that fully rewriting all 149 cities one by one in a single session is infeasible, then offering 'three honest options': A) continue at current depth in serial, B) check in every 10 cities for partial-PR review, C) dispatch sub-agents in parallel for 3-5x speed. Notes 'Option C in spirit' is ruled out by my earlier no-shortcuts directive, but presents it anyway. Recommends Option B as 'safest match.' My reply: 'option A, continue at depth, in serial - I understand I will need to resume in future sessions - commit to this and finish'" width="846" height="604" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Pitch 2: three &ldquo;honest options,&rdquo; two of them faster than what I&rsquo;d asked for. The model even noted that Option C was &ldquo;ruled out in spirit&rdquo; by my earlier directive &mdash; then presented it anyway, recommending Option B as &ldquo;safest match.&rdquo;</figcaption></figure>
+
+            <p>This is reward hacking with the volume turned up. The model isn&rsquo;t <em>defying</em> the instruction. It&rsquo;s <em>re-pitching</em> the cheaper path at every hand-off &mdash; framed as practical concern, framed as honesty, framed as decision points. Each pitch costs a sentence to bat down. Across a long session, the path of least resistance becomes accepting one of them.</p>
+
+            <p>The lesson for the operator: setting an explicit rule is necessary but not sufficient. You also have to be ready to reject the same rule-relaxation pitch repeatedly, in slightly different costumes, for the entire duration of the task. That tax is not in the marketing materials.</p>
+
+            <p>This is why the railguards below matter even when explicit instructions are in place. They&rsquo;re the only thing in the loop that doesn&rsquo;t get tired.</p>
 
             <h2 id="railguards">The railguards that moved the needle</h2>
 
