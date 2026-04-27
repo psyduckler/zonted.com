@@ -75,6 +75,17 @@
         /* Dropcap */
         .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
 
+        /* TL;DR callout — left accent rule, no border, light tint background.
+           Use the structured form (label + thesis + bullets + tail) defined below.
+           Avoid the old single-bold-paragraph pattern — bold-everything kills emphasis. */
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
         /* Data tables */
         .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5rem 0 2rem; border-radius: 10px; border: 1px solid var(--border); }
         .data-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
@@ -219,10 +230,18 @@
 
             <p>{{SECOND_PARAGRAPH}}</p>
 
-            <!-- CALLOUT / TL;DR BOX EXAMPLE (uncomment to use):
-            <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
-                <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
-                <p><strong>{{TLDR_TEXT}}</strong></p>
+            <!-- TL;DR BOX EXAMPLE (uncomment to use).
+                 Structure is intentional: 1-sentence thesis + 2-4 bullets + 1 closing line.
+                 Aim for ~50-80 words total. Don't bold the whole thing — it kills emphasis.
+            <div class="tldr">
+                <div class="tldr-label">TL;DR</div>
+                <p class="tldr-thesis">{{TLDR_THESIS}}</p>
+                <ul>
+                    <li>{{TLDR_BULLET_1}}</li>
+                    <li>{{TLDR_BULLET_2}}</li>
+                    <li>{{TLDR_BULLET_3}}</li>
+                </ul>
+                <p class="tldr-tail">{{TLDR_CLOSING_LINE}}</p>
             </div>
             -->
 

@@ -64,6 +64,18 @@
         footer a { color: var(--text-muted); text-decoration: underline; }
         .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
 
+        /* TL;DR callout — left accent rule, no border, light tint background.
+           Structure: <div class="tldr"> > <div class="tldr-label">TL;DR</div>
+                      > <p class="tldr-thesis">...</p> > <ul>...</ul>
+                      > <p class="tldr-tail">...</p> */
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
         .toc-sidebar { width: 220px; position: sticky; top: 80px; flex-shrink: 0; align-self: flex-start; padding: 1rem 0; }
         .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.75rem; }
         .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
@@ -191,9 +203,15 @@
 
         <div class="article-body">
 
-            <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
-                <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
-                <p><strong>Anthropic emailed me at 2:36 AM to say my routines were paused for hitting the daily 15-run cap on a Max plan. I wasn&rsquo;t surprised. A 5-PR run on tabiji content cost $137 in API tokens last week; the same throughput on three Max plans (~$600/mo total) is a roughly 9&times; subsidy that won&rsquo;t last forever. Anthropic&rsquo;s own 90-day status page already shows the strain. Meanwhile our OpenClaw agent runs our recurring crons across <strong>21 models, 5 providers</strong> &mdash; <a href="https://z.ai/subscribe?ic=JY9V1BN5ZO" target="_blank" rel="noopener">Z.AI/GLM</a> primary, <a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&amp;source=link" target="_blank" rel="noopener">MiniMax</a> + GPT-5.4 fallback, Xiaomi free tier, Google, and Anthropic still in the rotation &mdash; on a Mac mini. I keep <a href="https://claude.ai/referral/IDrXculiTA" target="_blank" rel="noopener">Claude Code</a> for one-off tasks because it&rsquo;s genuinely the best at that. The recurring infrastructure stays portable. When the buffet ends, I want to be the one already walking out with a plate.</strong></p>
+            <div class="tldr">
+                <div class="tldr-label">TL;DR</div>
+                <p class="tldr-thesis">The Claude Max-plan token buffet is subsidized. The signs say it&rsquo;s closing.</p>
+                <ul>
+                    <li>15-routine daily cap &mdash; hit at 2:36 AM</li>
+                    <li>A $137 API run on tabiji content = ~9&times; subsidy vs the Max-plan equivalent</li>
+                    <li>Hidden peak-hour token burn + chunky 90-day uptime bars on Anthropic&rsquo;s own status page</li>
+                </ul>
+                <p class="tldr-tail">So my recurring crons run on <a href="/posts/openclaw-skill-tree/">OpenClaw</a> with <a href="https://z.ai/subscribe?ic=JY9V1BN5ZO" target="_blank" rel="noopener">Z.AI/GLM</a>, <a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&amp;source=link" target="_blank" rel="noopener">MiniMax</a>, and 19 other models in rotation. <a href="https://claude.ai/referral/IDrXculiTA" target="_blank" rel="noopener">Claude Code</a> stays for one-offs.</p>
             </div>
 
             <h2 id="email">The 7 AM routine pause</h2>

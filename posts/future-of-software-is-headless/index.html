@@ -58,6 +58,15 @@
         footer a { color: var(--text-muted); text-decoration: underline; }
         .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
 
+        /* TL;DR callout — left accent rule, no border, light tint background. */
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
         .toc-sidebar { width: 220px; position: sticky; top: 80px; flex-shrink: 0; align-self: flex-start; padding: 1rem 0; }
         .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.75rem; }
         .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
@@ -185,9 +194,15 @@
 
         <div class="article-body">
 
-            <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
-                <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
-                <p><strong>Marc Benioff just announced Salesforce is going headless. That's the canary: the primary consumer of software is now an agent, not a human. The cloud-kitchen model — no front of house, just a kitchen and an API — is eating workflow SaaS and making BI dashboards dead weight. My filter: no API, no deal. If your product's primary surface is a UI, you have eighteen months.</strong></p>
+            <div class="tldr">
+                <div class="tldr-label">TL;DR</div>
+                <p class="tldr-thesis">Marc Benioff just announced Salesforce is going headless. The primary consumer of software is now an agent, not a human.</p>
+                <ul>
+                    <li>Cloud-kitchen model: no front of house, just a kitchen and an API</li>
+                    <li>Eats workflow SaaS, makes BI dashboards dead weight</li>
+                    <li>My filter: no API, no deal</li>
+                </ul>
+                <p class="tldr-tail">If your product's primary surface is a UI, you have eighteen months.</p>
             </div>
 
             <p class="dropcap">Marc Benioff <a href="https://x.com/Benioff/status/2044981547267395620" target="_blank" rel="noopener">tweeted this week</a> that Salesforce is going headless. That's not a UI redesign — it's a strategic pivot. Salesforce, the archetypal UI-heavy SaaS, is conceding out loud what's been true for months: the primary consumer of software going forward is not a human. It's an agent.</p>
