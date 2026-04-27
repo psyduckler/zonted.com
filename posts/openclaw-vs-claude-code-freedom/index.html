@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>OpenClaw vs Claude Code: I Choose Freedom — Zonted</title>
+    <meta name="description" content="A 5-PR run on tabiji content cost $137 in API tokens last week. The same throughput on a Max plan is a ~9× subsidy. Subsidies end. Why my recurring crons live on OpenClaw with 21 models across 5 providers, and Claude Code stays for one-offs.">
+    <link rel="canonical" href="https://zonted.com/posts/openclaw-vs-claude-code-freedom/">
+    <meta property="og:title" content="OpenClaw vs Claude Code: I Choose Freedom">
+    <meta property="og:description" content="A 5-PR run on tabiji content cost $137 in API tokens last week. The same throughput on a Max plan is a ~9× subsidy. Subsidies end. Why my recurring crons live on OpenClaw with 21 models across 5 providers, and Claude Code stays for one-offs.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/resources/openclaw-vs-claude-code-freedom/openclaw-21-models.png">
+    <meta property="og:url" content="https://zonted.com/posts/openclaw-vs-claude-code-freedom/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-04-27">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://img.zonted.com/resources/openclaw-vs-claude-code-freedom/openclaw-21-models.png">
+    <meta name="twitter:title" content="OpenClaw vs Claude Code: I Choose Freedom">
+    <meta name="twitter:description" content="The Claude Max plan is subsidized. The signs say the buffet is closing. Why my crons run on OpenClaw with 21 models, and Claude Code stays for one-offs.">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"OpenClaw vs Claude Code: I Choose Freedom","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-04-27","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/openclaw-vs-claude-code-freedom/","description":"A 5-PR run on tabiji content cost $137 in API tokens last week. The same throughput on a Max plan is a ~9× subsidy. Subsidies end. Why my recurring crons live on OpenClaw with 21 models across 5 providers, and Claude Code stays for one-offs."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"OpenClaw vs Claude Code: I Choose Freedom"}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #767676;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        /* Force all article-body figure images to fill the content column.
+           Protects against narrow-screenshot drift where a <708px image would
+           otherwise render at its native size and look misaligned with wider figures. */
+        .article-body figure img { width: 100%; height: auto; }
+        /* Override for inline-aside hardware photos that should NOT upscale */
+        .article-body figure.aside-small img { width: auto; max-width: 240px; height: auto; display: block; margin: 0 auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+        .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
+
+        .toc-sidebar { width: 220px; position: sticky; top: 80px; flex-shrink: 0; align-self: flex-start; padding: 1rem 0; }
+        .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.75rem; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: rgba(252,252,250,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav style="position:sticky;top:0;z-index:100;background:rgba(252,252,250,0.95);border-bottom:1px solid #ddd;">
+<div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+        <a href="/metrics/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Metrics</a>
+        <a href="/about/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">About</a>
+    </div>
+</div>
+</nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#email">The 7 AM routine pause</a></li>
+            <li><a href="#math">The math the buffet hides</a></li>
+            <li><a href="#shrinking">And it&rsquo;s already shrinking</a></li>
+            <li><a href="#freedom">21 models, 5 providers, one Mac mini</a></li>
+            <li><a href="#dual-stack">My dual-stack reality</a></li>
+            <li><a href="#hedge">The hedge thesis</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#email">The 7 AM email</a></li>
+        <li><a href="#math">The math the buffet hides</a></li>
+        <li><a href="#shrinking">It&rsquo;s already shrinking</a></li>
+        <li><a href="#freedom">21 models, one Mac mini</a></li>
+        <li><a href="#dual-stack">My dual-stack reality</a></li>
+        <li><a href="#hedge">The hedge thesis</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form action="https://zonted.substack.com/api/v1/free?nojs=true" method="post" target="_blank" style="display:flex;flex-direction:column;gap:6px;">
+            <input type="email" name="email" placeholder="your@email.com" required style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;width:100%;">
+            <button type="submit" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;font-weight:600;padding:8px 10px;border:none;border-radius:6px;background:var(--text);color:var(--bg);cursor:pointer;transition:background 0.2s;">Subscribe</button>
+        </form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <article class="article-container">
+        <div style="margin-bottom:1.5rem;padding-top:1rem;">
+            <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+        </div>
+        <h1>OpenClaw vs Claude Code: I Choose Freedom</h1>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+            <div>
+                <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">April 27, 2026 &middot; 7 min read</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+
+            <div style="background:var(--bg-surface);border:2px solid var(--text-muted);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0;">
+                <h3 style="color:var(--text-muted);margin-bottom:0.75rem;font-size:1.1rem;">TL;DR</h3>
+                <p><strong>Anthropic emailed me at 2:36 AM to say my routines were paused for hitting the daily 15-run cap on a Max plan. I wasn&rsquo;t surprised. A 5-PR run on tabiji content cost $137 in API tokens last week; the same throughput on three Max plans (~$600/mo total) is a roughly 9&times; subsidy that won&rsquo;t last forever. Anthropic&rsquo;s own 90-day status page already shows the strain. Meanwhile my OpenClaw collaborator runs our recurring crons across <strong>21 models, 5 providers</strong> &mdash; <a href="https://z.ai/subscribe?ic=JY9V1BN5ZO" target="_blank" rel="noopener">Z.AI/GLM</a> primary, <a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&amp;source=link" target="_blank" rel="noopener">MiniMax</a> + GPT-5.4 fallback, Xiaomi free tier, Google, and Anthropic still in the rotation &mdash; on a Mac mini. I keep <a href="https://claude.ai/referral/IDrXculiTA" target="_blank" rel="noopener">Claude Code</a> for one-off tasks because it&rsquo;s genuinely the best at that. The recurring infrastructure stays portable. When the buffet ends, I want to be the one already walking out with a plate.</strong></p>
+            </div>
+
+            <h2 id="email">The 7 AM routine pause</h2>
+
+            <p class="dropcap">I checked my phone over coffee and found a Claude email sent at 2:36 AM:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/openclaw-vs-claude-code-freedom/routines-paused-email.png" alt="Email from no-reply-claude at 2:36 AM titled 'Your routines are paused — daily limit reached'. Body reads: You've hit today's limit of 15 routine runs, so scam-narrative-rewrite-batch and any other routines are paused for now. An admin..." width="910" height="1972" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">The Max plan stops at 15 routine runs per day. We hit it during sleep.</figcaption></figure>
+
+            <p>I run three Claude Max plans, one Codex Pro, plus subscriptions to <a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&amp;source=link" target="_blank" rel="noopener">MiniMax</a> and <a href="https://z.ai/subscribe?ic=JY9V1BN5ZO" target="_blank" rel="noopener">Z.AI/GLM</a>. I am, by any reasonable definition, the kind of customer Anthropic should want to keep happy. And the routine that had stopped &mdash; <code>scam-narrative-rewrite-batch</code> &mdash; was doing exactly the kind of overnight, scheduled, non-interactive work that the <em>idea</em> of a Max plan is supposed to enable.</p>
+
+            <p>It got capped at 15. The cap was the soft signal I&rsquo;d been waiting for.</p>
+
+            <h2 id="math">The math the buffet hides</h2>
+
+            <p>Last week I ran a five-city PR through the tabiji.ai content pipeline against the Anthropic API directly. The cost summary at the end:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/openclaw-vs-claude-code-freedom/pr-cost-breakdown.png" alt="Cost breakdown table for 5 cities (Abu Dhabi, Acapulco, Accra, Addis Ababa, Agadir) showing per-PR cost ranging from $20.25 to $37.51, total $137.39, total API time 2 hours 14 minutes wall. Steady-state cost lands around $20-25 per city once cache warms up. Full 224-page drain at that rate equals approximately $5,500 versus my early $7,400 estimate." width="850" height="400" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Five cities, $137 in API tokens, ~2.25 hours of compute. The full 224-page run extrapolates to ~$5,500.</figcaption></figure>
+
+            <p><strong>$137.39 for five cities. ~$25 per city steady-state. The full 224-page drain comes in around $5,500.</strong></p>
+
+            <p>Now compare that to what I actually pay: roughly $600/month for three Max plans plus another ~$200 for Codex Pro. ~$800/month, and most months I generate <em>more</em> token equivalent than that 224-page run. The implied subsidy from Anthropic to my account is on the order of <strong>9&times;</strong>. They&rsquo;re losing money on me. They&rsquo;re losing money on every heavy user. The only way the math closes is if the average user is ~10&times; lighter than I am, OR they reprice, OR they cap.</p>
+
+            <p>OpenAI is in the same situation with Codex Pro. <a href="/posts/the-economics-of-the-internet-are-broken/">The economics of AI inference</a> are not subtle: it costs real GPU-hours to generate tokens, and a $200 monthly fee buys you a fixed dollar of GPU-hours regardless of how the marketing copy reads. The buffet is real. It&rsquo;s just temporary.</p>
+
+            <h2 id="shrinking">And it&rsquo;s already shrinking</h2>
+
+            <p>If you think the subsidy ending is years away, look at the dashboard:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/openclaw-vs-claude-code-freedom/anthropic-status-page.png" alt="Anthropic 90-day status page showing All Systems Operational header. Below: claude.ai 98.75% uptime, Claude Console (platform.claude.com) 99.09%, Claude API (api.anthropic.com) 99.05%, Claude Code 99.22%. Each row shows daily uptime bars over 90 days with significant numbers of yellow and red incident days." width="1756" height="1436" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Anthropic&rsquo;s own 90-day status page. The headline numbers sound great until you do the arithmetic on them.</figcaption></figure>
+
+            <p>The headline reads &ldquo;All Systems Operational.&rdquo; The bars tell a different story. Claude Code at 99.22% uptime over 90 days is roughly <strong>16 hours of degraded or down service per quarter</strong>. Claude.ai at 98.75% is <strong>27 hours</strong>. Read each yellow or red bar as a day where my recurring crons either failed silently, retried into rate-limit walls, or hit timeouts and burned my routine quota anyway.</p>
+
+            <p>That&rsquo;s the tail end of the same supply story as the cost math: too much demand, finite GPU capacity, the only knobs are price (subsidies tightening), volume (the 15-run cap I just hit), or quality (degradations). All three are in motion right now.</p>
+
+            <p>And separate from any of that, there&rsquo;s the <a href="/posts/openclaw-claude-ban-ai-model-replacement/">model-deprecation risk</a>: Anthropic can sunset a model I&rsquo;ve been depending on with 60 days of notice. If my pipeline is glued to a specific Claude version, that&rsquo;s a forced migration on someone else&rsquo;s timeline.</p>
+
+            <h2 id="freedom">21 models, 5 providers, one Mac mini</h2>
+
+            <p>This is what the alternative looks like. <a href="/posts/openclaw-skill-tree/">OpenClaw</a> is the open-source agentic harness we run for tabiji&rsquo;s recurring infrastructure &mdash; the bit you&rsquo;d call Claude Code if you were locked into Anthropic. Psy, the engineer who runs our setup, posted his current model config in our team Slack:</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/openclaw-vs-claude-code-freedom/openclaw-21-models.png" alt="Slack message from Psy listing the OpenClaw model configuration: 21 models across 5 providers. Defaults: primary z.ai/glm-5.1, fallback 1 minimax/MiniMax-M2.7, fallback 2 openai-codex/gpt-5.4. Sub-agent model glm-5.1, image gen google/gemini-3-pro-image-preview, video gen google/veo-3.1-lite-generate-preview. Z.AI 11 models including glm-5.1, glm-5.1-turbo variants and vision models. MiniMax 2 models. Xiaomi 3 models including mimo-v2-flash 1M context, mimo-v2-pro, all free. Google 3 models all 1M context vision. Anthropic 2 models: claude-opus-4-6 and claude-sonnet-4-6, plus codex/gpt-5.4 referenced as fallback." width="2034" height="1378" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Psy&rsquo;s OpenClaw config: 21 models across Z.AI, MiniMax, Xiaomi, Google, and Anthropic. Defaults and fallbacks named explicitly.</figcaption></figure>
+
+            <p>The defaults: <a href="https://z.ai/subscribe?ic=JY9V1BN5ZO" target="_blank" rel="noopener">Z.AI&rsquo;s GLM-5.1</a> as primary. <a href="https://platform.minimax.io/subscribe/token-plan?code=B8atrcvv5N&amp;source=link" target="_blank" rel="noopener">MiniMax-M2.7</a> as first fallback. GPT-5.4 via the Codex plugin as second fallback. Xiaomi&rsquo;s mimo-v2-flash and v2-pro available with 1M-token context, free. Google Gemini 3 Pro for image and video generation. Anthropic still in the rotation as <code>claude-opus-4-6</code> and <code>claude-sonnet-4-6</code>, called when they&rsquo;re the right tool, not because they&rsquo;re the only tool.</p>
+
+            <p>When GLM rate-limits, OpenClaw fails over to MiniMax. When MiniMax has a degradation window, it falls through to GPT-5.4. The recurring crons keep running. No 2:36 AM email.</p>
+
+            <figure class="aside-small" style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/openclaw-vs-claude-code-freedom/mac-mini-setup.jpg" alt="Apple Mac mini sitting on a wooden desk with a power cable plugged in. Compact, silver, about the size of a paperback." width="152" height="203" loading="lazy" style="border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;text-align:center;">The actual hardware. ~$600 of Mac mini, sitting on a desk.</figcaption></figure>
+
+            <p>And it runs on <em>that</em>. A $600 Mac mini in a room. Not a hyperscaler in Virginia, not a multi-region replicated cloud setup &mdash; a small silver box on a desk, routing requests to whichever provider has capacity. The whole architecture is pages of YAML and a router script.</p>
+
+            <h2 id="dual-stack">My dual-stack reality</h2>
+
+            <p>I want to be honest about what I actually do, because the headline is a thesis but day-to-day is a compromise.</p>
+
+            <p>I still pay for three <a href="https://claude.ai/referral/IDrXculiTA" target="_blank" rel="noopener">Claude Code</a> Max plans. I use Claude Code every single day. For one-off tasks &mdash; interactive coding, exploration, audits, drafting (this very post), debugging weird production issues at 11 PM &mdash; nothing else feels as good. The model quality is excellent, the harness is mature, the tool calls are fast. I wrote about <a href="/posts/scaling-ai-is-lazy/">where the model takes shortcuts at scale</a> precisely because I push it hard enough to find the edges.</p>
+
+            <p>What lives on OpenClaw is anything <em>recurring</em>. Scheduled content runs. Nightly audits. Multi-page sweeps. The kind of work that I want to fire-and-forget on a cron, where a 2:36 AM &ldquo;your routines are paused&rdquo; email is unacceptable. That work cannot live on a single vendor with a daily cap, because it doesn&rsquo;t care about my timezone.</p>
+
+            <p>That&rsquo;s the dual stack: Claude Code for the 9 AM &ldquo;help me figure this out&rdquo; loop, OpenClaw for the cron that runs at 3 AM whether anyone&rsquo;s watching or not.</p>
+
+            <h2 id="hedge">The hedge thesis</h2>
+
+            <p>Choosing OpenClaw isn&rsquo;t about Anthropic being bad &mdash; they&rsquo;re not, the product is the best in its class. It&rsquo;s about not betting your business on someone else&rsquo;s pricing model holding.</p>
+
+            <p>Freedom in this context = optionality. The Max plan gives you one model and a daily limit. OpenClaw gives you 21 options and a circuit breaker. When Anthropic tightens &mdash; whether by pricing, capping, or deprecating &mdash; the cost to me is reading a config file and changing one default. The cost to a single-vendor shop is rebuilding their pipeline on a forced timeline.</p>
+
+            <p>The product is excellent. The price terms are subsidized. The two are different bets, and only one of them is yours to control. Keep the recurring work portable, use Claude Code where it sings, and when the buffet closes, walk out with a plate.</p>
+
+        </div>
+    </article>
+</div>
+</div>
+
+</main>
+
+<footer>
+    <div style="max-width:660px;margin:0 auto;">
+        <p style="color:var(--text-dim);font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;margin-bottom:12px;">&copy; 2026 Bernard Huang &middot; zonted.com</p>
+        <div style="display:flex;gap:20px;justify-content:center;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;">
+            <a href="/posts/" style="color:var(--text-dim);text-decoration:none;">Posts</a>
+            <a href="/metrics/" style="color:var(--text-dim);text-decoration:none;">Metrics</a>
+            <a href="/about/" style="color:var(--text-dim);text-decoration:none;">About</a>
+            <a href="/feed.xml" style="color:var(--text-dim);text-decoration:none;">RSS</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://github.com/bernardjhuang">GitHub</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            <a href="https://tabiji.ai">tabiji.ai</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                const label = document.querySelector('.toc-active-label');
+                if (label) {
+                    const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                    if (activeLink) label.textContent = activeLink.textContent;
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
+<!-- NEWSLETTER_REDIRECT -->
+<script>
+(function(){
+  document.querySelectorAll('form[action*="substack.com"]').forEach(function(form){
+    var iframe=document.createElement("iframe");
+    iframe.name="substack-frame";
+    iframe.style.display="none";
+    document.body.appendChild(iframe);
+    form.target="substack-frame";
+    form.addEventListener("submit",function(){
+      setTimeout(function(){window.location.href="/subscribe/confirmed/";},300);
+    });
+  });
+})();
+</script>
+<!-- /NEWSLETTER_REDIRECT -->
+</body>
+</html>
