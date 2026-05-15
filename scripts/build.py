@@ -38,6 +38,20 @@ BROKEN_IMAGES = {
     "https://img.zonted.com/resources/what-is-ai-self-healing/hero-bg.jpg",
 }
 
+# Per-slug thumbnail override. Wins over og:image filtering — useful when
+# og:image is the generic owl logo or a broken/stub asset, but the article
+# body has a real hero image we can point at instead.
+SLUG_THUMB_OVERRIDES = {
+    "posts/ai-psychosis": "/posts/ai-psychosis/img/cyberpsychosis.avif",
+    "posts/openclaw-claude-ban-ai-model-replacement": "https://img.zonted.com/resources/cleanshot-claude-ban.png",
+    "posts/rise-of-the-ai-influencer": "/posts/rise-of-the-ai-influencer/img/yangmunus-instagram-profile.png",
+    "posts/slop-iterate-curate-ai-content": "https://img.zonted.com/resources/slop-iterate-curate/killed-natural-attractions.png",
+    "posts/true-cost-of-ai-content-production": "https://img.zonted.com/resources/true-cost-of-ai-content-production/google-cloud-billing-march-2026.png",
+    "posts/veo3-vs-hailuo-minimax": "https://img.zonted.com/resources/video-generation-comparison/capybara-source.jpg",
+    "posts/makeugc": "https://img.zonted.com/resources/makeugc-review/content-library.jpg",
+    "posts/wavespeed": "https://img.zonted.com/resources/wavespeed-review/ws-dashboard.png",
+}
+
 # ---------------------------------------------------------------------------
 # Category assignment
 # ---------------------------------------------------------------------------
@@ -101,6 +115,9 @@ def extract_metadata(filepath, slug):
     image = img_match.group(2) if img_match else ''
     if 'tabiji-owl-logo' in image or 'zonted-og.png' in image or image in BROKEN_IMAGES:
         image = ''
+    # Slug override wins (e.g. og:image was the owl, but the body has a hero)
+    if slug in SLUG_THUMB_OVERRIDES:
+        image = SLUG_THUMB_OVERRIDES[slug]
 
     category = get_category(slug, title)
 
