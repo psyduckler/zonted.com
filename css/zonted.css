@@ -363,20 +363,26 @@ img, video { max-width: 100%; height: auto; }
 .zn-rows { list-style: none; }
 .zn-row {
   display: grid;
-  grid-template-columns: 90px 1fr 200px 50px;
-  gap: 18px;
-  align-items: center;
-  padding: 24px 0;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "date    content"
+    "thumb   content";
+  column-gap: 32px;
+  row-gap: 12px;
+  align-items: start;
+  padding: 28px 0;
   border-bottom: 1px solid var(--rule);
 }
 .zn-row-date {
+  grid-area: date;
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--faded);
   letter-spacing: 0.05em;
-  align-self: center;
+  padding-top: 4px;
 }
-.zn-row > div:nth-child(2) { align-self: center; }
+.zn-row-content { grid-area: content; }
 .zn-row-eyebrow { display: block; margin-bottom: 6px; }
 .zn-row-title {
   font-family: var(--display);
@@ -392,22 +398,16 @@ img, video { max-width: 100%; height: auto; }
 .zn-row-title:hover { text-decoration: underline; text-underline-offset: 3px; color: var(--ink); }
 .zn-row-dek {
   font-family: var(--serif);
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.55;
   color: var(--faded);
-  max-width: 560px;
+  max-width: 100%;
   margin: 0;
 }
-.zn-row-read {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--faded);
-  letter-spacing: 0.05em;
-  text-align: right;
-}
 
-/* Thumbnail — real image or hatched placeholder, 200×140 box */
+/* Thumbnail — real image or hatched placeholder, 200×140 box, below date */
 .zn-row-thumb {
+  grid-area: thumb;
   width: 200px;
   height: 140px;
   border-radius: 6px;
@@ -700,18 +700,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ox); outline-of
   .zn-article-rail { position: static; padding-top: 0; margin-bottom: 24px; padding: 16px; background: var(--paper-2); border-radius: 4px; }
   .zn-article-rail .zn-rail-numbers { margin-top: 18px; }
 }
-@media (max-width: 960px) {
-  /* Drop thumb column on tablet+below — feels cramped at 200px next to dek */
-  .zn-row { grid-template-columns: 90px 1fr 50px; gap: 18px; }
-  .zn-row-thumb { display: none; }
-  .zn-row-dek { max-width: 100%; }
-}
 @media (max-width: 640px) {
   .zn-subscribe { grid-template-columns: 1fr; gap: 18px; }
   .zn-cards { grid-template-columns: 1fr; gap: 18px; }
-  .zn-row { grid-template-columns: 1fr; gap: 4px; }
-  .zn-row-date { font-size: 0.7rem; }
-  .zn-row-read { text-align: left; }
+  .zn-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "date" "thumb" "content";
+    column-gap: 0;
+    row-gap: 8px;
+    padding: 22px 0;
+  }
+  .zn-row-date { font-size: 0.7rem; padding-top: 0; }
+  .zn-row-thumb { width: 100%; max-width: 320px; height: auto; aspect-ratio: 10 / 7; }
   .zn-nav-inner { padding: 0 16px; }
   .zn-nav-links { gap: 16px; }
   .zn-nav-links a { font-size: 0.875rem; }

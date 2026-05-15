@@ -150,8 +150,6 @@ def make_entry_row(article):
     date_display = format_date_short(article['date']) if article['date'] else ''
     title = html.escape(article['title'])
     dek = html.escape(article.get('description', '') or '')
-    read_time = article.get('reading_time')
-    read_display = f"{read_time}m" if read_time else ''
     image = article.get('image', '')
     if image:
         thumb_html = (
@@ -164,12 +162,11 @@ def make_entry_row(article):
     return (
         f'                <li class="zn-row">\n'
         f'                    <span class="zn-row-date">{date_display}</span>\n'
-        f'                    <div>\n'
+        f'{thumb_html}\n'
+        f'                    <div class="zn-row-content">\n'
         f'                        <a href="/{article["slug"]}/" class="zn-row-title">{title}</a>\n'
         f'                        <p class="zn-row-dek">{dek}</p>\n'
         f'                    </div>\n'
-        f'{thumb_html}\n'
-        f'                    <span class="zn-row-read">{read_display}</span>\n'
         f'                </li>'
     )
 
