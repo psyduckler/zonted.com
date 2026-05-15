@@ -363,26 +363,28 @@ img, video { max-width: 100%; height: auto; }
 .zn-rows { list-style: none; }
 .zn-row {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "date    content"
-    "thumb   content";
-  column-gap: 32px;
-  row-gap: 12px;
+  grid-template-columns: 150px 1fr;
+  column-gap: 24px;
   align-items: start;
-  padding: 28px 0;
+  padding: 20px 0;
   border-bottom: 1px solid var(--rule);
 }
 .zn-row-date {
-  grid-area: date;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 2;
+  padding: 3px 7px;
+  background: rgba(26, 24, 21, 0.78);
+  color: var(--paper);
   font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--faded);
+  font-size: 0.65rem;
   letter-spacing: 0.05em;
-  padding-top: 4px;
+  border-radius: 3px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
-.zn-row-content { grid-area: content; }
+.zn-row-content { display: flex; flex-direction: column; gap: 6px; }
 .zn-row-eyebrow { display: block; margin-bottom: 6px; }
 .zn-row-title {
   font-family: var(--display);
@@ -405,11 +407,10 @@ img, video { max-width: 100%; height: auto; }
   margin: 0;
 }
 
-/* Thumbnail — real image or hatched placeholder, 200×140 box, below date */
+/* Thumbnail — real image or hatched placeholder, 150×105 box with date pill */
 .zn-row-thumb {
-  grid-area: thumb;
-  width: 200px;
-  height: 140px;
+  width: 150px;
+  height: 105px;
   border-radius: 6px;
   border: 1px solid var(--rule);
   overflow: hidden;
@@ -705,13 +706,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ox); outline-of
   .zn-cards { grid-template-columns: 1fr; gap: 18px; }
   .zn-row {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: "date" "thumb" "content";
-    column-gap: 0;
-    row-gap: 8px;
-    padding: 22px 0;
+    row-gap: 10px;
+    padding: 18px 0;
   }
-  .zn-row-date { font-size: 0.7rem; padding-top: 0; }
   .zn-row-thumb { width: 100%; max-width: 320px; height: auto; aspect-ratio: 10 / 7; }
   .zn-nav-inner { padding: 0 16px; }
   .zn-nav-links { gap: 16px; }
