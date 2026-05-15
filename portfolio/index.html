@@ -247,6 +247,19 @@
             position: relative;
             z-index: 1;
         }
+        /* Real-screenshot layer behind the label/pips/scanline. When present,
+           hide the big NAME label so the screenshot reads cleanly. */
+        .tc-image-screenshot {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            display: block;
+        }
+        .tc-image-inner:has(.tc-image-screenshot) .tc-image-label { display: none; }
+        .tc-image-inner:has(.tc-image-screenshot) .tc-image-stripes { display: none; }
         .tc-image-stripes {
             position: absolute;
             inset: 0;
@@ -603,6 +616,7 @@
 
                     <div class="tc-image">
                         <div class="tc-image-inner" style="background:linear-gradient(135deg, #fbbf24, #0a0a0a);">
+                            <img class="tc-image-screenshot" src="https://img.zonted.com/resources/portfolio/tabiji.png" alt="" loading="lazy">
                             <div class="tc-image-stripes"></div>
                             <span class="tc-image-label">TABIJI</span>
                             <div class="tc-energy">
@@ -657,6 +671,7 @@
 
                     <div class="tc-image">
                         <div class="tc-image-inner" style="background:linear-gradient(135deg, #a855f7, #0a0a0a);">
+                            <img class="tc-image-screenshot" src="https://img.zonted.com/resources/portfolio/veracity.png" alt="" loading="lazy">
                             <div class="tc-image-stripes"></div>
                             <span class="tc-image-label">VERACITY</span>
                             <div class="tc-energy">
@@ -667,14 +682,14 @@
                         </div>
                     </div>
 
-                    <div class="tc-sub">An AI-built API, one-shot in an afternoon.</div>
+                    <div class="tc-sub">Detect AI slop before it ships.</div>
 
                     <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(168,85,247,0.13), #0a0a0a); border-color:#a855f7;">
-                        <div class="tc-move-row"><span class="tc-move-name">One-Shot Surge</span><span class="tc-move-dmg">110</span></div>
-                        <div class="tc-move-desc">Spins up a new API surface in a single Hermes + Codex 5.5 prompt.</div>
+                        <div class="tc-move-row"><span class="tc-move-name">Pre-Merge Catch</span><span class="tc-move-dmg">110</span></div>
+                        <div class="tc-move-desc">Scans the PR. Returns one verdict: ship, hold, or reject.</div>
                     </div>
                     <div class="tc-move-2" style="background:rgba(168,85,247,0.1); border-color:rgba(168,85,247,0.27);">
-                        <div class="tc-move-row"><span class="tc-move-name">Truth Pass</span><span class="tc-move-dmg">40</span></div>
+                        <div class="tc-move-row"><span class="tc-move-name">Slop Filter</span><span class="tc-move-dmg">45</span></div>
                     </div>
 
                     <div class="tc-stats">
@@ -711,6 +726,7 @@
 
                     <div class="tc-image">
                         <div class="tc-image-inner" style="background:linear-gradient(135deg, #ef4444, #0a0a0a);">
+                            <img class="tc-image-screenshot" src="https://img.zonted.com/resources/portfolio/zonted.png" alt="" loading="lazy">
                             <div class="tc-image-stripes"></div>
                             <span class="tc-image-label">ZONTED</span>
                             <div class="tc-energy">
@@ -765,6 +781,7 @@
 
                     <div class="tc-image">
                         <div class="tc-image-inner" style="background:linear-gradient(135deg, #ec4899, #0a0a0a);">
+                            <img class="tc-image-screenshot" src="https://img.zonted.com/resources/portfolio/palmaura.png" alt="" loading="lazy">
                             <div class="tc-image-stripes"></div>
                             <span class="tc-image-label">PALMAURA</span>
                             <div class="tc-energy">
@@ -819,6 +836,7 @@
 
                     <div class="tc-image">
                         <div class="tc-image-inner" style="background:linear-gradient(135deg, #10b981, #0a0a0a);">
+                            <img class="tc-image-screenshot" src="https://img.zonted.com/resources/portfolio/kapiko.png" alt="" loading="lazy">
                             <div class="tc-image-stripes"></div>
                             <span class="tc-image-label">KAPIKO</span>
                             <div class="tc-energy">
@@ -829,14 +847,14 @@
                         </div>
                     </div>
 
-                    <div class="tc-sub">An AI tool in the lab. Coming online.</div>
+                    <div class="tc-sub">AI-crafted ambient music for the soul.</div>
 
                     <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(16,185,129,0.13), #0a0a0a); border-color:#10b981;">
-                        <div class="tc-move-row"><span class="tc-move-name">Quiet Build</span><span class="tc-move-dmg">80</span></div>
-                        <div class="tc-move-desc">Builds in the open, ships in private. Stat sheet pending.</div>
+                        <div class="tc-move-row"><span class="tc-move-name">Soul Frequency</span><span class="tc-move-dmg">95</span></div>
+                        <div class="tc-move-desc">Tunes the room to its calmest setting for the next 8 hours.</div>
                     </div>
                     <div class="tc-move-2" style="background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.27);">
-                        <div class="tc-move-row"><span class="tc-move-name">Beta Pulse</span><span class="tc-move-dmg">25</span></div>
+                        <div class="tc-move-row"><span class="tc-move-name">Ambient Wave</span><span class="tc-move-dmg">30</span></div>
                     </div>
 
                     <div class="tc-stats">
@@ -949,6 +967,7 @@
 
                         <div class="tc-image">
                             <div class="tc-image-inner" style="background:linear-gradient(135deg, #fbbf24, #0a0a0a);">
+                                <img class="tc-image-screenshot" src="https://img.zonted.com/resources/portfolio/tabiji.png" alt="" loading="lazy">
                                 <div class="tc-image-stripes"></div>
                                 <span class="tc-image-label">TABIJI</span>
                                 <div class="tc-energy">
