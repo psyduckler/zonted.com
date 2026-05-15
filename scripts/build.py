@@ -33,7 +33,6 @@ BROKEN_IMAGES = {
     "https://img.zonted.com/og/ai-reels-what-actually-works.jpg",
     "https://img.zonted.com/og/makeugc-review.jpg",
     "https://img.zonted.com/og/wavespeed-review.jpg",
-    "https://img.zonted.com/resources/local-models-free-tokens/qwen-ollama-local.png",
     # Returns 200 but the asset is a 117-byte stub, not the actual hero image
     "https://img.zonted.com/resources/what-is-ai-self-healing/hero-bg.jpg",
 }
