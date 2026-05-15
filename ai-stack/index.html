@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <title>AI Stack — Zonted</title>
+    <meta name="description" content="The models, harnesses, and infrastructure that run tabiji.ai today. Five model harnesses on five token plans, glued together with cron jobs.">
+    <link rel="canonical" href="https://zonted.com/ai-stack/">
+    <meta property="og:title" content="AI Stack — Zonted">
+    <meta property="og:description" content="The models, harnesses, and infrastructure that run tabiji.ai today. Five model harnesses on five token plans, glued together with cron jobs.">
+    <meta property="og:url" content="https://zonted.com/ai-stack/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/og/zonted-og.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="AI Stack — Zonted">
+    <meta name="twitter:description" content="The models, harnesses, and infrastructure that run tabiji.ai today.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fcfcfa;
+            --bg-surface: #f5f4f0;
+            --bg-raised: #edecea;
+            --border: #ddd;
+            --border-light: #e8e8e4;
+            --text: #1a1a1a;
+            --text-muted: #595959;
+            --text-dim: #767676;
+            --accent: #1a1a1a;
+            --accent-hover: #000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.85;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--text); text-decoration: underline; }
+        a:hover { color: var(--accent-hover); }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #fcfcfa;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 32px; }
+
+        .nav-links a {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .page-header {
+            padding: 48px 0 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .updated-badge {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            background: var(--bg-surface);
+            padding: 3px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 2.5rem;
+        }
+
+        .summary-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .summary-card .value {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .summary-card .label {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 4px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        .content p { margin-bottom: 1.25rem; }
+
+        .stack-list {
+            list-style: none;
+            margin: 1rem 0 1.5rem;
+            padding: 0;
+        }
+
+        .stack-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .stack-list li:last-child { border-bottom: none; }
+
+        .stack-list .harness {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .stack-list .role {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .pull-quote {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            font-weight: 600;
+            font-style: italic;
+            border-left: 3px solid var(--text);
+            padding: 8px 0 8px 20px;
+            margin: 1.5rem 0;
+        }
+
+        .infra-list {
+            list-style: none;
+            margin: 0.75rem 0 1.5rem;
+            padding: 0;
+        }
+
+        .infra-list li {
+            padding: 8px 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .infra-list li strong {
+            font-weight: 600;
+        }
+
+        .subscribe-block {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-top {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--text-muted); }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text-muted); }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 32px 0 1rem; }
+            .page-header h1 { font-size: 1.75rem; }
+            .summary-grid { grid-template-columns: 1fr; }
+            .pull-quote { font-size: 1.15rem; padding-left: 16px; }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Zonted.</a>
+            <div class="nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/ai-stack/" class="active">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main">
+    <div class="container">
+        <div class="page-header">
+            <h1>AI Stack</h1>
+            <p>Every model, harness, and service that runs <a href="https://tabiji.ai">tabiji.ai</a> today. Five model harnesses on five token plans, glued together with cron jobs.</p>
+            <div class="updated-badge">Updated May 15, 2026</div>
+        </div>
+
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="value">5</div>
+                <div class="label">Model harnesses</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">1</div>
+                <div class="label">Media API hub</div>
+            </div>
+            <div class="summary-card">
+                <div class="value">0</div>
+                <div class="label">Orchestrators</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>The five harnesses</h2>
+            <p>Each harness runs in parallel. Each owns the work it's best at.</p>
+
+            <ul class="stack-list">
+                <li>
+                    <span class="harness"><a href="/posts/openclaw-vs-claude-code-freedom/">openclaw</a> + GLM 5.1</span>
+                    <span class="role">Social calendar, video builds</span>
+                </li>
+                <li>
+                    <span class="harness">hermes + Codex 5.5</span>
+                    <span class="role">Coding, API infrastructure</span>
+                </li>
+                <li>
+                    <span class="harness">Claude Code + Opus 4.7</span>
+                    <span class="role">Planning, Pinterest automation</span>
+                </li>
+                <li>
+                    <span class="harness">AI Studio + Gemini 3.1 Pro</span>
+                    <span class="role">Second-opinion planning</span>
+                </li>
+                <li>
+                    <span class="harness">MiniMax 2.7</span>
+                    <span class="role">Low-think tasks (occasional)</span>
+                </li>
+            </ul>
+
+            <h2>Why five separate harnesses (instead of one orchestrator)</h2>
+            <p>I could stitch all of this together with a single orchestration framework. I don't — each harness sits on its own token plan, so running them in parallel is meaningfully cheaper than fanning everything through a single API.</p>
+
+            <p>The other reason: the frontier is uneven. Different models lead in different domains. Opus is the best planner I've used. Codex is sharpest on API surface design. GLM 5.1 is shockingly cost-effective for high-volume content tasks. Gemini Pro pushes back hardest on plans I'm too confident about. Forcing all of those through one wrapper would homogenize the output and waste each model's edge.</p>
+
+            <h2>The pattern</h2>
+            <p class="pull-quote">Plan with five models. Hand the chosen plan off to the one that's best at executing it.</p>
+
+            <p>A plan that survives review from Opus, GLM, Codex, and Gemini is a plan worth running. A plan that any one of them flags as wrong usually deserves another pass before execution.</p>
+
+            <h2>Media generation</h2>
+            <p><a href="/posts/wavespeed/">Wavespeed</a> handles most video and audio. One API surface, frontier-model access across the board.</p>
+
+            <p>Native-API fallbacks for what Wavespeed doesn't proxy:</p>
+            <ul class="infra-list">
+                <li><strong>Gemini API</strong> — nano banana (image)</li>
+                <li><strong>GPT API</strong> — image generation and Sora</li>
+            </ul>
+
+            <h2>Data &amp; infrastructure</h2>
+            <ul class="infra-list">
+                <li><strong>Cloudflare R2</strong> — media storage (<a href="https://img.zonted.com">img.zonted.com</a>)</li>
+                <li><strong>Cloudflare Pages</strong> — site hosting</li>
+                <li><strong>Cloudflare D1</strong> — structured data when an agent needs a DB</li>
+                <li><strong>Cron jobs</strong> — across each harness, the glue layer</li>
+            </ul>
+
+            <p>No team. No orchestrator. Five harnesses on five token plans, sharing the same R2 bucket and D1 database.</p>
+        </div>
+
+        <div class="subscribe-block">
+            <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:6px;">Watch the stack shift in real time</div>
+            <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Day-to-day changes go to <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a> and <a href="https://x.com/bernardjhuang">X</a>. Long-form to the inbox.</div>
+            <form action="https://zonted.substack.com/api/v1/free?nojs=true" method="post" target="_blank" style="display:flex;gap:8px;max-width:400px;margin:0 auto;">
+                <input type="email" name="email" placeholder="your@email.com" required style="flex:1;font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;padding:10px 14px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;">
+                <button type="submit" style="font-family:'Inter',system-ui,sans-serif;font-size:0.9rem;font-weight:600;padding:10px 20px;border:none;border-radius:6px;background:var(--text);color:var(--bg);cursor:pointer;white-space:nowrap;transition:background 0.2s;">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">&copy; 2026 Bernard Huang &middot; zonted.com</div>
+            <div class="footer-links">
+                <a href="/posts/">Posts</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/feed.xml">RSS</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://x.com/bernardjhuang">X</a>
+                <a href="https://github.com/bernardjhuang">GitHub</a>
+                <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+                <a href="https://tabiji.ai">tabiji.ai</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
