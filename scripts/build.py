@@ -139,11 +139,21 @@ def format_date_rfc822(date_str):
 def make_entry_row(article):
     date_display = format_date_short(article['date']) if article['date'] else ''
     cat = article['category'].lower()
+    cat_label = article['category']
+    title = html.escape(article['title'])
+    dek = html.escape(article.get('description', '') or '')
+    read_time = article.get('read_time', '')
+    read_display = f"{read_time}m" if read_time and read_time.isdigit() else (read_time or '')
 
     return (
-        f'                <li class="entry-row" data-category="{cat}">\n'
-        f'                    <span class="entry-date">{date_display}</span>\n'
-        f'                    <a href="/{article["slug"]}/" class="entry-title">{html.escape(article["title"])}</a>\n'
+        f'                <li class="zn-row" data-category="{cat}">\n'
+        f'                    <span class="zn-row-date">{date_display}</span>\n'
+        f'                    <div>\n'
+        f'                        <span class="zn-eyebrow zn-eyebrow--ox zn-row-eyebrow">{cat_label}</span>\n'
+        f'                        <a href="/{article["slug"]}/" class="zn-row-title">{title}</a>\n'
+        f'                        <p class="zn-row-dek">{dek}</p>\n'
+        f'                    </div>\n'
+        f'                    <span class="zn-row-read">{read_display}</span>\n'
         f'                </li>'
     )
 
@@ -192,17 +202,17 @@ def generate_homepage(articles):
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Build entry list
+    # Build entry list (zn-rows variant). Filter bar lives in the static
+    # template now; we only emit the <ul>.
     rows = [make_entry_row(a) for a in articles]
     entry_html = '\n'.join(rows)
 
     new_block = (
         f'<!-- ENTRY_LIST_START -->\n'
-        f'{FILTER_BAR_HTML}\n'
-        f'            <ul class="entry-list">\n'
+        f'                <ul class="zn-rows">\n'
         f'{entry_html}\n'
-        f'            </ul>\n'
-        f'            <!-- ENTRY_LIST_END -->'
+        f'                </ul>\n'
+        f'                <!-- ENTRY_LIST_END -->'
     )
 
     # Replace between markers
@@ -220,17 +230,6 @@ def generate_homepage(articles):
         f'{count} articles,',
         content
     )
-
-    # Inject/update filter JS before </body>
-    if '<!-- FILTER_JS_START -->' in content:
-        content = re.sub(
-            r'<!-- FILTER_JS_START -->.*?<!-- FILTER_JS_END -->',
-            FILTER_JS,
-            content,
-            flags=re.DOTALL
-        )
-    else:
-        content = content.replace('</body>', f'{FILTER_JS}\n</body>')
 
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
@@ -252,10 +251,10 @@ def generate_posts_hub(articles):
 
     new_block = (
         f'<!-- ENTRY_LIST_START -->\n'
-        f'            <ul class="entry-list">\n'
+        f'                <ul class="zn-rows">\n'
         f'{entry_html}\n'
-        f'            </ul>\n'
-        f'            <!-- ENTRY_LIST_END -->'
+        f'                </ul>\n'
+        f'                <!-- ENTRY_LIST_END -->'
     )
 
     content = re.sub(
