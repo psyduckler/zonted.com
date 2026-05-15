@@ -82,6 +82,14 @@ def extract_metadata(filepath, slug):
     rt_match = re.search(r'(\d+)\s*min\s*read', content, re.IGNORECASE)
     reading_time = int(rt_match.group(1)) if rt_match else None
 
+    # og:image — backreferenced quote (same fix as description). Filter out
+    # the generic tabiji-owl-logo default so the row falls back to the hatched
+    # placeholder instead of repeating the same logo on 17 rows.
+    img_match = re.search(r'<meta\s+property=["\']og:image["\']\s+content=(["\'])(.*?)\1', head, re.IGNORECASE)
+    image = img_match.group(2) if img_match else ''
+    if 'tabiji-owl-logo' in image or 'zonted-og.png' in image:
+        image = ''
+
     category = get_category(slug, title)
 
     return {
@@ -91,6 +99,7 @@ def extract_metadata(filepath, slug):
         'reading_time': reading_time,
         'slug': slug,
         'category': category,
+        'image': image,
         'filepath': filepath,
     }
 
@@ -141,8 +150,16 @@ def make_entry_row(article):
     date_display = format_date_short(article['date']) if article['date'] else ''
     title = html.escape(article['title'])
     dek = html.escape(article.get('description', '') or '')
-    read_time = article.get('read_time', '')
-    read_display = f"{read_time}m" if read_time and read_time.isdigit() else (read_time or '')
+    read_time = article.get('reading_time')
+    read_display = f"{read_time}m" if read_time else ''
+    image = article.get('image', '')
+    if image:
+        thumb_html = (
+            f'                    <a href="/{article["slug"]}/" class="zn-row-thumb" aria-hidden="true" tabindex="-1">'
+            f'<img src="{html.escape(image)}" alt="" loading="lazy"></a>'
+        )
+    else:
+        thumb_html = f'                    <div class="zn-row-thumb zn-row-thumb-placeholder" aria-hidden="true"></div>'
 
     return (
         f'                <li class="zn-row">\n'
@@ -151,6 +168,7 @@ def make_entry_row(article):
         f'                        <a href="/{article["slug"]}/" class="zn-row-title">{title}</a>\n'
         f'                        <p class="zn-row-dek">{dek}</p>\n'
         f'                    </div>\n'
+        f'{thumb_html}\n'
         f'                    <span class="zn-row-read">{read_display}</span>\n'
         f'                </li>'
     )
