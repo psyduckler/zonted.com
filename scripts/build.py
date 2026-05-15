@@ -199,9 +199,10 @@ def generate_homepage(articles):
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Build entry list (zn-rows variant). Filter bar lives in the static
-    # template now; we only emit the <ul>.
-    rows = [make_entry_row(a) for a in articles]
+    # Homepage shows only the 5 most recent posts; "Read all →" link in
+    # the section header points to /posts/ for the full hub.
+    homepage_articles = articles[:5]
+    rows = [make_entry_row(a) for a in homepage_articles]
     entry_html = '\n'.join(rows)
 
     new_block = (
