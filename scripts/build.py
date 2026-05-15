@@ -138,18 +138,15 @@ def format_date_rfc822(date_str):
 
 def make_entry_row(article):
     date_display = format_date_short(article['date']) if article['date'] else ''
-    cat = article['category'].lower()
-    cat_label = article['category']
     title = html.escape(article['title'])
     dek = html.escape(article.get('description', '') or '')
     read_time = article.get('read_time', '')
     read_display = f"{read_time}m" if read_time and read_time.isdigit() else (read_time or '')
 
     return (
-        f'                <li class="zn-row" data-category="{cat}">\n'
+        f'                <li class="zn-row">\n'
         f'                    <span class="zn-row-date">{date_display}</span>\n'
         f'                    <div>\n'
-        f'                        <span class="zn-eyebrow zn-eyebrow--ox zn-row-eyebrow">{cat_label}</span>\n'
         f'                        <a href="/{article["slug"]}/" class="zn-row-title">{title}</a>\n'
         f'                        <p class="zn-row-dek">{dek}</p>\n'
         f'                    </div>\n'
