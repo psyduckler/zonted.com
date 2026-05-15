@@ -5,7 +5,7 @@
     <link>https://zonted.com/</link>
     <description>I test AI tools so you don't have to. Honest reviews, real data, and opinions from someone who actually builds with this stuff.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Build for Agents, Price Per Call.</title>
@@ -270,6 +270,14 @@
       <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
       <author>bernard@zonted.com (Bernard Huang)</author>
       <guid isPermaLink="true">https://zonted.com/posts/ai-reels-what-actually-works/</guid>
+    </item>
+    <item>
+      <title>81 Lines of Merge Conflict. -95% Traffic. Google Has Zero Patience for AI Slop.</title>
+      <link>https://zonted.com/posts/google-zero-patience-ai-slop/</link>
+      <description>An AI agent shipped a merge conflict to tabiji.ai</description>
+      <pubDate></pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/google-zero-patience-ai-slop/</guid>
     </item>
   </channel>
 </rss>

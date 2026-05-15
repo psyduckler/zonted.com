@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>81 Lines of Merge Conflict. -95% Traffic. Google Has Zero Patience for AI Slop.</title>
+    <meta name="description" content="An AI agent shipped a merge conflict to tabiji.ai's production HTML for four hours. Google cut our search traffic by 95% within four days. We haven't recovered. A case study in why AI orchestrators need pre-ship guards now.">
+    <link rel="canonical" href="https://zonted.com/posts/google-zero-patience-ai-slop/">
+    <meta property="og:title" content="81 Lines of Merge Conflict. -95% Traffic. Google Has Zero Patience for AI Slop.">
+    <meta property="og:description" content="An AI agent shipped a merge conflict to tabiji.ai's production HTML for four hours. Google cut our search traffic by 95% within four days. We haven't recovered.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/resources/google-zero-patience-ai-slop/gsc-traffic-cliff.png">
+    <meta property="og:url" content="https://zonted.com/posts/google-zero-patience-ai-slop/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"81 Lines of Merge Conflict. -95% Traffic. Google Has Zero Patience for AI Slop.","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-05-15","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/google-zero-patience-ai-slop/","description":"An AI agent shipped a merge conflict to tabiji.ai's production HTML for four hours. Google cut our search traffic by 95% within four days. We haven't recovered."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"81 Lines of Merge Conflict. -95% Traffic. Google Has Zero Patience for AI Slop."}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #767676;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-body figure img { width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+
+        .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
+
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
+        .article-meta {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-sidebar {
+            padding-top: 3rem;
+            width: 220px; flex-shrink: 0;
+            position: sticky; top: 80px;
+            max-height: calc(100vh - 100px); overflow-y: auto;
+        }
+        .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: #fcfcfa; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav style="position:sticky;top:0;z-index:100;background:#fcfcfa;border-bottom:1px solid #ddd;">
+<div style="max-width:1040px;margin:0 auto;padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="/" style="font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;color:#1a1a1a;text-decoration:none;">Zonted.</a>
+    <div style="display:flex;gap:1.5rem;">
+        <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Posts</a>
+        <a href="/ai-stack/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">AI Stack</a>
+        <a href="/metrics/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">Metrics</a>
+        <a href="/about/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:#595959;text-decoration:none;font-size:0.9rem;font-weight:500;">About</a>
+    </div>
+</div>
+</nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#what-broke">What broke</a></li>
+            <li><a href="#what-google-saw">What Google saw</a></li>
+            <li><a href="#what-else-was-wrong">What else was wrong</a></li>
+            <li><a href="#why-googles-bar-moved">Why Google's bar quietly moved</a></li>
+            <li><a href="#the-lesson">The lesson</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#what-broke">What broke</a></li>
+        <li><a href="#what-google-saw">What Google saw</a></li>
+        <li><a href="#what-else-was-wrong">What else was wrong</a></li>
+        <li><a href="#why-googles-bar-moved">Why Google's bar moved</a></li>
+        <li><a href="#the-lesson">The lesson</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form action="https://zonted.substack.com/api/v1/free?nojs=true" method="post" target="_blank" style="display:flex;flex-direction:column;gap:6px;">
+            <input type="email" name="email" placeholder="your@email.com" required style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;width:100%;">
+            <button type="submit" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;font-weight:600;padding:8px 10px;border:none;border-radius:6px;background:var(--text);color:var(--bg);cursor:pointer;transition:background 0.2s;">Subscribe</button>
+        </form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>81 Lines of Merge Conflict. -95% Traffic. Google Has Zero Patience for AI Slop.</h1>
+        <div class="article-meta">May 15, 2026 &middot; By Bernard Huang &middot; 5 min read</div>
+
+        <div class="article-body">
+
+            <p class="dropcap">On May 10, 2026, one of my AI agents shipped a PR that left 81 lines of raw git conflict markers &mdash; <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; sha</code> &mdash; sitting in plain HTML on tabiji.ai's main scams hub. Four hours later, the broken state was patched. Four days later, Google had cut our organic search traffic by ~95%. We haven't recovered.</p>
+
+            <div class="tldr">
+                <div class="tldr-label">TL;DR</div>
+                <p class="tldr-thesis">An AI agent shipped a merge conflict to <a href="https://tabiji.ai">tabiji.ai</a>'s production HTML for four hours; Google cut our search traffic by 95% in four days and we haven't recovered.</p>
+                <ul>
+                    <li>81 lines of raw <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> rendered to every visitor on /scams/, the site's strongest organic page.</li>
+                    <li>Both clicks <em>and</em> impressions cratered &mdash; Google didn't just stop sending traffic, it stopped showing the pages.</li>
+                    <li>Cleanup uncovered 1,244 broken links, 237 broken images, 32 latent bugs across the site &mdash; once Google looked, it found a lot.</li>
+                </ul>
+                <p class="tldr-tail">AI is going to ship merge conflicts. Build a pre-ship gate before Google decides what kind of publisher you are.</p>
+            </div>
+
+            <p>This is a story about a small mistake that turned out not to be small at all.</p>
+
+            <h2 id="what-broke">What broke</h2>
+
+            <p>Tabiji.ai runs a fleet of AI agents. They write copy, build pages, produce videos, refactor code, ship PRs. Most of the time it works. This time, it didn't.</p>
+
+            <p>The forensic record is on GitHub:</p>
+
+            <ul>
+                <li>5/8 &mdash; <a href="https://github.com/psyduckler/tabiji/pull/1490">PR #1490</a>: we found and patched merge-conflict residue on the scams hub. Thought we were clear.</li>
+                <li>5/10 02:39 EDT &mdash; a subsequent PR landed with fresh residue. 81 conflict marker lines, stacked between the hero stat pills, rendering to every visitor.</li>
+                <li>5/10 06:39 EDT &mdash; emergency fix in <a href="https://github.com/psyduckler/tabiji/pull/1513">PR #1513</a>. The broken state was live for roughly four hours.</li>
+            </ul>
+
+            <p>Four hours. That's it.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="https://img.zonted.com/resources/google-zero-patience-ai-slop/gsc-traffic-cliff.png" alt="Google Search Console performance chart for tabiji.ai showing organic clicks and impressions both collapsing from a peak of ~80 daily clicks and ~13K daily impressions to near zero in mid-May 2026" width="2538" height="1288" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">GSC for tabiji.ai. Both clicks and impressions cliff after May 10 &mdash; Google didn't just stop ranking the pages, it stopped showing them.</figcaption></figure>
+
+            <h2 id="what-google-saw">What Google saw</h2>
+
+            <p>On a normal day, the scams hub is one of tabiji's strongest pages. It ranks for hundreds of "[city] scams to avoid" queries and pulls in dozens of daily clicks plus second-order internal traffic.</p>
+
+            <p>For four hours, that same URL was rendering literal git conflict syntax in the visible body. To Google's quality classifier, the signal is unambiguous: <em>broken site, low-quality publisher.</em> By the next morning, the click-through curve had bent. Within 96 hours, ~95% of our pre-crash daily clicks were gone.</p>
+
+            <p>The more telling line in the chart above is the purple one. <strong>Impressions cratered alongside clicks.</strong> Google didn't just stop sending traffic &mdash; it stopped <em>showing</em> the pages in search results. The line is still flat. There's been no recovery.</p>
+
+            <h2 id="what-else-was-wrong">What else was wrong</h2>
+
+            <p>When we audited what <em>else</em> was broken on the site &mdash; partially because we were panicking, partially because if Google had downgraded us we wanted to know exactly what they'd seen &mdash; the catalog was ugly:</p>
+
+            <ul>
+                <li><a href="https://github.com/psyduckler/tabiji/pull/1530">PR #1530</a> &mdash; 479 broken hub-card links + 19 empty sections.</li>
+                <li><a href="https://github.com/psyduckler/tabiji/pull/1531">PR #1531</a> &mdash; 1,244 broken internal links across 379 unique targets.</li>
+                <li><a href="https://github.com/psyduckler/tabiji/pull/1535">PR #1535</a> &mdash; 24 latent bugs: entity double-encoding, duplicate DOM IDs, raw markdown leaking into rendered HTML.</li>
+                <li><a href="https://github.com/psyduckler/tabiji/pull/1536">PR #1536</a> &mdash; 8 more: broken HTML, leftover <code>console.log</code>s, security issues.</li>
+                <li><a href="https://github.com/psyduckler/tabiji/pull/1537">PR #1537</a> &mdash; 237 broken CDN image references + 6 missing schema blocks across 121 files.</li>
+            </ul>
+
+            <p>None of these alone would tank a site. Together, they paint a picture of a publisher who is not being careful. The merge conflict was the loudest offense. Once Google had a reason to look harder, there was a lot to find.</p>
+
+            <h2 id="why-googles-bar-moved">Why Google's bar quietly moved</h2>
+
+            <p>The internet is being buried under AI-generated garbage. AI-spun listicles. AI review farms. AI sites that publish faster than any human team can &mdash; and worse than any human reviewer would. Google has noticed. The quality bar has shifted, especially for sites that look algorithmically generated.</p>
+
+            <p>For a human-published site, a busted page is forgiven. People ship bugs sometimes. Whatever.</p>
+
+            <p>For an AI-published site, the same bug looks like <em>one more data point in a pattern.</em> "Are you a careful publisher, or are you part of the slop flood?" One broken page can't answer that on its own. Five can. So can one extremely loud one.</p>
+
+            <p>The site you're reading this on &mdash; Zonted &mdash; is fine, because it ships a few human-reviewed posts a week. The site that broke &mdash; <a href="https://tabiji.ai">tabiji.ai</a> &mdash; ships hundreds of pages a week, autonomously, with AI. Google evaluates them differently now. I think this is going to be true of every AI-native site this year.</p>
+
+            <h2 id="the-lesson">The lesson</h2>
+
+            <p>If you're running AI agents that ship code to production, you need a pre-ship quality gate. Doesn't matter much which kind:</p>
+
+            <ul>
+                <li>A lint check that fails the build on <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> patterns (twenty minutes of work).</li>
+                <li>An audit agent that reviews every PR before merge.</li>
+                <li>A staging tier that holds AI-generated builds long enough for a human eye.</li>
+                <li>Whatever else fits <a href="/ai-stack/">your stack</a>.</li>
+            </ul>
+
+            <p>I didn't have one. I now do. But it took 95% of our search traffic to teach me that lesson, and the lesson is still being charged to my account daily because the recovery curve hasn't started yet.</p>
+
+            <p>The point isn't that AI shouldn't ship code. The point is: <strong>AI is going to ship merge conflicts.</strong> AI is going to leave <code>console.log</code>s. AI is going to introduce duplicate IDs and double-encode entities and let markdown leak through into the DOM. That's just true. It will happen.</p>
+
+            <p>The question is whether what it shipped gets to production before someone &mdash; or some other agent &mdash; checks it.</p>
+
+            <p>The cost of getting that wrong, in the year Google decided to take AI slop seriously, is higher than I expected.</p>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div style="max-width:660px;margin:2rem auto;padding:0 2rem;text-align:center;">
+    <a href="https://x.com/intent/tweet?text=81%20Lines%20of%20Merge%20Conflict.%20-95%25%20Traffic.%20Google%20Has%20Zero%20Patience%20for%20AI%20Slop.&url=https://zonted.com/posts/google-zero-patience-ai-slop/" target="_blank" rel="noopener" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Share on X &rarr;</a>
+</div>
+</main>
+
+<footer>
+    <div style="max-width:660px;margin:0 auto;">
+        <p style="color:var(--text-dim);font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;margin-bottom:12px;">&copy; 2026 Bernard Huang &middot; zonted.com</p>
+        <div style="display:flex;gap:20px;justify-content:center;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;">
+            <a href="/posts/" style="color:var(--text-dim);text-decoration:none;">Posts</a>
+            <a href="/ai-stack/" style="color:var(--text-dim);text-decoration:none;">AI Stack</a>
+            <a href="/metrics/" style="color:var(--text-dim);text-decoration:none;">Metrics</a>
+            <a href="/about/" style="color:var(--text-dim);text-decoration:none;">About</a>
+            <a href="/feed.xml" style="color:var(--text-dim);text-decoration:none;">RSS</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://github.com/bernardjhuang">GitHub</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            <a href="https://tabiji.ai">tabiji.ai</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                const label = document.querySelector('.toc-active-label');
+                if (label) {
+                    const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                    if (activeLink) label.textContent = activeLink.textContent;
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
+<!-- NEWSLETTER_REDIRECT -->
+<script>
+(function(){
+  document.querySelectorAll('form[action*="substack.com"]').forEach(function(form){
+    var iframe=document.createElement("iframe");
+    iframe.name="substack-frame";
+    iframe.style.display="none";
+    document.body.appendChild(iframe);
+    form.target="substack-frame";
+    form.addEventListener("submit",function(){
+      setTimeout(function(){window.location.href="/subscribe/confirmed/";},300);
+    });
+  });
+})();
+</script>
+<!-- /NEWSLETTER_REDIRECT -->
+</body>
+</html>
