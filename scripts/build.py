@@ -65,9 +65,10 @@ def extract_metadata(filepath, slug):
     # Also handle HTML entity dash
     title = re.sub(r'\s*(?:—|&mdash;)\s*(?:zonted\.com|Zonted)\s*$', '', title)
 
-    # Description
-    desc_match = re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']', head, re.IGNORECASE)
-    description = html.unescape(desc_match.group(1)) if desc_match else ''
+    # Description — backreference the opening quote so apostrophes inside
+    # the content don't truncate (e.g. "tabiji.ai's production HTML…").
+    desc_match = re.search(r'<meta\s+name=["\']description["\']\s+content=(["\'])(.*?)\1', head, re.IGNORECASE)
+    description = html.unescape(desc_match.group(2)) if desc_match else ''
 
     # Date from article:published_time
     date_match = re.search(r'<meta\s+property=["\']article:published_time["\']\s+content=["\'](\d{4}-\d{2}-\d{2})', head, re.IGNORECASE)
