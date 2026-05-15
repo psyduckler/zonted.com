@@ -362,13 +362,13 @@ img, video { max-width: 100%; height: auto; }
 /* ---------- Post list rows ---------- */
 .zn-rows { list-style: none; }
 .zn-row {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  column-gap: 24px;
+  display: flex;
+  gap: 24px;
   align-items: start;
   padding: 20px 0;
   border-bottom: 1px solid var(--rule);
 }
+.zn-row-content { flex: 1; min-width: 0; }
 .zn-row-date {
   position: absolute;
   top: 6px;
@@ -407,8 +407,10 @@ img, video { max-width: 100%; height: auto; }
   margin: 0;
 }
 
-/* Thumbnail — real image or hatched placeholder, 150×105 box with date pill */
+/* Thumbnail — 150×105 box with date pill. No thumb element emitted when
+   there's no image, so the content takes the full row width. */
 .zn-row-thumb {
+  flex: 0 0 150px;
   width: 150px;
   height: 105px;
   border-radius: 6px;
@@ -705,11 +707,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ox); outline-of
   .zn-subscribe { grid-template-columns: 1fr; gap: 18px; }
   .zn-cards { grid-template-columns: 1fr; gap: 18px; }
   .zn-row {
-    grid-template-columns: 1fr;
-    row-gap: 10px;
+    flex-direction: column;
+    gap: 10px;
     padding: 18px 0;
   }
-  .zn-row-thumb { width: 100%; max-width: 320px; height: auto; aspect-ratio: 10 / 7; }
+  .zn-row-thumb { flex: 0 0 auto; width: 100%; max-width: 320px; height: auto; aspect-ratio: 10 / 7; }
   .zn-nav-inner { padding: 0 16px; }
   .zn-nav-links { gap: 16px; }
   .zn-nav-links a { font-size: 0.875rem; }

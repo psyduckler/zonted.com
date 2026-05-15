@@ -26,6 +26,18 @@ FALLBACK_DATES = {
     "posts/ai-image-generation-comparison": "2026-03-11",
 }
 
+# og:image URLs that 404 on R2. Treat as no-image; the row will skip the
+# thumb column entirely. Move to a working URL or re-upload the asset to
+# img.zonted.com to bring the thumbnail back.
+BROKEN_IMAGES = {
+    "https://img.zonted.com/og/ai-reels-what-actually-works.jpg",
+    "https://img.zonted.com/og/makeugc-review.jpg",
+    "https://img.zonted.com/og/wavespeed-review.jpg",
+    "https://img.zonted.com/resources/local-models-free-tokens/qwen-ollama-local.png",
+    # Returns 200 but the asset is a 117-byte stub, not the actual hero image
+    "https://img.zonted.com/resources/what-is-ai-self-healing/hero-bg.jpg",
+}
+
 # ---------------------------------------------------------------------------
 # Category assignment
 # ---------------------------------------------------------------------------
@@ -83,11 +95,11 @@ def extract_metadata(filepath, slug):
     reading_time = int(rt_match.group(1)) if rt_match else None
 
     # og:image — backreferenced quote (same fix as description). Filter out
-    # the generic tabiji-owl-logo default so the row falls back to the hatched
-    # placeholder instead of repeating the same logo on 17 rows.
+    # the generic tabiji-owl-logo default + URLs we've confirmed 404 so the
+    # row simply omits the thumb column.
     img_match = re.search(r'<meta\s+property=["\']og:image["\']\s+content=(["\'])(.*?)\1', head, re.IGNORECASE)
     image = img_match.group(2) if img_match else ''
-    if 'tabiji-owl-logo' in image or 'zonted-og.png' in image:
+    if 'tabiji-owl-logo' in image or 'zonted-og.png' in image or image in BROKEN_IMAGES:
         image = ''
 
     category = get_category(slug, title)
@@ -151,21 +163,18 @@ def make_entry_row(article):
     title = html.escape(article['title'])
     dek = html.escape(article.get('description', '') or '')
     image = article.get('image', '')
-    date_pill = f'<span class="zn-row-date">{date_display}</span>'
     if image:
         thumb_html = (
             f'                    <a href="/{article["slug"]}/" class="zn-row-thumb" tabindex="-1">'
             f'<img src="{html.escape(image)}" alt="" loading="lazy">'
-            f'{date_pill}</a>'
+            f'<span class="zn-row-date">{date_display}</span></a>\n'
         )
     else:
-        thumb_html = (
-            f'                    <div class="zn-row-thumb zn-row-thumb-placeholder">{date_pill}</div>'
-        )
+        thumb_html = ''
 
     return (
         f'                <li class="zn-row">\n'
-        f'{thumb_html}\n'
+        f'{thumb_html}'
         f'                    <div class="zn-row-content">\n'
         f'                        <a href="/{article["slug"]}/" class="zn-row-title">{title}</a>\n'
         f'                        <p class="zn-row-dek">{dek}</p>\n'
