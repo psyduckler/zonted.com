@@ -368,23 +368,23 @@ img, video { max-width: 100%; height: auto; }
   padding: 20px 0;
   border-bottom: 1px solid var(--rule);
 }
-.zn-row-content { flex: 1; min-width: 0; }
-.zn-row-date {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  z-index: 2;
-  padding: 3px 7px;
-  background: rgba(26, 24, 21, 0.78);
-  color: var(--paper);
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  border-radius: 3px;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+/* Left column: always 150px, always shows the date, optionally shows the
+   image below it. When there's no image, left column collapses to just the
+   date but the content still aligns at the same x-offset across rows. */
+.zn-row-left {
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-.zn-row-content { display: flex; flex-direction: column; gap: 6px; }
+.zn-row-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--faded);
+  letter-spacing: 0.05em;
+  padding-top: 4px;
+}
+.zn-row-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .zn-row-eyebrow { display: block; margin-bottom: 6px; }
 .zn-row-title {
   font-family: var(--display);
@@ -407,17 +407,16 @@ img, video { max-width: 100%; height: auto; }
   margin: 0;
 }
 
-/* Thumbnail — 150×105 box with date pill. No thumb element emitted when
-   there's no image, so the content takes the full row width. */
+/* Thumbnail — 150×105 box. Lives inside .zn-row-left, below the date.
+   Only emitted when the post has a usable image. */
 .zn-row-thumb {
-  flex: 0 0 150px;
+  display: block;
   width: 150px;
   height: 105px;
   border-radius: 6px;
   border: 1px solid var(--rule);
   overflow: hidden;
   background: var(--paper-2);
-  position: relative;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .zn-row-thumb img {
@@ -711,7 +710,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ox); outline-of
     gap: 10px;
     padding: 18px 0;
   }
-  .zn-row-thumb { flex: 0 0 auto; width: 100%; max-width: 320px; height: auto; aspect-ratio: 10 / 7; }
+  .zn-row-left { flex: 0 0 auto; width: 100%; gap: 6px; }
+  .zn-row-thumb { width: 100%; max-width: 320px; height: auto; aspect-ratio: 10 / 7; }
   .zn-nav-inner { padding: 0 16px; }
   .zn-nav-links { gap: 16px; }
   .zn-nav-links a { font-size: 0.875rem; }

@@ -163,18 +163,22 @@ def make_entry_row(article):
     title = html.escape(article['title'])
     dek = html.escape(article.get('description', '') or '')
     image = article.get('image', '')
+    thumb = ''
     if image:
-        thumb_html = (
-            f'                    <a href="/{article["slug"]}/" class="zn-row-thumb" tabindex="-1">'
-            f'<img src="{html.escape(image)}" alt="" loading="lazy">'
-            f'<span class="zn-row-date">{date_display}</span></a>\n'
+        thumb = (
+            f'                        <a href="/{article["slug"]}/" class="zn-row-thumb" tabindex="-1">'
+            f'<img src="{html.escape(image)}" alt="" loading="lazy"></a>\n'
         )
-    else:
-        thumb_html = ''
+    left_html = (
+        f'                    <div class="zn-row-left">\n'
+        f'                        <span class="zn-row-date">{date_display}</span>\n'
+        f'{thumb}'
+        f'                    </div>'
+    )
 
     return (
         f'                <li class="zn-row">\n'
-        f'{thumb_html}'
+        f'{left_html}\n'
         f'                    <div class="zn-row-content">\n'
         f'                        <a href="/{article["slug"]}/" class="zn-row-title">{title}</a>\n'
         f'                        <p class="zn-row-dek">{dek}</p>\n'
