@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0518">
+    <title>Portfolio — Zonted</title>
+    <meta name="description" content="Every project I've launched, as a collectible trading card. Hover any card to see the holographic foil ripple. TABIJI · Clearscope · Zonted, three open slots.">
+    <link rel="canonical" href="https://zonted.com/portfolio/">
+    <meta property="og:title" content="Portfolio — Zonted">
+    <meta property="og:description" content="Every project I've launched, as a collectible trading card. Hover any card to see the holographic foil ripple.">
+    <meta property="og:url" content="https://zonted.com/portfolio/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://img.zonted.com/og/zonted-og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231a1815'/><text x='50' y='75' text-anchor='middle' font-size='72' font-family='Georgia,serif' font-weight='700' fill='%23fcfcfa'>Z</text></svg>">
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/zonted.css">
+    <style>
+        :root {
+            --tc-bg: #0a0518;
+            --tc-bg2: #1a0a35;
+            --tc-bg3: #2a0e55;
+            --tc-card: #fef8e7;
+            --tc-card-edge: #0a0a0a;
+            --tc-card-inner: #f5ead0;
+            --tc-text: #fbf8f0;
+            --tc-dim: #a0a0b8;
+            --tc-gold: #fbbf24;
+            --tc-gold-dark: #9c6e1a;
+            --tc-gold-light: #fde68a;
+            --tc-red: #ef4444;
+            --tc-blue: #3b82f6;
+            --tc-green: #10b981;
+            --tc-purple: #a855f7;
+            --tc-magenta: #ec4899;
+            --tc-silver: #cbd5e1;
+            --tc-display: 'Archivo Black', sans-serif;
+            --tc-body: 'Inter Tight', sans-serif;
+            --tc-serif: 'Fraunces', Georgia, serif;
+            --tc-mono: 'JetBrains Mono', ui-monospace, monospace;
+        }
+
+        /* ---------- Keyframe library — canonical, do not invent new names ---------- */
+        @keyframes holoShimmer { 0% { background-position: 0% 0%; } 100% { background-position: 200% 200%; } }
+        @keyframes holoRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes floatYSlow { 0%, 100% { transform: translateY(0) rotate(-1.2deg); } 50% { transform: translateY(-12px) rotate(1.2deg); } }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px var(--glow), 0 0 60px var(--glow); opacity: 1; } 50% { box-shadow: 0 0 40px var(--glow), 0 0 90px var(--glow); opacity: 0.9; } }
+        @keyframes starPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } }
+        @keyframes sparkleSpin { 0% { transform: rotate(0deg) scale(0.6); opacity: 0; } 20% { transform: rotate(72deg) scale(1); opacity: 1; } 100% { transform: rotate(360deg) scale(0.4); opacity: 0; } }
+        @keyframes statFill { 0% { width: 0; } 100% { width: var(--fill); } }
+        @keyframes scanline { 0% { transform: translateY(-120%); } 100% { transform: translateY(120%); } }
+        @keyframes scanlineH { 0% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+        @keyframes textShimmer { 0%, 100% { background-position: -200% 0; } 50% { background-position: 200% 0; } }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0.3; } }
+        @keyframes orbit { 0% { transform: rotate(0deg) translateX(120px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); } }
+        @keyframes orbitReverse { 0% { transform: rotate(0deg) translateX(180px) rotate(0deg); } 100% { transform: rotate(-360deg) translateX(180px) rotate(360deg); } }
+        @keyframes flicker { 0%, 100% { opacity: 1; } 33% { opacity: 0.85; } 66% { opacity: 0.95; } }
+        @keyframes drift { 0% { transform: translate(0, 0); } 25% { transform: translate(40px, -30px); } 50% { transform: translate(-20px, -60px); } 75% { transform: translate(-50px, -20px); } 100% { transform: translate(0, 0); } }
+
+        /* ---------- Page chrome ---------- */
+        .portfolio-page { background: var(--tc-bg); color: var(--tc-text); font-family: var(--tc-body); }
+        .portfolio-page a { color: var(--tc-gold); }
+        .portfolio-page a:hover { color: var(--tc-text); }
+
+        /* ---------- Sparkles + Orbs ---------- */
+        .tc-sparkle { position: absolute; width: 14px; height: 14px; pointer-events: none; animation: sparkleSpin var(--dur, 2.5s) ease-in-out var(--delay, 0s) infinite; }
+        .tc-orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(8px); animation: drift var(--dur, 14s) ease-in-out var(--delay, 0s) infinite, flicker 3s ease-in-out infinite; }
+
+        /* ---------- Hero ---------- */
+        .port-hero {
+            padding: 64px 36px 56px;
+            text-align: center;
+            background: radial-gradient(ellipse at center, var(--tc-bg3) 0%, var(--tc-bg2) 30%, var(--tc-bg) 70%);
+            position: relative;
+            overflow: hidden;
+        }
+        .port-hero-inner { position: relative; z-index: 1; }
+        .port-hero-eyebrow {
+            font-family: var(--tc-mono);
+            font-size: 11px;
+            color: var(--tc-gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: flicker 4s infinite;
+        }
+        .port-hero h1 {
+            font-family: var(--tc-display);
+            font-size: clamp(3.5rem, 10vw, 8.125rem);
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin: 18px 0 0;
+            text-transform: uppercase;
+            animation: floatY 4s ease-in-out infinite;
+            color: var(--tc-text);
+            font-weight: 400;
+        }
+        .port-hero h1 .gotta { display: block; text-shadow: 0 0 60px rgba(251, 191, 36, 0.53), 0 0 120px rgba(251, 191, 36, 0.27); }
+        .port-hero h1 .ship-line { display: block; margin-top: -8px; }
+        .port-hero h1 .rainbow {
+            background: linear-gradient(115deg, var(--tc-gold) 0%, var(--tc-magenta) 25%, var(--tc-purple) 50%, var(--tc-blue) 75%, var(--tc-gold) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: textShimmer 3s ease-in-out infinite;
+        }
+        .port-hero p {
+            font-family: var(--tc-body);
+            font-size: 18px;
+            color: var(--tc-dim);
+            margin: 22px auto 0;
+            max-width: 600px;
+            line-height: 1.55;
+            font-weight: 500;
+        }
+        .port-hero-chips { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; font-family: var(--tc-mono); font-size: 11px; letter-spacing: 2px; }
+        .port-hero-chip { padding: 6px 12px; border: 1px solid; text-transform: uppercase; }
+        .chip-ultra { background: rgba(251, 191, 36, 0.13); border-color: var(--tc-gold); color: var(--tc-gold); }
+        .chip-rare { background: rgba(239, 68, 68, 0.13); border-color: var(--tc-red); color: var(--tc-red); }
+        .chip-slot { background: rgba(203, 213, 225, 0.13); border-color: var(--tc-silver); color: var(--tc-silver); }
+
+        /* ---------- Card grid ---------- */
+        .port-grid {
+            padding: 30px 36px 60px;
+            background: linear-gradient(180deg, var(--tc-bg), var(--tc-bg2));
+            position: relative;
+            overflow: hidden;
+        }
+        .port-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1180px;
+            margin-inline: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------- Trading Card ---------- */
+        .tc-card {
+            position: relative;
+            aspect-ratio: 5 / 7.2;
+            background: var(--tc-card);
+            border-radius: 14px;
+            border: 4px solid var(--tc-card-edge);
+            padding: 6px;
+            overflow: hidden;
+            color: var(--tc-card-edge);
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.3s;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .tc-card:hover { transform: scale(1.06) rotateY(-6deg) rotateX(4deg); }
+        .tc-card:hover .tc-holo { opacity: 0.55; }
+        .tc-card:focus-visible { outline: 2px solid var(--tc-gold); outline-offset: 4px; }
+        .tc-card-ultra { animation: floatYSlow 6s ease-in-out infinite; }
+
+        /* Inner gold frame */
+        .tc-frame { position: absolute; inset: 6px; border: 2px solid var(--tc-gold-dark); border-radius: 6px; pointer-events: none; z-index: 2; }
+
+        /* Holographic shimmer overlays */
+        .tc-holo {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+            z-index: 1;
+            mix-blend-mode: overlay;
+        }
+        .tc-foil {
+            background: linear-gradient(115deg, #ffafd5 0%, #b0e5ff 18%, #b6ffc6 36%, #fff5b0 54%, #ffc4f8 72%, #b0e5ff 88%, #ffafd5 100%);
+            background-size: 250% 250%;
+            animation: holoShimmer 6s linear infinite;
+            opacity: 0.18;
+        }
+        .tc-foil-strong {
+            background: linear-gradient(115deg, #ff5fc4 0%, #5feaff 16%, #5feaff 28%, #fff5b0 42%, #ff5fc4 58%, #5feaff 74%, #fff5b0 88%, #ff5fc4 100%);
+            background-size: 300% 300%;
+            animation: holoShimmer 4s linear infinite;
+            opacity: 0.35;
+        }
+
+        /* Card content rows */
+        .tc-title-row {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 8px;
+            z-index: 3;
+        }
+        .tc-name {
+            font-family: var(--tc-display);
+            font-size: 19px;
+            letter-spacing: -0.6px;
+            text-transform: uppercase;
+        }
+        .tc-hp-row { display: flex; align-items: center; gap: 5px; }
+        .tc-hp-label { font-family: var(--tc-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+        .tc-hp { font-family: var(--tc-display); font-size: 26px; color: var(--tc-red); text-shadow: 0 0 8px rgba(239, 68, 68, 0.47); }
+        .tc-type-bubble {
+            display: inline-flex;
+            width: 26px;
+            height: 26px;
+            border: 2px solid var(--tc-card-edge);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 10px;
+            font-family: var(--tc-display);
+            margin-left: 2px;
+        }
+
+        /* Image window */
+        .tc-image {
+            position: relative;
+            margin: 2px 8px;
+            padding: 4px;
+            border: 2px solid var(--tc-gold-dark);
+            background: var(--tc-card-inner);
+            z-index: 3;
+        }
+        .tc-image-inner {
+            position: relative;
+            aspect-ratio: 5 / 3.4;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tc-image-inner .tc-image-label {
+            font-family: var(--tc-display);
+            font-size: 36px;
+            color: var(--tc-card-inner);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            opacity: 0.92;
+            position: relative;
+            z-index: 1;
+        }
+        .tc-image-stripes {
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 6px, transparent 6px, transparent 14px);
+            pointer-events: none;
+        }
+        .tc-energy { position: absolute; top: 4px; left: 4px; display: flex; gap: 2px; z-index: 2; }
+        .tc-energy-pip {
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, var(--tc-gold), var(--tc-gold-dark));
+            border: 1.5px solid var(--tc-card-edge);
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(251, 191, 36, 0.53);
+        }
+        .tc-image-meta {
+            position: absolute;
+            bottom: 4px;
+            right: 6px;
+            font-family: var(--tc-mono);
+            font-size: 9px;
+            color: var(--tc-text);
+            background: rgba(10, 10, 10, 0.8);
+            padding: 2px 6px;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+        .tc-image-scan {
+            position: absolute;
+            inset: 0;
+            height: 30%;
+            pointer-events: none;
+            z-index: 1;
+            animation: scanline 4s linear infinite;
+        }
+
+        /* Sub-tagline */
+        .tc-sub {
+            position: relative;
+            padding: 4px 10px 0;
+            font-family: var(--tc-body);
+            font-size: 10.5px;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--tc-card-edge);
+            opacity: 0.85;
+            line-height: 1.35;
+            z-index: 3;
+        }
+
+        /* Moves */
+        .tc-move {
+            position: relative;
+            margin: 6px 8px 0;
+            padding: 7px 9px;
+            color: var(--tc-card);
+            border-radius: 3px;
+            z-index: 3;
+            border: 1px solid;
+        }
+        .tc-move-row { display: flex; justify-content: space-between; align-items: center; }
+        .tc-move-name { font-family: var(--tc-display); font-size: 13px; color: var(--tc-gold-light); letter-spacing: 0.4px; text-transform: uppercase; }
+        .tc-move-dmg { font-family: var(--tc-display); font-size: 16px; color: var(--tc-red); text-shadow: 0 0 6px var(--tc-red); }
+        .tc-move-desc { font-family: var(--tc-body); font-size: 9px; font-style: italic; color: var(--tc-dim); margin-top: 2px; line-height: 1.3; }
+        .tc-move-2 { margin: 5px 8px 0; padding: 6px 9px; border-radius: 3px; z-index: 3; border: 1px solid; }
+        .tc-move-2 .tc-move-name { font-size: 11px; color: var(--tc-card-edge); }
+        .tc-move-2 .tc-move-dmg { font-size: 13px; color: var(--tc-card-edge); text-shadow: none; }
+
+        /* Stat bars */
+        .tc-stats { position: relative; padding: 6px 10px 0; z-index: 3; }
+        .tc-stat { margin-top: 6px; }
+        .tc-stat-row { display: flex; justify-content: space-between; font-family: var(--tc-mono); font-size: 8px; color: var(--tc-card-edge); opacity: 0.7; letter-spacing: 0.5px; margin-bottom: 2px; }
+        .tc-stat-row strong { font-weight: 700; }
+        .tc-stat-row span:last-child { font-family: var(--tc-display); font-size: 12px; opacity: 1; letter-spacing: -0.3px; }
+        .tc-stat-track {
+            height: 6px;
+            background: var(--tc-card-edge);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--tc-gold-dark);
+        }
+        .tc-stat-fill { height: 100%; animation: statFill 1.5s ease-out var(--delay, 0s) both; }
+
+        /* Bottom info bar */
+        .tc-bottom {
+            position: absolute;
+            bottom: 8px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--tc-mono);
+            font-size: 9px;
+            color: var(--tc-card-edge);
+            letter-spacing: 1px;
+            z-index: 3;
+        }
+        .tc-bottom strong { font-weight: 700; }
+        .tc-stars { letter-spacing: 1px; }
+        .tc-stars span { color: var(--tc-gold); display: inline-block; animation: starPulse 1.6s ease-in-out var(--d, 0s) infinite; }
+
+        /* ---------- Featured stat sheet ---------- */
+        .port-stats {
+            background: radial-gradient(ellipse at top, var(--tc-bg3) 0%, var(--tc-bg2) 30%, var(--tc-bg) 70%);
+            padding: 70px 36px;
+            color: var(--tc-text);
+            border-top: 2px solid var(--tc-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        .port-stats-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 56px;
+            align-items: start;
+            max-width: 1180px;
+            margin-inline: auto;
+            z-index: 1;
+        }
+        .port-stats-featured { position: relative; }
+        .port-stats-orbits {
+            position: absolute;
+            inset: -30px;
+            pointer-events: none;
+        }
+        .port-stats-orbits-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            animation: holoRotate 30s linear infinite;
+        }
+        .port-stats-orbits-center .orb-dot { position: absolute; border-radius: 50%; }
+        .orb-dot.gold { width: 12px; height: 12px; background: var(--tc-gold); box-shadow: 0 0 20px var(--tc-gold); animation: orbit 8s linear infinite; }
+        .orb-dot.magenta { width: 8px; height: 8px; background: var(--tc-magenta); box-shadow: 0 0 16px var(--tc-magenta); animation: orbitReverse 12s linear infinite; }
+
+        .port-stats-eyebrow {
+            font-family: var(--tc-mono);
+            font-size: 11px;
+            color: var(--tc-gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: flicker 4s infinite;
+        }
+        .port-stats h2 {
+            font-family: var(--tc-display);
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            letter-spacing: -0.04em;
+            line-height: 0.92;
+            margin: 14px 0 0;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        .port-stats h2 .rainbow {
+            background: linear-gradient(115deg, var(--tc-gold) 0%, var(--tc-magenta) 30%, var(--tc-purple) 60%, var(--tc-gold) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: textShimmer 3s ease-in-out infinite;
+        }
+        .port-stats-tagline {
+            font-family: var(--tc-serif);
+            font-style: italic;
+            font-size: 19px;
+            color: var(--tc-dim);
+            margin-top: 10px;
+        }
+        .port-stats-sub {
+            margin-top: 32px;
+            font-family: var(--tc-mono);
+            font-size: 11px;
+            color: var(--tc-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .port-counters {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .port-counter {
+            background: linear-gradient(135deg, var(--tc-bg2), var(--tc-bg3));
+            border: 1.5px solid;
+            padding: 16px 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        .port-counter-scan {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            animation: scanlineH 4s linear var(--delay, 0s) infinite;
+        }
+        .port-counter-label {
+            font-family: var(--tc-mono);
+            font-size: 9px;
+            letter-spacing: 1.8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+        }
+        .port-counter-value {
+            margin-top: 10px;
+            font-family: var(--tc-display);
+            font-size: 30px;
+            letter-spacing: -0.7px;
+            line-height: 1;
+            position: relative;
+        }
+
+        .port-reels { margin-top: 14px; }
+        .port-reel {
+            display: grid;
+            grid-template-columns: 70px 1fr 100px 90px;
+            gap: 14px;
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            background: rgba(26, 10, 53, 0.67);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            align-items: baseline;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .port-reel:hover { transform: translateX(6px); border-color: var(--tc-gold); }
+        .port-reel-num { font-family: var(--tc-mono); font-size: 10px; color: var(--tc-gold); font-weight: 700; letter-spacing: 1.5px; }
+        .port-reel-title { font-family: var(--tc-serif); font-size: 16px; font-style: italic; color: var(--tc-text); }
+        .port-reel-place { font-family: var(--tc-mono); font-size: 10px; color: var(--tc-dim); letter-spacing: 1.5px; text-align: right; text-transform: uppercase; }
+        .port-reel-dmg { font-family: var(--tc-display); font-size: 22px; color: var(--tc-red); text-align: right; text-shadow: 0 0 8px rgba(239, 68, 68, 0.53); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1024px) {
+            .port-cards { grid-template-columns: repeat(2, 1fr); }
+            .port-stats-grid { grid-template-columns: 1fr; gap: 32px; }
+            .port-stats-featured { max-width: 360px; margin-inline: auto; }
+        }
+        @media (max-width: 700px) {
+            .port-hero { padding: 48px 20px 40px; }
+            .port-hero h1 { font-size: clamp(2.5rem, 14vw, 4rem); }
+            .port-hero p { font-size: 16px; }
+            .port-grid { padding: 24px 20px 48px; }
+            .port-cards { grid-template-columns: 1fr; max-width: 380px; margin-inline: auto; gap: 24px; }
+            .port-stats { padding: 48px 20px; }
+            .port-stats h2 { font-size: clamp(3rem, 14vw, 5rem); }
+            .port-counters { grid-template-columns: repeat(2, 1fr); }
+            .port-reel { grid-template-columns: 48px 1fr 70px; gap: 8px; padding: 10px 12px; }
+            .port-reel-place { display: none; }
+            .port-reel-title { font-size: 14px; }
+            .port-reel-dmg { font-size: 18px; }
+        }
+        @media (max-width: 480px) {
+            .zn-nav-cta { display: none; }
+            .port-counters { grid-template-columns: 1fr; }
+            .port-stats-sub { font-size: 10px; letter-spacing: 2px; }
+        }
+
+        /* ---------- Accessibility — reduced motion ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            .port-hero h1, .tc-card-ultra, .tc-sparkle, .tc-orb,
+            .tc-foil, .tc-foil-strong, .tc-image-scan, .tc-stars span,
+            .port-stats-orbits-center, .orb-dot, .port-counter-scan,
+            .port-hero-eyebrow, .port-stats-eyebrow, .tc-stat-fill,
+            .port-hero h1 .rainbow, .port-stats h2 .rainbow {
+                animation: none !important;
+            }
+        }
+
+        /* Disable 3D tilt on touch devices */
+        @media (hover: none) {
+            .tc-card:hover { transform: none; }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body class="portfolio-page">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav class="zn-nav">
+        <div class="zn-nav-inner">
+            <a href="/" class="zn-logo"><span class="zn-avatar-sm">Z</span>zonted.</a>
+            <div class="zn-nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/" class="active">Portfolio</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/#subscribe" class="zn-nav-cta">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main">
+
+        <!-- ========== HERO ========== -->
+        <section class="port-hero">
+            <div class="tc-orb" aria-hidden="true" style="left:10%; top:20%; width:200px; height:200px; background:radial-gradient(circle at center, rgba(168,85,247,0.53), transparent 70%); --dur:14s;"></div>
+            <div class="tc-orb" aria-hidden="true" style="left:75%; top:30%; width:250px; height:250px; background:radial-gradient(circle at center, rgba(236,72,153,0.53), transparent 70%); --dur:18s; --delay:2s;"></div>
+            <div class="tc-orb" aria-hidden="true" style="left:40%; top:70%; width:180px; height:180px; background:radial-gradient(circle at center, rgba(59,130,246,0.53), transparent 70%); --dur:16s; --delay:4s;"></div>
+            <div class="tc-orb" aria-hidden="true" style="left:85%; top:75%; width:160px; height:160px; background:radial-gradient(circle at center, rgba(251,191,36,0.53), transparent 70%); --dur:12s; --delay:1s;"></div>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:12%; top:15%; --delay:0s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:28%; top:40%; --delay:0.4s; --dur:4s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:42%; top:65%; --delay:0.8s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:58%; top:15%; --delay:1.2s; --dur:4s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:72%; top:40%; --delay:1.6s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:88%; top:65%; --delay:2s; --dur:4s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+
+            <div class="port-hero-inner">
+                <p class="port-hero-eyebrow">&starf; &starf; &starf; The Zonted Project Dex &middot; 1st Edition &middot; Holographic &starf; &starf; &starf;</p>
+                <h1>
+                    <span class="gotta">GOTTA</span>
+                    <span class="ship-line">SHIP <span class="rainbow">'EM ALL.</span></span>
+                </h1>
+                <p>Every project I've launched, as a collectible. Hover any card to see the holographic foil ripple. Scroll down to enter the stat sheet.</p>
+                <div class="port-hero-chips">
+                    <span class="port-hero-chip chip-ultra">2 ultra rare</span>
+                    <span class="port-hero-chip chip-rare">1 rare</span>
+                    <span class="port-hero-chip chip-slot">3 empty slots</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CARD GRID ========== -->
+        <section class="port-grid" aria-label="Project card collection">
+            <div class="tc-orb" aria-hidden="true" style="left:5%; top:10%; width:300px; height:300px; background:radial-gradient(circle at center, rgba(168,85,247,0.53), transparent 70%); --dur:20s;"></div>
+            <div class="tc-orb" aria-hidden="true" style="left:80%; top:60%; width:280px; height:280px; background:radial-gradient(circle at center, rgba(236,72,153,0.53), transparent 70%); --dur:22s; --delay:3s;"></div>
+
+            <div class="port-cards">
+
+                <!-- 001 · TABIJI · ULTRA -->
+                <a href="https://tabiji.ai" class="tc-card tc-card-ultra" style="--card-color: #fbbf24; box-shadow: 0 8px 28px rgba(251,191,36,0.47), 0 0 0 1px #fbbf24, inset 0 0 0 2px #fbbf24;">
+                    <div class="tc-frame"></div>
+                    <div class="tc-holo tc-foil-strong" aria-hidden="true"></div>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:8%; top:15%; --delay:0s; --dur:2.5s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:86%; top:25%; --delay:0.5s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:20%; top:60%; --delay:1s; --dur:2.8s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:78%; top:68%; --delay:1.5s; --dur:2.2s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:50%; top:92%; --delay:0.8s; --dur:3.2s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+
+                    <div class="tc-title-row">
+                        <span class="tc-name">TABIJI</span>
+                        <span class="tc-hp-row">
+                            <span class="tc-hp-label">HP</span>
+                            <span class="tc-hp">184</span>
+                            <span class="tc-type-bubble" style="background:radial-gradient(circle at 30% 30%, #fbbf24, #0a0a0a); box-shadow:0 0 8px #fbbf24;">M</span>
+                        </span>
+                    </div>
+
+                    <div class="tc-image">
+                        <div class="tc-image-inner" style="background:linear-gradient(135deg, #fbbf24, #0a0a0a);">
+                            <div class="tc-image-stripes"></div>
+                            <span class="tc-image-label">TABIJI</span>
+                            <div class="tc-energy">
+                                <span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span>
+                            </div>
+                            <span class="tc-image-meta" style="border:1px solid #fbbf24;">MEDIA &middot; 2024</span>
+                            <div class="tc-image-scan" style="background:linear-gradient(180deg, transparent 0%, rgba(251,191,36,0.2) 50%, transparent 100%);"></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-sub">An AI travel pipeline that turns scams into reels.</div>
+
+                    <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(251,191,36,0.13), #0a0a0a); border-color:#fbbf24;">
+                        <div class="tc-move-row"><span class="tc-move-name">16M-View Tulum Beam</span><span class="tc-move-dmg">320</span></div>
+                        <div class="tc-move-desc">Hits all foes once. If a Wavespeed is in play, double damage.</div>
+                    </div>
+                    <div class="tc-move-2" style="background:rgba(251,191,36,0.1); border-color:rgba(251,191,36,0.27);">
+                        <div class="tc-move-row"><span class="tc-move-name">Pipeline Surge</span><span class="tc-move-dmg">60</span></div>
+                    </div>
+
+                    <div class="tc-stats">
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>ATK</strong><span style="color:#ef4444;">92</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:76.6%; --delay:0.1s; background:linear-gradient(90deg, #ef4444, rgba(239,68,68,0.8)); box-shadow:0 0 6px rgba(239,68,68,0.53);"></div></div>
+                        </div>
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>DEF</strong><span style="color:#3b82f6;">41</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:34.2%; --delay:0.25s; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.8)); box-shadow:0 0 6px rgba(59,130,246,0.53);"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-bottom">
+                        <strong>001/006</strong>
+                        <span class="tc-stars"><span style="--d:0s;">&starf;</span><span style="--d:0.3s;">&starf;</span><span style="--d:0.6s;">&starf;</span></span>
+                        <strong>&copy;BH 2026</strong>
+                    </div>
+                </a>
+
+                <!-- 002 · CLEARSCOPE · ULTRA -->
+                <a href="https://www.clearscope.io" class="tc-card tc-card-ultra" style="--card-color: #3b82f6; box-shadow: 0 8px 28px rgba(59,130,246,0.47), 0 0 0 1px #3b82f6, inset 0 0 0 2px #fbbf24;">
+                    <div class="tc-frame"></div>
+                    <div class="tc-holo tc-foil-strong" aria-hidden="true"></div>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:8%; top:15%; --delay:0.2s; --dur:2.5s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:86%; top:25%; --delay:0.7s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:20%; top:60%; --delay:1.2s; --dur:2.8s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:78%; top:68%; --delay:1.7s; --dur:2.2s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                    <svg class="tc-sparkle" aria-hidden="true" style="left:50%; top:92%; --delay:1s; --dur:3.2s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+
+                    <div class="tc-title-row">
+                        <span class="tc-name">CLEARSCOPE</span>
+                        <span class="tc-hp-row">
+                            <span class="tc-hp-label">HP</span>
+                            <span class="tc-hp">800</span>
+                            <span class="tc-type-bubble" style="background:radial-gradient(circle at 30% 30%, #3b82f6, #0a0a0a); box-shadow:0 0 8px #3b82f6;">S</span>
+                        </span>
+                    </div>
+
+                    <div class="tc-image">
+                        <div class="tc-image-inner" style="background:linear-gradient(135deg, #3b82f6, #0a0a0a);">
+                            <div class="tc-image-stripes"></div>
+                            <span class="tc-image-label">CLEARSCOPE</span>
+                            <div class="tc-energy">
+                                <span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span>
+                            </div>
+                            <span class="tc-image-meta" style="border:1px solid #3b82f6;">SAAS &middot; 2016&ndash;2024</span>
+                            <div class="tc-image-scan" style="background:linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.2) 50%, transparent 100%);"></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-sub">A B2B SEO grader. 8 years of slow compounding.</div>
+
+                    <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(59,130,246,0.13), #0a0a0a); border-color:#3b82f6;">
+                        <div class="tc-move-row"><span class="tc-move-name">Category Lock</span><span class="tc-move-dmg">240</span></div>
+                        <div class="tc-move-desc">Foe cannot retreat for 8 turns. Yields one Exit token.</div>
+                    </div>
+                    <div class="tc-move-2" style="background:rgba(59,130,246,0.1); border-color:rgba(59,130,246,0.27);">
+                        <div class="tc-move-row"><span class="tc-move-name">Brand Burn</span><span class="tc-move-dmg">50</span></div>
+                    </div>
+
+                    <div class="tc-stats">
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>ATK</strong><span style="color:#ef4444;">88</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:73.3%; --delay:0.1s; background:linear-gradient(90deg, #ef4444, rgba(239,68,68,0.8)); box-shadow:0 0 6px rgba(239,68,68,0.53);"></div></div>
+                        </div>
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>DEF</strong><span style="color:#3b82f6;">95</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:79.1%; --delay:0.25s; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.8)); box-shadow:0 0 6px rgba(59,130,246,0.53);"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-bottom">
+                        <strong>002/006</strong>
+                        <span class="tc-stars"><span style="--d:0s;">&starf;</span><span style="--d:0.3s;">&starf;</span><span style="--d:0.6s;">&starf;</span></span>
+                        <strong>&copy;BH 2026</strong>
+                    </div>
+                </a>
+
+                <!-- 003 · ZONTED · RARE -->
+                <a href="/" class="tc-card" style="--card-color: #ef4444; box-shadow: 0 8px 28px rgba(239,68,68,0.47), 0 0 0 1px #ef4444, inset 0 0 0 2px #fbbf24;">
+                    <div class="tc-frame"></div>
+                    <div class="tc-holo tc-foil" aria-hidden="true"></div>
+
+                    <div class="tc-title-row">
+                        <span class="tc-name">ZONTED</span>
+                        <span class="tc-hp-row">
+                            <span class="tc-hp-label">HP</span>
+                            <span class="tc-hp">142</span>
+                            <span class="tc-type-bubble" style="background:radial-gradient(circle at 30% 30%, #ef4444, #0a0a0a); box-shadow:0 0 8px #ef4444;">W</span>
+                        </span>
+                    </div>
+
+                    <div class="tc-image">
+                        <div class="tc-image-inner" style="background:linear-gradient(135deg, #ef4444, #0a0a0a);">
+                            <div class="tc-image-stripes"></div>
+                            <span class="tc-image-label">ZONTED</span>
+                            <div class="tc-energy">
+                                <span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span>
+                            </div>
+                            <span class="tc-image-meta" style="border:1px solid #ef4444;">WRITER &middot; 2018</span>
+                            <div class="tc-image-scan" style="background:linear-gradient(180deg, transparent 0%, rgba(239,68,68,0.2) 50%, transparent 100%);"></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-sub">Honest writing on AI. New post by email when published.</div>
+
+                    <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(239,68,68,0.13), #0a0a0a); border-color:#ef4444;">
+                        <div class="tc-move-row"><span class="tc-move-name">Long-Form Letter</span><span class="tc-move-dmg">180</span></div>
+                        <div class="tc-move-desc">Heals self for the count of subscribers (&times; 0.01).</div>
+                    </div>
+                    <div class="tc-move-2" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.27);">
+                        <div class="tc-move-row"><span class="tc-move-name">Compound Interest</span><span class="tc-move-dmg">30</span></div>
+                    </div>
+
+                    <div class="tc-stats">
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>ATK</strong><span style="color:#ef4444;">49</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:40.8%; --delay:0.1s; background:linear-gradient(90deg, #ef4444, rgba(239,68,68,0.8)); box-shadow:0 0 6px rgba(239,68,68,0.53);"></div></div>
+                        </div>
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>DEF</strong><span style="color:#3b82f6;">80</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:66.6%; --delay:0.25s; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.8)); box-shadow:0 0 6px rgba(59,130,246,0.53);"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-bottom">
+                        <strong>003/006</strong>
+                        <span class="tc-stars"><span style="--d:0s;">&starf;</span><span style="--d:0.3s;">&starf;</span></span>
+                        <strong>&copy;BH 2026</strong>
+                    </div>
+                </a>
+
+                <!-- 004 · SLOT -->
+                <div class="tc-card" style="--card-color: #cbd5e1; box-shadow: 0 8px 28px rgba(203,213,225,0.27), 0 0 0 1px #cbd5e1, inset 0 0 0 2px #fbbf24;" aria-label="Empty card slot 4">
+                    <div class="tc-frame"></div>
+                    <div class="tc-holo tc-foil" aria-hidden="true"></div>
+
+                    <div class="tc-title-row">
+                        <span class="tc-name">[ SLOT ]</span>
+                        <span class="tc-hp-row">
+                            <span class="tc-hp-label">HP</span>
+                            <span class="tc-hp">??</span>
+                            <span class="tc-type-bubble" style="background:radial-gradient(circle at 30% 30%, #cbd5e1, #0a0a0a); box-shadow:0 0 8px #cbd5e1;">?</span>
+                        </span>
+                    </div>
+
+                    <div class="tc-image">
+                        <div class="tc-image-inner" style="background:linear-gradient(135deg, #cbd5e1, #1a1815);">
+                            <div class="tc-image-stripes"></div>
+                            <span class="tc-image-label" style="opacity:0.6;">??</span>
+                            <div class="tc-energy"><span class="tc-energy-pip"></span></div>
+                            <span class="tc-image-meta" style="border:1px solid #cbd5e1;">? &middot; ??</span>
+                        </div>
+                    </div>
+
+                    <div class="tc-sub">Awaiting acquisition &mdash; fill with a real project.</div>
+
+                    <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(203,213,225,0.13), #0a0a0a); border-color:#cbd5e1;">
+                        <div class="tc-move-row"><span class="tc-move-name">Placeholder Strike</span><span class="tc-move-dmg">??</span></div>
+                        <div class="tc-move-desc">Replace this card with a past project from your roster.</div>
+                    </div>
+
+                    <div class="tc-stats">
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>ATK</strong><span style="color:#ef4444;">0</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:0%; --delay:0.1s; background:linear-gradient(90deg, #ef4444, rgba(239,68,68,0.8));"></div></div>
+                        </div>
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>DEF</strong><span style="color:#3b82f6;">0</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:0%; --delay:0.25s; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.8));"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-bottom">
+                        <strong>004/006</strong>
+                        <span class="tc-stars"><span style="--d:0s;">&starf;</span></span>
+                        <strong>&copy;BH 2026</strong>
+                    </div>
+                </div>
+
+                <!-- 005 · SLOT -->
+                <div class="tc-card" style="--card-color: #cbd5e1; box-shadow: 0 8px 28px rgba(203,213,225,0.27), 0 0 0 1px #cbd5e1, inset 0 0 0 2px #fbbf24;" aria-label="Empty card slot 5">
+                    <div class="tc-frame"></div>
+                    <div class="tc-holo tc-foil" aria-hidden="true"></div>
+
+                    <div class="tc-title-row">
+                        <span class="tc-name">[ SLOT ]</span>
+                        <span class="tc-hp-row">
+                            <span class="tc-hp-label">HP</span>
+                            <span class="tc-hp">??</span>
+                            <span class="tc-type-bubble" style="background:radial-gradient(circle at 30% 30%, #cbd5e1, #0a0a0a); box-shadow:0 0 8px #cbd5e1;">?</span>
+                        </span>
+                    </div>
+
+                    <div class="tc-image">
+                        <div class="tc-image-inner" style="background:linear-gradient(135deg, #cbd5e1, #1a1815);">
+                            <div class="tc-image-stripes"></div>
+                            <span class="tc-image-label" style="opacity:0.6;">??</span>
+                            <div class="tc-energy"><span class="tc-energy-pip"></span></div>
+                            <span class="tc-image-meta" style="border:1px solid #cbd5e1;">? &middot; ??</span>
+                        </div>
+                    </div>
+
+                    <div class="tc-sub">Awaiting acquisition.</div>
+
+                    <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(203,213,225,0.13), #0a0a0a); border-color:#cbd5e1;">
+                        <div class="tc-move-row"><span class="tc-move-name">Placeholder Strike</span><span class="tc-move-dmg">??</span></div>
+                        <div class="tc-move-desc">Open card slot.</div>
+                    </div>
+
+                    <div class="tc-stats">
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>ATK</strong><span style="color:#ef4444;">0</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:0%; --delay:0.1s; background:linear-gradient(90deg, #ef4444, rgba(239,68,68,0.8));"></div></div>
+                        </div>
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>DEF</strong><span style="color:#3b82f6;">0</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:0%; --delay:0.25s; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.8));"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-bottom">
+                        <strong>005/006</strong>
+                        <span class="tc-stars"><span style="--d:0s;">&starf;</span></span>
+                        <strong>&copy;BH 2026</strong>
+                    </div>
+                </div>
+
+                <!-- 006 · SLOT -->
+                <div class="tc-card" style="--card-color: #cbd5e1; box-shadow: 0 8px 28px rgba(203,213,225,0.27), 0 0 0 1px #cbd5e1, inset 0 0 0 2px #fbbf24;" aria-label="Empty card slot 6">
+                    <div class="tc-frame"></div>
+                    <div class="tc-holo tc-foil" aria-hidden="true"></div>
+
+                    <div class="tc-title-row">
+                        <span class="tc-name">[ SLOT ]</span>
+                        <span class="tc-hp-row">
+                            <span class="tc-hp-label">HP</span>
+                            <span class="tc-hp">??</span>
+                            <span class="tc-type-bubble" style="background:radial-gradient(circle at 30% 30%, #cbd5e1, #0a0a0a); box-shadow:0 0 8px #cbd5e1;">?</span>
+                        </span>
+                    </div>
+
+                    <div class="tc-image">
+                        <div class="tc-image-inner" style="background:linear-gradient(135deg, #cbd5e1, #1a1815);">
+                            <div class="tc-image-stripes"></div>
+                            <span class="tc-image-label" style="opacity:0.6;">??</span>
+                            <div class="tc-energy"><span class="tc-energy-pip"></span></div>
+                            <span class="tc-image-meta" style="border:1px solid #cbd5e1;">? &middot; ??</span>
+                        </div>
+                    </div>
+
+                    <div class="tc-sub">Awaiting acquisition.</div>
+
+                    <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(203,213,225,0.13), #0a0a0a); border-color:#cbd5e1;">
+                        <div class="tc-move-row"><span class="tc-move-name">Placeholder Strike</span><span class="tc-move-dmg">??</span></div>
+                        <div class="tc-move-desc">Open card slot.</div>
+                    </div>
+
+                    <div class="tc-stats">
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>ATK</strong><span style="color:#ef4444;">0</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:0%; --delay:0.1s; background:linear-gradient(90deg, #ef4444, rgba(239,68,68,0.8));"></div></div>
+                        </div>
+                        <div class="tc-stat">
+                            <div class="tc-stat-row"><strong>DEF</strong><span style="color:#3b82f6;">0</span></div>
+                            <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:0%; --delay:0.25s; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.8));"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="tc-bottom">
+                        <strong>006/006</strong>
+                        <span class="tc-stars"><span style="--d:0s;">&starf;</span></span>
+                        <strong>&copy;BH 2026</strong>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========== FEATURED STAT SHEET ========== -->
+        <section class="port-stats" aria-label="Featured project: TABIJI stat sheet">
+            <div class="tc-orb" aria-hidden="true" style="left:0%; top:20%; width:400px; height:400px; background:radial-gradient(circle at center, rgba(251,191,36,0.53), transparent 70%); --dur:18s;"></div>
+            <div class="tc-orb" aria-hidden="true" style="left:70%; top:70%; width:350px; height:350px; background:radial-gradient(circle at center, rgba(239,68,68,0.53), transparent 70%); --dur:22s; --delay:3s;"></div>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:5%; top:10%; --delay:0s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:15%; top:23%; --delay:0.5s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:35%; top:36%; --delay:1s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:55%; top:49%; --delay:1.5s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:75%; top:62%; --delay:2s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+            <svg class="tc-sparkle" aria-hidden="true" style="left:90%; top:75%; --delay:2.5s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+
+            <div class="port-stats-grid">
+
+                <div class="port-stats-featured">
+                    <div class="port-stats-orbits" aria-hidden="true">
+                        <div class="port-stats-orbits-center">
+                            <span class="orb-dot gold"></span>
+                            <span class="orb-dot magenta"></span>
+                        </div>
+                    </div>
+                    <!-- featured card (same content as card 001 but standalone) -->
+                    <a href="https://tabiji.ai" class="tc-card tc-card-ultra" style="--card-color: #fbbf24; box-shadow: 0 8px 28px rgba(251,191,36,0.47), 0 0 0 1px #fbbf24, inset 0 0 0 2px #fbbf24;">
+                        <div class="tc-frame"></div>
+                        <div class="tc-holo tc-foil-strong" aria-hidden="true"></div>
+                        <svg class="tc-sparkle" aria-hidden="true" style="left:8%; top:15%; --delay:0s; --dur:2.5s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                        <svg class="tc-sparkle" aria-hidden="true" style="left:86%; top:25%; --delay:0.5s; --dur:3s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                        <svg class="tc-sparkle" aria-hidden="true" style="left:20%; top:60%; --delay:1s; --dur:2.8s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                        <svg class="tc-sparkle" aria-hidden="true" style="left:78%; top:68%; --delay:1.5s; --dur:2.2s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+                        <svg class="tc-sparkle" aria-hidden="true" style="left:50%; top:92%; --delay:0.8s; --dur:3.2s;" viewBox="0 0 14 14"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z" fill="#fff"/></svg>
+
+                        <div class="tc-title-row">
+                            <span class="tc-name">TABIJI</span>
+                            <span class="tc-hp-row">
+                                <span class="tc-hp-label">HP</span>
+                                <span class="tc-hp">184</span>
+                                <span class="tc-type-bubble" style="background:radial-gradient(circle at 30% 30%, #fbbf24, #0a0a0a); box-shadow:0 0 8px #fbbf24;">M</span>
+                            </span>
+                        </div>
+
+                        <div class="tc-image">
+                            <div class="tc-image-inner" style="background:linear-gradient(135deg, #fbbf24, #0a0a0a);">
+                                <div class="tc-image-stripes"></div>
+                                <span class="tc-image-label">TABIJI</span>
+                                <div class="tc-energy">
+                                    <span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span><span class="tc-energy-pip"></span>
+                                </div>
+                                <span class="tc-image-meta" style="border:1px solid #fbbf24;">MEDIA &middot; 2024</span>
+                                <div class="tc-image-scan" style="background:linear-gradient(180deg, transparent 0%, rgba(251,191,36,0.2) 50%, transparent 100%);"></div>
+                            </div>
+                        </div>
+
+                        <div class="tc-sub">An AI travel pipeline that turns scams into reels.</div>
+
+                        <div class="tc-move" style="background:linear-gradient(135deg, #0a0a0a, rgba(251,191,36,0.13), #0a0a0a); border-color:#fbbf24;">
+                            <div class="tc-move-row"><span class="tc-move-name">16M-View Tulum Beam</span><span class="tc-move-dmg">320</span></div>
+                            <div class="tc-move-desc">Hits all foes once. If a Wavespeed is in play, double damage.</div>
+                        </div>
+                        <div class="tc-move-2" style="background:rgba(251,191,36,0.1); border-color:rgba(251,191,36,0.27);">
+                            <div class="tc-move-row"><span class="tc-move-name">Pipeline Surge</span><span class="tc-move-dmg">60</span></div>
+                        </div>
+
+                        <div class="tc-stats">
+                            <div class="tc-stat">
+                                <div class="tc-stat-row"><strong>ATK</strong><span style="color:#ef4444;">92</span></div>
+                                <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:76.6%; --delay:0.1s; background:linear-gradient(90deg, #ef4444, rgba(239,68,68,0.8)); box-shadow:0 0 6px rgba(239,68,68,0.53);"></div></div>
+                            </div>
+                            <div class="tc-stat">
+                                <div class="tc-stat-row"><strong>DEF</strong><span style="color:#3b82f6;">41</span></div>
+                                <div class="tc-stat-track"><div class="tc-stat-fill" style="--fill:34.2%; --delay:0.25s; background:linear-gradient(90deg, #3b82f6, rgba(59,130,246,0.8)); box-shadow:0 0 6px rgba(59,130,246,0.53);"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="tc-bottom">
+                            <strong>001/006</strong>
+                            <span class="tc-stars"><span style="--d:0s;">&starf;</span><span style="--d:0.3s;">&starf;</span><span style="--d:0.6s;">&starf;</span></span>
+                            <strong>&copy;BH 2026</strong>
+                        </div>
+                    </a>
+                </div>
+
+                <div>
+                    <p class="port-stats-eyebrow">&starf; Card 001/006 &middot; 1st Ed Holographic &middot; Ultra Rare &starf;</p>
+                    <h2><span class="rainbow">TABIJI</span></h2>
+                    <div class="port-stats-tagline">An AI travel pipeline that turns scams into reels. Released 2024.</div>
+
+                    <div class="port-stats-sub">&starf; &starf; &starf; Battle Stats &middot; 90-day window &starf; &starf; &starf;</div>
+                    <div class="port-counters">
+                        <div class="port-counter" style="border-color:#ef4444; box-shadow:0 0 20px rgba(239,68,68,0.2), inset 0 0 0 1px rgba(239,68,68,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(239,68,68,0.13) 50%, transparent); --delay:0s;"></div>
+                            <div class="port-counter-label" style="color:#ef4444;">Total DMG · IG views</div>
+                            <div class="port-counter-value" style="color:#ef4444; text-shadow:0 0 16px rgba(239,68,68,0.53);">16.02M</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#fbbf24; box-shadow:0 0 20px rgba(251,191,36,0.2), inset 0 0 0 1px rgba(251,191,36,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(251,191,36,0.13) 50%, transparent); --delay:0.4s;"></div>
+                            <div class="port-counter-label" style="color:#fbbf24;">CRIT HIT · Tulum reel</div>
+                            <div class="port-counter-value" style="color:#fbbf24; text-shadow:0 0 16px rgba(251,191,36,0.53);">3.88M</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#ec4899; box-shadow:0 0 20px rgba(236,72,153,0.2), inset 0 0 0 1px rgba(236,72,153,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(236,72,153,0.13) 50%, transparent); --delay:0.8s;"></div>
+                            <div class="port-counter-label" style="color:#ec4899;">AOE Reach</div>
+                            <div class="port-counter-value" style="color:#ec4899; text-shadow:0 0 16px rgba(236,72,153,0.53);">8.28M</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#3b82f6; box-shadow:0 0 20px rgba(59,130,246,0.2), inset 0 0 0 1px rgba(59,130,246,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(59,130,246,0.13) 50%, transparent); --delay:1.2s;"></div>
+                            <div class="port-counter-label" style="color:#3b82f6;">Site sessions</div>
+                            <div class="port-counter-value" style="color:#3b82f6; text-shadow:0 0 16px rgba(59,130,246,0.53);">17,394</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#10b981; box-shadow:0 0 20px rgba(16,185,129,0.2), inset 0 0 0 1px rgba(16,185,129,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(16,185,129,0.13) 50%, transparent); --delay:1.6s;"></div>
+                            <div class="port-counter-label" style="color:#10b981;">Search impressions</div>
+                            <div class="port-counter-value" style="color:#10b981; text-shadow:0 0 16px rgba(16,185,129,0.53);">387,507</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#ef4444; box-shadow:0 0 20px rgba(239,68,68,0.2), inset 0 0 0 1px rgba(239,68,68,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(239,68,68,0.13) 50%, transparent); --delay:2.0s;"></div>
+                            <div class="port-counter-label" style="color:#ef4444;">Party · IG followers</div>
+                            <div class="port-counter-value" style="color:#ef4444; text-shadow:0 0 16px rgba(239,68,68,0.53);">4,284</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#a855f7; box-shadow:0 0 20px rgba(168,85,247,0.2), inset 0 0 0 1px rgba(168,85,247,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(168,85,247,0.13) 50%, transparent); --delay:2.4s;"></div>
+                            <div class="port-counter-label" style="color:#a855f7;">YT shorts cast</div>
+                            <div class="port-counter-value" style="color:#a855f7; text-shadow:0 0 16px rgba(168,85,247,0.53);">810</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#3b82f6; box-shadow:0 0 20px rgba(59,130,246,0.2), inset 0 0 0 1px rgba(59,130,246,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(59,130,246,0.13) 50%, transparent); --delay:2.8s;"></div>
+                            <div class="port-counter-label" style="color:#3b82f6;">Pinterest pins</div>
+                            <div class="port-counter-value" style="color:#3b82f6; text-shadow:0 0 16px rgba(59,130,246,0.53);">6,725</div>
+                        </div>
+                        <div class="port-counter" style="border-color:#10b981; box-shadow:0 0 20px rgba(16,185,129,0.2), inset 0 0 0 1px rgba(16,185,129,0.27);">
+                            <div class="port-counter-scan" style="background:linear-gradient(90deg, transparent, rgba(16,185,129,0.13) 50%, transparent); --delay:3.2s;"></div>
+                            <div class="port-counter-label" style="color:#10b981;">Avg stamina</div>
+                            <div class="port-counter-value" style="color:#10b981; text-shadow:0 0 16px rgba(16,185,129,0.53);">1m 45s</div>
+                        </div>
+                    </div>
+
+                    <div class="port-stats-sub">&starf; Signature attacks &middot; top transmissions</div>
+                    <div class="port-reels">
+                        <div class="port-reel">
+                            <span class="port-reel-num">ATK 01</span>
+                            <span class="port-reel-title">The Spare Tire Rental Scam in Tulum, Mexico</span>
+                            <span class="port-reel-place">&middot; Tulum</span>
+                            <span class="port-reel-dmg">3.88M</span>
+                        </div>
+                        <div class="port-reel">
+                            <span class="port-reel-num">ATK 02</span>
+                            <span class="port-reel-title">Lisbon's gorgeous cobblestones are trying to kill you when it rains.</span>
+                            <span class="port-reel-place">&middot; Lisbon</span>
+                            <span class="port-reel-dmg">2.18M</span>
+                        </div>
+                        <div class="port-reel">
+                            <span class="port-reel-num">ATK 03</span>
+                            <span class="port-reel-title">Two men flashed badges. Then stole €200 from his wallet.</span>
+                            <span class="port-reel-place">&middot; Rome</span>
+                            <span class="port-reel-dmg">0.47M</span>
+                        </div>
+                        <div class="port-reel">
+                            <span class="port-reel-num">ATK 04</span>
+                            <span class="port-reel-title">I paid $70 to walk across a bridge in Vancouver.</span>
+                            <span class="port-reel-place">&middot; Vancouver</span>
+                            <span class="port-reel-dmg">0.36M</span>
+                        </div>
+                        <div class="port-reel">
+                            <span class="port-reel-num">ATK 05</span>
+                            <span class="port-reel-title">The #1 mistake tourists make in Cairo.</span>
+                            <span class="port-reel-place">&middot; Cairo</span>
+                            <span class="port-reel-dmg">0.19M</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="zn-footer">
+        <div class="zn-container zn-footer-inner">
+            <span>&copy; 2026 Bernard Huang &middot; zonted.com</span>
+            <span class="zn-footer-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/feed.xml">RSS</a>
+                <a href="https://x.com/bernardjhuang">X</a>
+                <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            </span>
+        </div>
+    </footer>
+</body>
+</html>

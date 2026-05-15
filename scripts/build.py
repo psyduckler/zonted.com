@@ -280,6 +280,9 @@ def generate_sitemap(articles):
     urls.append(('/', '1.0', today))
     # Hubs
     urls.append(('/posts/', '0.8', today))
+    urls.append(('/portfolio/', '0.8', today))
+    urls.append(('/ai-stack/', '0.8', today))
+    urls.append(('/metrics/', '0.7', today))
     # About
     urls.append(('/about/', '0.6', today))
 
