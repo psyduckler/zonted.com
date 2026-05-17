@@ -212,7 +212,12 @@ def update_html(data: dict) -> None:
         </section>
 
 '''
-    text = re.sub(r'        <!-- Portfolio GA4 Snapshot -->.*?        <!-- Tabiji Metrics -->\n', portfolio + '        <!-- Tabiji Metrics -->\n', text, flags=re.S)
+    text = re.sub(
+        r'        <!-- Portfolio GA4 Snapshot -->.*?(?=        <!-- Portfolio Search Console Snapshot -->|        <!-- Tabiji Social Snapshot -->|        <!-- Tabiji Metrics -->\n)',
+        portfolio,
+        text,
+        flags=re.S,
+    )
 
     search_console = f'''        <!-- Portfolio Search Console Snapshot -->
         <section class="portfolio-section search-console-section" aria-labelledby="portfolio-gsc-heading">
@@ -225,7 +230,12 @@ def update_html(data: dict) -> None:
 
 '''
     if '<!-- Portfolio Search Console Snapshot -->' in text:
-        text = re.sub(r'        <!-- Portfolio Search Console Snapshot -->.*?        <!-- Tabiji Metrics -->\n', search_console + '        <!-- Tabiji Metrics -->\n', text, flags=re.S)
+        text = re.sub(
+            r'        <!-- Portfolio Search Console Snapshot -->.*?(?=        <!-- Tabiji Social Snapshot -->|        <!-- Tabiji Metrics -->\n)',
+            search_console,
+            text,
+            flags=re.S,
+        )
     else:
         text = text.replace('        <!-- Tabiji Metrics -->\n', search_console + '        <!-- Tabiji Metrics -->\n', 1)
 
