@@ -8,9 +8,9 @@
     <lastBuildDate>Sun, 17 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Stakes Priming: I Told an AI I&#x27;d Lose My Job. The Audit Got 24% Better.</title>
+      <title>Stakes Priming in Prompts: I Told an AI I&#x27;d Lose My Job. The Audit Got 24% Better.</title>
       <link>https://zonted.com/posts/stakes-priming/</link>
-      <description>Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work — once at the level of catching duplicate JSON keys no parser would accept, once 24% better by the model&#x27;s own grading.</description>
+      <description>Two A/B experiments. Same model (Claude) generated the audits, an independent model (Gemini 3.1 Pro) graded them. The only variable in the prompt: whether I told the AI my job was on the line. Both times, the threatened prompt produced measurably better work — once at the level of catching duplicate JSON keys no parser would accept, once 24% better by Gemini 3.1 Pro&#x27;s scoring.</description>
       <pubDate>Sun, 17 May 2026 00:00:00 +0000</pubDate>
       <author>bernard@zonted.com (Bernard Huang)</author>
       <guid isPermaLink="true">https://zonted.com/posts/stakes-priming/</guid>

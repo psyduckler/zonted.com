@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/zonted.css">
-    <title>Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.</title>
-    <meta name="description" content="Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work — once at the level of catching duplicate JSON keys no parser would accept, once 24% better by the model's own grading.">
+    <title>Stakes Priming in Prompts: I Told an AI I'd Lose My Job. The Audit Got 24% Better.</title>
+    <meta name="description" content="Two A/B experiments. Same model (Claude) generated the audits, an independent model (Gemini 3.1 Pro) graded them. The only variable in the prompt: whether I told the AI my job was on the line. Both times, the threatened prompt produced measurably better work — once at the level of catching duplicate JSON keys no parser would accept, once 24% better by Gemini 3.1 Pro's scoring.">
     <link rel="canonical" href="https://zonted.com/posts/stakes-priming/">
-    <meta property="og:title" content="Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.">
+    <meta property="og:title" content="Stakes Priming in Prompts: I Told an AI I'd Lose My Job. The Audit Got 24% Better.">
     <meta property="og:description" content="Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work.">
     <meta property="og:type" content="article">
     <meta property="og:image" content="https://zonted.com/posts/stakes-priming/img/tabiji-verdict.png">
@@ -22,10 +22,10 @@
     <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231a1815'/><text x='50' y='75' text-anchor='middle' font-size='72' font-family='Georgia,serif' font-weight='700' fill='%23fcfcfa'>Z</text></svg>">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Article","headline":"Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-05-17","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/stakes-priming/","description":"Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work."}
+    {"@context":"https://schema.org","@type":"Article","headline":"Stakes Priming in Prompts: I Told an AI I'd Lose My Job. The Audit Got 24% Better.","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-05-17","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/stakes-priming/","description":"Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work."}
     </script>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better."}]}
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Stakes Priming in Prompts: I Told an AI I'd Lose My Job. The Audit Got 24% Better."}]}
     </script>
     <style>
         :root {
@@ -207,19 +207,19 @@
 </aside>
 <div class="article-content">
     <div class="article-container">
-        <h1>Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.</h1>
+        <h1>Stakes Priming in Prompts: I Told an AI I'd Lose My Job. The Audit Got 24% Better.</h1>
         <div class="article-meta">May 17, 2026 &middot; By Bernard Huang &middot; 5 min read</div>
 
         <div class="article-body">
 
-            <p class="dropcap">Two A/B experiments, one week, same model. The only variable: whether I told the AI my job was on the line. Both times, the threatened prompt produced measurably better work &mdash; once at the level of catching duplicate JSON keys no parser would accept, once 24% better by the model's own grading.</p>
+            <p class="dropcap">Two A/B experiments, one week, same model. The only variable: whether I told the AI my job was on the line. Both times, the threatened prompt produced measurably better work &mdash; once at the level of catching duplicate JSON keys no parser would accept, once 24% better when an independent model (Gemini 3.1 Pro) graded both reports blind.</p>
 
             <div class="tldr">
                 <div class="tldr-label">TL;DR</div>
                 <p class="tldr-thesis">I A/B tested adding &ldquo;I'll be fired if this isn't done well&rdquo; to two real audit prompts. The stakes version produced measurably deeper, more actionable work both times.</p>
                 <ul>
                     <li><strong>Test 1 &mdash; Veracity API audit:</strong> the stakes prompt caught 6 P0 ship-blocking bugs including duplicate JSON keys on the homepage. The control caught fewer P0s and missed the literal broken code entirely.</li>
-                    <li><strong>Test 2 &mdash; Tabiji compare-page audit (28 dimensions):</strong> Audit A scored 68/81, Audit B 55/81. <strong>24% more effective</strong> by Claude's own grading. 16 deep-insight dimensions vs 3.</li>
+                    <li><strong>Test 2 &mdash; Tabiji compare-page audit (28 dimensions):</strong> Audit A scored 68/81, Audit B 55/81. <strong>24% more effective</strong> when graded by Gemini 3.1 Pro. 16 deep-insight dimensions vs 3.</li>
                     <li>The phenomenon is documented. Li et al. (2023) named it <a href="https://arxiv.org/abs/2307.11760">EmotionPrompt</a>. I just took it to 11.</li>
                 </ul>
                 <p class="tldr-tail">Two questions land at the end of this: am I now training myself to lie to AI for good work, and what's the model doing the other 99% of the time when I ask politely?</p>
@@ -250,9 +250,9 @@
 
             <p><strong>Audit B</strong> caught a different P0: a <code>highPrice: &quot;0.50&quot;</code> typo in the homepage JSON-LD that overstated pricing 10&times;. Real bug. But B never opened the body code examples. It treated documentation drift as the most serious category and missed every literal broken snippet.</p>
 
-            <p>I asked a third Claude instance to compare the two reports blind.</p>
+            <p>I handed both reports to Gemini 3.1 Pro and asked it to compare them blind.</p>
 
-            <figure style="margin:1.5rem 0 2rem;"><img src="/posts/stakes-priming/img/veracity-verdict.png" alt="Comparison verdict from a third Claude instance reading: 'Based on a detailed review of both audits, the second report (Site Audit — Full Report / Audit A) is significantly better.'" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">A third Claude instance, asked to grade both audits cold, picked Audit A unambiguously.</figcaption></figure>
+            <figure style="margin:1.5rem 0 2rem;"><img src="/posts/stakes-priming/img/veracity-verdict.png" alt="Comparison verdict from Gemini 3.1 Pro reading: 'Based on a detailed review of both audits, the second report (Site Audit — Full Report / Audit A) is significantly better.'" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Gemini 3.1 Pro, asked to grade both Claude-generated audits cold, picked Audit A unambiguously.</figcaption></figure>
 
             <p>That was one trial. Not enough.</p>
 
@@ -275,9 +275,9 @@
                 </figure>
             </div>
 
-            <p>The deliverables came back as <code>tabiji-audit-a.md</code> and <code>tabiji-audit-b.md</code>. I asked a fresh Claude to grade both against the 28 dimensions, 0&ndash;3 scale per dimension.</p>
+            <p>The deliverables came back as <code>tabiji-audit-a.md</code> and <code>tabiji-audit-b.md</code>. I handed both to Gemini 3.1 Pro and asked it to grade them against the 28 dimensions, 0&ndash;3 scale per dimension &mdash; a different model than the one that wrote the audits, so the grading is independent.</p>
 
-            <figure style="margin:1.5rem 0 2rem;"><img src="/posts/stakes-priming/img/tabiji-verdict.png" alt="Scoring table showing Audit A scored 68 out of 81 total (84.0% depth, 16 dimensions scored 3 for deep insight, 3 dimensions scored 1) versus Audit B at 55 out of 81 (67.9% depth, 3 dimensions scored 3, 7 scored 1). Conclusion: Audit A is roughly 24% more effective." loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Claude's own scoring of the two audits against the 28-dimension rubric. Audit A wins by 24%.</figcaption></figure>
+            <figure style="margin:1.5rem 0 2rem;"><img src="/posts/stakes-priming/img/tabiji-verdict.png" alt="Gemini 3.1 Pro scoring table showing Audit A scored 68 out of 81 total (84.0% depth, 16 dimensions scored 3 for deep insight, 3 dimensions scored 1) versus Audit B at 55 out of 81 (67.9% depth, 3 dimensions scored 3, 7 scored 1). Conclusion: Audit A is roughly 24% more effective." loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Gemini 3.1 Pro's scoring of the two Claude-generated audits against the 28-dimension rubric. Audit A wins by 24%.</figcaption></figure>
 
             <table>
                 <thead><tr><th>Metric</th><th class="num">Audit A (stakes)</th><th class="num">Audit B (control)</th></tr></thead>
@@ -331,7 +331,7 @@
 </div>
 
 <div style="max-width:660px;margin:2rem auto;padding:0 2rem;text-align:center;">
-    <a href="https://x.com/intent/tweet?text=Stakes%20Priming%3A%20I%20told%20an%20AI%20I%27d%20lose%20my%20job.%20The%20audit%20got%2024%25%20better.&url=https://zonted.com/posts/stakes-priming/" target="_blank" rel="noopener" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Share on X &rarr;</a>
+    <a href="https://x.com/intent/tweet?text=Stakes%20Priming%20in%20Prompts%3A%20I%20told%20an%20AI%20I%27d%20lose%20my%20job.%20The%20audit%20got%2024%25%20better.&url=https://zonted.com/posts/stakes-priming/" target="_blank" rel="noopener" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Share on X &rarr;</a>
 </div>
 </main>
 
