@@ -91,7 +91,7 @@
         .nav-links a.active { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
 
         .container {
-            max-width: 1040px;
+            max-width: 1160px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -259,28 +259,28 @@
 
         .property-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
         }
 
         .property-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-light);
             border-radius: 10px;
-            padding: 18px;
+            padding: 14px;
             min-width: 0;
         }
 
         .property-card-header {
             display: flex;
             justify-content: space-between;
-            gap: 12px;
+            gap: 8px;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .property-card h3 {
-            font-size: 1rem;
+            font-size: 0.92rem;
             line-height: 1.2;
             margin: 0 0 3px;
             font-family: 'Inter', system-ui, sans-serif;
@@ -290,7 +290,7 @@
         .property-domain {
             display: block;
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             color: var(--text-dim);
         }
 
@@ -302,13 +302,13 @@
 
         .property-total strong {
             display: block;
-            font-size: 1.15rem;
+            font-size: 1rem;
             line-height: 1.1;
         }
 
         .property-total span {
             display: block;
-            font-size: 0.68rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--text-dim);
@@ -317,13 +317,13 @@
 
         .property-mini-chart {
             position: relative;
-            height: 140px;
-            margin: 12px 0 16px;
+            height: 96px;
+            margin: 8px 0 12px;
         }
 
         .channel-list {
             display: grid;
-            gap: 7px;
+            gap: 5px;
             list-style: none;
             margin: 0;
         }
@@ -331,10 +331,10 @@
         .channel-item {
             display: grid;
             grid-template-columns: minmax(0, 1fr) auto;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
         }
 
@@ -347,7 +347,7 @@
 
         .channel-track {
             grid-column: 1 / -1;
-            height: 4px;
+            height: 3px;
             background: var(--bg-raised);
             border-radius: 999px;
             overflow: hidden;
@@ -362,7 +362,7 @@
 
         .empty-channels {
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             color: var(--text-dim);
             padding: 12px 0 4px;
         }
@@ -445,7 +445,7 @@
         .channel-badge {
             display: inline-block;
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.66rem;
             font-weight: 500;
             color: var(--text-muted);
             background: var(--bg-raised);
@@ -517,9 +517,17 @@
 
         @media (max-width: 768px) {
             .summary-grid { grid-template-columns: 1fr 1fr; }
-            .property-grid { grid-template-columns: 1fr; }
             .page-header h1 { font-size: 1.6rem; }
             .chart-container { height: 240px; padding: 12px; }
+        }
+
+        @media (max-width: 1100px) {
+            .property-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .property-mini-chart { height: 120px; }
+        }
+
+        @media (max-width: 640px) {
+            .property-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
