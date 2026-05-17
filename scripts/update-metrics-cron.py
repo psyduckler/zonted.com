@@ -26,6 +26,7 @@ STATE_PATH = Path("/Users/psy/.openclaw/workspace/state/zonted-metrics-cron.json
 LOG_DIR = Path("/Users/psy/.openclaw/workspace/logs")
 CHANNEL = "C0APKM06YTC"
 THRESHOLD = 0.25
+YOUTUBE_SHORTS_URL = "https://www.youtube.com/@tabijiai/shorts"
 
 PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 ENV = {**os.environ, "PATH": PATH}
@@ -86,6 +87,44 @@ def top_items(items: list[dict]) -> str:
                 </li>'''
         )
     return "\n".join(rows)
+
+
+def fetch_youtube_metrics() -> dict:
+    """Fetch current public YouTube Shorts metrics via yt-dlp.
+
+    YouTube Analytics OAuth is still upload-only, so this keeps the public card fresh
+    from the channel page until the token is expanded to yt-analytics.readonly.
+    """
+    ytdlp = shutil.which("yt-dlp", path=PATH)
+    if not ytdlp:
+        raise RuntimeError("yt-dlp not found; cannot refresh YouTube public metrics")
+    proc = run([ytdlp, "--flat-playlist", "--dump-single-json", YOUTUBE_SHORTS_URL], capture=True)
+    payload = json.loads(proc.stdout)
+    videos = []
+    for idx, entry in enumerate(payload.get("entries") or [], 1):
+        video_id = entry.get("id")
+        if not video_id:
+            continue
+        url = entry.get("url") or f"https://www.youtube.com/shorts/{video_id}"
+        views = int(entry.get("view_count") or 0)
+        videos.append(
+            {
+                "rank": idx,
+                "videoId": video_id,
+                "title": entry.get("title") or video_id,
+                "url": url,
+                "views": views,
+            }
+        )
+
+    top = sorted(videos, key=lambda row: row["views"], reverse=True)[:5]
+    return {
+        "handle": payload.get("uploader_id") or "@tabijiai",
+        "subscribers": int(payload.get("channel_follower_count") or 0),
+        "videos": len(videos),
+        "totalViews": sum(row["views"] for row in videos),
+        "topShorts": top,
+    }
 
 
 def replace_chart_data(script_text: str, key: str, value: object) -> str:
@@ -195,10 +234,73 @@ def render_search_console_cards(data: dict) -> str:
     return "\n".join(cards)
 
 
+def render_youtube_social_card(youtube: dict) -> str:
+    top_views = youtube["topShorts"][0]["views"] if youtube.get("topShorts") else 0
+    return f'''                <article class="property-card social-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>YouTube Shorts</h3>
+                            <span class="property-domain">{esc(youtube.get('handle') or '@tabijiai')}</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>{fmt(youtube['totalViews'])}</strong>
+                            <span>channel views</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="youtubeSocialChart"></canvas></div>
+                    <div class="subsection-label">Signals</div>
+                    <ol class="channel-list">
+                        <li class="channel-item"><span>Subscribers</span><strong>{fmt(youtube['subscribers'])}</strong></li>
+                        <li class="channel-item"><span>Videos</span><strong>{fmt(youtube['videos'])}</strong></li>
+                        <li class="channel-item"><span>Top short</span><strong>{fmt(top_views)}</strong></li>
+                    </ol>
+                </article>'''
+
+
+def render_youtube_detail_section(youtube: dict) -> str:
+    top_rows = top_items(
+        [
+            {
+                "title": row["title"],
+                "url": row["url"],
+                "stats": f"<span>{fmt(row['views'])} views</span>",
+            }
+            for row in youtube.get("topShorts", [])
+        ]
+    )
+    return f'''        <!-- YouTube -->
+        <div class="metric-section">
+            <h2><span class="icon">▶️</span> YouTube</h2>
+            <p class="section-desc">@<a href="https://youtube.com/@tabijiai">tabijiai</a> — AI-generated travel shorts. Public channel snapshot from YouTube; historical daily analytics will unlock after OAuth is expanded.</p>
+
+            <div class="metric-row">
+                <span class="metric-label">Subscribers</span>
+                <span class="metric-value">{fmt(youtube['subscribers'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Videos</span>
+                <span class="metric-value">{fmt(youtube['videos'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Channel Views</span>
+                <span class="metric-value">{fmt(youtube['totalViews'])}</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top Shorts by Views</div>
+            <ul class="top-list">
+{top_rows}
+            </ul>
+        </div>
+
+'''
+
+
 def update_html(data: dict) -> None:
     text = METRICS_HTML.read_text()
     tabiji = next(prop for prop in data["properties"] if prop["key"] == "tabiji")
     tabiji_gsc = next((prop for prop in data.get("searchConsoleProperties", []) if prop["key"] == "tabiji"), None)
+    youtube = data.get("youtubeMetrics")
 
     text = re.sub(r'<div class="updated-badge">Updated [^<]+</div>', f'<div class="updated-badge">Updated {esc(data["updatedLabel"])}</div>', text, count=1)
 
@@ -343,6 +445,22 @@ def update_html(data: dict) -> None:
             flags=re.S,
         )
 
+    if youtube:
+        text = re.sub(
+            r'                <article class="property-card social-card">\s*<div class="property-card-header">\s*<div>\s*<h3>YouTube Shorts</h3>.*?                </article>',
+            render_youtube_social_card(youtube),
+            text,
+            count=1,
+            flags=re.S,
+        )
+        text = re.sub(
+            r'        <!-- YouTube -->.*?(?=        <!-- TikTok -->)',
+            render_youtube_detail_section(youtube),
+            text,
+            count=1,
+            flags=re.S,
+        )
+
     chart_match = re.search(r'const chartData = (.*?);', text, re.S)
     if not chart_match:
         raise RuntimeError("Could not find chartData")
@@ -352,6 +470,32 @@ def update_html(data: dict) -> None:
     chart["ga4Sessions"] = {"labels": data["labels"], "sessions": tabiji["series"]}
     if tabiji_gsc:
         chart["searchConsole"] = {"labels": data.get("gscLabels", data["labels"]), "clicks": tabiji_gsc["clicks"], "impressions": tabiji_gsc["impressions"]}
+    if youtube:
+        social = chart.setdefault("socialSnapshot", {})
+        cards = social.setdefault("cards", [])
+        youtube_card = {
+            "key": "youtube",
+            "name": "YouTube Shorts",
+            "handle": youtube.get("handle") or "@tabijiai",
+            "color": "#cc0000",
+            "total": fmt(youtube["totalViews"]),
+            "label": "channel views",
+            "chartType": "bar",
+            "chartLabel": "Top shorts",
+            "labels": [f"#{i}" for i in range(1, len(youtube.get("topShorts", [])) + 1)],
+            "series": [row["views"] for row in youtube.get("topShorts", [])],
+            "rows": [
+                {"label": "Subscribers", "value": fmt(youtube["subscribers"])},
+                {"label": "Videos", "value": fmt(youtube["videos"])},
+                {"label": "Top short", "value": fmt(youtube["topShorts"][0]["views"] if youtube.get("topShorts") else 0)},
+            ],
+        }
+        for idx, card in enumerate(cards):
+            if card.get("key") == "youtube":
+                cards[idx] = youtube_card
+                break
+        else:
+            cards.append(youtube_card)
     text = text[: chart_match.start(1)] + json.dumps(chart, separators=(",", ":")) + text[chart_match.end(1) :]
 
     METRICS_HTML.write_text(text)
@@ -462,6 +606,7 @@ def main() -> int:
     run(["git", "pull", "--rebase", "--autostash", "origin", "main"], capture=True)
     fetch = run(["node", str(FETCHER)], capture=True)
     data = json.loads(fetch.stdout)
+    data["youtubeMetrics"] = fetch_youtube_metrics()
 
     previous = load_previous_state()
     update_html(data)
