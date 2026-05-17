@@ -678,6 +678,125 @@ def inject_newsletter_redirect(articles):
     return count
 
 
+def pick_related(article, articles, n=3):
+    """Choose n related articles. Same category first (by recency, already
+    sorted in `articles`), then fall back to the most-recent overall to
+    fill remaining slots. Excludes the current article."""
+    others = [a for a in articles if a['slug'] != article['slug']]
+    same_cat = [a for a in others if a['category'] == article['category']]
+    rest = [a for a in others if a['category'] != article['category']]
+
+    selected = []
+    seen = set()
+    for a in same_cat + rest:
+        if a['slug'] in seen:
+            continue
+        seen.add(a['slug'])
+        selected.append(a)
+        if len(selected) == n:
+            break
+    return selected
+
+
+def render_recommended_block(items):
+    """Render the markered <section> for n recommended posts."""
+    rows = []
+    for item in items:
+        slug = item['slug']
+        title = html.escape(item['title'])
+        desc = html.escape(item.get('description', '') or '')
+        # Trim long descriptions to avoid a wall-of-text recommendation list.
+        if len(desc) > 160:
+            desc = desc[:157].rsplit(' ', 1)[0] + '…'
+        rows.append(
+            f'                <li>'
+            f'<a class="zn-recommended-title" href="/{slug}/">{title}</a>'
+            f'<p class="zn-recommended-dek">{desc}</p>'
+            f'</li>'
+        )
+
+    return (
+        '<!-- RECOMMENDED_START -->\n'
+        '            <section class="zn-recommended">\n'
+        '                <p class="zn-recommended-label">Recommended Reading</p>\n'
+        '                <ul class="zn-recommended-list">\n'
+        + '\n'.join(rows) + '\n'
+        '                </ul>\n'
+        '            </section>\n'
+        '            <!-- RECOMMENDED_END -->'
+    )
+
+
+def find_article_body_close(content):
+    """Find the </div> position that closes <div class="article-body">.
+
+    Returns (start_index, end_index) of the closing </div>, or None.
+    Uses a depth counter rather than a regex so it handles arbitrary nesting
+    of <div> and <figure>/<section>/etc. (only counts <div>).
+    """
+    start = content.find('<div class="article-body">')
+    if start == -1:
+        return None
+    pos = start + len('<div class="article-body">')
+    depth = 1
+    while depth > 0:
+        nxt_open = content.find('<div', pos)
+        nxt_close = content.find('</div>', pos)
+        if nxt_close == -1:
+            return None
+        if nxt_open != -1 and nxt_open < nxt_close:
+            depth += 1
+            pos = nxt_open + 4
+        else:
+            depth -= 1
+            if depth == 0:
+                return (nxt_close, nxt_close + len('</div>'))
+            pos = nxt_close + len('</div>')
+    return None
+
+
+def inject_recommended_reading(articles):
+    """Add (or refresh) a 3-item Recommended Reading block at the end of each
+    article body. Idempotent — finds existing markers and replaces between
+    them, otherwise inserts before the article-body's closing </div>.
+    """
+    count = 0
+    for article in articles:
+        related = pick_related(article, articles, n=3)
+        if len(related) < 3:
+            # Need at least 3 others to ship the block.
+            continue
+        block = render_recommended_block(related)
+
+        filepath = article['filepath']
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        original = content
+
+        if '<!-- RECOMMENDED_START -->' in content and '<!-- RECOMMENDED_END -->' in content:
+            content = re.sub(
+                r'<!-- RECOMMENDED_START -->.*?<!-- RECOMMENDED_END -->',
+                lambda m: block,
+                content,
+                flags=re.DOTALL,
+            )
+        else:
+            close = find_article_body_close(content)
+            if close is None:
+                continue
+            # Insert AFTER the </div> that closes <div class="article-body">,
+            # so the section is a peer of the body (and not affected by
+            # .article-body descendant CSS in per-page inline styles).
+            insert_at = close[1]
+            content = content[:insert_at] + '\n        ' + block + content[insert_at:]
+
+        if content != original:
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+    return count
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -712,6 +831,9 @@ def main():
 
     n = inject_newsletter_redirect(articles)
     print(f"Injected newsletter redirect into {n} articles")
+
+    n = inject_recommended_reading(articles)
+    print(f"Injected Recommended Reading block into {n} articles")
 
 
 if __name__ == '__main__':

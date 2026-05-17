@@ -691,6 +691,16 @@ img, video { max-width: 100%; height: auto; }
 .zn-read-next-eyebrow { margin-bottom: 18px; }
 .zn-read-next-list .zn-row { grid-template-columns: 1fr 60px; }
 
+/* ---------- Recommended Reading (end-of-article block) ---------- */
+.zn-recommended { margin: 56px 0 0; padding: 28px 0 0; border-top: 1px solid var(--rule); }
+.zn-recommended-label { font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faded); margin: 0 0 18px; }
+.zn-recommended-list { list-style: none; padding: 0; margin: 0; }
+.zn-recommended-list li { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.zn-recommended-list li:last-child { border-bottom: none; }
+.zn-recommended-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--ink); text-decoration: none; display: block; line-height: 1.35; }
+.zn-recommended-title:hover { color: var(--ox); }
+.zn-recommended-dek { font-family: var(--serif); font-size: 0.92rem; color: var(--faded); margin: 6px 0 0; line-height: 1.5; }
+
 /* ---------- Skip link / focus ---------- */
 .skip-link { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--paper); padding: 8px 16px; z-index: 200; font-family: var(--mono); font-size: 0.8rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
 .skip-link:focus { transform: translateY(0); }
