@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Nightly updater for https://zonted.com/metrics/.
 
-Refreshes the GA4 portfolio cards + Tabiji GA4 chart/section, commits and pushes
-changes, waits briefly for Cloudflare Pages deploy, then posts a Slack update.
+Refreshes the GA4 + Search Console portfolio cards and Tabiji GA4 chart/section,
+commits and pushes changes, waits briefly for Cloudflare Pages deploy, then posts
+a Slack update.
 """
 from __future__ import annotations
 
@@ -47,8 +48,44 @@ def pct(x: float) -> str:
     return f"{x * 100:.2f}%"
 
 
+def compact(n: float) -> str:
+    n = float(n or 0)
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.2f}M"
+    if n >= 1_000:
+        return f"{n / 1_000:.1f}K"
+    return fmt(n)
+
+
 def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
+
+
+def title_for_url(url: str) -> str:
+    if url.rstrip("/") == "https://tabiji.ai":
+        return "tabiji.ai"
+    parts = [part for part in url.rstrip("/").split("/") if part]
+    if not parts:
+        return url
+    slug = parts[-1]
+    if len(parts) >= 3 and parts[-2] == "scams":
+        return slug.replace("-", " ").title() + " Scams"
+    return slug.replace("-", " ").title()
+
+
+def top_items(items: list[dict]) -> str:
+    rows = []
+    for idx, item in enumerate(items, 1):
+        rows.append(
+            f'''                <li class="top-item">
+                    <span class="top-rank">{idx}</span>
+                    <div class="top-info">
+                        <div class="top-title"><a href="{esc(item['url'])}">{esc(item['title'])}</a></div>
+                        <div class="top-stats">{item['stats']}</div>
+                    </div>
+                </li>'''
+        )
+    return "\n".join(rows)
 
 
 def replace_chart_data(script_text: str, key: str, value: object) -> str:
@@ -119,9 +156,49 @@ def render_property_cards(data: dict) -> str:
     return "\n".join(cards)
 
 
+def render_search_console_cards(data: dict) -> str:
+    cards: list[str] = []
+    for prop in data.get("searchConsoleProperties", []):
+        pages = prop.get("topPages", [])
+        max_impressions = max((row["impressions"] for row in pages), default=0)
+        if pages:
+            rows = "\n".join(
+                f'''                            <li class="channel-item">
+                                <span>{esc(title_for_url(row['page']))}</span>
+                                <strong>{fmt(row['clicks'])} / {compact(row['impressions'])}</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:{(row['impressions'] / max_impressions * 100 if max_impressions else 0):.1f}%;background:{esc(prop['color'])}"></span></span>
+                            </li>'''
+                for row in pages
+            )
+        else:
+            rows = '                            <li class="empty-channels">No page data yet.</li>'
+
+        cards.append(
+            f'''                <article class="property-card search-console-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>{esc(prop['name'])}</h3>
+                            <span class="property-domain">{esc(prop['domain'])}</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>{fmt(prop['totals']['clicks'])}</strong>
+                            <span>clicks · {compact(prop['totals']['impressions'])} impr.</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="{esc(prop['key'])}GscChart"></canvas></div>
+                    <div class="subsection-label">Top pages <span class="muted-inline">clicks / impressions</span></div>
+                    <ol class="channel-list">
+{rows}
+                    </ol>
+                </article>'''
+        )
+    return "\n".join(cards)
+
+
 def update_html(data: dict) -> None:
     text = METRICS_HTML.read_text()
     tabiji = next(prop for prop in data["properties"] if prop["key"] == "tabiji")
+    tabiji_gsc = next((prop for prop in data.get("searchConsoleProperties", []) if prop["key"] == "tabiji"), None)
 
     text = re.sub(r'<div class="updated-badge">Updated [^<]+</div>', f'<div class="updated-badge">Updated {esc(data["updatedLabel"])}</div>', text, count=1)
 
@@ -136,6 +213,21 @@ def update_html(data: dict) -> None:
 
 '''
     text = re.sub(r'        <!-- Portfolio GA4 Snapshot -->.*?        <!-- Tabiji Metrics -->\n', portfolio + '        <!-- Tabiji Metrics -->\n', text, flags=re.S)
+
+    search_console = f'''        <!-- Portfolio Search Console Snapshot -->
+        <section class="portfolio-section search-console-section" aria-labelledby="portfolio-gsc-heading">
+            <h2 id="portfolio-gsc-heading"><span class="icon">🔎</span> Search Console Snapshot</h2>
+            <p class="section-desc">Google Search Console clicks and impressions over the last 90 days for the same four properties. Ordered by total clicks.</p>
+            <div class="property-grid">
+{render_search_console_cards(data)}
+            </div>
+        </section>
+
+'''
+    if '<!-- Portfolio Search Console Snapshot -->' in text:
+        text = re.sub(r'        <!-- Portfolio Search Console Snapshot -->.*?        <!-- Tabiji Metrics -->\n', search_console + '        <!-- Tabiji Metrics -->\n', text, flags=re.S)
+    else:
+        text = text.replace('        <!-- Tabiji Metrics -->\n', search_console + '        <!-- Tabiji Metrics -->\n', 1)
 
     summary = f'''        <!-- Tabiji Metrics -->
         <section class="tabiji-metrics-section" aria-labelledby="tabiji-metrics-heading">
@@ -202,13 +294,55 @@ def update_html(data: dict) -> None:
         flags=re.S,
     )
 
+    if tabiji_gsc:
+        page_items = [
+            {
+                "title": title_for_url(row["page"]),
+                "url": row["page"],
+                "stats": f"<span>{fmt(row['clicks'])} clicks</span> <span>{fmt(row['impressions'])} impressions</span> <span>Pos {row['position']:.1f}</span>",
+            }
+            for row in tabiji_gsc.get("topPages", [])
+        ]
+        gsc_section = f'''            <div class="metric-row">
+                <span class="metric-label">Clicks</span>
+                <span class="metric-value">{fmt(tabiji_gsc['totals']['clicks'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Impressions</span>
+                <span class="metric-value">{fmt(tabiji_gsc['totals']['impressions'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">CTR</span>
+                <span class="metric-value">{pct(tabiji_gsc['totals']['ctr'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Avg. Position</span>
+                <span class="metric-value">{tabiji_gsc['totals']['position']:.2f}</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Pages by Clicks</div>
+            <ul class="top-list">
+{top_items(page_items)}
+            </ul>'''
+        text = re.sub(
+            r'            <div class="metric-row">\s*<span class="metric-label">Clicks</span>.*?            </ul>\s*        </div>\s*\n\s*        <!-- Instagram -->',
+            gsc_section + "\n        </div>\n\n        <!-- Instagram -->",
+            text,
+            count=1,
+            flags=re.S,
+        )
+
     chart_match = re.search(r'const chartData = (.*?);', text, re.S)
     if not chart_match:
         raise RuntimeError("Could not find chartData")
-    chart_text = chart_match.group(1)
-    chart_text = replace_chart_data(chart_text, "portfolioGa4", {"labels": data["labels"], "properties": data["properties"]})
-    chart_text = replace_chart_data(chart_text, "ga4Sessions", {"labels": data["labels"], "sessions": tabiji["series"]})
-    text = text[: chart_match.start(1)] + chart_text + text[chart_match.end(1) :]
+    chart = json.loads(chart_match.group(1))
+    chart["portfolioGa4"] = {"labels": data["labels"], "properties": data["properties"]}
+    chart["portfolioGsc"] = {"labels": data.get("gscLabels", data["labels"]), "properties": data.get("searchConsoleProperties", [])}
+    chart["ga4Sessions"] = {"labels": data["labels"], "sessions": tabiji["series"]}
+    if tabiji_gsc:
+        chart["searchConsole"] = {"labels": data.get("gscLabels", data["labels"]), "clicks": tabiji_gsc["clicks"], "impressions": tabiji_gsc["impressions"]}
+    text = text[: chart_match.start(1)] + json.dumps(chart, separators=(",", ":")) + text[chart_match.end(1) :]
 
     METRICS_HTML.write_text(text)
 
@@ -315,7 +449,7 @@ def main() -> int:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     os.chdir(ROOT)
 
-    run(["git", "pull", "--rebase", "origin", "main"], capture=True)
+    run(["git", "pull", "--rebase", "--autostash", "origin", "main"], capture=True)
     fetch = run(["node", str(FETCHER)], capture=True)
     data = json.loads(fetch.stdout)
 
@@ -359,8 +493,9 @@ if __name__ == "__main__":
     except Exception as exc:
         error_msg = f"❌ Failed to update zonted.com/metrics/: {exc}"
         print(error_msg, file=sys.stderr)
-        try:
-            post_slack(error_msg)
-        except Exception:
-            pass
+        if "--no-post" not in sys.argv:
+            try:
+                post_slack(error_msg)
+            except Exception:
+                pass
         raise

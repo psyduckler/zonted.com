@@ -338,6 +338,13 @@
             color: var(--text-muted);
         }
 
+        .channel-item > span:first-child {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         .channel-track {
             grid-column: 1 / -1;
             height: 4px;
@@ -463,6 +470,13 @@
             margin-bottom: 8px;
         }
 
+        .muted-inline {
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--text-dim);
+            text-transform: none;
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 40px 0;
@@ -551,7 +565,7 @@
                             <span class="property-domain">tabiji.ai</span>
                         </div>
                         <div class="property-total">
-                            <strong>17,672</strong>
+                            <strong>17,687</strong>
                             <span>sessions</span>
                         </div>
                     </div>
@@ -560,7 +574,7 @@
                     <ol class="channel-list">
                             <li class="channel-item">
                                 <span>(direct) / (none)</span>
-                                <strong>11,339</strong>
+                                <strong>11,340</strong>
                                 <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#2a7a2a"></span></span>
                             </li>
                             <li class="channel-item">
@@ -592,7 +606,7 @@
                             <span class="property-domain">zonted.com</span>
                         </div>
                         <div class="property-total">
-                            <strong>343</strong>
+                            <strong>344</strong>
                             <span>sessions</span>
                         </div>
                     </div>
@@ -601,7 +615,7 @@
                     <ol class="channel-list">
                             <li class="channel-item">
                                 <span>(direct) / (none)</span>
-                                <strong>293</strong>
+                                <strong>294</strong>
                                 <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#6f4aa8"></span></span>
                             </li>
                             <li class="channel-item">
@@ -612,7 +626,7 @@
                             <li class="channel-item">
                                 <span>linkedin.com / referral</span>
                                 <strong>16</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:5.5%;background:#6f4aa8"></span></span>
+                                <span class="channel-track"><span class="channel-fill" style="width:5.4%;background:#6f4aa8"></span></span>
                             </li>
                             <li class="channel-item">
                                 <span>google / organic</span>
@@ -687,13 +701,161 @@
             </div>
         </section>
 
+        <!-- Portfolio Search Console Snapshot -->
+        <section class="portfolio-section search-console-section" aria-labelledby="portfolio-gsc-heading">
+            <h2 id="portfolio-gsc-heading"><span class="icon">🔎</span> Search Console Snapshot</h2>
+            <p class="section-desc">Google Search Console clicks and impressions over the last 90 days for the same four properties. Ordered by total clicks.</p>
+            <div class="property-grid">
+                <article class="property-card search-console-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>Tabiji</h3>
+                            <span class="property-domain">tabiji.ai</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>2,159</strong>
+                            <span>clicks · 392.6K impr.</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="tabijiGscChart"></canvas></div>
+                    <div class="subsection-label">Top pages <span class="muted-inline">clicks / impressions</span></div>
+                    <ol class="channel-list">
+                            <li class="channel-item">
+                                <span>tabiji.ai</span>
+                                <strong>51 / 886</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#2a7a2a"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Vienna Scams</span>
+                                <strong>25 / 644</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:72.7%;background:#2a7a2a"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Almaty Bookshops</span>
+                                <strong>21 / 540</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:60.9%;background:#2a7a2a"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Gangnam Jjimjilbangs</span>
+                                <strong>16 / 534</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:60.3%;background:#2a7a2a"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Amman Bookshops</span>
+                                <strong>15 / 615</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:69.4%;background:#2a7a2a"></span></span>
+                            </li>
+                    </ol>
+                </article>
+                <article class="property-card search-console-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>Zonted</h3>
+                            <span class="property-domain">zonted.com</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>8</strong>
+                            <span>clicks · 9.4K impr.</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="zontedGscChart"></canvas></div>
+                    <div class="subsection-label">Top pages <span class="muted-inline">clicks / impressions</span></div>
+                    <ol class="channel-list">
+                            <li class="channel-item">
+                                <span>Www.Zonted.Com</span>
+                                <strong>7 / 9.1K</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Local Models Free Tokens</span>
+                                <strong>1 / 8</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:0.1%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Aeo Answer Engine Optimization</span>
+                                <strong>0 / 1</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:0.0%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Openclaw Vs Claude Code Freedom</span>
+                                <strong>0 / 1</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:0.0%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Zonted.Com</span>
+                                <strong>0 / 156</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:1.7%;background:#6f4aa8"></span></span>
+                            </li>
+                    </ol>
+                </article>
+                <article class="property-card search-console-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>VeracityAPI</h3>
+                            <span class="property-domain">veracityapi.com</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>2</strong>
+                            <span>clicks · 24 impr.</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="veracityapiGscChart"></canvas></div>
+                    <div class="subsection-label">Top pages <span class="muted-inline">clicks / impressions</span></div>
+                    <ol class="channel-list">
+                            <li class="channel-item">
+                                <span>Veracityapi.Com</span>
+                                <strong>1 / 4</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#336699"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Alternatives</span>
+                                <strong>1 / 1</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:25.0%;background:#336699"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Veracityapi.Com</span>
+                                <strong>0 / 1</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:25.0%;background:#336699"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Ai Detection Api</span>
+                                <strong>0 / 2</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:50.0%;background:#336699"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>Ai Generated Content Detection</span>
+                                <strong>0 / 1</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:25.0%;background:#336699"></span></span>
+                            </li>
+                    </ol>
+                </article>
+                <article class="property-card search-console-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>Palmaura</h3>
+                            <span class="property-domain">palmaura.app</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>0</strong>
+                            <span>clicks · 0 impr.</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="palmauraGscChart"></canvas></div>
+                    <div class="subsection-label">Top pages <span class="muted-inline">clicks / impressions</span></div>
+                    <ol class="channel-list">
+                            <li class="empty-channels">No page data yet.</li>
+                    </ol>
+                </article>
+            </div>
+        </section>
+
         <!-- Tabiji Metrics -->
         <section class="tabiji-metrics-section" aria-labelledby="tabiji-metrics-heading">
             <h2 id="tabiji-metrics-heading"><span class="icon">✈️</span> Tabiji metrics</h2>
             <p class="section-desc">Deeper website, search, and social metrics for <a href="https://tabiji.ai">tabiji.ai</a>.</p>
             <div class="summary-grid">
                 <div class="summary-card">
-                    <div class="value">17,672</div>
+                    <div class="value">17,687</div>
                     <div class="label">GA Sessions</div>
                 </div>
                 <div class="summary-card">
@@ -760,15 +922,15 @@
 
             <div class="metric-row">
                 <span class="metric-label">Sessions</span>
-                <span class="metric-value">17,672</span>
+                <span class="metric-value">17,687</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Users</span>
-                <span class="metric-value">15,406</span>
+                <span class="metric-value">15,408</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Pageviews</span>
-                <span class="metric-value">25,768</span>
+                <span class="metric-value">25,772</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Avg. Session Duration</span>
@@ -776,14 +938,14 @@
             </div>
             <div class="metric-row">
                 <span class="metric-label">Engagement Rate</span>
-                <span class="metric-value">22.50%</span>
+                <span class="metric-value">22.49%</span>
             </div>
 
             <hr class="section-divider">
             <div class="subsection-label">Top 5 Source / Medium</div>
             <div class="metric-row">
                 <span class="metric-label">(direct) / (none)</span>
-                <span class="metric-value">11,339 sessions</span>
+                <span class="metric-value">11,340 sessions</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">google / organic</span>
@@ -850,11 +1012,11 @@
 
             <div class="metric-row">
                 <span class="metric-label">Clicks</span>
-                <span class="metric-value">2,144</span>
+                <span class="metric-value">2,159</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Impressions</span>
-                <span class="metric-value">387,507</span>
+                <span class="metric-value">392,616</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">CTR</span>
@@ -862,7 +1024,7 @@
             </div>
             <div class="metric-row">
                 <span class="metric-label">Avg. Position</span>
-                <span class="metric-value">12.65</span>
+                <span class="metric-value">12.74</span>
             </div>
 
             <hr class="section-divider">
@@ -872,14 +1034,14 @@
                     <span class="top-rank">1</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/">tabiji.ai</a></div>
-                        <div class="top-stats"><span>51 clicks</span> <span>842 impressions</span> <span>Pos 4.5</span></div>
+                        <div class="top-stats"><span>51 clicks</span> <span>886 impressions</span> <span>Pos 4.4</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">2</span>
                     <div class="top-info">
                         <div class="top-title"><a href="https://tabiji.ai/scams/vienna/">Vienna Scams</a></div>
-                        <div class="top-stats"><span>25 clicks</span> <span>624 impressions</span> <span>Pos 7.4</span></div>
+                        <div class="top-stats"><span>25 clicks</span> <span>644 impressions</span> <span>Pos 7.4</span></div>
                     </div>
                 </li>
                 <li class="top-item">
@@ -892,15 +1054,15 @@
                 <li class="top-item">
                     <span class="top-rank">4</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/amman-bookshops/">Amman Bookshops</a></div>
-                        <div class="top-stats"><span>15 clicks</span> <span>615 impressions</span> <span>Pos 8.5</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/gangnam-jjimjilbangs/">Gangnam Jjimjilbangs</a></div>
+                        <div class="top-stats"><span>16 clicks</span> <span>534 impressions</span> <span>Pos 6.8</span></div>
                     </div>
                 </li>
                 <li class="top-item">
                     <span class="top-rank">5</span>
                     <div class="top-info">
-                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/gangnam-jjimjilbangs/">Gangnam Jjimjilbangs</a></div>
-                        <div class="top-stats"><span>15 clicks</span> <span>527 impressions</span> <span>Pos 6.8</span></div>
+                        <div class="top-title"><a href="https://tabiji.ai/popular-picks/amman-bookshops/">Amman Bookshops</a></div>
+                        <div class="top-stats"><span>15 clicks</span> <span>615 impressions</span> <span>Pos 8.5</span></div>
                     </div>
                 </li>
             </ul>
@@ -1151,7 +1313,7 @@
 
     <script>
     // Chart data — refreshed May 15, 2026 (Pinterest analytics last refreshed May 8)
-    const chartData = {"portfolioGa4":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"properties":[{"key":"tabiji","name":"Tabiji","domain":"tabiji.ai","id":"524076952","color":"#2a7a2a","totals":{"sessions":17672,"users":15406,"views":25768,"avgDuration":100.08209912879131,"engagementRate":0.22504526935264826},"series":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,47],"sources":[{"sourceMedium":"(direct) / (none)","sessions":11339},{"sourceMedium":"google / organic","sessions":1825},{"sourceMedium":"bing / organic","sessions":1316},{"sourceMedium":"chatgpt.com / (not set)","sessions":1046},{"sourceMedium":"chatgpt.com / referral","sessions":338}]},{"key":"zonted","name":"Zonted","domain":"zonted.com","id":"532496138","color":"#6f4aa8","totals":{"sessions":343,"users":198,"views":1483,"avgDuration":457.583895122449,"engagementRate":0.4227405247813411},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,7,6,18,13,19,18,12,14,10,14,10,3,1,8,7,14,8,7,2,1,5,2,8,4,4,4,0,4,4,6,1,3,5,43,31,12,8],"sources":[{"sourceMedium":"(direct) / (none)","sessions":293},{"sourceMedium":"(not set)","sessions":20},{"sourceMedium":"linkedin.com / referral","sessions":16},{"sourceMedium":"google / organic","sessions":8},{"sourceMedium":"reddit.com / referral","sessions":3}]},{"key":"veracityapi","name":"VeracityAPI","domain":"veracityapi.com","id":"537020430","color":"#336699","totals":{"sessions":102,"users":47,"views":365,"avgDuration":623.7901001372549,"engagementRate":0.38235294117647056},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,53,23,11,8,6,0,0],"sources":[{"sourceMedium":"(direct) / (none)","sessions":58},{"sourceMedium":"extension / (not set)","sessions":18},{"sourceMedium":"checkout.stripe.com / referral","sessions":10},{"sourceMedium":"extension-popup / (not set)","sessions":6},{"sourceMedium":"search.google.com / referral","sessions":3}]},{"key":"palmaura","name":"Palmaura","domain":"palmaura.app","id":"538073800","color":"#8a5a20","totals":{"sessions":0,"users":0,"views":0,"avgDuration":0,"engagementRate":0},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"sources":[]}]},"ga4Sessions":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"sessions":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,47]},"searchConsole":{"labels":["Feb 10","Feb 11","Feb 12","Feb 13","Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9"],"clicks":[0,0,0,0,1,1,2,1,0,0,0,0,0,0,1,1,1,1,2,0,0,1,0,1,1,0,0,1,6,0,0,0,2,1,2,3,3,1,4,2,2,2,1,0,0,1,3,4,0,2,4,4,15,51,34,34,33,19,21,39,45,38,58,52,65,49,59,51,46,60,54,73,60,55,69,78,71,81,58,60,68,77,75,75,84,78,60,73,64],"impressions":[0,5,2,1,1,6,2,3,26,26,14,13,10,6,13,34,43,55,36,22,48,30,31,33,35,44,34,51,93,94,156,174,185,247,199,238,255,276,241,299,308,278,272,470,282,314,400,595,696,669,916,967,3539,9924,11894,11450,11040,8985,8239,8126,8492,9068,10015,9551,8342,8928,9136,9511,8664,8860,8657,9591,10184,10923,11654,12421,11339,10743,10294,11047,11873,11539,11581,11204,11748,12194,12310,12982,12211]},"igReach":{"labels":["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15"],"reach":[5,9,8,130,374,1390,409,375,273,315,174,149,257,302,334,471,105,209,338,964,2052,5225,7354,6473,8395,30772,93073,103909,146000,92857,114717,180249,116517,94593,129108,163122,129795,88823,88264,82586,84381,130587,178926,132246,118801,97002,85456,74844,131626,113828,92449,70464,60646,50552,47452,52872,69338,59635,72487,74757,50637,45531,298869,859279,297723,166953,153909,195695,105387,109767,138300,107007,92615,71342,74375,83057,511881,449849,163769,102689,73471,85753,77827,76679,89677,87282,61284,64017,67339,24967]},"pinterestImpressions":{"labels":["Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6"],"impressions":[76,80,323,138,112,126,144,398,84,359,105,203,287,577,578,495,437,430,389,445,778,912,825,1022,1239,1020,1082,1130,1216,1195,1450,1294,1033,1660,1456,1415,1532,1756,1988,1603,1879,2029,2072,2037,1939,1894,1701,1837,1789,1833,1644,1397,1702,1381,1369,1301,1266,1158]}};
+    const chartData = {"portfolioGa4":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"properties":[{"key":"tabiji","name":"Tabiji","domain":"tabiji.ai","id":"524076952","color":"#2a7a2a","totals":{"sessions":17687,"users":15408,"views":25772,"avgDuration":100.05130511675242,"engagementRate":0.22485441284559282},"series":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,51],"sources":[{"sourceMedium":"(direct) / (none)","sessions":11340},{"sourceMedium":"google / organic","sessions":1825},{"sourceMedium":"bing / organic","sessions":1316},{"sourceMedium":"chatgpt.com / (not set)","sessions":1046},{"sourceMedium":"chatgpt.com / referral","sessions":338}]},{"key":"zonted","name":"Zonted","domain":"zonted.com","id":"532496138","color":"#6f4aa8","totals":{"sessions":344,"users":198,"views":1493,"avgDuration":463.9866235261628,"engagementRate":0.42151162790697677},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,7,6,18,13,19,18,12,14,10,14,10,3,1,8,7,14,8,7,2,1,5,2,8,4,4,4,0,4,4,6,1,3,5,43,31,12,9],"sources":[{"sourceMedium":"(direct) / (none)","sessions":294},{"sourceMedium":"(not set)","sessions":20},{"sourceMedium":"linkedin.com / referral","sessions":16},{"sourceMedium":"google / organic","sessions":8},{"sourceMedium":"reddit.com / referral","sessions":3}]},{"key":"veracityapi","name":"VeracityAPI","domain":"veracityapi.com","id":"537020430","color":"#336699","totals":{"sessions":102,"users":47,"views":365,"avgDuration":623.7901001372549,"engagementRate":0.38235294117647056},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,53,23,11,8,6,0,0],"sources":[{"sourceMedium":"(direct) / (none)","sessions":58},{"sourceMedium":"extension / (not set)","sessions":18},{"sourceMedium":"checkout.stripe.com / referral","sessions":10},{"sourceMedium":"extension-popup / (not set)","sessions":6},{"sourceMedium":"search.google.com / referral","sessions":3}]},{"key":"palmaura","name":"Palmaura","domain":"palmaura.app","id":"538073800","color":"#8a5a20","totals":{"sessions":0,"users":0,"views":0,"avgDuration":0,"engagementRate":0},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"sources":[]}]},"ga4Sessions":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"sessions":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,51]},"searchConsole":{"labels":["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15"],"clicks":[1,2,1,0,0,0,0,0,0,1,1,1,1,2,0,0,1,0,1,1,0,0,1,6,0,0,0,2,1,2,3,3,1,4,2,2,2,1,0,0,1,3,4,0,2,4,4,15,51,34,34,33,19,21,39,45,38,58,52,65,49,59,51,46,60,54,73,60,55,69,78,71,81,58,60,68,77,75,75,84,78,60,73,64,9,0,2,2,2,1],"impressions":[6,2,3,26,26,14,13,10,6,13,34,43,55,36,22,48,30,31,33,35,44,34,51,93,94,156,174,185,247,199,238,255,276,241,299,308,278,272,470,282,314,400,595,696,669,916,967,3539,9924,11894,11450,11040,8985,8239,8126,8492,9068,10015,9551,8342,8928,9136,9511,8664,8860,8657,9591,10184,10923,11654,12421,11339,10743,10294,11047,11873,11539,11581,11204,11748,12194,12310,12982,12211,3320,359,325,379,365,370]},"igReach":{"labels":["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15"],"reach":[5,9,8,130,374,1390,409,375,273,315,174,149,257,302,334,471,105,209,338,964,2052,5225,7354,6473,8395,30772,93073,103909,146000,92857,114717,180249,116517,94593,129108,163122,129795,88823,88264,82586,84381,130587,178926,132246,118801,97002,85456,74844,131626,113828,92449,70464,60646,50552,47452,52872,69338,59635,72487,74757,50637,45531,298869,859279,297723,166953,153909,195695,105387,109767,138300,107007,92615,71342,74375,83057,511881,449849,163769,102689,73471,85753,77827,76679,89677,87282,61284,64017,67339,24967]},"pinterestImpressions":{"labels":["Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6"],"impressions":[76,80,323,138,112,126,144,398,84,359,105,203,287,577,578,495,437,430,389,445,778,912,825,1022,1239,1020,1082,1130,1216,1195,1450,1294,1033,1660,1456,1415,1532,1756,1988,1603,1879,2029,2072,2037,1939,1894,1701,1837,1789,1833,1644,1397,1702,1381,1369,1301,1266,1158]},"portfolioGsc":{"labels":["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15"],"properties":[{"key":"tabiji","name":"Tabiji","domain":"tabiji.ai","siteUrl":"sc-domain:tabiji.ai","color":"#2a7a2a","totals":{"clicks":2159,"impressions":392616,"ctr":0.0054990117570348634,"position":12.741314668785785},"clicks":[1,2,1,0,0,0,0,0,0,1,1,1,1,2,0,0,1,0,1,1,0,0,1,6,0,0,0,2,1,2,3,3,1,4,2,2,2,1,0,0,1,3,4,0,2,4,4,15,51,34,34,33,19,21,39,45,38,58,52,65,49,59,51,46,60,54,73,60,55,69,78,71,81,58,60,68,77,75,75,84,78,60,73,64,9,0,2,2,2,1],"impressions":[6,2,3,26,26,14,13,10,6,13,34,43,55,36,22,48,30,31,33,35,44,34,51,93,94,156,174,185,247,199,238,255,276,241,299,308,278,272,470,282,314,400,595,696,669,916,967,3539,9924,11894,11450,11040,8985,8239,8126,8492,9068,10015,9551,8342,8928,9136,9511,8664,8860,8657,9591,10184,10923,11654,12421,11339,10743,10294,11047,11873,11539,11581,11204,11748,12194,12310,12982,12211,3320,359,325,379,365,370],"topQueries":[{"query":"tabiji","clicks":13,"impressions":395,"ctr":0.03291139240506329,"position":5.870886075949367},{"query":"taxi-mafia am gale\u00e3o-flughafen","clicks":10,"impressions":34,"ctr":0.29411764705882354,"position":4.6764705882352935},{"query":"best shawarma in amman","clicks":6,"impressions":131,"ctr":0.04580152671755725,"position":8.625954198473282},{"query":"best budae jjigae in seoul","clicks":4,"impressions":22,"ctr":0.18181818181818182,"position":8.5},{"query":"martinique vs st lucia","clicks":4,"impressions":66,"ctr":0.06060606060606061,"position":7.893939393939394}],"topPages":[{"page":"https://tabiji.ai/","clicks":51,"impressions":886,"ctr":0.05756207674943566,"position":4.366817155756207},{"page":"https://tabiji.ai/scams/vienna/","clicks":25,"impressions":644,"ctr":0.03881987577639751,"position":7.375776397515528},{"page":"https://tabiji.ai/popular-picks/almaty-bookshops/","clicks":21,"impressions":540,"ctr":0.03888888888888889,"position":10.044444444444444},{"page":"https://tabiji.ai/popular-picks/gangnam-jjimjilbangs/","clicks":16,"impressions":534,"ctr":0.0299625468164794,"position":6.777153558052435},{"page":"https://tabiji.ai/popular-picks/amman-bookshops/","clicks":15,"impressions":615,"ctr":0.024390243902439025,"position":8.495934959349594}]},{"key":"zonted","name":"Zonted","domain":"zonted.com","siteUrl":"sc-domain:zonted.com","color":"#6f4aa8","totals":{"clicks":8,"impressions":9398,"ctr":0.0008512449457331347,"position":8.496595020217068},"clicks":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,2,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],"impressions":[0,0,0,0,0,0,0,0,6,2,39,241,329,575,540,594,448,340,293,290,328,433,485,323,344,249,216,261,176,61,86,92,109,47,106,54,67,81,87,70,145,57,32,132,63,81,113,116,80,54,60,173,98,57,124,87,50,46,114,191,6,1,2,1,3,1,6,1,10,2,11,5,2,2,1,4,2,4,2,2,1,3,6,2,3,9,14,10,27,10],"topQueries":[{"query":"\"ai image generation\" \"free api\" \"no key\" or \"no authentication\"","clicks":0,"impressions":219,"ctr":0,"position":8.054794520547945},{"query":"\"ai image generation\" \"free api\" \"no key\" or \"no authentication\" or \"public endpoint\"","clicks":0,"impressions":182,"ctr":0,"position":8.263736263736263},{"query":"\"bluedot\" \"digital business card\"","clicks":0,"impressions":6,"ctr":0,"position":3.8333333333333335},{"query":"\"coursesandevents-at-govt-nz.swoogo.com\"","clicks":0,"impressions":33,"ctr":0,"position":5.96969696969697},{"query":"\"invoice ninja\" \"fly.io\"","clicks":0,"impressions":1,"ctr":0,"position":11}],"topPages":[{"page":"https://www.zonted.com/","clicks":7,"impressions":9099,"ctr":0.0007693153093746566,"position":8.447301901307835},{"page":"https://zonted.com/posts/local-models-free-tokens/","clicks":1,"impressions":8,"ctr":0.125,"position":5.375},{"page":"https://www.zonted.com/posts/aeo-answer-engine-optimization/","clicks":0,"impressions":1,"ctr":0,"position":1},{"page":"https://www.zonted.com/posts/openclaw-vs-claude-code-freedom/","clicks":0,"impressions":1,"ctr":0,"position":4},{"page":"https://zonted.com/","clicks":0,"impressions":156,"ctr":0,"position":6.198717948717949}]},{"key":"veracityapi","name":"VeracityAPI","domain":"veracityapi.com","siteUrl":"sc-domain:veracityapi.com","color":"#336699","totals":{"clicks":2,"impressions":24,"ctr":0.08333333333333333,"position":19.208333333333332},"clicks":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],"impressions":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,7,15],"topQueries":[{"query":"veracity api","clicks":1,"impressions":1,"ctr":1,"position":3},{"query":"\"gptzero\" ai or a.i. or detector or detection","clicks":0,"impressions":2,"ctr":0,"position":92.5},{"query":"\"originality.ai\"","clicks":0,"impressions":1,"ctr":0,"position":85},{"query":"api detection","clicks":0,"impressions":1,"ctr":0,"position":81}],"topPages":[{"page":"https://veracityapi.com/","clicks":1,"impressions":4,"ctr":0.25,"position":5},{"page":"https://veracityapi.com/alternatives","clicks":1,"impressions":1,"ctr":1,"position":3},{"page":"http://veracityapi.com/","clicks":0,"impressions":1,"ctr":0,"position":4},{"page":"https://veracityapi.com/ai-detection-api","clicks":0,"impressions":2,"ctr":0,"position":42.5},{"page":"https://veracityapi.com/ai-generated-content-detection","clicks":0,"impressions":1,"ctr":0,"position":8}]},{"key":"palmaura","name":"Palmaura","domain":"palmaura.app","siteUrl":"sc-domain:palmaura.app","color":"#8a5a20","totals":{"clicks":0,"impressions":0,"ctr":0,"position":0},"clicks":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"impressions":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"topQueries":[],"topPages":[]}]}};
 
     // Shared chart options
     const sharedOptions = {
@@ -1245,6 +1407,76 @@
                 }]
             },
             options: portfolioChartOptions
+        });
+    });
+
+    const portfolioGscChartOptions = {
+        ...sharedOptions,
+        plugins: {
+            ...sharedOptions.plugins,
+            legend: {
+                display: true,
+                position: 'top',
+                align: 'end',
+                labels: {
+                    font: { family: 'Inter', size: 10 },
+                    color: '#595959',
+                    boxWidth: 12,
+                    boxHeight: 2,
+                    padding: 8,
+                }
+            },
+            tooltip: {
+                ...sharedOptions.plugins.tooltip,
+                callbacks: {
+                    label: function(context) {
+                        const metric = context.dataset.label.toLowerCase();
+                        return `${context.dataset.label}: ${context.parsed.y.toLocaleString()} ${metric}`;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ...sharedOptions.scales.x,
+                ticks: { ...sharedOptions.scales.x.ticks, maxTicksLimit: 4 }
+            },
+            y: {
+                ...sharedOptions.scales.y,
+                position: 'left',
+            },
+            y1: {
+                ...sharedOptions.scales.y,
+                position: 'right',
+                grid: { display: false },
+            }
+        }
+    };
+
+    (chartData.portfolioGsc?.properties || []).forEach(function(property) {
+        const canvas = document.getElementById(`${property.key}GscChart`);
+        if (!canvas) return;
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: chartData.portfolioGsc.labels,
+                datasets: [{
+                    label: 'Impressions',
+                    data: property.impressions,
+                    borderColor: property.color,
+                    backgroundColor: property.color + '14',
+                    fill: true,
+                    yAxisID: 'y',
+                }, {
+                    label: 'Clicks',
+                    data: property.clicks,
+                    borderColor: '#1a1a1a',
+                    backgroundColor: 'rgba(26,26,26,0.08)',
+                    fill: false,
+                    yAxisID: 'y1',
+                }]
+            },
+            options: portfolioGscChartOptions
         });
     });
 
