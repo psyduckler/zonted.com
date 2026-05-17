@@ -16,7 +16,8 @@ import shutil
 import subprocess
 import sys
 import time
-from datetime import datetime
+from collections import defaultdict
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,7 @@ LOG_DIR = Path("/Users/psy/.openclaw/workspace/logs")
 CHANNEL = "C0APKM06YTC"
 THRESHOLD = 0.25
 YOUTUBE_SHORTS_URL = "https://www.youtube.com/@tabijiai/shorts"
+TABIJI_PUBLISH_LOG = Path("/Users/psy/.openclaw/workspace/tabiji/functions/publish-log.json")
 
 PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 ENV = {**os.environ, "PATH": PATH}
@@ -74,6 +76,19 @@ def title_for_url(url: str) -> str:
     return slug.replace("-", " ").title()
 
 
+def youtube_video_id(url: str) -> str:
+    match = re.search(r"(?:shorts/|watch\?v=|youtu\.be/)([A-Za-z0-9_-]{6,})", url or "")
+    return match.group(1) if match else ""
+
+
+def date_label(iso_date: str) -> str:
+    try:
+        parsed = datetime.strptime(iso_date, "%Y-%m-%d")
+        return f"{parsed.strftime('%b')} {parsed.day}"
+    except ValueError:
+        return iso_date
+
+
 def top_items(items: list[dict]) -> str:
     rows = []
     for idx, item in enumerate(items, 1):
@@ -118,12 +133,47 @@ def fetch_youtube_metrics() -> dict:
         )
 
     top = sorted(videos, key=lambda row: row["views"], reverse=True)[:5]
+    publish_dates: dict[str, str] = {}
+    if TABIJI_PUBLISH_LOG.exists():
+        for row in json.loads(TABIJI_PUBLISH_LOG.read_text()):
+            video_id = youtube_video_id(row.get("platforms", {}).get("yt", ""))
+            if not video_id:
+                continue
+            publish_dates[video_id] = datetime.fromtimestamp(int(row.get("ts") or 0)).strftime("%Y-%m-%d")
+
+    views_by_date: dict[str, int] = defaultdict(int)
+    tracked_videos = 0
+    tracked_views = 0
+    for video in videos:
+        published = publish_dates.get(video["videoId"])
+        if not published:
+            continue
+        tracked_videos += 1
+        tracked_views += video["views"]
+        views_by_date[published] += video["views"]
+
+    active_dates = sorted(views_by_date)
+    dates: list[str] = []
+    if active_dates:
+        cursor = datetime.strptime(active_dates[0], "%Y-%m-%d")
+        end = datetime.strptime(active_dates[-1], "%Y-%m-%d")
+        while cursor <= end:
+            dates.append(cursor.strftime("%Y-%m-%d"))
+            cursor += timedelta(days=1)
     return {
         "handle": payload.get("uploader_id") or "@tabijiai",
         "subscribers": int(payload.get("channel_follower_count") or 0),
         "videos": len(videos),
         "totalViews": sum(row["views"] for row in videos),
         "topShorts": top,
+        "trackedVideos": tracked_videos,
+        "trackedViews": tracked_views,
+        "timeSeries": {
+            "label": "Views by publish date",
+            "range": f"{date_label(dates[0])}–{date_label(dates[-1])}" if dates else "",
+            "labels": [date_label(day) for day in dates],
+            "series": [views_by_date[day] for day in dates],
+        },
     }
 
 
@@ -235,7 +285,8 @@ def render_search_console_cards(data: dict) -> str:
 
 
 def render_youtube_social_card(youtube: dict) -> str:
-    top_views = youtube["topShorts"][0]["views"] if youtube.get("topShorts") else 0
+    series = youtube.get("timeSeries", {})
+    chart_note = f"{series.get('label', 'Views by publish date')} · {series.get('range', '')}".strip(" ·")
     return f'''                <article class="property-card social-card">
                     <div class="property-card-header">
                         <div>
@@ -247,12 +298,13 @@ def render_youtube_social_card(youtube: dict) -> str:
                             <span>channel views</span>
                         </div>
                     </div>
+                    <div class="chart-kicker">{esc(chart_note)}</div>
                     <div class="property-mini-chart"><canvas id="youtubeSocialChart"></canvas></div>
                     <div class="subsection-label">Signals</div>
                     <ol class="channel-list">
                         <li class="channel-item"><span>Subscribers</span><strong>{fmt(youtube['subscribers'])}</strong></li>
                         <li class="channel-item"><span>Videos</span><strong>{fmt(youtube['videos'])}</strong></li>
-                        <li class="channel-item"><span>Top short</span><strong>{fmt(top_views)}</strong></li>
+                        <li class="channel-item"><span>Tracked views</span><strong>{compact(youtube.get('trackedViews', 0))}</strong></li>
                     </ol>
                 </article>'''
 
@@ -480,14 +532,16 @@ def update_html(data: dict) -> None:
             "color": "#cc0000",
             "total": fmt(youtube["totalViews"]),
             "label": "channel views",
-            "chartType": "bar",
-            "chartLabel": "Top shorts",
-            "labels": [f"#{i}" for i in range(1, len(youtube.get("topShorts", [])) + 1)],
-            "series": [row["views"] for row in youtube.get("topShorts", [])],
+            "chartType": "line",
+            "chartLabel": youtube.get("timeSeries", {}).get("label") or "Views by publish date",
+            "labels": youtube.get("timeSeries", {}).get("labels") or [f"#{i}" for i in range(1, len(youtube.get("topShorts", [])) + 1)],
+            "series": youtube.get("timeSeries", {}).get("series") or [row["views"] for row in youtube.get("topShorts", [])],
+            "tension": 0.35,
+            "pointRadius": 0,
             "rows": [
                 {"label": "Subscribers", "value": fmt(youtube["subscribers"])},
                 {"label": "Videos", "value": fmt(youtube["videos"])},
-                {"label": "Top short", "value": fmt(youtube["topShorts"][0]["views"] if youtube.get("topShorts") else 0)},
+                {"label": "Tracked views", "value": compact(youtube.get("trackedViews", 0))},
             ],
         }
         for idx, card in enumerate(cards):
