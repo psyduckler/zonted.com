@@ -158,6 +158,29 @@
             margin-top: 4px;
         }
 
+
+
+        .tabiji-metrics-section {
+            margin: 0 0 2.5rem;
+        }
+
+        .tabiji-metrics-section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tabiji-metrics-section .section-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            max-width: 720px;
+        }
+
         /* Sections */
         .metric-section {
             max-width: 660px;
@@ -516,26 +539,10 @@
             <div class="updated-badge">Updated May 17, 2026</div>
         </div>
 
-        <!-- Summary Cards -->
-        <div class="summary-grid">
-            <div class="summary-card">
-                <div class="value">17,672</div>
-                <div class="label">GA Sessions</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">16.02M</div>
-                <div class="label">IG Views (90d)</div>
-            </div>
-            <div class="summary-card">
-                <div class="value">4,284</div>
-                <div class="label">IG Followers</div>
-            </div>
-        </div>
-
         <!-- Portfolio GA4 Snapshot -->
         <section class="portfolio-section" aria-labelledby="portfolio-ga4-heading">
             <h2 id="portfolio-ga4-heading"><span class="icon">📊</span> GA4 Portfolio Snapshot</h2>
-            <p class="section-desc">Sessions over the last 90 days plus top acquisition channels for Tabiji, VeracityAPI, Palmaura, and Zonted.</p>
+            <p class="section-desc">Sessions over the last 90 days plus top source / medium rows for Tabiji, VeracityAPI, Palmaura, and Zonted. Ordered by total sessions.</p>
             <div class="property-grid">
                 <article class="property-card">
                     <div class="property-card-header">
@@ -549,32 +556,73 @@
                         </div>
                     </div>
                     <div class="property-mini-chart"><canvas id="tabijiGa4Chart"></canvas></div>
-                    <div class="subsection-label">Top channels</div>
+                    <div class="subsection-label">Top source / medium</div>
                     <ol class="channel-list">
                             <li class="channel-item">
-                                <span>Direct</span>
-                                <strong>11,333</strong>
+                                <span>(direct) / (none)</span>
+                                <strong>11,339</strong>
                                 <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#2a7a2a"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Organic Search</span>
-                                <strong>3,771</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:33.3%;background:#2a7a2a"></span></span>
+                                <span>google / organic</span>
+                                <strong>1,825</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:16.1%;background:#2a7a2a"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Unassigned</span>
-                                <strong>1,142</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:10.1%;background:#2a7a2a"></span></span>
+                                <span>bing / organic</span>
+                                <strong>1,316</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:11.6%;background:#2a7a2a"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Referral</span>
-                                <strong>587</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:5.2%;background:#2a7a2a"></span></span>
+                                <span>chatgpt.com / (not set)</span>
+                                <strong>1,046</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:9.2%;background:#2a7a2a"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Organic Social</span>
-                                <strong>555</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:4.9%;background:#2a7a2a"></span></span>
+                                <span>chatgpt.com / referral</span>
+                                <strong>338</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:3.0%;background:#2a7a2a"></span></span>
+                            </li>
+                    </ol>
+                </article>
+                <article class="property-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>Zonted</h3>
+                            <span class="property-domain">zonted.com</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>342</strong>
+                            <span>sessions</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="zontedGa4Chart"></canvas></div>
+                    <div class="subsection-label">Top source / medium</div>
+                    <ol class="channel-list">
+                            <li class="channel-item">
+                                <span>(direct) / (none)</span>
+                                <strong>292</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>(not set)</span>
+                                <strong>19</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:6.5%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>linkedin.com / referral</span>
+                                <strong>16</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:5.5%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>google / organic</span>
+                                <strong>8</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:2.7%;background:#6f4aa8"></span></span>
+                            </li>
+                            <li class="channel-item">
+                                <span>reddit.com / referral</span>
+                                <strong>3</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:1.0%;background:#6f4aa8"></span></span>
                             </li>
                     </ol>
                 </article>
@@ -590,30 +638,30 @@
                         </div>
                     </div>
                     <div class="property-mini-chart"><canvas id="veracityapiGa4Chart"></canvas></div>
-                    <div class="subsection-label">Top channels</div>
+                    <div class="subsection-label">Top source / medium</div>
                     <ol class="channel-list">
                             <li class="channel-item">
-                                <span>Direct</span>
+                                <span>(direct) / (none)</span>
                                 <strong>58</strong>
                                 <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#336699"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Unassigned</span>
-                                <strong>24</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:41.4%;background:#336699"></span></span>
+                                <span>extension / (not set)</span>
+                                <strong>18</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:31.0%;background:#336699"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Organic Shopping</span>
+                                <span>checkout.stripe.com / referral</span>
                                 <strong>10</strong>
                                 <span class="channel-track"><span class="channel-fill" style="width:17.2%;background:#336699"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Organic Search</span>
-                                <strong>7</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:12.1%;background:#336699"></span></span>
+                                <span>extension-popup / (not set)</span>
+                                <strong>6</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:10.3%;background:#336699"></span></span>
                             </li>
                             <li class="channel-item">
-                                <span>Referral</span>
+                                <span>search.google.com / referral</span>
                                 <strong>3</strong>
                                 <span class="channel-track"><span class="channel-fill" style="width:5.2%;background:#336699"></span></span>
                             </li>
@@ -631,52 +679,31 @@
                         </div>
                     </div>
                     <div class="property-mini-chart"><canvas id="palmauraGa4Chart"></canvas></div>
-                    <div class="subsection-label">Top channels</div>
+                    <div class="subsection-label">Top source / medium</div>
                     <ol class="channel-list">
-                            <li class="empty-channels">No channel data yet.</li>
+                            <li class="empty-channels">No source / medium data yet.</li>
                     </ol>
                 </article>
-                <article class="property-card">
-                    <div class="property-card-header">
-                        <div>
-                            <h3>Zonted</h3>
-                            <span class="property-domain">zonted.com</span>
-                        </div>
-                        <div class="property-total">
-                            <strong>341</strong>
-                            <span>sessions</span>
-                        </div>
-                    </div>
-                    <div class="property-mini-chart"><canvas id="zontedGa4Chart"></canvas></div>
-                    <div class="subsection-label">Top channels</div>
-                    <ol class="channel-list">
-                            <li class="channel-item">
-                                <span>Direct</span>
-                                <strong>292</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:100.0%;background:#6f4aa8"></span></span>
-                            </li>
-                            <li class="channel-item">
-                                <span>Organic Social</span>
-                                <strong>19</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:6.5%;background:#6f4aa8"></span></span>
-                            </li>
-                            <li class="channel-item">
-                                <span>Unassigned</span>
-                                <strong>18</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:6.2%;background:#6f4aa8"></span></span>
-                            </li>
-                            <li class="channel-item">
-                                <span>Organic Search</span>
-                                <strong>13</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:4.5%;background:#6f4aa8"></span></span>
-                            </li>
-                            <li class="channel-item">
-                                <span>Referral</span>
-                                <strong>1</strong>
-                                <span class="channel-track"><span class="channel-fill" style="width:0.3%;background:#6f4aa8"></span></span>
-                            </li>
-                    </ol>
-                </article>
+            </div>
+        </section>
+
+        <!-- Tabiji Metrics -->
+        <section class="tabiji-metrics-section" aria-labelledby="tabiji-metrics-heading">
+            <h2 id="tabiji-metrics-heading"><span class="icon">✈️</span> Tabiji metrics</h2>
+            <p class="section-desc">Deeper website, search, and social metrics for <a href="https://tabiji.ai">tabiji.ai</a>.</p>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="value">17,672</div>
+                    <div class="label">GA Sessions</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">16.02M</div>
+                    <div class="label">IG Views (90d)</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">4,284</div>
+                    <div class="label">IG Followers</div>
+                </div>
             </div>
         </section>
 
@@ -737,11 +764,11 @@
             </div>
             <div class="metric-row">
                 <span class="metric-label">Users</span>
-                <span class="metric-value">15,403</span>
+                <span class="metric-value">15,406</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Pageviews</span>
-                <span class="metric-value">25,766</span>
+                <span class="metric-value">25,768</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">Avg. Session Duration</span>
@@ -753,26 +780,26 @@
             </div>
 
             <hr class="section-divider">
-            <div class="subsection-label">Top 5 Channels</div>
+            <div class="subsection-label">Top 5 Source / Medium</div>
             <div class="metric-row">
-                <span class="metric-label">Direct</span>
-                <span class="metric-value">11,333 sessions</span>
+                <span class="metric-label">(direct) / (none)</span>
+                <span class="metric-value">11,339 sessions</span>
             </div>
             <div class="metric-row">
-                <span class="metric-label">Organic Search</span>
-                <span class="metric-value">3,771 sessions</span>
+                <span class="metric-label">google / organic</span>
+                <span class="metric-value">1,825 sessions</span>
             </div>
             <div class="metric-row">
-                <span class="metric-label">Unassigned</span>
-                <span class="metric-value">1,142 sessions</span>
+                <span class="metric-label">bing / organic</span>
+                <span class="metric-value">1,316 sessions</span>
             </div>
             <div class="metric-row">
-                <span class="metric-label">Referral</span>
-                <span class="metric-value">587 sessions</span>
+                <span class="metric-label">chatgpt.com / (not set)</span>
+                <span class="metric-value">1,046 sessions</span>
             </div>
             <div class="metric-row">
-                <span class="metric-label">Organic Social</span>
-                <span class="metric-value">555 sessions</span>
+                <span class="metric-label">chatgpt.com / referral</span>
+                <span class="metric-value">338 sessions</span>
             </div>
 
             <hr class="section-divider">
@@ -1124,7 +1151,7 @@
 
     <script>
     // Chart data — refreshed May 15, 2026 (Pinterest analytics last refreshed May 8)
-    const chartData = {"portfolioGa4":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"properties":[{"key":"tabiji","name":"Tabiji","domain":"tabiji.ai","id":"524076952","color":"#2a7a2a","totals":{"sessions":17672,"users":15403,"views":25766,"avgDuration":100.08209912879131,"engagementRate":0.22504526935264826},"series":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,46],"channels":[{"channel":"Direct","sessions":11333},{"channel":"Organic Search","sessions":3771},{"channel":"Unassigned","sessions":1142},{"channel":"Referral","sessions":587},{"channel":"Organic Social","sessions":555}]},{"key":"veracityapi","name":"VeracityAPI","domain":"veracityapi.com","id":"537020430","color":"#336699","totals":{"sessions":102,"users":47,"views":365,"avgDuration":623.7901001372549,"engagementRate":0.38235294117647056},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,53,23,11,8,6,0,0],"channels":[{"channel":"Direct","sessions":58},{"channel":"Unassigned","sessions":24},{"channel":"Organic Shopping","sessions":10},{"channel":"Organic Search","sessions":7},{"channel":"Referral","sessions":3}]},{"key":"palmaura","name":"Palmaura","domain":"palmaura.app","id":"538073800","color":"#8a5a20","totals":{"sessions":0,"users":0,"views":0,"avgDuration":0,"engagementRate":0},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"channels":[]},{"key":"zonted","name":"Zonted","domain":"zonted.com","id":"532496138","color":"#6f4aa8","totals":{"sessions":341,"users":197,"views":1480,"avgDuration":460.22957235777136,"engagementRate":0.4252199413489736},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,7,6,18,13,19,18,12,14,10,14,10,3,1,8,7,14,8,7,2,1,5,2,8,4,4,4,0,4,4,6,1,3,5,43,31,12,6],"channels":[{"channel":"Direct","sessions":292},{"channel":"Organic Social","sessions":19},{"channel":"Unassigned","sessions":18},{"channel":"Organic Search","sessions":13},{"channel":"Referral","sessions":1}]}]},"ga4Sessions":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"sessions":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,46]},"searchConsole":{"labels":["Feb 10","Feb 11","Feb 12","Feb 13","Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9"],"clicks":[0,0,0,0,1,1,2,1,0,0,0,0,0,0,1,1,1,1,2,0,0,1,0,1,1,0,0,1,6,0,0,0,2,1,2,3,3,1,4,2,2,2,1,0,0,1,3,4,0,2,4,4,15,51,34,34,33,19,21,39,45,38,58,52,65,49,59,51,46,60,54,73,60,55,69,78,71,81,58,60,68,77,75,75,84,78,60,73,64],"impressions":[0,5,2,1,1,6,2,3,26,26,14,13,10,6,13,34,43,55,36,22,48,30,31,33,35,44,34,51,93,94,156,174,185,247,199,238,255,276,241,299,308,278,272,470,282,314,400,595,696,669,916,967,3539,9924,11894,11450,11040,8985,8239,8126,8492,9068,10015,9551,8342,8928,9136,9511,8664,8860,8657,9591,10184,10923,11654,12421,11339,10743,10294,11047,11873,11539,11581,11204,11748,12194,12310,12982,12211]},"igReach":{"labels":["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15"],"reach":[5,9,8,130,374,1390,409,375,273,315,174,149,257,302,334,471,105,209,338,964,2052,5225,7354,6473,8395,30772,93073,103909,146000,92857,114717,180249,116517,94593,129108,163122,129795,88823,88264,82586,84381,130587,178926,132246,118801,97002,85456,74844,131626,113828,92449,70464,60646,50552,47452,52872,69338,59635,72487,74757,50637,45531,298869,859279,297723,166953,153909,195695,105387,109767,138300,107007,92615,71342,74375,83057,511881,449849,163769,102689,73471,85753,77827,76679,89677,87282,61284,64017,67339,24967]},"pinterestImpressions":{"labels":["Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6"],"impressions":[76,80,323,138,112,126,144,398,84,359,105,203,287,577,578,495,437,430,389,445,778,912,825,1022,1239,1020,1082,1130,1216,1195,1450,1294,1033,1660,1456,1415,1532,1756,1988,1603,1879,2029,2072,2037,1939,1894,1701,1837,1789,1833,1644,1397,1702,1381,1369,1301,1266,1158]}};
+    const chartData = {"portfolioGa4":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"properties":[{"key":"tabiji","name":"Tabiji","domain":"tabiji.ai","id":"524076952","color":"#2a7a2a","totals":{"sessions":17672,"users":15406,"views":25768,"avgDuration":100.08209912879131,"engagementRate":0.22504526935264826},"series":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,47],"sources":[{"sourceMedium":"(direct) / (none)","sessions":11339},{"sourceMedium":"google / organic","sessions":1825},{"sourceMedium":"bing / organic","sessions":1316},{"sourceMedium":"chatgpt.com / (not set)","sessions":1046},{"sourceMedium":"chatgpt.com / referral","sessions":338}]},{"key":"zonted","name":"Zonted","domain":"zonted.com","id":"532496138","color":"#6f4aa8","totals":{"sessions":342,"users":197,"views":1480,"avgDuration":458.8838718538013,"engagementRate":0.4239766081871345},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,7,6,18,13,19,18,12,14,10,14,10,3,1,8,7,14,8,7,2,1,5,2,8,4,4,4,0,4,4,6,1,3,5,43,31,12,7],"sources":[{"sourceMedium":"(direct) / (none)","sessions":292},{"sourceMedium":"(not set)","sessions":19},{"sourceMedium":"linkedin.com / referral","sessions":16},{"sourceMedium":"google / organic","sessions":8},{"sourceMedium":"reddit.com / referral","sessions":3}]},{"key":"veracityapi","name":"VeracityAPI","domain":"veracityapi.com","id":"537020430","color":"#336699","totals":{"sessions":102,"users":47,"views":365,"avgDuration":623.7901001372549,"engagementRate":0.38235294117647056},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,53,23,11,8,6,0,0],"sources":[{"sourceMedium":"(direct) / (none)","sessions":58},{"sourceMedium":"extension / (not set)","sessions":18},{"sourceMedium":"checkout.stripe.com / referral","sessions":10},{"sourceMedium":"extension-popup / (not set)","sessions":6},{"sourceMedium":"search.google.com / referral","sessions":3}]},{"key":"palmaura","name":"Palmaura","domain":"palmaura.app","id":"538073800","color":"#8a5a20","totals":{"sessions":0,"users":0,"views":0,"avgDuration":0,"engagementRate":0},"series":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"sources":[]}]},"ga4Sessions":{"labels":["Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15","May 16","May 17"],"sessions":[52,50,25,32,29,13,40,67,47,50,67,49,37,33,31,43,38,26,31,49,52,54,39,47,29,37,25,33,24,36,30,43,38,25,33,24,28,16,20,26,29,40,37,135,138,430,440,159,260,328,251,195,309,370,406,292,313,299,308,255,397,442,490,292,334,260,284,2135,443,302,549,457,474,315,534,177,215,213,196,208,198,143,153,148,107,155,642,401,187,47]},"searchConsole":{"labels":["Feb 10","Feb 11","Feb 12","Feb 13","Feb 14","Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9"],"clicks":[0,0,0,0,1,1,2,1,0,0,0,0,0,0,1,1,1,1,2,0,0,1,0,1,1,0,0,1,6,0,0,0,2,1,2,3,3,1,4,2,2,2,1,0,0,1,3,4,0,2,4,4,15,51,34,34,33,19,21,39,45,38,58,52,65,49,59,51,46,60,54,73,60,55,69,78,71,81,58,60,68,77,75,75,84,78,60,73,64],"impressions":[0,5,2,1,1,6,2,3,26,26,14,13,10,6,13,34,43,55,36,22,48,30,31,33,35,44,34,51,93,94,156,174,185,247,199,238,255,276,241,299,308,278,272,470,282,314,400,595,696,669,916,967,3539,9924,11894,11450,11040,8985,8239,8126,8492,9068,10015,9551,8342,8928,9136,9511,8664,8860,8657,9591,10184,10923,11654,12421,11339,10743,10294,11047,11873,11539,11581,11204,11748,12194,12310,12982,12211]},"igReach":{"labels":["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Mar 1","Mar 2","Mar 3","Mar 4","Mar 5","Mar 6","Mar 7","Mar 8","Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6","May 7","May 8","May 9","May 10","May 11","May 12","May 13","May 14","May 15"],"reach":[5,9,8,130,374,1390,409,375,273,315,174,149,257,302,334,471,105,209,338,964,2052,5225,7354,6473,8395,30772,93073,103909,146000,92857,114717,180249,116517,94593,129108,163122,129795,88823,88264,82586,84381,130587,178926,132246,118801,97002,85456,74844,131626,113828,92449,70464,60646,50552,47452,52872,69338,59635,72487,74757,50637,45531,298869,859279,297723,166953,153909,195695,105387,109767,138300,107007,92615,71342,74375,83057,511881,449849,163769,102689,73471,85753,77827,76679,89677,87282,61284,64017,67339,24967]},"pinterestImpressions":{"labels":["Mar 9","Mar 10","Mar 11","Mar 12","Mar 13","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 1","Apr 2","Apr 3","Apr 4","Apr 5","Apr 6","Apr 7","Apr 8","Apr 9","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18","Apr 19","Apr 20","Apr 21","Apr 22","Apr 23","Apr 24","Apr 25","Apr 26","Apr 27","Apr 28","Apr 29","Apr 30","May 1","May 2","May 3","May 4","May 5","May 6"],"impressions":[76,80,323,138,112,126,144,398,84,359,105,203,287,577,578,495,437,430,389,445,778,912,825,1022,1239,1020,1082,1130,1216,1195,1450,1294,1033,1660,1456,1415,1532,1756,1988,1603,1879,2029,2072,2037,1939,1894,1701,1837,1789,1833,1644,1397,1702,1381,1369,1301,1266,1158]}};
 
     // Shared chart options
     const sharedOptions = {
