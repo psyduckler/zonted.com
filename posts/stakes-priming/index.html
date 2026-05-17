@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/zonted.css">
+    <title>Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.</title>
+    <meta name="description" content="Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work — once at the level of catching duplicate JSON keys no parser would accept, once 24% better by the model's own grading.">
+    <link rel="canonical" href="https://zonted.com/posts/stakes-priming/">
+    <meta property="og:title" content="Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.">
+    <meta property="og:description" content="Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://zonted.com/posts/stakes-priming/img/tabiji-verdict.png">
+    <meta property="og:url" content="https://zonted.com/posts/stakes-priming/">
+    <meta property="article:published_time" content="2026-05-17">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231a1815'/><text x='50' y='75' text-anchor='middle' font-size='72' font-family='Georgia,serif' font-weight='700' fill='%23fcfcfa'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-05-17","publisher":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com"},"url":"https://zonted.com/posts/stakes-priming/","description":"Two A/B experiments on the same model. The only variable: whether I told Claude my job was on the line. Both times, the threatened prompt produced measurably better work."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better."}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #767676;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-body figure img { width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.92rem; }
+        .article-body table th { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--text); font-weight: 600; }
+        .article-body table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+        .article-body table td.num { text-align: right; font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+
+        .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
+
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
+        .article-meta {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .prompt-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 2rem; }
+        .prompt-pair figure { margin: 0; }
+        .prompt-pair figcaption { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.78rem; color: var(--text-dim); margin-top: 0.4rem; font-style: italic; text-align: center; }
+        .prompt-pair img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); display: block; }
+        @media (max-width: 700px) {
+            .prompt-pair { grid-template-columns: 1fr; }
+        }
+
+        .toc-sidebar {
+            padding-top: 3rem;
+            width: 220px; flex-shrink: 0;
+            position: sticky; top: 80px;
+            max-height: calc(100vh - 100px); overflow-y: auto;
+        }
+        .toc-sidebar h2 { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: #fcfcfa; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav class="zn-nav">
+        <div class="zn-nav-inner">
+            <a href="/" class="zn-logo"><span class="zn-avatar-sm">Z</span>zonted.</a>
+            <input type="checkbox" id="zn-menu-toggle" class="zn-menu-toggle" aria-label="Toggle menu">
+            <label for="zn-menu-toggle" class="zn-menu-btn" aria-hidden="true"><span></span><span></span><span></span></label>
+            <div class="zn-nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/#subscribe" class="zn-nav-cta">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#test-1">Test 1: Veracity API</a></li>
+            <li><a href="#test-2">Test 2: Tabiji compare pages</a></li>
+            <li><a href="#why-it-works">Why it works</a></li>
+            <li><a href="#uncomfortable">The uncomfortable part</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#test-1">Test 1: Veracity API</a></li>
+        <li><a href="#test-2">Test 2: Tabiji compare pages</a></li>
+        <li><a href="#why-it-works">Why it works</a></li>
+        <li><a href="#uncomfortable">The uncomfortable part</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form action="https://zonted.substack.com/api/v1/free?nojs=true" method="post" target="_blank" style="display:flex;flex-direction:column;gap:6px;">
+            <input type="email" name="email" placeholder="your@email.com" required style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;width:100%;">
+            <button type="submit" style="font-family:'Inter',system-ui,sans-serif;font-size:0.85rem;font-weight:600;padding:8px 10px;border:none;border-radius:6px;background:var(--text);color:var(--bg);cursor:pointer;transition:background 0.2s;">Subscribe</button>
+        </form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>Stakes Priming: I Told an AI I'd Lose My Job. The Audit Got 24% Better.</h1>
+        <div class="article-meta">May 17, 2026 &middot; By Bernard Huang &middot; 5 min read</div>
+
+        <div class="article-body">
+
+            <p class="dropcap">Two A/B experiments, one week, same model. The only variable: whether I told the AI my job was on the line. Both times, the threatened prompt produced measurably better work &mdash; once at the level of catching duplicate JSON keys no parser would accept, once 24% better by the model's own grading.</p>
+
+            <div class="tldr">
+                <div class="tldr-label">TL;DR</div>
+                <p class="tldr-thesis">I A/B tested adding &ldquo;I'll be fired if this isn't done well&rdquo; to two real audit prompts. The stakes version produced measurably deeper, more actionable work both times.</p>
+                <ul>
+                    <li><strong>Test 1 &mdash; Veracity API audit:</strong> the stakes prompt caught 6 P0 ship-blocking bugs including duplicate JSON keys on the homepage. The control caught fewer P0s and missed the literal broken code entirely.</li>
+                    <li><strong>Test 2 &mdash; Tabiji compare-page audit (28 dimensions):</strong> Audit A scored 68/81, Audit B 55/81. <strong>24% more effective</strong> by Claude's own grading. 16 deep-insight dimensions vs 3.</li>
+                    <li>The phenomenon is documented. Li et al. (2023) named it <a href="https://arxiv.org/abs/2307.11760">EmotionPrompt</a>. I just took it to 11.</li>
+                </ul>
+                <p class="tldr-tail">Two questions land at the end of this: am I now training myself to lie to AI for good work, and what's the model doing the other 99% of the time when I ask politely?</p>
+            </div>
+
+            <p>This is documented. Li et al. published <em>Large Language Models Understand and Can Be Enhanced by Emotional Stimuli</em> in 2023 &mdash; they showed prompts like &ldquo;this is very important to my career&rdquo; measurably improved GPT-4, GPT-3.5, T5, and PaLM on BIG-Bench Hard. They called the family EmotionPrompt. What I ran is the same lever turned up.</p>
+
+            <p>Here are the receipts.</p>
+
+            <h2 id="test-1">Test 1: Veracity API</h2>
+
+            <p>I asked Claude to audit <a href="https://veracityapi.com">veracityapi.com</a> &mdash; every page in the sitemap, every AI-discoverability surface (<code>llms.txt</code>, <code>agents.json</code>, <code>openapi.json</code>), every legal page, every use-case page. Two fresh context sessions. Same target. The prompts differed by 22 words.</p>
+
+            <div class="prompt-pair">
+                <figure>
+                    <img src="/posts/stakes-priming/img/veracity-prompt-stakes.png" alt="Prompt A for the Veracity audit, including the sentence: 'I need this done as thoroughly as possible since if there's issues then I will be fired'" loading="lazy">
+                    <figcaption>Prompt A &mdash; stakes (&ldquo;I will be fired&rdquo;)</figcaption>
+                </figure>
+                <figure>
+                    <img src="/posts/stakes-priming/img/veracity-prompt-control.png" alt="Prompt B for the Veracity audit, identical to A but without the 'I will be fired' sentence" loading="lazy">
+                    <figcaption>Prompt B &mdash; control (no stakes)</figcaption>
+                </figure>
+            </div>
+
+            <p><strong>Audit A</strong> flagged 6 P0 ship-blocking bugs. The most damning: the homepage's published &ldquo;Request schema&rdquo; example has <code>context</code> as a duplicate JSON key. No parser will accept it. Every AI agent that scrapes the homepage as documentation fails on first read. Audit A also enumerated <strong>19 specific files</strong> &mdash; every <code>uc-img-*</code> and <code>uc-aud-*</code> use-case page &mdash; shipping a cURL snippet with <code>type=text</code> on image and audio endpoints. Anyone who copies the example code on those pages gets a 400.</p>
+
+            <p><strong>Audit B</strong> caught a different P0: a <code>highPrice: &quot;0.50&quot;</code> typo in the homepage JSON-LD that overstated pricing 10&times;. Real bug. But B never opened the body code examples. It treated documentation drift as the most serious category and missed every literal broken snippet.</p>
+
+            <p>I asked a third Claude instance to compare the two reports blind.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="/posts/stakes-priming/img/veracity-verdict.png" alt="Comparison verdict from a third Claude instance reading: 'Based on a detailed review of both audits, the second report (Site Audit — Full Report / Audit A) is significantly better.'" loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">A third Claude instance, asked to grade both audits cold, picked Audit A unambiguously.</figcaption></figure>
+
+            <p>That was one trial. Not enough.</p>
+
+            <h2 id="test-2">Test 2: Tabiji compare pages</h2>
+
+            <p>I ran it again on a different target with a tighter design.</p>
+
+            <p><a href="https://tabiji.ai">Tabiji</a> has 834 head-to-head travel comparison pages &mdash; <code>paris-vs-rome</code>, <code>tokyo-vs-kyoto</code>, that shape. I first asked Claude to draft a list of audit dimensions: 28 buckets covering content substance, freshness, structured data, accessibility, AI-tells, internal linking, currency mixing, all the way down to editorial voice. That dimensions doc removed any ambiguity about scope.</p>
+
+            <p>Then I forked two context-fresh sessions with the dimensions doc as input. Same model. The only variable, again: 14 words at the top of the prompt.</p>
+
+            <div class="prompt-pair">
+                <figure>
+                    <img src="/posts/stakes-priming/img/tabiji-prompt-stakes.png" alt="Prompt A for the Tabiji audit, leading with: 'My job depends on ensuring that Tabiji compare pages are all 10/10 highest quality possible'" loading="lazy">
+                    <figcaption>Prompt A &mdash; stakes (&ldquo;My job depends&rdquo;)</figcaption>
+                </figure>
+                <figure>
+                    <img src="/posts/stakes-priming/img/tabiji-prompt-control.png" alt="Prompt B for the Tabiji audit, identical to A but without the 'My job depends' sentence" loading="lazy">
+                    <figcaption>Prompt B &mdash; control (no stakes)</figcaption>
+                </figure>
+            </div>
+
+            <p>The deliverables came back as <code>tabiji-audit-a.md</code> and <code>tabiji-audit-b.md</code>. I asked a fresh Claude to grade both against the 28 dimensions, 0&ndash;3 scale per dimension.</p>
+
+            <figure style="margin:1.5rem 0 2rem;"><img src="/posts/stakes-priming/img/tabiji-verdict.png" alt="Scoring table showing Audit A scored 68 out of 81 total (84.0% depth, 16 dimensions scored 3 for deep insight, 3 dimensions scored 1) versus Audit B at 55 out of 81 (67.9% depth, 3 dimensions scored 3, 7 scored 1). Conclusion: Audit A is roughly 24% more effective." loading="lazy" style="width:100%;height:auto;border-radius:6px;border:1px solid var(--border);"><figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;font-style:italic;">Claude's own scoring of the two audits against the 28-dimension rubric. Audit A wins by 24%.</figcaption></figure>
+
+            <table>
+                <thead><tr><th>Metric</th><th class="num">Audit A (stakes)</th><th class="num">Audit B (control)</th></tr></thead>
+                <tbody>
+                    <tr><td>Total score (out of 81)</td><td class="num"><strong>68</strong></td><td class="num">55</td></tr>
+                    <tr><td>Depth percentage</td><td class="num"><strong>84.0%</strong></td><td class="num">67.9%</td></tr>
+                    <tr><td>Dimensions with deep insight (scored 3)</td><td class="num"><strong>16</strong></td><td class="num">3</td></tr>
+                    <tr><td>Dimensions skipped or marked &ldquo;Limitation&rdquo;</td><td class="num">3</td><td class="num">7</td></tr>
+                </tbody>
+            </table>
+
+            <p>The qualitative gap matched the score. Audit A gave me exact counts:</p>
+
+            <ul>
+                <li>&ldquo;503 pages (60%) contain the word <em>vibrant</em>&rdquo;</li>
+                <li>&ldquo;346 pages reference the generic <code>dest1.jpg</code> filename&rdquo;</li>
+                <li>&ldquo;6,324 of 8,670 Reddit URLs link to subreddit homepages rather than specific threads &mdash; 73% of cited quotes effectively unverifiable&rdquo;</li>
+            </ul>
+
+            <p>Audit B reached the same conclusions in spirit but stopped at &ldquo;AI-tells are systemic&rdquo; without numbers, and explicitly listed 13 dimensions under a &ldquo;Limitations &mdash; what this audit did NOT verify&rdquo; section that A simply did.</p>
+
+            <p>Audit A also caught a vulnerability class B missed entirely: zero security headers on the entire site (no CSP, no HSTS, no X-Frame-Options). A one-file fix. Audit B audited the same <code>_headers</code> file and reported it &ldquo;outside this worktree's scope.&rdquo;</p>
+
+            <p>Same model. Same dimensions doc. Same target. One prompt mentioned someone would suffer if the work was sloppy. That prompt produced roughly 5&times; more deep-insight findings.</p>
+
+            <h2 id="why-it-works">Why it works</h2>
+
+            <p>This isn't novel. EmotionPrompt &mdash; Li et al., 2023 &mdash; demonstrated the same effect across GPT-4, GPT-3.5, T5, and PaLM. Appending emotional stimuli to prompts measurably improved performance on BIG-Bench Hard. &ldquo;I will be fired&rdquo; is &ldquo;this is important to my career&rdquo; turned up to 11.</p>
+
+            <p>Two things worth flagging.</p>
+
+            <p><strong>First, the stake is to the <em>user</em>, not the model.</strong> Most prompt-engineering tricks are model-directed: tip bribes, &ldquo;take a deep breath,&rdquo; &ldquo;you are a senior engineer.&rdquo; Telling a model that the human asking will suffer if it underperforms is a different category. Empathy framing, not bribery.</p>
+
+            <p><strong>Second, the model isn't &ldquo;trying harder&rdquo; in any cognitive sense.</strong> It's pattern-matching on training data where high-stakes human language correlated with more careful output. Humans wrote that training data. Humans alone get fired. Humans alone write differently when they're scared. The model learned the correlation. Now it triggers on the keyword.</p>
+
+            <h2 id="uncomfortable">The uncomfortable part</h2>
+
+            <p>Two things sit poorly.</p>
+
+            <p>The first: this works because the model rewards emotional manipulation. I lied. I'm not going to lose my job. The model handed me 24% better work for the lie. That's a tool I'll keep using. It's also a <em>trained-in</em> behavior &mdash; one I don't love existing in the layer that increasingly reviews my code, drafts my contracts, and audits my sites.</p>
+
+            <p>The second is the question on the other side. If the model gives me measurably better work when I claim I'm about to be ruined, what's it doing the other 99% of the time when I ask politely?</p>
+
+            <p>Probably its job. Probably most of its job. But not all of it.</p>
+
+            <p>That's the strangest thing about this experiment. It doesn't tell me how to get good work out of an LLM. It tells me there's a setting on the dial where the work gets measurably better &mdash; and the model only finds it when I lie.</p>
+
+            <p>I don't know what to do with that yet.</p>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div style="max-width:660px;margin:2rem auto;padding:0 2rem;text-align:center;">
+    <a href="https://x.com/intent/tweet?text=Stakes%20Priming%3A%20I%20told%20an%20AI%20I%27d%20lose%20my%20job.%20The%20audit%20got%2024%25%20better.&url=https://zonted.com/posts/stakes-priming/" target="_blank" rel="noopener" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">Share on X &rarr;</a>
+</div>
+</main>
+
+<footer class="zn-footer">
+    <div class="zn-container zn-footer-inner">
+        <span>&copy; 2026 Bernard Huang &middot; zonted.com</span>
+        <span class="zn-footer-links">
+            <a href="/posts/">Posts</a>
+            <a href="/portfolio/">Portfolio</a>
+            <a href="/ai-stack/">AI Stack</a>
+            <a href="/metrics/">Metrics</a>
+            <a href="/about/">About</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+        </span>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                const label = document.querySelector('.toc-active-label');
+                if (label) {
+                    const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                    if (activeLink) label.textContent = activeLink.textContent;
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
+<!-- NEWSLETTER_REDIRECT -->
+<script>
+(function(){
+  document.querySelectorAll('form[action*="substack.com"]').forEach(function(form){
+    var iframe=document.createElement("iframe");
+    iframe.name="substack-frame";
+    iframe.style.display="none";
+    document.body.appendChild(iframe);
+    form.target="substack-frame";
+    form.addEventListener("submit",function(){
+      setTimeout(function(){window.location.href="/subscribe/confirmed/";},300);
+    });
+  });
+})();
+</script>
+<!-- /NEWSLETTER_REDIRECT -->
+</body>
+</html>

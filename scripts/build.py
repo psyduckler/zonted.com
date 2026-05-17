@@ -41,6 +41,7 @@ BROKEN_IMAGES = {
 # og:image is the generic owl logo or a broken/stub asset, but the article
 # body has a real hero image we can point at instead.
 SLUG_THUMB_OVERRIDES = {
+    "posts/stakes-priming": "/posts/stakes-priming/img/tabiji-verdict.png",
     "posts/ai-psychosis": "/posts/ai-psychosis/img/cyberpsychosis.avif",
     "posts/openclaw-claude-ban-ai-model-replacement": "https://img.zonted.com/resources/cleanshot-claude-ban.png",
     "posts/rise-of-the-ai-influencer": "/posts/rise-of-the-ai-influencer/img/yangmunus-instagram-profile.png",
