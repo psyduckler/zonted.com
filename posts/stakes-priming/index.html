@@ -225,7 +225,9 @@
                 <p class="tldr-tail">Two questions land at the end of this: am I now training myself to lie to AI for good work, and what's the model doing the other 99% of the time when I ask politely?</p>
             </div>
 
-            <p>This is documented. Li et al. published <em>Large Language Models Understand and Can Be Enhanced by Emotional Stimuli</em> in 2023 &mdash; they showed prompts like &ldquo;this is very important to my career&rdquo; measurably improved GPT-4, GPT-3.5, T5, and PaLM on BIG-Bench Hard. They called the family EmotionPrompt. What I ran is the same lever turned up.</p>
+            <p>I heard about this a week and a half ago from <a href="https://tokay.io">Aaron O'Connell and Jen DeWalt at Tokay</a>. They'd been noticing the pattern in their own work and pointed me at the literature. The receipts below are me trying to verify it on tasks I actually care about.</p>
+
+            <p>The phenomenon is documented. Li et al. published <em><a href="https://arxiv.org/abs/2307.11760">Large Language Models Understand and Can Be Enhanced by Emotional Stimuli</a></em> in 2023 &mdash; they showed prompts like &ldquo;this is very important to my career&rdquo; measurably improved GPT-4, GPT-3.5, T5, and PaLM on BIG-Bench Hard. They called the family EmotionPrompt. What I ran is the same lever turned up.</p>
 
             <p>Here are the receipts.</p>
 
@@ -303,9 +305,7 @@
 
             <h2 id="why-it-works">Why it works</h2>
 
-            <p>This isn't novel. EmotionPrompt &mdash; Li et al., 2023 &mdash; demonstrated the same effect across GPT-4, GPT-3.5, T5, and PaLM. Appending emotional stimuli to prompts measurably improved performance on BIG-Bench Hard. &ldquo;I will be fired&rdquo; is &ldquo;this is important to my career&rdquo; turned up to 11.</p>
-
-            <p>Two things worth flagging.</p>
+            <p>Two things worth flagging about the EmotionPrompt lever.</p>
 
             <p><strong>First, the stake is to the <em>user</em>, not the model.</strong> Most prompt-engineering tricks are model-directed: tip bribes, &ldquo;take a deep breath,&rdquo; &ldquo;you are a senior engineer.&rdquo; Telling a model that the human asking will suffer if it underperforms is a different category. Empathy framing, not bribery.</p>
 
