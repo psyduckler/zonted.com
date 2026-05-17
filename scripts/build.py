@@ -433,6 +433,98 @@ def strip_nav_links(articles):
     return count
 
 
+def strip_share_and_related(articles):
+    """Remove end-of-article share buttons + Keep Reading blocks site-wide.
+
+    Two historical patterns exist:
+      A) Older posts: <hr> + <div class="share-buttons"> + <div class="related-posts">
+      B) Newer posts: a single <div> with a "Share on X →" link
+
+    This pass strips both so they don't accrete again on subsequent builds.
+    """
+    # The related-posts <div> contains a nested <div class="related-label">,
+    # so a non-greedy `.*?</div>` would close at the inner div's closer and
+    # leave the <ul> + outer </div> behind. The sub-pattern below spans the
+    # full block by anchoring on the inner <ul class="related-list">…</ul>
+    # before allowing </div> to close.
+    related_div = (
+        r'<div class="related-posts">\s*'
+        r'(?:<div class="related-label">[^<]*</div>\s*)?'
+        r'<ul class="related-list">.*?</ul>\s*'
+        r'</div>'
+    )
+
+    # Pattern A: hr + share-buttons + related-posts (related block optional).
+    pat_share_buttons = re.compile(
+        r'\n*\s*<hr[^>]*style="[^"]*margin:\s*3rem\s*0[^"]*"[^>]*>\s*'
+        r'<div class="share-buttons">.*?</div>\s*'
+        r'(?:' + related_div + r'\s*)?',
+        re.DOTALL
+    )
+    # Variant where the hr is omitted but share-buttons + related are still present.
+    pat_share_no_hr = re.compile(
+        r'\n*\s*<div class="share-buttons">.*?</div>\s*'
+        r'(?:' + related_div + r'\s*)?',
+        re.DOTALL
+    )
+    # Pattern B: standalone "Share on X →" div (no LinkedIn / Copy Link).
+    pat_share_on_x = re.compile(
+        r'\n*<div style="max-width:660px;margin:2rem auto;padding:0 2rem;text-align:center;">\s*'
+        r'<a href="https://x\.com/intent/tweet[^"]*"[^>]*>Share on X[^<]*</a>\s*'
+        r'</div>\s*',
+        re.DOTALL
+    )
+    # Pattern C: an h2 "Related reading"/"Related"/"Related Resources" heading
+    # immediately followed by the related-posts <div>.
+    pat_related_heading = re.compile(
+        r'\n*\s*<h2 id="related">[^<]*</h2>\s*' + related_div + r'\s*',
+        re.DOTALL
+    )
+    # Pattern D: bare standalone related-posts div.
+    pat_related_only = re.compile(
+        r'\n*\s*' + related_div + r'\s*',
+        re.DOTALL
+    )
+    # Pattern E: <h2 id="related"> heading followed by a plain <ul> of links
+    # (markup used by ~5 older posts instead of the related-posts div).
+    pat_related_ul = re.compile(
+        r'\n*\s*<h2 id="related">[^<]*</h2>\s*'
+        r'<ul>.*?</ul>\s*',
+        re.DOTALL
+    )
+    # Pattern F: salvage for posts that got partially stripped by an earlier
+    # (buggy) version of this function. The shape is:
+    #   <ul class="related-list">…</ul>
+    #   </div>   <-- orphan closer from the original outer related-posts div
+    # We can safely remove both since neither has any remaining anchor.
+    pat_orphan_related = re.compile(
+        r'\n*\s*<ul class="related-list">.*?</ul>\s*</div>\s*',
+        re.DOTALL
+    )
+
+    count = 0
+    for article in articles:
+        filepath = article['filepath']
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        original = content
+
+        content = pat_share_buttons.sub('\n', content)
+        content = pat_share_no_hr.sub('\n', content)
+        content = pat_share_on_x.sub('\n', content)
+        content = pat_related_heading.sub('\n', content)
+        content = pat_related_only.sub('\n', content)
+        content = pat_related_ul.sub('\n', content)
+        content = pat_orphan_related.sub('\n', content)
+
+        if content != original:
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+
+    return count
+
+
 def fix_back_links(articles):
     """Move standalone back-link div into article-container so it aligns with body text."""
     count = 0
@@ -608,6 +700,9 @@ def main():
 
     n = strip_nav_links(articles)
     print(f"Stripped nav links from {n} articles")
+
+    n = strip_share_and_related(articles)
+    print(f"Stripped share + Keep Reading blocks from {n} articles")
 
     n = fix_back_links(articles)
     print(f"Fixed back link alignment in {n} articles")
