@@ -1,0 +1,366 @@
+#!/usr/bin/env python3
+"""Nightly updater for https://zonted.com/metrics/.
+
+Refreshes the GA4 portfolio cards + Tabiji GA4 chart/section, commits and pushes
+changes, waits briefly for Cloudflare Pages deploy, then posts a Slack update.
+"""
+from __future__ import annotations
+
+import argparse
+import html
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+METRICS_HTML = ROOT / "metrics" / "index.html"
+FETCHER = ROOT / "scripts" / "fetch-ga4-portfolio.js"
+STATE_PATH = Path("/Users/psy/.openclaw/workspace/state/zonted-metrics-cron.json")
+LOG_DIR = Path("/Users/psy/.openclaw/workspace/logs")
+CHANNEL = "C0APKM06YTC"
+THRESHOLD = 0.25
+
+PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+ENV = {**os.environ, "PATH": PATH}
+
+
+def run(cmd: list[str], *, cwd: Path = ROOT, check: bool = True, capture: bool = True) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, cwd=str(cwd), env=ENV, text=True, capture_output=capture, check=check)
+
+
+def fmt(n: float) -> str:
+    return f"{int(round(n)):,}"
+
+
+def duration(seconds: float) -> str:
+    sec = int(round(seconds))
+    return f"{sec // 60}m {sec % 60:02d}s" if sec >= 60 else f"{sec}s"
+
+
+def pct(x: float) -> str:
+    return f"{x * 100:.2f}%"
+
+
+def esc(value: object) -> str:
+    return html.escape(str(value), quote=True)
+
+
+def replace_chart_data(script_text: str, key: str, value: object) -> str:
+    marker = f'"{key}":'
+    start = script_text.index(marker)
+    i = start + len(marker)
+    # Skip value JSON object/array/primitive until the comma before the next top-level key.
+    depth = 0
+    in_string = False
+    escaped = False
+    value_start = i
+    for j, ch in enumerate(script_text[i:], i):
+        if in_string:
+            if escaped:
+                escaped = False
+            elif ch == "\\":
+                escaped = True
+            elif ch == '"':
+                in_string = False
+            continue
+        if ch == '"':
+            in_string = True
+        elif ch in "[{":
+            depth += 1
+        elif ch in "]}":
+            depth -= 1
+        elif ch == "," and depth == 0:
+            return script_text[:value_start] + json.dumps(value, separators=(",", ":")) + script_text[j:]
+    return script_text[:value_start] + json.dumps(value, separators=(",", ":"))
+
+
+def render_property_cards(data: dict) -> str:
+    cards: list[str] = []
+    for prop in data["properties"]:
+        sources = prop.get("sources", [])
+        max_sessions = max((row["sessions"] for row in sources), default=0)
+        if sources:
+            rows = "\n".join(
+                f'''                            <li class="channel-item">
+                                <span>{esc(row['sourceMedium'])}</span>
+                                <strong>{fmt(row['sessions'])}</strong>
+                                <span class="channel-track"><span class="channel-fill" style="width:{(row['sessions'] / max_sessions * 100 if max_sessions else 0):.1f}%;background:{esc(prop['color'])}"></span></span>
+                            </li>'''
+                for row in sources
+            )
+        else:
+            rows = '                            <li class="empty-channels">No source / medium data yet.</li>'
+
+        cards.append(
+            f'''                <article class="property-card">
+                    <div class="property-card-header">
+                        <div>
+                            <h3>{esc(prop['name'])}</h3>
+                            <span class="property-domain">{esc(prop['domain'])}</span>
+                        </div>
+                        <div class="property-total">
+                            <strong>{fmt(prop['totals']['sessions'])}</strong>
+                            <span>sessions</span>
+                        </div>
+                    </div>
+                    <div class="property-mini-chart"><canvas id="{esc(prop['key'])}Ga4Chart"></canvas></div>
+                    <div class="subsection-label">Top source / medium</div>
+                    <ol class="channel-list">
+{rows}
+                    </ol>
+                </article>'''
+        )
+    return "\n".join(cards)
+
+
+def update_html(data: dict) -> None:
+    text = METRICS_HTML.read_text()
+    tabiji = next(prop for prop in data["properties"] if prop["key"] == "tabiji")
+
+    text = re.sub(r'<div class="updated-badge">Updated [^<]+</div>', f'<div class="updated-badge">Updated {esc(data["updatedLabel"])}</div>', text, count=1)
+
+    portfolio = f'''        <!-- Portfolio GA4 Snapshot -->
+        <section class="portfolio-section" aria-labelledby="portfolio-ga4-heading">
+            <h2 id="portfolio-ga4-heading"><span class="icon">📊</span> GA4 Portfolio Snapshot</h2>
+            <p class="section-desc">Sessions over the last 90 days plus top source / medium rows for Tabiji, VeracityAPI, Palmaura, and Zonted. Ordered by total sessions.</p>
+            <div class="property-grid">
+{render_property_cards(data)}
+            </div>
+        </section>
+
+'''
+    text = re.sub(r'        <!-- Portfolio GA4 Snapshot -->.*?        <!-- Tabiji Metrics -->\n', portfolio + '        <!-- Tabiji Metrics -->\n', text, flags=re.S)
+
+    summary = f'''        <!-- Tabiji Metrics -->
+        <section class="tabiji-metrics-section" aria-labelledby="tabiji-metrics-heading">
+            <h2 id="tabiji-metrics-heading"><span class="icon">✈️</span> Tabiji metrics</h2>
+            <p class="section-desc">Deeper website, search, and social metrics for <a href="https://tabiji.ai">tabiji.ai</a>.</p>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="value">{fmt(tabiji['totals']['sessions'])}</div>
+                    <div class="label">GA Sessions</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">16.02M</div>
+                    <div class="label">IG Views (90d)</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">4,284</div>
+                    <div class="label">IG Followers</div>
+                </div>
+            </div>
+        </section>
+
+'''
+    text = re.sub(r'        <!-- Tabiji Metrics -->.*?        <!-- Charts Section -->\n', summary + '        <!-- Charts Section -->\n', text, flags=re.S)
+
+    source_rows = "\n".join(
+        f'''            <div class="metric-row">
+                <span class="metric-label">{esc(row['sourceMedium'])}</span>
+                <span class="metric-value">{fmt(row['sessions'])} sessions</span>
+            </div>'''
+        for row in tabiji.get("sources", [])
+    )
+    ga_section = f'''            <div class="metric-row">
+                <span class="metric-label">Sessions</span>
+                <span class="metric-value">{fmt(tabiji['totals']['sessions'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Users</span>
+                <span class="metric-value">{fmt(tabiji['totals']['users'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Pageviews</span>
+                <span class="metric-value">{fmt(tabiji['totals']['views'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Avg. Session Duration</span>
+                <span class="metric-value">{duration(tabiji['totals']['avgDuration'])}</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Engagement Rate</span>
+                <span class="metric-value">{pct(tabiji['totals']['engagementRate'])}</span>
+            </div>
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Source / Medium</div>
+{source_rows}
+
+            <hr class="section-divider">
+            <div class="subsection-label">Top 5 Pages by Views</div>'''
+    text = re.sub(
+        r'            <div class="metric-row">\s*<span class="metric-label">Sessions</span>.*?            <hr class="section-divider">\s*<div class="subsection-label">Top 5 Pages by Views</div>',
+        ga_section,
+        text,
+        count=1,
+        flags=re.S,
+    )
+
+    chart_match = re.search(r'const chartData = (.*?);', text, re.S)
+    if not chart_match:
+        raise RuntimeError("Could not find chartData")
+    chart_text = chart_match.group(1)
+    chart_text = replace_chart_data(chart_text, "portfolioGa4", {"labels": data["labels"], "properties": data["properties"]})
+    chart_text = replace_chart_data(chart_text, "ga4Sessions", {"labels": data["labels"], "sessions": tabiji["series"]})
+    text = text[: chart_match.start(1)] + chart_text + text[chart_match.end(1) :]
+
+    METRICS_HTML.write_text(text)
+
+
+def current_head() -> str:
+    return run(["git", "rev-parse", "--short", "HEAD"]).stdout.strip()
+
+
+def deploy_status(head: str) -> str:
+    gh = shutil.which("gh", path=PATH)
+    if not gh:
+        return "deploy status unknown: gh not found"
+    deadline = time.time() + 300
+    last = "deploy status unknown"
+    while time.time() < deadline:
+        proc = run(
+            [
+                gh,
+                "run",
+                "list",
+                "--limit",
+                "5",
+                "--json",
+                "headSha,status,conclusion,workflowName,url",
+            ],
+            check=False,
+        )
+        if proc.returncode == 0:
+            try:
+                runs = json.loads(proc.stdout)
+                match = next((r for r in runs if r.get("headSha", "").startswith(head)), None)
+                if match:
+                    status = match.get("status")
+                    conclusion = match.get("conclusion")
+                    if status == "completed":
+                        return f"deploy {conclusion or 'completed'}"
+                    last = f"deploy {status}"
+            except Exception as exc:
+                last = f"deploy status parse failed: {exc}"
+        time.sleep(10)
+    return last
+
+
+def load_previous_state() -> dict | None:
+    if not STATE_PATH.exists():
+        return None
+    return json.loads(STATE_PATH.read_text())
+
+
+def save_state(data: dict, head: str) -> None:
+    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    state = {
+        "updatedIso": data["updatedIso"],
+        "commit": head,
+        "totalSessions": sum(prop["totals"]["sessions"] for prop in data["properties"]),
+        "properties": {prop["key"]: {"name": prop["name"], "sessions": prop["totals"]["sessions"]} for prop in data["properties"]},
+    }
+    STATE_PATH.write_text(json.dumps(state, indent=2))
+
+
+def movement_lines(previous: dict | None, data: dict) -> list[str]:
+    if not previous:
+        return ["No previous nightly baseline yet; saved tonight as the baseline."]
+
+    lines: list[str] = []
+    current_total = sum(prop["totals"]["sessions"] for prop in data["properties"])
+    previous_total = previous.get("totalSessions", 0)
+    if previous_total:
+        delta = (current_total - previous_total) / previous_total
+        if abs(delta) >= THRESHOLD:
+            direction = "up" if delta > 0 else "down"
+            lines.append(f"⚠️ Total portfolio traffic {direction} {delta:+.1%}: {fmt(previous_total)} → {fmt(current_total)} sessions")
+
+    previous_props = previous.get("properties", {})
+    for prop in data["properties"]:
+        old = previous_props.get(prop["key"], {}).get("sessions")
+        new = prop["totals"]["sessions"]
+        if old is None:
+            continue
+        if old == 0 and new > 0:
+            lines.append(f"⚠️ {prop['name']} traffic started from zero: 0 → {fmt(new)} sessions")
+        elif old:
+            delta = (new - old) / old
+            if abs(delta) >= THRESHOLD:
+                direction = "up" if delta > 0 else "down"
+                lines.append(f"⚠️ {prop['name']} traffic {direction} {delta:+.1%}: {fmt(old)} → {fmt(new)} sessions")
+    return lines or ["No ±25% total-traffic movements vs previous nightly baseline."]
+
+
+def post_slack(message: str, dry_run: bool = False) -> None:
+    if dry_run:
+        print("DRY RUN Slack message:\n" + message)
+        return
+    openclaw = shutil.which("openclaw", path=PATH) or "/opt/homebrew/bin/openclaw"
+    run([openclaw, "message", "send", "--channel", "slack", "--target", CHANNEL, "--message", message], check=False, capture=True)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--no-post", action="store_true", help="Do everything except posting to Slack")
+    parser.add_argument("--no-push", action="store_true", help="Update files but do not commit/push")
+    args = parser.parse_args()
+
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    os.chdir(ROOT)
+
+    run(["git", "pull", "--rebase", "origin", "main"], capture=True)
+    fetch = run(["node", str(FETCHER)], capture=True)
+    data = json.loads(fetch.stdout)
+
+    previous = load_previous_state()
+    update_html(data)
+
+    status = run(["git", "status", "--short"], capture=True).stdout.strip()
+    changed = bool(status)
+    head = current_head()
+    deploy = "no deploy needed"
+
+    if changed and not args.no_push:
+        run(["git", "add", "metrics/index.html", "scripts/fetch-ga4-portfolio.js", "scripts/update-metrics-cron.py"], capture=True)
+        run(["git", "commit", "-m", "Refresh metrics page data"], capture=True)
+        run(["git", "push", "origin", "main"], capture=True)
+        head = current_head()
+        deploy = deploy_status(head)
+    elif args.no_push:
+        deploy = "not pushed (--no-push)"
+
+    save_state(data, head)
+
+    totals = {prop["name"]: prop["totals"]["sessions"] for prop in data["properties"]}
+    movements = movement_lines(previous, data)
+    message = "\n".join(
+        [
+            f"✅ Updated zonted.com/metrics/ ({data['rangeLabel']})",
+            f"Commit: `{head}` · {deploy}",
+            "Sessions: " + ", ".join(f"{name} {fmt(value)}" for name, value in totals.items()),
+            *movements,
+        ]
+    )
+    post_slack(message, dry_run=args.no_post)
+    print(message)
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        error_msg = f"❌ Failed to update zonted.com/metrics/: {exc}"
+        print(error_msg, file=sys.stderr)
+        try:
+            post_slack(error_msg)
+        except Exception:
+            pass
+        raise
