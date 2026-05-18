@@ -37,12 +37,12 @@ MANUAL_REVENUE_CARDS = [
         "name": "Tabiji",
         "domain": "tabiji.ai",
         "color": "#2a7a2a",
-        "total": "$76.72",
+        "total": "$79.80",
         "label": "estimated royalties",
         "source": "KDP dashboard",
         "rows": [
-            {"label": "Orders", "value": "23"},
-            {"label": "KENP read", "value": "1,375"},
+            {"label": "Orders", "value": "25"},
+            {"label": "KENP read", "value": "1,577"},
         ],
     },
     {
