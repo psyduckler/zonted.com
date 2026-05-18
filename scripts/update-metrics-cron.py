@@ -296,68 +296,45 @@ def stripe_list(path: str, params: dict[str, object] | None = None) -> list[dict
         cursor = batch[-1].get("id")
 
 
-def monthly_amount_cents(price: dict, quantity: int) -> float:
-    recurring = price.get("recurring") or {}
-    interval = recurring.get("interval")
-    interval_count = int(recurring.get("interval_count") or 1)
-    unit_amount = price.get("unit_amount")
-    if unit_amount is None:
-        unit_amount = price.get("unit_amount_decimal") or 0
-    amount = float(unit_amount or 0) * int(quantity or 1)
-    if interval == "year":
-        return amount / (12 * interval_count)
-    if interval == "month":
-        return amount / interval_count
-    if interval == "week":
-        return amount * 52 / 12 / interval_count
-    if interval == "day":
-        return amount * 365 / 12 / interval_count
-    return 0
+def fetch_stripe_usage_revenue() -> dict:
+    """Fetch one-time / usage payments for VeracityAPI.
 
+    VeracityAPI currently charges metered request top-ups rather than Stripe
+    subscriptions, so revenue comes from successful charges/payment intents.
+    """
+    cutoff = datetime.utcnow() - timedelta(days=89)
+    cutoff_ts = int(cutoff.timestamp())
+    charges = stripe_list("charges")
+    balance_transactions = stripe_list("balance_transactions")
 
-def fetch_stripe_mrr() -> dict:
-    subscriptions = stripe_list(
-        "subscriptions",
-        {
-            "status": "all",
-        },
-    )
-    prices = stripe_list("prices", {"active": "true", "type": "recurring"})
+    successful = [
+        charge
+        for charge in charges
+        if charge.get("status") == "succeeded" and charge.get("paid") and not charge.get("refunded")
+    ]
+    recent = [charge for charge in successful if int(charge.get("created") or 0) >= cutoff_ts]
+    currency_totals: dict[str, float] = defaultdict(float)
+    lifetime_currency_totals: dict[str, float] = defaultdict(float)
+    for charge in successful:
+        currency = (charge.get("currency") or "usd").lower()
+        amount = float((charge.get("amount_captured") or charge.get("amount") or 0) - (charge.get("amount_refunded") or 0))
+        lifetime_currency_totals[currency] += amount
+        if int(charge.get("created") or 0) >= cutoff_ts:
+            currency_totals[currency] += amount
 
-    live_statuses = {"active", "trialing", "past_due"}
-    active_subscriptions = [sub for sub in subscriptions if sub.get("status") in live_statuses and not sub.get("cancel_at_period_end")]
-    trialing = [sub for sub in active_subscriptions if sub.get("status") == "trialing"]
-    currencies: dict[str, float] = defaultdict(float)
-    price_rows: dict[str, dict] = {}
+    primary_currency = max(lifetime_currency_totals or {"usd": 0}, key=(lifetime_currency_totals or {"usd": 0}).get)
+    recent_gross = currency_totals.get(primary_currency, 0)
+    lifetime_gross = lifetime_currency_totals.get(primary_currency, 0)
 
-    for sub in active_subscriptions:
-        for item in (sub.get("items") or {}).get("data") or []:
-            price = item.get("price") or {}
-            currency = (price.get("currency") or "usd").lower()
-            mrr = monthly_amount_cents(price, item.get("quantity") or 1)
-            currencies[currency] += mrr
-            nickname = price.get("nickname") or (price.get("product") or {}).get("name") or price.get("lookup_key") or price.get("id") or "Recurring price"
-            row = price_rows.setdefault(
-                price.get("id") or nickname,
-                {"name": nickname, "currency": currency, "subscriptions": 0, "mrrCents": 0},
-            )
-            row["subscriptions"] += 1
-            row["mrrCents"] += mrr
-
-    primary_currency = max(currencies, key=currencies.get) if currencies else "usd"
-    mrr_cents = currencies.get(primary_currency, 0)
-    active_prices = [price for price in prices if price.get("recurring")]
-    top_prices = sorted(price_rows.values(), key=lambda row: row["mrrCents"], reverse=True)[:5]
-    if not top_prices and active_prices:
-        top_prices = [
-            {
-                "name": price.get("nickname") or price.get("lookup_key") or price.get("id") or "Recurring price",
-                "currency": (price.get("currency") or "usd").lower(),
-                "subscriptions": 0,
-                "mrrCents": 0,
-            }
-            for price in active_prices[:5]
-        ]
+    recent_balance = [
+        txn
+        for txn in balance_transactions
+        if txn.get("reporting_category") == "charge"
+        and (txn.get("currency") or "usd").lower() == primary_currency
+        and int(txn.get("created") or 0) >= cutoff_ts
+    ]
+    recent_net = sum(float(txn.get("net") or 0) for txn in recent_balance)
+    recent_fees = sum(float(txn.get("fee") or 0) for txn in recent_balance)
 
     return {
         "key": "veracityapi",
@@ -366,13 +343,12 @@ def fetch_stripe_mrr() -> dict:
         "color": "#336699",
         "source": "Stripe",
         "currency": primary_currency,
-        "mrrCents": round(mrr_cents, 2),
-        "mrrDisplay": money(mrr_cents, primary_currency),
-        "activeSubscriptions": len(active_subscriptions),
-        "trialingSubscriptions": len(trialing),
-        "totalSubscriptions": len(subscriptions),
-        "activeRecurringPrices": len(active_prices),
-        "topPrices": top_prices,
+        "grossCents90d": round(recent_gross, 2),
+        "netCents90d": round(recent_net, 2),
+        "feesCents90d": round(recent_fees, 2),
+        "lifetimeGrossCents": round(lifetime_gross, 2),
+        "successfulPayments90d": len(recent),
+        "successfulPaymentsLifetime": len(successful),
         "updatedIso": datetime.utcnow().isoformat(timespec="seconds") + "Z",
     }
 
@@ -383,15 +359,14 @@ def revenue_cards(stripe_revenue: dict) -> dict:
         "name": stripe_revenue["name"],
         "domain": stripe_revenue["domain"],
         "color": stripe_revenue.get("color", "#336699"),
-        "total": stripe_revenue.get("mrrDisplay") or money(stripe_revenue.get("mrrCents") or 0, stripe_revenue.get("currency") or "usd"),
-        "label": "current MRR",
+        "total": money(stripe_revenue.get("grossCents90d") or 0, stripe_revenue.get("currency") or "usd"),
+        "label": "gross collected (90d)",
         "source": "Stripe",
         "rows": [
-            {"label": "Active subscriptions", "value": fmt(stripe_revenue.get("activeSubscriptions") or 0)},
-            {"label": "Trialing subscriptions", "value": fmt(stripe_revenue.get("trialingSubscriptions") or 0)},
-            {"label": "Recurring prices", "value": fmt(stripe_revenue.get("activeRecurringPrices") or 0)},
+            {"label": "Successful payments", "value": fmt(stripe_revenue.get("successfulPayments90d") or 0)},
+            {"label": "Net after fees", "value": money(stripe_revenue.get("netCents90d") or 0, stripe_revenue.get("currency") or "usd")},
+            {"label": "Lifetime gross", "value": money(stripe_revenue.get("lifetimeGrossCents") or 0, stripe_revenue.get("currency") or "usd")},
         ],
-        "topPrices": stripe_revenue.get("topPrices") or [],
     }
     return {
         "updatedIso": datetime.utcnow().isoformat(timespec="seconds") + "Z",
@@ -635,7 +610,7 @@ def update_html(data: dict) -> None:
         revenue = f'''        <!-- Revenue Snapshot -->
         <section class="portfolio-section revenue-section" aria-labelledby="revenue-heading">
             <h2 id="revenue-heading"><span class="icon">💸</span> Revenue Snapshot</h2>
-            <p class="section-desc">Revenue snapshot for active projects. VeracityAPI MRR is pulled from Stripe read-only access and normalized from active, trialing, and past-due recurring subscription items.</p>
+            <p class="section-desc">Revenue snapshot for active projects. VeracityAPI usage revenue is pulled from Stripe read-only successful charges for the last 90 days.</p>
             <div class="property-grid revenue-grid">
 {revenue_cards}
             </div>
@@ -802,7 +777,7 @@ def main() -> int:
     run(["git", "pull", "--rebase", "--autostash", "origin", "main"], capture=True)
     fetch = run(["node", str(FETCHER)], capture=True)
     data = json.loads(fetch.stdout)
-    data["revenueSnapshot"] = revenue_cards(fetch_stripe_mrr())
+    data["revenueSnapshot"] = revenue_cards(fetch_stripe_usage_revenue())
 
     previous = load_previous_state()
     update_html(data)
