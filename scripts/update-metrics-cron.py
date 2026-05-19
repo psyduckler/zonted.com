@@ -259,6 +259,10 @@ def keychain_secret(service: str) -> str:
     proc = run(["security", "find-generic-password", "-s", service, "-w"], check=False, capture=True)
     if proc.returncode == 0 and proc.stdout.strip():
         return proc.stdout.strip()
+    if proc.stderr.strip():
+        print(f"⚠️ Keychain lookup failed for {service}: {proc.stderr.strip()}", file=sys.stderr)
+    elif proc.returncode:
+        print(f"⚠️ Keychain lookup failed for {service}: security exited {proc.returncode}", file=sys.stderr)
     return ""
 
 
@@ -372,6 +376,22 @@ def revenue_cards(stripe_revenue: dict) -> dict:
         "updatedIso": datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "cards": [MANUAL_REVENUE_CARDS[0], MANUAL_REVENUE_CARDS[1], veracity, MANUAL_REVENUE_CARDS[2]],
     }
+
+
+def load_existing_revenue_snapshot() -> dict | None:
+    if not METRICS_HTML.exists():
+        return None
+    chart_match = re.search(r'const chartData = (.*?);', METRICS_HTML.read_text(), re.S)
+    if not chart_match:
+        return None
+    try:
+        chart = json.loads(chart_match.group(1))
+    except json.JSONDecodeError:
+        return None
+    snapshot = chart.get("revenueSnapshot")
+    if isinstance(snapshot, dict) and snapshot.get("cards"):
+        return snapshot
+    return None
 
 
 def replace_chart_data(script_text: str, key: str, value: object) -> str:
@@ -777,7 +797,17 @@ def main() -> int:
     run(["git", "pull", "--rebase", "--autostash", "origin", "main"], capture=True)
     fetch = run(["node", str(FETCHER)], capture=True)
     data = json.loads(fetch.stdout)
-    data["revenueSnapshot"] = revenue_cards(fetch_stripe_usage_revenue())
+    warnings: list[str] = []
+    try:
+        data["revenueSnapshot"] = revenue_cards(fetch_stripe_usage_revenue())
+    except Exception as exc:
+        fallback_revenue = load_existing_revenue_snapshot()
+        if not fallback_revenue:
+            raise
+        data["revenueSnapshot"] = fallback_revenue
+        warning = f"⚠️ VeracityAPI revenue unchanged: {exc}"
+        warnings.append(warning)
+        print(warning, file=sys.stderr)
 
     previous = load_previous_state()
     update_html(data)
@@ -805,6 +835,7 @@ def main() -> int:
             f"✅ Updated zonted.com/metrics/ ({data['rangeLabel']})",
             f"Commit: `{head}` · {deploy}",
             "Sessions: " + ", ".join(f"{name} {fmt(value)}" for name, value in totals.items()),
+            *warnings,
             *movements,
         ]
     )
