@@ -811,6 +811,65 @@ def find_article_body_close(content):
     return None
 
 
+def inject_post_subscribe(articles):
+    """Add (or refresh) the post-end Substack subscribe block on every article.
+
+    Sits between the article body and the Recommended Reading block. Uses
+    Substack's transparent embed and the wrapper-crop trick to hide the
+    disclaimer + logo (same approach as the homepage instance).
+
+    Idempotent — finds existing markers and replaces between them. If no
+    markers yet, prefers inserting BEFORE the recommended-reading block; if
+    that also doesn't exist, falls back to right after the article-body close.
+    """
+    BLOCK = (
+        '<!-- SUBSCRIBE_BLOCK_START -->\n'
+        '            <section class="zn-post-subscribe">\n'
+        '                <p class="zn-post-subscribe-label">Newsletter</p>\n'
+        '                <h2 class="zn-post-subscribe-headline">Get the next post by email.</h2>\n'
+        '                <p class="zn-post-subscribe-sub">One email when I publish something new. No spam, no fixed schedule, unsubscribe anytime.</p>\n'
+        '                <div class="zn-post-subscribe-form">\n'
+        '                    <iframe src="https://zonted.substack.com/embed?transparent=1" width="480" height="150" frameborder="0" scrolling="no" title="Subscribe to Zonted"></iframe>\n'
+        '                </div>\n'
+        '            </section>\n'
+        '            <!-- SUBSCRIBE_BLOCK_END -->'
+    )
+
+    count = 0
+    for article in articles:
+        filepath = article['filepath']
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+        original = content
+
+        if '<!-- SUBSCRIBE_BLOCK_START -->' in content and '<!-- SUBSCRIBE_BLOCK_END -->' in content:
+            content = re.sub(
+                r'<!-- SUBSCRIBE_BLOCK_START -->.*?<!-- SUBSCRIBE_BLOCK_END -->',
+                lambda m: BLOCK,
+                content,
+                flags=re.DOTALL,
+            )
+        elif '<!-- RECOMMENDED_START -->' in content:
+            # Insert before the recommended-reading block.
+            content = content.replace(
+                '<!-- RECOMMENDED_START -->',
+                BLOCK + '\n        <!-- RECOMMENDED_START -->',
+                1,
+            )
+        else:
+            close = find_article_body_close(content)
+            if close is None:
+                continue
+            insert_at = close[1]
+            content = content[:insert_at] + '\n        ' + BLOCK + content[insert_at:]
+
+        if content != original:
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+    return count
+
+
 def inject_recommended_reading(articles):
     """Add (or refresh) a 3-item Recommended Reading block at the end of each
     article body. Idempotent — finds existing markers and replaces between
@@ -887,6 +946,9 @@ def main():
 
     n = strip_newsletter_redirect(articles)
     print(f"Stripped legacy newsletter-redirect script from {n} files")
+
+    n = inject_post_subscribe(articles)
+    print(f"Injected post-end subscribe block into {n} articles")
 
     n = inject_recommended_reading(articles)
     print(f"Injected Recommended Reading block into {n} articles")

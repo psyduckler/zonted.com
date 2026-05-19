@@ -701,6 +701,14 @@ img, video { max-width: 100%; height: auto; }
 .zn-recommended-title:hover { color: var(--ox); }
 .zn-recommended-dek { font-family: var(--serif); font-size: 0.92rem; color: var(--faded); margin: 6px 0 0; line-height: 1.5; }
 
+/* ---------- Post-end subscribe (sibling block above Recommended Reading) ---------- */
+.zn-post-subscribe { margin: 56px 0 0; padding: 28px 0 0; border-top: 1px solid var(--rule); }
+.zn-post-subscribe-label { font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faded); margin: 0 0 14px; }
+.zn-post-subscribe-headline { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--ink); margin: 0 0 6px; letter-spacing: -0.01em; line-height: 1.25; }
+.zn-post-subscribe-sub { font-family: var(--serif); font-size: 0.95rem; color: var(--faded); margin: 0 0 18px; line-height: 1.55; }
+.zn-post-subscribe-form { overflow: hidden; height: 68px; max-width: 480px; width: 100%; background: transparent; }
+.zn-post-subscribe-form iframe { width: 100%; max-width: 480px; border: 0; background: transparent; display: block; }
+
 /* ---------- Skip link / focus ---------- */
 .skip-link { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--paper); padding: 8px 16px; z-index: 200; font-family: var(--mono); font-size: 0.8rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
 .skip-link:focus { transform: translateY(0); }
