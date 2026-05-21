@@ -36,6 +36,7 @@ export async function onRequestPost({ request, env }) {
   const audienceId = env.RESEND_AUDIENCE_ID || FALLBACK_AUDIENCE_ID;
 
   try {
+    // 1. Add the contact to the audience.
     const resp = await fetch(
       `https://api.resend.com/audiences/${audienceId}/contacts`,
       {
@@ -48,15 +49,46 @@ export async function onRequestPost({ request, env }) {
       },
     );
 
-    // Resend treats duplicates as success (returns the existing contact).
-    if (resp.ok) return json({ ok: true });
+    if (!resp.ok) {
+      const text = await resp.text();
+      console.error('Resend contacts non-2xx:', resp.status, text);
+      return json({ error: 'subscribe failed' }, 502);
+    }
 
-    const text = await resp.text();
-    console.error('Resend non-2xx:', resp.status, text);
-    return json({ error: 'subscribe failed' }, 502);
+    // 2. Fire a short plain-text welcome email. Best-effort — failures here
+    //    should NOT fail the subscription itself (the contact is already in
+    //    the audience). We log and move on.
+    sendWelcomeEmail(env.RESEND_API_KEY, email).catch((err) => {
+      console.error('Welcome email failed (non-fatal):', err);
+    });
+
+    return json({ ok: true });
   } catch (err) {
     console.error('Subscribe fetch threw:', err);
     return json({ error: 'network error' }, 502);
+  }
+}
+
+async function sendWelcomeEmail(apiKey, to) {
+  const resp = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: 'Bernard Huang <bernard@zonted.com>',
+      to: [to],
+      subject: "You're in.",
+      text:
+        "Thanks for subscribing to Zonted. I'll email you when the next post ships — " +
+        "one email per post, no drips, no welcome series.\n\n" +
+        "— Bernard",
+    }),
+  });
+  if (!resp.ok) {
+    const text = await resp.text();
+    throw new Error(`Resend emails non-2xx: ${resp.status} ${text.slice(0, 200)}`);
   }
 }
 
