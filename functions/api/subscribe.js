@@ -86,7 +86,7 @@ async function sendWelcomeEmail(apiKey, to) {
     body: JSON.stringify({
       from: 'Bernard Huang <bernard@zonted.com>',
       to: [to],
-      subject: "You're in.",
+      subject: "You're subscribed to the zonted newsletter",
       text:
         "Thanks for subscribing to Zonted. I'll email you when the next post ships — " +
         "one email per post, no drips, no welcome series.\n\n" +
