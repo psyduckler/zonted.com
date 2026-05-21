@@ -209,21 +209,19 @@ img, video { max-width: 100%; height: auto; }
 }
 
 /* Lab operational badge + cron feed — live activity pulse in the hero.
-   Spec: handoff-homepage-cron. Feed sits between H1 and the byline; badge
-   floats to the right of the feed so the two form one operator-status row.
-   On mobile (≤640px), they stack — badge above feed. */
+   Spec: handoff-homepage-cron. Badge stacks above the feed, both
+   left-aligned, so the eye reads "status → live activity" in order. */
 .zn-hero-pulse {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
+  gap: 10px;
   margin: 20px 0 24px;
 }
 .zn-cron-status {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  flex-shrink: 0;
-  margin-top: 10px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.15em;
@@ -253,8 +251,7 @@ img, video { max-width: 100%; height: auto; }
 }
 
 .zn-cron-feed {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   font-family: var(--mono);
   font-size: 12px;
   color: var(--faded);
@@ -282,13 +279,6 @@ img, video { max-width: 100%; height: auto; }
 }
 
 @media (max-width: 640px) {
-  .zn-hero-pulse {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .zn-cron-status {
-    margin-top: 0;
-  }
   .zn-cron-feed {
     font-size: 11px;
     min-height: calc(3 * (11px * 1.6 + 8px));
