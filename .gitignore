@@ -1,0 +1,6 @@
+# Cloudflare wrangler dev / preview local state — never commit
+.wrangler/
+
+# OS / editor noise
+.DS_Store
+*.swp
