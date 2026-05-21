@@ -155,6 +155,9 @@ async function sendWelcomeEmail(apiKey, to) {
     body: JSON.stringify({
       from: 'Bernard Huang <bernard@zonted.com>',
       to: [to],
+      // BCC to the Slack email-into-channel address so each welcome
+      // becomes a Slack post in #zonted. Cheaper than a webhook.
+      bcc: ['zonted-aaaatiivdnlzaxfx56mdscopey@psyduckler.slack.com'],
       subject: "You're subscribed to the zonted newsletter",
       text:
         "Thanks for subscribing to Zonted. I'll email you when the next post ships — " +
