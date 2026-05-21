@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/zonted.css?v=2026-05-21">
+    <link rel="stylesheet" href="/css/zonted.css?v=2026-05-21-cron">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
 </head>
@@ -46,7 +46,12 @@
         <div class="zn-container">
 
             <header class="zn-hero">
+                <div class="zn-cron-status">
+                    <span class="zn-cron-dot" aria-hidden="true"></span>
+                    <span>Lab operational</span>
+                </div>
                 <h1 class="zn-hero-headline">I build fully autonomous AI businesses. I share the work as it happens.</h1>
+                <div class="zn-cron-feed" id="zn-cron-feed" aria-live="polite" aria-label="Live agent activity feed"></div>
                 <div class="zn-hero-byline">
                     <span class="zn-avatar-md" style="background-image:url('https://img.zonted.com/about/bernard-huang-headshot.jpg');" role="img" aria-label="Bernard Huang"></span>
                     <p class="zn-hero-byline-text"><strong>Bernard Huang</strong> &middot; <em>Glad you're here.</em><br>From token herding the agent swarms to the cron jobs that ship their work &mdash; every system, workflow, and dollar burned.</p>
@@ -139,5 +144,71 @@
         </div>
     </footer>
 <script defer src="/js/subscribe.js"></script>
+<script>
+// Lab operational — live cron pulse in the hero. 3-line rotating activity
+// feed. Timestamps deliberately fictional (start at 14:22, +3min/tick) so
+// the page never shows stale times. Respects prefers-reduced-motion.
+(function () {
+  var feed = document.getElementById('zn-cron-feed');
+  if (!feed) return;
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var events = [
+    ['openclaw',    'shipped reel · Tulum tire scam · 3.8M views'],
+    ['hermes',      'published IG carousel · Spain · 5 slides'],
+    ['claude code', 'planned 3-reel series · saved to D1'],
+    ['codex',       'patched /api/scams 500 error · deployed'],
+    ['openclaw',    'queued TikTok post · Cairo mistake reel'],
+    ['hermes',      'audited blog post · ZNT-029 · 2 fixes'],
+    ['claude code', 'pinned to Pinterest board · Adelaide scams'],
+    ['codex',       'fixed cron drift · tiktok-token-refresh'],
+    ['openclaw',    'published YT Short · Lisbon cobblestones'],
+    ['hermes',      'compiled /api/pins endpoint · 0 errors'],
+    ['claude code', 'curated 14 of 47 Pinterest pins · ship'],
+    ['codex',       'caught 502 on R2 upload · retry succeeded'],
+    ['openclaw',    'rendered 24 thumbnails via Wavespeed'],
+    ['hermes',      'updated Portugal carousel · slide 4'],
+    ['claude code', 'killed underperforming format · 3 reels'],
+    ['codex',       'memory rollup complete · nightly job ok']
+  ];
+
+  var minutes = 14 * 60 + 22; // start at 14:22
+  function fmt(m) {
+    var h = String(Math.floor(m / 60) % 24).padStart(2, '0');
+    var mm = String(m % 60).padStart(2, '0');
+    return h + ':' + mm;
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function render(agent, msg, isNew) {
+    var line = document.createElement('div');
+    line.className = 'zn-cron-line' + (isNew ? ' zn-cron-new' : '');
+    line.innerHTML =
+      '<span class="zn-cron-t">' + fmt(minutes) + '</span>' +
+      '<span><span class="zn-cron-agent">' + escapeHtml(agent) + '</span> · ' + escapeHtml(msg) + '</span>';
+    return line;
+  }
+
+  for (var i = 0; i < 3; i++) {
+    feed.appendChild(render(events[i][0], events[i][1], i === 2));
+    minutes += 3;
+  }
+
+  if (reducedMotion) return;
+
+  var idx = 3;
+  setInterval(function () {
+    var ev = events[idx % events.length];
+    idx++;
+    minutes += 3;
+    feed.appendChild(render(ev[0], ev[1], true));
+    while (feed.children.length > 3) feed.removeChild(feed.firstChild);
+  }, 2800);
+})();
+</script>
 </body>
 </html>

@@ -9,6 +9,7 @@
   --faded: #6b655c;
   --ox: #6b1a1a;
   --rule: #1a181522;
+  --green-live: #1a7a3c;
 
   --serif: 'Source Serif 4', Georgia, serif;
   --display: 'Fraunces', Georgia, serif;
@@ -202,8 +203,87 @@ img, video { max-width: 100%; height: auto; }
 
 /* ---------- Hero ---------- */
 .zn-hero {
+  position: relative;
   padding: 56px 0 40px;
   border-bottom: 1px solid var(--rule);
+}
+
+/* Lab operational badge + cron feed — live activity pulse in the hero.
+   Spec: handoff-homepage-cron. Status badge sits top-right of the hero,
+   feed sits between H1 and the byline so the page demonstrates
+   "the work as it happens" before introducing Bernard. */
+.zn-cron-status {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--faded);
+  text-transform: uppercase;
+}
+.zn-cron-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--green-live);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+.zn-cron-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--green-live);
+  animation: znCronPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0;
+}
+@keyframes znCronPing {
+  0%   { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.zn-cron-feed {
+  margin: 20px 0 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faded);
+  /* Reserve room for exactly 3 lines so the byline doesn't shift on rotate */
+  min-height: calc(3 * (12px * 1.6 + 8px));
+}
+.zn-cron-line {
+  padding: 4px 0;
+  border-top: 1px dashed var(--rule);
+  display: flex;
+  gap: 14px;
+}
+.zn-cron-t { color: var(--ox); }
+.zn-cron-agent { color: var(--ox); font-weight: 700; }
+
+.zn-cron-new { animation: znCronNew 0.6s ease-out; }
+@keyframes znCronNew {
+  from { opacity: 0; transform: translateX(-4px); background: rgba(26, 122, 60, 0.07); }
+  to   { opacity: 1; transform: translateX(0); background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zn-cron-dot::after,
+  .zn-cron-new { animation: none !important; }
+}
+
+@media (max-width: 640px) {
+  .zn-cron-status {
+    position: static;
+    margin-bottom: 12px;
+  }
+  .zn-cron-feed {
+    font-size: 11px;
+    min-height: calc(3 * (11px * 1.6 + 8px));
+  }
 }
 .zn-hero-eyebrow { margin-bottom: 18px; }
 .zn-hero-headline {
