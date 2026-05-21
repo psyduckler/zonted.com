@@ -61,10 +61,11 @@
 
         /* ---------- Page chrome ---------- */
         .portfolio-page { background: var(--tc-bg); color: var(--tc-text); font-family: var(--tc-body); --zn-hover: #581c87; }
-        /* Scope :hover only to non-card links — the card itself manages its own
-           hover color (otherwise all card text would flash off-white). */
-        .portfolio-page a:not(.tc-card) { color: var(--tc-gold); }
-        .portfolio-page a:not(.tc-card):hover { color: var(--tc-text); }
+        /* Scope dark-theme link overrides to <main> only — nav + footer keep
+           the sitewide light treatment. The card itself manages its own hover
+           color (otherwise all card text would flash off-white). */
+        .portfolio-page main a:not(.tc-card) { color: var(--tc-gold); }
+        .portfolio-page main a:not(.tc-card):hover { color: var(--tc-text); }
         .tc-card:hover .tc-name { color: var(--zn-hover); }
 
         /* ---------- Sparkles + Orbs ---------- */
