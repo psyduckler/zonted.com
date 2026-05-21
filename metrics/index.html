@@ -538,6 +538,114 @@
         @media (max-width: 480px) {
             .summary-grid { grid-template-columns: 1fr; }
         }
+
+        /* ───── Aquarium · whimsical GA4-driven section ───── */
+        .aquarium {
+            --aq-deep: #001020;
+            --aq-mid: #021a30;
+            --aq-top: #0a2640;
+            --aq-floor-a: #1a3a4a;
+            --aq-floor-b: #0a1a20;
+            --aq-tank-edge: #1a4a6a;
+            --aq-text: #cce8ff;
+            --aq-dim: #7aa8c8;
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
+        }
+        .aq-tank {
+            position: relative;
+            height: 460px;
+            background: radial-gradient(ellipse at center, #0a3a60 0%, var(--aq-deep) 80%),
+                        linear-gradient(180deg, var(--aq-top) 0%, var(--aq-mid) 50%, var(--aq-deep) 100%);
+            border: 1px solid var(--aq-tank-edge);
+            overflow: hidden;
+            border-radius: 6px;
+        }
+        .aq-rays {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(159, 223, 255, 0.13) 0%, transparent 50%);
+            animation: aqShine 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes aqShine { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+        .aq-creature { position: absolute; }
+        .aq-body {
+            animation: aqSwim var(--dur, 18s) ease-in-out infinite;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        @keyframes aqSwim {
+            0%   { transform: translate(0, 0); }
+            25%  { transform: translate(40px, -12px); }
+            50%  { transform: translate(80px, 8px); }
+            75%  { transform: translate(40px, -6px); }
+            100% { transform: translate(0, 0); }
+        }
+        .aq-emoji {
+            font-size: var(--sz, 40px);
+            filter: drop-shadow(0 0 12px var(--glow, #9fdfff));
+            animation: aqBob 3s ease-in-out infinite;
+            line-height: 1;
+        }
+        @keyframes aqBob { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        .aq-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: var(--glow, #9fdfff);
+            background: rgba(0, 16, 32, 0.66);
+            padding: 2px 6px;
+            margin-top: 6px;
+            border: 1px solid rgba(159, 223, 255, 0.3);
+            text-transform: uppercase;
+        }
+        .aq-tag b { color: #fff; margin-left: 4px; font-weight: 700; }
+
+        .aq-bubbles { position: absolute; inset: 0; pointer-events: none; }
+        .aq-bub {
+            position: absolute;
+            bottom: 30px;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, rgba(159, 223, 255, 0.33));
+            box-shadow: 0 0 4px #9fdfff;
+            animation: aqRise var(--bdur, 5s) linear infinite;
+        }
+        @keyframes aqRise {
+            0%   { transform: translateY(0)    scale(0.5); opacity: 0; }
+            10%  { opacity: 0.9; }
+            90%  { opacity: 0.9; }
+            100% { transform: translateY(-420px) scale(1.2); opacity: 0; }
+        }
+        .aq-floor {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 30px;
+            background: linear-gradient(180deg, var(--aq-floor-a), var(--aq-floor-b));
+        }
+
+        .aq-readout {
+            margin-top: 18px; width: 100%; border-collapse: collapse;
+            font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+            background: var(--aq-deep); color: var(--aq-text);
+            border: 1px solid var(--aq-tank-edge); border-radius: 6px;
+            overflow: hidden;
+        }
+        .aq-readout caption {
+            text-align: left; font-family: 'Source Serif 4', Georgia, serif;
+            font-style: italic; font-size: 15px; padding: 14px 16px 4px;
+            color: var(--aq-dim);
+        }
+        .aq-readout th, .aq-readout td {
+            padding: 10px 16px; border-bottom: 1px solid var(--aq-tank-edge); text-align: left;
+        }
+        .aq-readout tbody tr:last-child th, .aq-readout tbody tr:last-child td { border-bottom: none; }
+        .aq-readout thead th { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--aq-dim); }
+        .aq-readout tbody th { font-weight: 500; color: var(--aq-text); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .aq-body, .aq-emoji, .aq-bub, .aq-rays { animation: none !important; }
+        }
+        @media (max-width: 640px) {
+            .aq-tank { height: 360px; }
+        }
     </style>
 </head>
 <body>
@@ -565,6 +673,67 @@
             <p>At-a-glance GA4 and Search Console performance for active Zonted projects. All data from the last 90 days unless noted.</p>
             <div class="updated-badge">Updated May 21, 2026</div>
         </div>
+
+        <!-- Portfolio Aquarium -->
+        <section class="portfolio-section aquarium-section" aria-labelledby="aquarium-heading">
+            <h2 id="aquarium-heading"><span class="icon">🐋</span> The Aquarium</h2>
+            <p class="section-desc">Each Zonted project as a species in a tank. Size honors GA4 sessions over the last 90 days — Tabiji's whale dwarfs Palmaura's plankton because the audiences differ by 935×. The readout table beneath is the canonical data; the tank is for feel.</p>
+            <div class="aquarium">
+                <div class="aq-tank">
+                    <div class="aq-rays" aria-hidden="true"></div>
+                    <div class="aq-creature" style="left: 4%; top: 32%;">
+                        <div class="aq-body" style="--dur: 24s; --sz: 88px; --glow: #fbbf24;">
+                            <div class="aq-emoji">🐋</div>
+                            <div class="aq-tag">TABIJI<b>18,708</b></div>
+                        </div>
+                    </div>
+                    <div class="aq-creature" style="left: 55%; top: 14%;">
+                        <div class="aq-body" style="--dur: 14s; --sz: 34px; --glow: #ec4899;">
+                            <div class="aq-emoji">🐠🐠🐠</div>
+                            <div class="aq-tag">ZONTED<b>428</b></div>
+                        </div>
+                    </div>
+                    <div class="aq-creature" style="left: 65%; top: 56%;">
+                        <div class="aq-body" style="--dur: 18s; --sz: 32px; --glow: #a8ff7a;">
+                            <div class="aq-emoji">🪼</div>
+                            <div class="aq-tag">VERACITY<b>135</b></div>
+                        </div>
+                    </div>
+                    <div class="aq-creature" style="left: 88%; top: 40%;">
+                        <div class="aq-body" style="--dur: 8s; --sz: 14px; --glow: #c8a8ff;">
+                            <div class="aq-emoji">·</div>
+                            <div class="aq-tag">PALMAURA<b>20</b></div>
+                        </div>
+                    </div>
+                    <div class="aq-bubbles" aria-hidden="true">
+                        <div class="aq-bub" style="left: 8%;  --bdur: 5s;   animation-delay: 0s;"></div>
+                        <div class="aq-bub" style="left: 12%; --bdur: 6s;   animation-delay: 1s;"></div>
+                        <div class="aq-bub" style="left: 18%; --bdur: 5.5s; animation-delay: 2.5s;"></div>
+                        <div class="aq-bub" style="left: 22%; --bdur: 7s;   animation-delay: 0.5s;"></div>
+                        <div class="aq-bub" style="left: 28%; --bdur: 4.5s; animation-delay: 3s;"></div>
+                        <div class="aq-bub" style="left: 42%; --bdur: 6.5s; animation-delay: 1.5s;"></div>
+                        <div class="aq-bub" style="left: 58%; --bdur: 5s;   animation-delay: 0.8s;"></div>
+                        <div class="aq-bub" style="left: 64%; --bdur: 7s;   animation-delay: 2s;"></div>
+                        <div class="aq-bub" style="left: 70%; --bdur: 4s;   animation-delay: 4s;"></div>
+                        <div class="aq-bub" style="left: 76%; --bdur: 6s;   animation-delay: 1.2s;"></div>
+                        <div class="aq-bub" style="left: 82%; --bdur: 5.5s; animation-delay: 3.5s;"></div>
+                        <div class="aq-bub" style="left: 88%; --bdur: 8s;   animation-delay: 0.3s;"></div>
+                        <div class="aq-bub" style="left: 92%; --bdur: 6s;   animation-delay: 2.8s;"></div>
+                    </div>
+                    <div class="aq-floor" aria-hidden="true"></div>
+                </div>
+                <table class="aq-readout">
+                    <caption>Species observed — GA4 sessions, last 90 days</caption>
+                    <thead><tr><th>Species</th><th>Sessions</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><th>Tabiji (whale)</th>     <td>18,708</td><td>Thriving</td></tr>
+                        <tr><th>Zonted (clownfish)</th> <td>428</td>   <td>Stable</td></tr>
+                        <tr><th>Veracity (jellyfish)</th><td>135</td>  <td>Emerging</td></tr>
+                        <tr><th>Palmaura (plankton)</th><td>20</td>    <td>Forming</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
         <!-- Portfolio GA4 Snapshot -->
         <section class="portfolio-section" aria-labelledby="portfolio-ga4-heading">

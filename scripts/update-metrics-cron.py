@@ -472,6 +472,126 @@ def replace_chart_data(script_text: str, key: str, value: object) -> str:
     return script_text[:value_start] + json.dumps(value, separators=(",", ":"))
 
 
+# Aquarium species configuration — keyed by GA4 property key.
+# emoji + color + tank position + swim duration. Status thresholds use
+# session counts so sizing and label both come from GA4 — no other inputs.
+AQUARIUM_SPECIES = {
+    "tabiji":      {"emoji": "🐋",    "glow": "#fbbf24", "left": "4%",  "top": "32%", "dur": "24s", "label": "TABIJI",   "tag_name": "Tabiji",   "tag_kind": "whale"},
+    "zonted":      {"emoji": "🐠🐠🐠", "glow": "#ec4899", "left": "55%", "top": "14%", "dur": "14s", "label": "ZONTED",   "tag_name": "Zonted",   "tag_kind": "clownfish"},
+    "veracityapi": {"emoji": "🪼",    "glow": "#a8ff7a", "left": "65%", "top": "56%", "dur": "18s", "label": "VERACITY", "tag_name": "Veracity", "tag_kind": "jellyfish"},
+    "palmaura":    {"emoji": "·",     "glow": "#c8a8ff", "left": "88%", "top": "40%", "dur": "8s",  "label": "PALMAURA", "tag_name": "Palmaura", "tag_kind": "plankton"},
+}
+
+
+def _aquarium_size_px(sessions: int, max_sessions: int) -> int:
+    """Map a session count to an emoji size between 14px (floor) and 120px (cap).
+    Uses square-root scaling so a 10x audience doesn't become a 10x glyph."""
+    if max_sessions <= 0:
+        return 14
+    ratio = sessions / max_sessions
+    # sqrt softens the curve; max_sessions species sits near the cap.
+    scaled = ratio ** 0.5
+    return max(14, min(120, int(14 + (120 - 14) * scaled)))
+
+
+def _aquarium_status(sessions: int) -> str:
+    """Derive a human status label from session count alone (no revenue)."""
+    if sessions >= 5000:
+        return "Thriving"
+    if sessions >= 250:
+        return "Stable"
+    if sessions >= 50:
+        return "Emerging"
+    return "Forming"
+
+
+def render_aquarium(data: dict) -> str:
+    """Build the aquarium section's inner markup from GA4 session totals.
+
+    Species sizing scales with sessions vs the leader. Bubbles are fixed
+    decorative layer. Readout table beneath is canonical for accessibility.
+    """
+    props = data.get("properties", [])
+    max_sessions = max((p["totals"]["sessions"] for p in props), default=0)
+
+    creatures: list[str] = []
+    # Render in the order defined by AQUARIUM_SPECIES so positions are stable.
+    by_key = {p["key"]: p for p in props}
+    for key, spec in AQUARIUM_SPECIES.items():
+        prop = by_key.get(key)
+        if not prop:
+            continue
+        sessions = int(prop["totals"]["sessions"] or 0)
+        size = _aquarium_size_px(sessions, max_sessions)
+        # Override the canonical defaults: leader gets full size, others shrink.
+        # Tabiji at 88px in the spec works because it's the leader; we recompute
+        # so the visualization stays truthful when audience ratios change.
+        creatures.append(
+            f'''                    <div class="aq-creature" style="left: {spec['left']}; top: {spec['top']};">
+                        <div class="aq-body" style="--dur: {spec['dur']}; --sz: {size}px; --glow: {spec['glow']};">
+                            <div class="aq-emoji">{spec['emoji']}</div>
+                            <div class="aq-tag">{spec['label']}<b>{fmt(sessions)}</b></div>
+                        </div>
+                    </div>'''
+        )
+
+    # Fixed decorative bubble field — same in every build. Tweak count by
+    # changing this list, not by wiring it to revenue.
+    bubbles_raw = [
+        ("8%",  "5s",   "0s"),
+        ("12%", "6s",   "1s"),
+        ("18%", "5.5s", "2.5s"),
+        ("22%", "7s",   "0.5s"),
+        ("28%", "4.5s", "3s"),
+        ("42%", "6.5s", "1.5s"),
+        ("58%", "5s",   "0.8s"),
+        ("64%", "7s",   "2s"),
+        ("70%", "4s",   "4s"),
+        ("76%", "6s",   "1.2s"),
+        ("82%", "5.5s", "3.5s"),
+        ("88%", "8s",   "0.3s"),
+        ("92%", "6s",   "2.8s"),
+    ]
+    bubbles = "\n".join(
+        f'                        <div class="aq-bub" style="left: {l};  --bdur: {d}; animation-delay: {a};"></div>'
+        for l, d, a in bubbles_raw
+    )
+
+    # Accessible readout table — single source of truth for screen readers.
+    readout_rows: list[str] = []
+    for key, spec in AQUARIUM_SPECIES.items():
+        prop = by_key.get(key)
+        if not prop:
+            continue
+        sessions = int(prop["totals"]["sessions"] or 0)
+        readout_rows.append(
+            f"                        <tr><th>{esc(spec['tag_name'])} ({esc(spec['tag_kind'])})</th><td>{fmt(sessions)}</td><td>{_aquarium_status(sessions)}</td></tr>"
+        )
+    readout_body = "\n".join(readout_rows)
+
+    return (
+        '            <h2 id="aquarium-heading"><span class="icon">🐋</span> The Aquarium</h2>\n'
+        "            <p class=\"section-desc\">Each Zonted project as a species in a tank. Size honors GA4 sessions over the last 90 days — Tabiji's whale dwarfs Palmaura's plankton because the audiences differ by orders of magnitude. The readout table beneath is the canonical data; the tank is for feel.</p>\n"
+        '            <div class="aquarium">\n'
+        '                <div class="aq-tank">\n'
+        '                    <div class="aq-rays" aria-hidden="true"></div>\n'
+        f'{chr(10).join(creatures)}\n'
+        '                    <div class="aq-bubbles" aria-hidden="true">\n'
+        f'{bubbles}\n'
+        '                    </div>\n'
+        '                    <div class="aq-floor" aria-hidden="true"></div>\n'
+        '                </div>\n'
+        '                <table class="aq-readout">\n'
+        '                    <caption>Species observed — GA4 sessions, last 90 days</caption>\n'
+        '                    <thead><tr><th>Species</th><th>Sessions</th><th>Status</th></tr></thead>\n'
+        '                    <tbody>\n'
+        f'{readout_body}\n'
+        '                    </tbody>\n'
+        '                </table>\n'
+        '            </div>'
+    )
+
+
 def render_property_cards(data: dict) -> str:
     cards: list[str] = []
     for prop in data["properties"]:
@@ -656,6 +776,28 @@ def update_html(data: dict) -> None:
     # Tabiji channel/detail sections are stripped here so nightly refreshes do
     # not accidentally republish private growth metrics.
     text = re.sub(r'<div class="updated-badge">Updated [^<]+</div>', f'<div class="updated-badge">Updated {esc(data["updatedLabel"])}</div>', text, count=1)
+
+    # Aquarium — first section on the page, driven by GA4 sessions only.
+    aquarium = f'''        <!-- Portfolio Aquarium -->
+        <section class="portfolio-section aquarium-section" aria-labelledby="aquarium-heading">
+{render_aquarium(data)}
+        </section>
+
+'''
+    if '<!-- Portfolio Aquarium -->' in text:
+        text = re.sub(
+            r'        <!-- Portfolio Aquarium -->.*?(?=        <!-- Portfolio GA4 Snapshot -->|        <!-- Portfolio Search Console Snapshot -->|\n    </div>\n    </main>)',
+            aquarium,
+            text,
+            flags=re.S,
+        )
+    else:
+        # First run on a page that doesn't yet have the marker — insert before GA4.
+        text = text.replace(
+            '        <!-- Portfolio GA4 Snapshot -->',
+            aquarium + '        <!-- Portfolio GA4 Snapshot -->',
+            1,
+        )
 
     portfolio = f'''        <!-- Portfolio GA4 Snapshot -->
         <section class="portfolio-section" aria-labelledby="portfolio-ga4-heading">
