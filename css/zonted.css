@@ -496,6 +496,38 @@ img, video { max-width: 100%; height: auto; }
   padding: 20px 0;
   border-bottom: 1px solid var(--rule);
 }
+
+/* JUST SHIPPED stamp — appears on the newest post in /posts when it's
+   within 7 days of build. Pure CSS, once-on-load animation. Spec:
+   _inbox/handoff-posts-shipped/. */
+.zn-row-shipped { position: relative; }
+.zn-shipped-stamp {
+  position: absolute;
+  top: -10px;
+  right: 4px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--green-live);
+  background: var(--paper);
+  border: 1.5px solid var(--green-live);
+  padding: 3px 7px;
+  transform: rotate(-6deg);
+  transform-origin: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  animation: znShippedStamp 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+@keyframes znShippedStamp {
+  0%   { opacity: 0;    transform: rotate(-6deg) scale(1.8); }
+  60%  { opacity: 1;    transform: rotate(-6deg) scale(0.92); }
+  100% { opacity: 0.95; transform: rotate(-6deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zn-shipped-stamp { animation: none; opacity: 0.95; }
+}
 /* Left column: always 150px, always shows the date, optionally shows the
    image below it. When there's no image, left column collapses to just the
    date but the content still aligns at the same x-offset across rows. */

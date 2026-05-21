@@ -179,7 +179,25 @@ def format_date_rfc822(date_str):
 # Entry list HTML generation
 # ---------------------------------------------------------------------------
 
-def make_entry_row(article):
+SHIPPED_FRESH_DAYS = 7
+"""Freshness window for the JUST SHIPPED stamp on /posts/. The newest post
+gets stamped only if its date is within this many days of the build run.
+After that, the stamp disappears until a new post ships."""
+
+
+def is_shipped(article):
+    """True if this article should get the JUST SHIPPED stamp on /posts/."""
+    if not article.get('date'):
+        return False
+    try:
+        dt = datetime.strptime(article['date'], '%Y-%m-%d')
+    except (ValueError, TypeError):
+        return False
+    age_days = (datetime.now() - dt).days
+    return 0 <= age_days < SHIPPED_FRESH_DAYS
+
+
+def make_entry_row(article, mark_shipped=False):
     date_display = format_date_short(article['date']) if article['date'] else ''
     title = html.escape(article['title'])
     dek = html.escape(article.get('description', '') or '')
@@ -197,13 +215,22 @@ def make_entry_row(article):
         f'                    </div>'
     )
 
+    row_classes = 'zn-row'
+    stamp_html = ''
+    if mark_shipped:
+        row_classes += ' zn-row-shipped'
+        stamp_html = (
+            '\n                    <div class="zn-shipped-stamp" aria-hidden="true">'
+            '★ JUST SHIPPED</div>'
+        )
+
     return (
-        f'                <li class="zn-row">\n'
+        f'                <li class="{row_classes}">\n'
         f'{left_html}\n'
         f'                    <div class="zn-row-content">\n'
         f'                        <a href="/{article["slug"]}/" class="zn-row-title">{title}</a>\n'
         f'                        <p class="zn-row-dek">{dek}</p>\n'
-        f'                    </div>\n'
+        f'                    </div>{stamp_html}\n'
         f'                </li>'
     )
 
@@ -297,7 +324,12 @@ def generate_posts_hub(articles):
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    rows = [make_entry_row(a) for a in articles]
+    # Mark the newest post as "shipped" if it's within the freshness window.
+    # Stamps disappear once the post ages past SHIPPED_FRESH_DAYS.
+    rows = [
+        make_entry_row(a, mark_shipped=(i == 0 and is_shipped(a)))
+        for i, a in enumerate(articles)
+    ]
     entry_html = '\n'.join(rows)
 
     new_block = (
