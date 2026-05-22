@@ -2,7 +2,7 @@
 
 > Honest writing on AI in production by Bernard Huang. Operator notes from someone building fully autonomous AI businesses — agent workflows, model selection, cost economics, and what actually breaks. Receipts included.
 
-Zonted is Bernard Huang's personal site. The angle is non-commodity: specific systems, real numbers from production, counterintuitive takes earned from running AI pipelines daily. Bernard runs Tabiji (an AI-driven travel publisher) and writes about the systems behind it — token herding agent swarms, cron-shipped content pipelines, API economics, model benchmarks. He has been in SEO/content for 15 years and treats AI the same way he treats search: empirical, measured, skeptical of received wisdom.
+Zonted is Bernard Huang's personal site. The angle is non-commodity: specific systems, real numbers from production, counterintuitive takes earned from running AI pipelines daily. Bernard runs Tabiji (an AI-driven travel publisher) and writes about the systems behind it — token herding agent swarms, cron-shipped content pipelines, API economics, model benchmarks. He founded Clearscope (the bootstrapped SEO content optimization platform) and has been in SEO/content for 15+ years. He treats AI the same way he treats search: empirical, measured, skeptical of received wisdom.
 
 ## What this site covers
 
@@ -41,4 +41,4 @@ Zonted is Bernard Huang's personal site. The angle is non-commodity: specific sy
 
 ## Author
 
-Bernard Huang. Based in Asia. Background in SEO/content/affiliate. Currently building Tabiji and a handful of other agentic businesses. Writes at zonted.com daily-ish.
+Bernard Huang. Based in Austin, TX. Founder of [Clearscope](https://clearscope.io) — the bootstrapped SEO content optimization platform he built and grew profitably for years before exiting day-to-day operations. Background in SEO/content/affiliate going back ~15 years. Currently building Tabiji, VeracityAPI, Palmaura, and a handful of other agentic businesses. Writes at zonted.com daily-ish.
