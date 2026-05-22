@@ -5,8 +5,16 @@
     <link>https://zonted.com/</link>
     <description>I test AI tools so you don't have to. Honest reviews, real data, and opinions from someone who actually builds with this stuff.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://zonted.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Plan 3×, Build Once: How Three Models Plan What Two Models Ship</title>
+      <link>https://zonted.com/posts/plan-3x-build-once/</link>
+      <description>We asked Opus 4.7 and GPT-5.5 to independently plan the same VeracityAPI feature. Gemini 3.1 Pro audited both and picked the winning combination: Opus&#x27;s architecture + GPT-5.5&#x27;s product strategy. Single-model planning would have shipped half a product.</description>
+      <pubDate>Fri, 22 May 2026 00:00:00 +0000</pubDate>
+      <author>bernard@zonted.com (Bernard Huang)</author>
+      <guid isPermaLink="true">https://zonted.com/posts/plan-3x-build-once/</guid>
+    </item>
     <item>
       <title>Stakes Priming in Prompts: I Told an AI I&#x27;d Lose My Job. The Audit Got 24% Better.</title>
       <link>https://zonted.com/posts/stakes-priming/</link>
