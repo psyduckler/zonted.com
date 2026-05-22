@@ -151,6 +151,137 @@
             color: var(--text);
         }
 
+        /* ────────────────────────────────────────────────────────────────
+         * /about/ as an email-client card — handoff-about-email
+         * ──────────────────────────────────────────────────────────────── */
+        :root {
+            --mail-sidebar: #f6f5f0;
+            --mail-border:  #d4d4d0;
+            --mail-row:     #e8e7e2;
+            --mail-active:  #fff3d6;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+        .about-mail {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+            overflow: hidden;
+            min-height: 600px;
+            max-width: 1080px;
+            margin: 0 auto 3rem;
+            font-family: var(--sans);
+            color: var(--ink);
+            font-size: 14px;
+        }
+        .mail-sidebar {
+            background: var(--mail-sidebar);
+            border-right: 1px solid var(--mail-border);
+            padding: 14px;
+        }
+        .mail-sidebar h3 {
+            margin: 0 0 8px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--faded);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .mail-msg {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--mail-row);
+            cursor: pointer;
+            position: relative;
+        }
+        .mail-msg.active {
+            background: var(--mail-active);
+            border-left: 3px solid var(--ox);
+            padding-left: 9px;
+        }
+        .mail-msg.unread .fr::before {
+            content: "●";
+            color: var(--ox);
+            margin-right: 6px;
+            font-size: 10px;
+        }
+        .mail-msg .fr  { font-weight: 600; font-size: 13px; color: var(--ink); }
+        .mail-msg .sub { font-size: 12px; color: #3a3a35; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .mail-msg .pre { font-size: 11px; color: var(--faded); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .mail-msg .tm  { font-size: 10px; color: #9b988e; float: right; }
+        .mail-msg:not(.active):hover { background: rgba(107, 26, 26, 0.04); }
+
+        .mail-body { padding: 24px 32px; }
+        .mail-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--faded);
+            border-bottom: 1px solid var(--mail-row);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+        .mail-avatar {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #a32118, #1a0e08);
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .mail-meta b { color: var(--ink); font-size: 13px; }
+        .mail-meta a { color: var(--faded); text-decoration: none; }
+        .mail-meta-sub { color: var(--faded); font-size: 11px; margin-top: 2px; }
+        .mail-body h2 {
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: -0.6px;
+            margin: 0 0 18px;
+            color: var(--ink);
+        }
+        .mail-content p {
+            margin: 0 0 16px;
+            line-height: 1.6;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 15px;
+        }
+        .mail-content p strong { color: var(--ox); font-weight: 600; }
+        .mail-content a { color: var(--ink); }
+
+        .mail-sign { color: var(--ink); }
+        .mail-typing { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: middle; }
+        .mail-typing i {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--ox);
+            animation: mailBounce 1.4s ease-in-out infinite;
+        }
+        .mail-typing i:nth-child(2) { animation-delay: 0.2s; }
+        .mail-typing i:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes mailBounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40%           { transform: scale(1);   opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .mail-typing i { animation: none; opacity: 1; }
+        }
+        @media (max-width: 760px) {
+            .about-mail { grid-template-columns: 1fr; margin: 0 16px 2rem; }
+            .mail-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--mail-border);
+                max-height: 240px;
+                overflow-y: auto;
+            }
+            .mail-body { padding: 20px 22px; }
+            .mail-body h2 { font-size: 24px; }
+        }
+
 
         /* Footer */
         footer {
@@ -222,25 +353,83 @@
         <h1 class="page-title">About</h1>
 
         <img src="https://img.zonted.com/about/bernard-huang.jpg" alt="Bernard Huang" style="border-radius:8px;max-width:280px;margin:1.5rem 0;border:1px solid var(--border);">
+    </div>
 
-        <div class="content">
-            <p class="dropcap">I'm Bernard Huang. Based in Austin, TX.</p>
+    <section class="about-mail">
+        <aside class="mail-sidebar">
+            <h3>Inbox &middot; 4 unread</h3>
 
-            <p>Before this, I founded <a href="https://clearscope.io">Clearscope</a>, the SEO content optimization platform used by content teams at Nvidia, HubSpot, Adobe, and Condé Nast. Bootstrapped, profitable, ran it for ~10 years before stepping away.</p>
+            <article class="mail-msg unread active">
+                <span class="tm">14:22</span>
+                <div class="fr">Bernard Huang</div>
+                <div class="sub">About me &mdash; the short version</div>
+                <div class="pre">I&#x27;m Bernard Huang. Based in Austin, TX&hellip;</div>
+            </article>
 
-            <p>What I do now: build fully autonomous AI businesses, and share the build in public.</p>
+            <article class="mail-msg unread">
+                <span class="tm">14:18</span>
+                <div class="fr">openclaw</div>
+                <div class="sub">[shipped] Tulum tire-scam reel</div>
+                <div class="pre">3.88M views and counting. Reel published to IG, TT, YT&hellip;</div>
+            </article>
 
-            <p>The portfolio: <a href="https://tabiji.ai">tabiji.ai</a> (AI travel publisher), <a href="https://veracityapi.com">VeracityAPI</a> (pre-merge AI-content audit), <a href="https://palmaura.app">Palmaura</a> (AI palm reading on iOS), <a href="https://kapiko.ai">Kapiko</a> (AI-generated ambient music), and one in stealth. Full set on the <a href="/portfolio/">portfolio</a>.</p>
+            <article class="mail-msg unread">
+                <span class="tm">14:11</span>
+                <div class="fr">hermes</div>
+                <div class="sub">[carousel] Spain &middot; 5 slides</div>
+                <div class="pre">Published to IG. 0 errors. Pinterest pin queued for&hellip;</div>
+            </article>
 
-            <p>Across all properties in the last 90 days: <strong>16M+ Instagram views</strong>, <strong>19,000+ organic sessions</strong>, <strong>2,100+ Google clicks</strong>. Thousands of pages, hundreds of videos, dozens of automated pipelines. One human (me). The rest is agents: writing copy, generating images, producing videos, posting to socials.</p>
+            <article class="mail-msg unread">
+                <span class="tm">13:30</span>
+                <div class="fr">Zonted Substack</div>
+                <div class="sub">+12 new subscribers &middot; letter 047</div>
+                <div class="pre">Confirmed: 8,420 &rarr; 8,432. Welcome cohort processed.</div>
+            </article>
 
-            <p>I share the day-to-day on <a href="https://www.linkedin.com/in/bernardjhuang/" rel="me">LinkedIn</a> and <a href="https://x.com/bernardjhuang" rel="me">X</a>: what I'm shipping, what's breaking, what just hit traffic. Follow there for the pulse.</p>
+            <article class="mail-msg">
+                <span class="tm">13:14</span>
+                <div class="fr">codex</div>
+                <div class="sub">[patched] /api/scams 500 error</div>
+                <div class="pre">Caught on health-check, redeployed. Stack green.</div>
+            </article>
+        </aside>
 
-            <p>Zonted is the long-form companion. The portfolio of what I've built, the playbooks I use repeatedly, and <a href="/metrics/">public metrics</a> on what's actually working. Every post here is from something I actually built and ran. No sponsorships, no AI-generated reviews, no "5 prompts to 10x your productivity."</p>
+        <div class="mail-body">
+            <div class="mail-meta">
+                <div class="mail-avatar" aria-hidden="true">BH</div>
+                <div>
+                    <b>Bernard Huang</b>
+                    <a href="mailto:bernard@zonted.com">&lt;bernard@zonted.com&gt;</a>
+                    <div class="mail-meta-sub">to: a new reader &middot; May 21, 2026 14:22 &middot; 2-min read</div>
+                </div>
+            </div>
 
-            <p>If you're building something AI-native (or trying to figure out if you should be), this is the unfiltered version from someone deep in it.</p>
+            <h2>About me &mdash; the short version</h2>
+
+            <div class="mail-content">
+                <p>I&#x27;m Bernard Huang. Based in Austin, TX.</p>
+
+                <p>Before this, I founded <a href="https://clearscope.io">Clearscope</a>, the SEO content optimization platform used by content teams at <strong>Nvidia, HubSpot, Adobe, and Cond&eacute; Nast</strong>. Bootstrapped, profitable, ran it for ~10 years before stepping away.</p>
+
+                <p>What I do now: build <strong>fully autonomous AI businesses</strong>, and share the build in public.</p>
+
+                <p>The portfolio: <a href="https://tabiji.ai">tabiji.ai</a> (AI travel publisher), <a href="https://veracityapi.com">VeracityAPI</a> (pre-merge AI-content audit), <a href="https://palmaura.app">Palmaura</a> (AI palm reading on iOS), <a href="https://kapiko.ai">Kapiko</a> (AI-generated ambient music), and one in stealth. Full set on the <a href="/portfolio/">portfolio</a>.</p>
+
+                <p>Across all properties in the last 90 days: <strong>16M+ Instagram views</strong>, <strong>19,000+ organic sessions</strong>, <strong>2,100+ Google clicks</strong>. Thousands of pages, hundreds of videos, dozens of automated pipelines. One human (me). The rest is agents: writing copy, generating images, producing videos, posting to socials.</p>
+
+                <p>I share the day-to-day on <a href="https://www.linkedin.com/in/bernardjhuang/" rel="me">LinkedIn</a> and <a href="https://x.com/bernardjhuang" rel="me">X</a>: what I&#x27;m shipping, what&#x27;s breaking, what just hit traffic. Follow there for the pulse.</p>
+
+                <p>Zonted is the long-form companion. The portfolio of what I&#x27;ve built, the playbooks I use repeatedly, and <a href="/metrics/">public metrics</a> on what&#x27;s actually working. Every post here is from something I actually built and ran. No sponsorships, no AI-generated reviews, no &quot;5 prompts to 10x your productivity.&quot;</p>
+
+                <p>If you&#x27;re building something AI-native (or trying to figure out if you should be), this is the unfiltered version from someone deep in it.</p>
+
+                <p class="mail-sign">&mdash; Bernard <span class="mail-typing" aria-hidden="true"><i></i><i></i><i></i></span></p>
+            </div>
         </div>
+    </section>
 
+    <div class="container">
         <section id="subscribe" class="zn-subscribe">
             <div class="zn-subscribe-copy">
                 <strong>Get new posts by email.</strong> One email when I publish something new. No spam, no fixed schedule, unsubscribe anytime.
