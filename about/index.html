@@ -660,11 +660,17 @@
   function pickNewState(s) {
     s.walking = Math.random() < 0.72;
     if (s.walking) {
-      // Horizontal-only: stage is short, vertical wander looks cramped.
-      s.dir = Math.random() < 0.5 ? 'right' : 'left';
+      // Horizontal-only. Bias heavily toward keeping the current direction
+      // — a 50/50 reroll every state change made Rebecca look indecisive,
+      // pivoting back and forth roughly every 2 seconds. Now she only
+      // reverses ~20% of the time; the rest she keeps her stride and lets
+      // the edge bounce handle the eventual turnaround.
+      if (Math.random() < 0.2) {
+        s.dir = s.dir === 'left' ? 'right' : 'left';
+      }
     }
     s.stateTimer = s.walking
-      ? 1500 + Math.random() * 2500
+      ? 2200 + Math.random() * 2800
       : 800 + Math.random() * 1500;
   }
 
