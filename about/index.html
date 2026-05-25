@@ -259,8 +259,8 @@
         }
         .bernard-sprite {
             position: absolute;
-            left: 50%;
-            top: 60px;
+            left: 0;
+            top: 0;
             width: 48px;
             height: 48px;
             background-image: url('https://img.zonted.com/about/bernard-sprite.png');
@@ -270,6 +270,9 @@
             image-rendering: pixelated;
             image-rendering: crisp-edges;
             will-change: transform, background-position;
+        }
+        .bernard-sprite.rebecca-sprite {
+            background-image: url('https://img.zonted.com/about/rebecca-sprite.png');
         }
         @media (prefers-reduced-motion: reduce) {
             /* JS gates animation off; this keeps him centered and still. */
@@ -428,7 +431,8 @@
                 <p class="mail-sign">&mdash; Bernard</p>
 
                 <div class="bernard-stage" aria-hidden="true">
-                    <div class="bernard-sprite"></div>
+                    <div class="bernard-sprite" data-sprite="bernard"></div>
+                    <div class="bernard-sprite rebecca-sprite" data-sprite="rebecca"></div>
                 </div>
             </div>
         </div>
@@ -605,19 +609,22 @@
   });
 })();
 
-// Wandering Bernard sprite. State machine: walks for 1.5–4s in a random
-// direction, then idles for 0.8–2.3s, then picks a new state. Bounces off
-// stage edges. Frame cycle (0=neutral, 1=left_step, 2=neutral, 3=right_step)
-// matches the metadata in the sprite package.
+// Wandering pixel-art sprites on /about/. Currently: Bernard + Rebecca.
+// Each sprite gets its own independent state machine — they wander around
+// the same stage without coordination, occasionally crossing paths.
+//
+// State machine per sprite: walks 1.5–4s in a random direction, then idles
+// 0.8–2.3s, then picks a new state. Bounces off stage edges. Walk-cycle
+// frame order 0,1,2,3 (neutral, left_step, neutral, right_step) per the
+// sprite package metadata.
 (function () {
   var stage = document.querySelector('.bernard-stage');
   if (!stage) return;
-  var sprite = stage.querySelector('.bernard-sprite');
-  if (!sprite) return;
+  var spriteEls = stage.querySelectorAll('.bernard-sprite');
+  if (!spriteEls.length) return;
 
-  var TILE = 48;                          // sprite displayed size (px)
+  var TILE = 48;
   var DIR_ROW = { down: 0, left: 1, right: 2, up: 3 };
-  var DIRS = ['down', 'left', 'right', 'up'];
   var VEC = {
     down:  { dx: 0,  dy: 1  },
     left:  { dx: -1, dy: 0  },
@@ -625,84 +632,95 @@
     up:    { dx: 0,  dy: -1 },
   };
   var FRAME_SEQ = [0, 1, 2, 3];
-  var SPEED_PX_PER_MS = 0.045;            // ~45 px/sec
+  var SPEED_PX_PER_MS = 0.045;
   var FRAME_DUR_MS = 180;
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var x = Math.max(0, stage.clientWidth / 2 - TILE / 2);
-  var y = Math.max(0, stage.clientHeight / 2 - TILE / 2);
-  var dir = 'right';
-  var frame = 0;
-  var walking = true;
-  var walkTimer = 0;
-  var stateTimer = 1200 + Math.random() * 800;
-  var lastT = performance.now();
-
-  function paint() {
-    sprite.style.transform = 'translate(' + Math.round(x) + 'px,' + Math.round(y) + 'px)';
-    sprite.style.left = '0';
-    sprite.style.top = '0';
-    sprite.style.backgroundPosition = (-FRAME_SEQ[frame] * TILE) + 'px ' + (-DIR_ROW[dir] * TILE) + 'px';
+  function makeSprite(el, startBias) {
+    // startBias: -1 → start on left third, +1 → start on right third, 0 → center
+    var maxX = stage.clientWidth - TILE;
+    var startX = stage.clientWidth / 2 - TILE / 2 + startBias * stage.clientWidth * 0.25;
+    return {
+      el: el,
+      x: Math.max(0, Math.min(maxX, startX)),
+      y: Math.max(0, stage.clientHeight / 2 - TILE / 2),
+      dir: startBias < 0 ? 'right' : 'left',
+      frame: 0,
+      walking: true,
+      walkTimer: 0,
+      stateTimer: 600 + Math.random() * 1400,
+    };
   }
 
-  function pickNewState() {
-    walking = Math.random() < 0.72;
-    if (walking) {
-      // Bias toward horizontal movement (stage is wider than tall)
+  function pickNewState(s) {
+    s.walking = Math.random() < 0.72;
+    if (s.walking) {
       var roll = Math.random();
-      if (roll < 0.4) dir = 'right';
-      else if (roll < 0.8) dir = 'left';
-      else if (roll < 0.9) dir = 'down';
-      else dir = 'up';
+      if (roll < 0.4) s.dir = 'right';
+      else if (roll < 0.8) s.dir = 'left';
+      else if (roll < 0.9) s.dir = 'down';
+      else s.dir = 'up';
     }
-    stateTimer = walking
+    s.stateTimer = s.walking
       ? 1500 + Math.random() * 2500
       : 800 + Math.random() * 1500;
   }
 
+  function paint(s) {
+    s.el.style.transform = 'translate(' + Math.round(s.x) + 'px,' + Math.round(s.y) + 'px)';
+    s.el.style.backgroundPosition = (-FRAME_SEQ[s.frame] * TILE) + 'px ' + (-DIR_ROW[s.dir] * TILE) + 'px';
+  }
+
+  function stepSprite(s, dt) {
+    s.stateTimer -= dt;
+    if (s.stateTimer <= 0) pickNewState(s);
+
+    if (s.walking) {
+      var v = VEC[s.dir];
+      s.x += v.dx * SPEED_PX_PER_MS * dt;
+      s.y += v.dy * SPEED_PX_PER_MS * dt;
+      var maxX = stage.clientWidth - TILE;
+      var maxY = stage.clientHeight - TILE;
+      if (s.x < 0)    { s.x = 0;    s.dir = 'right'; }
+      if (s.x > maxX) { s.x = maxX; s.dir = 'left'; }
+      if (s.y < 0)    { s.y = 0;    s.dir = 'down'; }
+      if (s.y > maxY) { s.y = maxY; s.dir = 'up'; }
+
+      s.walkTimer += dt;
+      while (s.walkTimer >= FRAME_DUR_MS) {
+        s.walkTimer -= FRAME_DUR_MS;
+        s.frame = (s.frame + 1) % FRAME_SEQ.length;
+      }
+    } else {
+      s.frame = 0;
+    }
+  }
+
+  // Bernard starts left-of-center, Rebecca starts right-of-center.
+  var biases = [-0.6, 0.6];
+  var sprites = Array.prototype.map.call(spriteEls, function (el, i) {
+    var s = makeSprite(el, biases[i] || 0);
+    pickNewState(s);
+    paint(s);
+    return s;
+  });
+
+  if (reduced) {
+    // Static pose, neutral frame. Hold positions.
+    sprites.forEach(function (s) { s.frame = 0; s.dir = 'down'; paint(s); });
+    return;
+  }
+
+  var lastT = performance.now();
   function tick(now) {
     var dt = now - lastT;
     lastT = now;
-
-    if (reduced) {
-      // Static pose, neutral frame, dead center.
-      x = Math.max(0, stage.clientWidth / 2 - TILE / 2);
-      y = Math.max(0, stage.clientHeight / 2 - TILE / 2);
-      frame = 0;
-      dir = 'down';
-      paint();
-      return; // no further frames
-    }
-
-    stateTimer -= dt;
-    if (stateTimer <= 0) pickNewState();
-
-    if (walking) {
-      var v = VEC[dir];
-      x += v.dx * SPEED_PX_PER_MS * dt;
-      y += v.dy * SPEED_PX_PER_MS * dt;
-      var maxX = stage.clientWidth - TILE;
-      var maxY = stage.clientHeight - TILE;
-      if (x < 0)    { x = 0;    dir = 'right'; }
-      if (x > maxX) { x = maxX; dir = 'left'; }
-      if (y < 0)    { y = 0;    dir = 'down'; }
-      if (y > maxY) { y = maxY; dir = 'up'; }
-
-      walkTimer += dt;
-      while (walkTimer >= FRAME_DUR_MS) {
-        walkTimer -= FRAME_DUR_MS;
-        frame = (frame + 1) % FRAME_SEQ.length;
-      }
-    } else {
-      frame = 0; // idle on neutral frame
-    }
-
-    paint();
+    sprites.forEach(function (s) {
+      stepSprite(s, dt);
+      paint(s);
+    });
     requestAnimationFrame(tick);
   }
-
-  pickNewState();
-  paint();
   requestAnimationFrame(tick);
 })();
 </script>
