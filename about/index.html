@@ -321,6 +321,7 @@
 
     <main id="main">
     <section class="about-mail">
+        <div id="mail-announcer" aria-live="polite" aria-atomic="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"></div>
         <aside class="mail-sidebar">
             <h3>Inbox &middot; 4 unread</h3>
 
@@ -533,6 +534,7 @@
   var inboxHeader = sidebar.querySelector('h3');
   if (!msgs.length || !bodies.length) return;
 
+  var announcer = document.getElementById('mail-announcer');
   function activate(id) {
     msgs.forEach(function (m) {
       var match = m.dataset.msgId === id;
@@ -546,6 +548,12 @@
     if (inboxHeader) {
       var remaining = sidebar.querySelectorAll('.mail-msg.unread').length;
       inboxHeader.textContent = 'Inbox · ' + remaining + ' unread';
+    }
+    // Announce the newly opened email to screen readers
+    if (announcer) {
+      var visible = Array.prototype.find.call(bodies, function (b) { return !b.hidden; });
+      var subj = visible && visible.querySelector('h2');
+      announcer.textContent = subj ? 'Showing: ' + subj.textContent.trim() : '';
     }
   }
 
