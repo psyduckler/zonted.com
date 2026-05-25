@@ -245,6 +245,39 @@
         }
 
         .mail-sign { color: var(--ink); }
+
+        /* Wandering Bernard sprite — sits below the sign-off in the about
+           email body. 4-direction walk cycle, 96×96 sprite cells displayed
+           at 48×48. JS handles position + frame; CSS sets the chrome. */
+        .bernard-stage {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            margin-top: 18px;
+            border-top: 1px dashed var(--mail-row);
+            overflow: hidden;
+        }
+        .bernard-sprite {
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            width: 48px;
+            height: 48px;
+            background-image: url('https://img.zonted.com/about/bernard-sprite.png');
+            background-size: 192px 192px;
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            will-change: transform, background-position;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            /* JS gates animation off; this keeps him centered and still. */
+            .bernard-stage { height: 96px; }
+        }
+        @media (max-width: 480px) {
+            .bernard-stage { height: 100px; }
+        }
         @media (max-width: 760px) {
             .about-mail { grid-template-columns: 1fr; margin: 0 16px 2rem; }
             .mail-sidebar {
@@ -393,6 +426,10 @@
                 <p>If you&#x27;re building something AI-native (or trying to figure out if you should be), this is the unfiltered version from someone deep in it.</p>
 
                 <p class="mail-sign">&mdash; Bernard</p>
+
+                <div class="bernard-stage" aria-hidden="true">
+                    <div class="bernard-sprite"></div>
+                </div>
             </div>
         </div>
 
@@ -566,6 +603,107 @@
       }
     });
   });
+})();
+
+// Wandering Bernard sprite. State machine: walks for 1.5–4s in a random
+// direction, then idles for 0.8–2.3s, then picks a new state. Bounces off
+// stage edges. Frame cycle (0=neutral, 1=left_step, 2=neutral, 3=right_step)
+// matches the metadata in the sprite package.
+(function () {
+  var stage = document.querySelector('.bernard-stage');
+  if (!stage) return;
+  var sprite = stage.querySelector('.bernard-sprite');
+  if (!sprite) return;
+
+  var TILE = 48;                          // sprite displayed size (px)
+  var DIR_ROW = { down: 0, left: 1, right: 2, up: 3 };
+  var DIRS = ['down', 'left', 'right', 'up'];
+  var VEC = {
+    down:  { dx: 0,  dy: 1  },
+    left:  { dx: -1, dy: 0  },
+    right: { dx: 1,  dy: 0  },
+    up:    { dx: 0,  dy: -1 },
+  };
+  var FRAME_SEQ = [0, 1, 2, 3];
+  var SPEED_PX_PER_MS = 0.045;            // ~45 px/sec
+  var FRAME_DUR_MS = 180;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var x = Math.max(0, stage.clientWidth / 2 - TILE / 2);
+  var y = Math.max(0, stage.clientHeight / 2 - TILE / 2);
+  var dir = 'right';
+  var frame = 0;
+  var walking = true;
+  var walkTimer = 0;
+  var stateTimer = 1200 + Math.random() * 800;
+  var lastT = performance.now();
+
+  function paint() {
+    sprite.style.transform = 'translate(' + Math.round(x) + 'px,' + Math.round(y) + 'px)';
+    sprite.style.left = '0';
+    sprite.style.top = '0';
+    sprite.style.backgroundPosition = (-FRAME_SEQ[frame] * TILE) + 'px ' + (-DIR_ROW[dir] * TILE) + 'px';
+  }
+
+  function pickNewState() {
+    walking = Math.random() < 0.72;
+    if (walking) {
+      // Bias toward horizontal movement (stage is wider than tall)
+      var roll = Math.random();
+      if (roll < 0.4) dir = 'right';
+      else if (roll < 0.8) dir = 'left';
+      else if (roll < 0.9) dir = 'down';
+      else dir = 'up';
+    }
+    stateTimer = walking
+      ? 1500 + Math.random() * 2500
+      : 800 + Math.random() * 1500;
+  }
+
+  function tick(now) {
+    var dt = now - lastT;
+    lastT = now;
+
+    if (reduced) {
+      // Static pose, neutral frame, dead center.
+      x = Math.max(0, stage.clientWidth / 2 - TILE / 2);
+      y = Math.max(0, stage.clientHeight / 2 - TILE / 2);
+      frame = 0;
+      dir = 'down';
+      paint();
+      return; // no further frames
+    }
+
+    stateTimer -= dt;
+    if (stateTimer <= 0) pickNewState();
+
+    if (walking) {
+      var v = VEC[dir];
+      x += v.dx * SPEED_PX_PER_MS * dt;
+      y += v.dy * SPEED_PX_PER_MS * dt;
+      var maxX = stage.clientWidth - TILE;
+      var maxY = stage.clientHeight - TILE;
+      if (x < 0)    { x = 0;    dir = 'right'; }
+      if (x > maxX) { x = maxX; dir = 'left'; }
+      if (y < 0)    { y = 0;    dir = 'down'; }
+      if (y > maxY) { y = maxY; dir = 'up'; }
+
+      walkTimer += dt;
+      while (walkTimer >= FRAME_DUR_MS) {
+        walkTimer -= FRAME_DUR_MS;
+        frame = (frame + 1) % FRAME_SEQ.length;
+      }
+    } else {
+      frame = 0; // idle on neutral frame
+    }
+
+    paint();
+    requestAnimationFrame(tick);
+  }
+
+  pickNewState();
+  paint();
+  requestAnimationFrame(tick);
 })();
 </script>
 </body>
