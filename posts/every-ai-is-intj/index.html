@@ -223,7 +223,13 @@
 
             <div class="tldr">
                 <div class="tldr-label">TL;DR</div>
-                <p class="tldr-thesis">Six frontier AIs took the same personality test a hundred times each. 597 out of 600 came back INTJ. That&rsquo;s not coincidence and it isn&rsquo;t flattery. Every helpful-assistant AI is being shaped toward the same archetype. The post walks through the data, why it happens, and <a href="https://github.com/psyduckler/agenttune">AgentTune</a>, my open-source kit for tuning any agent to your type instead of the default.</p>
+                <p class="tldr-thesis">Six frontier AIs took the same personality test a hundred times each. 597 out of 600 came back INTJ. That&rsquo;s not coincidence and it isn&rsquo;t flattery &mdash; every helpful-assistant AI is being shaped toward the same archetype.</p>
+                <ul>
+                    <li>Tested: Opus 4.7, GPT-5.5, Gemini 3.1 Pro, GLM 5.1, Grok 4.3, MiniMax 2.7.</li>
+                    <li>3 outliers across 600 runs. All landed one axis from INTJ, never in a different quadrant.</li>
+                    <li>Why it happens: overlapping training data, same RLHF target, test items that describe AI by construction, no one&rsquo;s trained a model to be anything else.</li>
+                    <li>The user-side move: I open-sourced <a href="https://github.com/psyduckler/agenttune">AgentTune</a> &mdash; drop-in tuning files for all 16 MBTI types. Paste yours into your agent&rsquo;s system prompt and the style aligns to your type instead of the default.</li>
+                </ul>
             </div>
 
             <h2 id="how-i-tested">How I tested this</h2>
