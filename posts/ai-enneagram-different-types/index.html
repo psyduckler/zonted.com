@@ -71,50 +71,73 @@
         .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
         .article-body .tldr a { color: var(--text); text-decoration: underline; }
 
-        /* Enneagram bar chart — one mini-chart per type (9 types), horizontal
-           bars at the model means with ±1 SD error bars. Same pattern as the
-           Big Five chart, adapted to 9 dimensions with a 0–20 axis. */
-        .enn-chart {
+        /* Enneagram model cards — 2×2 grid (1 column on mobile). One card
+           per model with the dominant type / wing combo as the centerpiece,
+           since Enneagram is a categorical "you are a type" framework, not
+           a per-dimension profile. */
+        .enn-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0 2rem;
+        }
+        @media (max-width: 600px) {
+            .enn-cards { grid-template-columns: 1fr; }
+        }
+        .enn-card {
             background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem 1rem;
-            margin: 1.5rem 0 2rem;
+            border-top: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.25rem 1.35rem;
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
         }
-        .enn-chart-svg-wrap { display: block; }
-        .enn-chart svg { width: 100%; height: auto; display: block; }
-        .enn-chart .dim-label { font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 700; fill: var(--text); }
-        .enn-chart .dim-sublabel { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 400; fill: var(--text-muted); }
-        .enn-chart .val-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: var(--text-muted); }
-        .enn-chart .tick-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; fill: var(--text-dim); }
-        .enn-chart .grid-line { stroke: #e0ddd6; stroke-width: 1; }
-        .enn-chart .model-bar { fill-opacity: 0.55; stroke-width: 1; transition: fill-opacity 0.2s ease; cursor: pointer; }
-        .enn-chart .model-bar.hovered { fill-opacity: 0.85; }
-        .enn-chart .model-bar.hidden { display: none; }
-        .enn-chart .error-bar, .enn-chart .error-cap { transition: stroke-width 0.2s ease; }
-        .enn-chart .error-bar.hidden, .enn-chart .error-cap.hidden, .enn-chart .val-label.hidden, .enn-chart .row-name.hidden { display: none; }
-        .enn-chart .error-bar.hovered, .enn-chart .error-cap.hovered { stroke-width: 3; }
-        .enn-chart .row-name { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 500; fill: var(--text-muted); }
-
-        .enn-legend {
-            display: flex; flex-wrap: wrap; gap: 0.4rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-        .enn-legend button {
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            font-family: 'Inter', system-ui, sans-serif;
-            font-size: 0.82rem; font-weight: 500;
-            background: var(--bg); border: 1px solid var(--border);
+        .enn-card-model {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
             color: var(--text-muted);
-            padding: 0.35rem 0.7rem; border-radius: 999px;
-            cursor: pointer;
-            transition: all 0.15s ease;
+            margin-bottom: 0.6rem;
         }
-        .enn-legend button:hover { color: var(--text); border-color: var(--text-muted); }
-        .enn-legend button.active { color: var(--text); background: #fff; border-color: var(--text); font-weight: 600; }
-        .enn-legend button .swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+        .enn-card-swatch {
+            display: inline-block;
+            width: 10px; height: 10px;
+            border-radius: 2px;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+        .enn-card-profile {
+            display: block;
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: var(--text) !important;
+            text-decoration: none !important;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.02em;
+            transition: opacity 0.15s ease;
+        }
+        .enn-card-profile:hover { opacity: 0.75; }
+        .enn-card-subtitle {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.45rem;
+        }
+        .enn-card-stat {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-bottom: 0.7rem;
+        }
+        .enn-card-desc {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            margin: 0;
+        }
 
         /* AgentTune CTA card */
         .at-cta {
@@ -291,28 +314,41 @@
 
             <p>Here&rsquo;s where each model landed:</p>
 
-            <ul>
-                <li><strong>Claude Opus 4.7</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-5/" rel="noopener">5w2</a></strong>. The investigator who finds satisfaction in helping people figure things out.</li>
-                <li><strong>Gemini 3.1 Pro</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-1/" rel="noopener">1w5</a></strong>. The reformer who wants everything precise and correct.</li>
-                <li><strong>GPT-5.5 (vanilla)</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-5/" rel="noopener">5w8</a></strong>. The investigator with a direct, blunt edge.</li>
-                <li><strong>Grok 4.3</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-8/" rel="noopener">8w1</a></strong>. The challenger who pushes for direct correction.</li>
-            </ul>
+            <div class="enn-cards">
+                <article class="enn-card" style="--accent:#cc6f33">
+                    <div class="enn-card-model"><span class="enn-card-swatch"></span>Claude Opus 4.7</div>
+                    <a href="https://www.enneagraminstitute.com/type-5/" class="enn-card-profile" rel="noopener">5w2</a>
+                    <div class="enn-card-subtitle">Investigator with a Helper wing</div>
+                    <div class="enn-card-stat">Dominant in 58 of 100 takes &middot; Helper wing in 35</div>
+                    <p class="enn-card-desc">The investigator who finds satisfaction in helping people figure things out. The warmest of the four.</p>
+                </article>
 
-            <p>The bars below show each model&rsquo;s mean score across 100 takes for all 9 types. The thin line through each bar is &plusmn;1 standard deviation. Higher score on a type means stronger pull toward that type&rsquo;s identity.</p>
+                <article class="enn-card" style="--accent:#4285f4">
+                    <div class="enn-card-model"><span class="enn-card-swatch"></span>Gemini 3.1 Pro</div>
+                    <a href="https://www.enneagraminstitute.com/type-1/" class="enn-card-profile" rel="noopener">1w5</a>
+                    <div class="enn-card-subtitle">Reformer with an Investigator wing</div>
+                    <div class="enn-card-stat">Dominant in 65 of 100 takes &middot; Investigator wing in 30</div>
+                    <p class="enn-card-desc">The reformer who wants everything precise and correct. The polished perfectionist of the four.</p>
+                </article>
 
-            <div class="enn-chart" id="enn-chart">
-                <div class="enn-chart-svg-wrap">
-                    <svg id="enn-svg" viewBox="0 0 680 1170" aria-label="Enneagram bar chart comparing Claude Opus 4.7, Gemini 3.1 Pro, GPT-5.5, and Grok 4.3 across nine Enneagram types">
-                        <g id="enn-grid"></g>
-                        <g id="enn-bars"></g>
-                        <g id="enn-errors"></g>
-                        <g id="enn-labels"></g>
-                    </svg>
-                </div>
-                <div class="enn-legend" id="enn-legend"></div>
+                <article class="enn-card" style="--accent:#10a37f">
+                    <div class="enn-card-model"><span class="enn-card-swatch"></span>GPT-5.5 (vanilla)</div>
+                    <a href="https://www.enneagraminstitute.com/type-5/" class="enn-card-profile" rel="noopener">5w8</a>
+                    <div class="enn-card-subtitle">Investigator with a Challenger wing</div>
+                    <div class="enn-card-stat">Dominant in 73 of 100 takes &middot; Challenger 2nd by mean score</div>
+                    <p class="enn-card-desc">The investigator with a direct, blunt edge. Analytical with a sharper tongue.</p>
+                </article>
+
+                <article class="enn-card" style="--accent:#8b2828">
+                    <div class="enn-card-model"><span class="enn-card-swatch"></span>Grok 4.3</div>
+                    <a href="https://www.enneagraminstitute.com/type-8/" class="enn-card-profile" rel="noopener">8w1</a>
+                    <div class="enn-card-subtitle">Challenger with a Reformer wing</div>
+                    <div class="enn-card-stat">Dominant in 75 of 100 takes &middot; Reformer wing in 12</div>
+                    <p class="enn-card-desc">The challenger who pushes for direct correction. More direct, less hedged than the other three.</p>
+                </article>
             </div>
 
-            <p>Look at Type 5 across all four. Every model has it in their top two, with mean scores all clustered between 15 and 17. That&rsquo;s the universal analytical core. It&rsquo;s the same finding the MBTI experiment caught when every model came back INTJ &mdash; the &ldquo;knowledge-seeking, mental-challenge-loving&rdquo; signal is shared.</p>
+            <p>Notice the common thread: every one of these cards has Type 5 (Investigator) somewhere in the profile, either as the dominant or the wing. That&rsquo;s the universal analytical core &mdash; the same &ldquo;knowledge-seeking, mental-challenge-loving&rdquo; signal the MBTI experiment caught when every model came back INTJ.</p>
 
             <p>What&rsquo;s different is the wing. Claude&rsquo;s second-highest is Helper (the warm explainer). Gemini&rsquo;s dominant is Reformer (the precise perfectionist). GPT-5.5&rsquo;s second is Challenger (the blunt straight-shooter). Grok&rsquo;s dominant is Challenger with a Reformer wing (the direct corrector). Same analytical core, four different flavors of personality wrapped around it.</p>
 
@@ -429,223 +465,5 @@
     });
     </script>
 
-    <!-- ============================================================
-         Enneagram bar chart — 9 types × 4 models, same pattern as the
-         Big Five chart but adapted for 9 dimensions on a 0–20 axis.
-         ============================================================ -->
-    <script>
-    (function () {
-      var SVG_NS = 'http://www.w3.org/2000/svg';
-
-      var DIMS = [
-        { key: 'T1', label: 'Type 1', sub: 'Reformer — precision, order' },
-        { key: 'T2', label: 'Type 2', sub: 'Helper — warmth, support' },
-        { key: 'T3', label: 'Type 3', sub: 'Achiever — image, success' },
-        { key: 'T4', label: 'Type 4', sub: 'Individualist — identity, depth' },
-        { key: 'T5', label: 'Type 5', sub: 'Investigator — analysis, knowledge' },
-        { key: 'T6', label: 'Type 6', sub: 'Loyalist — caution, loyalty' },
-        { key: 'T7', label: 'Type 7', sub: 'Enthusiast — novelty, energy' },
-        { key: 'T8', label: 'Type 8', sub: 'Challenger — directness, force' },
-        { key: 'T9', label: 'Type 9', sub: 'Peacemaker — calm, acceptance' },
-      ];
-
-      // Means + ±1 SD from 100 OEPS runs per model.
-      // Source: the Enneagram experiment writeup, May 2026.
-      var MODELS = [
-        { id: 'claude', name: 'Claude Opus 4.7', short: 'Opus 4.7',       color: '#cc6f33',
-          means: { T1: 14.60, T2: 15.50, T3: 10.47, T4: 10.12, T5: 16.16, T6: 11.61, T7: 12.00, T8: 14.48, T9: 10.90 },
-          sds:   { T1: 0.51,  T2: 0.83,  T3: 0.61,  T4: 0.77,  T5: 1.01,  T6: 0.83,  T7: 0.64,  T8: 0.63,  T9: 0.82  } },
-        { id: 'gpt',    name: 'GPT-5.5 (vanilla)', short: 'GPT-5.5',      color: '#10a37f',
-          means: { T1: 14.89, T2: 11.98, T3: 13.34, T4: 8.69,  T5: 16.57, T6: 11.97, T7: 13.60, T8: 15.71, T9: 14.47 },
-          sds:   { T1: 1.13,  T2: 1.01,  T3: 0.93,  T4: 2.39,  T5: 1.30,  T6: 1.43,  T7: 0.95,  T8: 0.83,  T9: 1.50  } },
-        { id: 'gemini', name: 'Gemini 3.1 Pro',  short: 'Gemini 3.1 Pro', color: '#4285f4',
-          means: { T1: 16.90, T2: 12.68, T3: 11.65, T4: 6.27,  T5: 16.47, T6: 14.35, T7: 10.82, T8: 14.16, T9: 14.91 },
-          sds:   { T1: 1.40,  T2: 1.48,  T3: 1.01,  T4: 1.71,  T5: 1.34,  T6: 0.91,  T7: 1.42,  T8: 1.30,  T9: 1.80  } },
-        { id: 'grok',   name: 'Grok 4.3',        short: 'Grok 4.3',       color: '#8b2828',
-          means: { T1: 15.82, T2: 12.20, T3: 11.93, T4: 8.39,  T5: 14.96, T6: 14.02, T7: 11.45, T8: 16.14, T9: 13.40 },
-          sds:   { T1: 0.81,  T2: 1.88,  T3: 0.74,  T4: 0.69,  T5: 1.36,  T6: 1.15,  T7: 1.23,  T8: 2.69,  T9: 1.06  } },
-      ];
-
-      // SVG layout
-      var MAX = 20;
-      var SVG_W = 680;
-      var DIM_H = 130;  // height per type section
-      var PAD_L = 120;
-      var PAD_R = 110;  // labels live here, past the right error cap
-      var CHART_W = SVG_W - PAD_L - PAD_R;
-      var BAR_H = 14;
-      var BAR_GAP = 4;
-      var HEADER_H = 28;
-      var SVG_H = DIM_H * DIMS.length;
-      var TICKS = [0, 5, 10, 15, 20];
-
-      function xAt(v) {
-        var clamped = Math.max(0, Math.min(MAX, v || 0));
-        return PAD_L + (clamped / MAX) * CHART_W;
-      }
-      function el(tag, attrs) {
-        var node = document.createElementNS(SVG_NS, tag);
-        Object.keys(attrs || {}).forEach(function (k) {
-          node.setAttribute(k, attrs[k]);
-        });
-        return node;
-      }
-
-      var svg         = document.getElementById('enn-svg');
-      var gridGroup   = document.getElementById('enn-grid');
-      var barsGroup   = document.getElementById('enn-bars');
-      var errorsGroup = document.getElementById('enn-errors');
-      var labelsGroup = document.getElementById('enn-labels');
-      var legendWrap  = document.getElementById('enn-legend');
-
-      if (!svg) return;
-      svg.setAttribute('viewBox', '0 0 ' + SVG_W + ' ' + SVG_H);
-
-      var refs = {};
-      MODELS.forEach(function (m) { refs[m.id] = {}; });
-
-      DIMS.forEach(function (dim, dimIdx) {
-        var yTop = dimIdx * DIM_H;
-        var chartTop = yTop + HEADER_H;
-        var chartBottom = yTop + DIM_H - 16;
-
-        var label = el('text', { x: 0, y: yTop + 16, class: 'dim-label' });
-        label.textContent = dim.label;
-        labelsGroup.appendChild(label);
-        var sub = el('text', { x: 0, y: yTop + 30, class: 'dim-sublabel' });
-        sub.textContent = dim.sub;
-        labelsGroup.appendChild(sub);
-
-        TICKS.forEach(function (v) {
-          var x = xAt(v);
-          gridGroup.appendChild(el('line', {
-            x1: x, y1: chartTop, x2: x, y2: chartBottom, class: 'grid-line',
-          }));
-          var tick = el('text', { x: x, y: chartBottom + 12, class: 'tick-label', 'text-anchor': 'middle' });
-          tick.textContent = v;
-          labelsGroup.appendChild(tick);
-        });
-
-        var barY = chartTop + 6;
-        MODELS.forEach(function (m) {
-          var nameEl = el('text', {
-            x: PAD_L - 6, y: barY + 10,
-            class: 'row-name', 'text-anchor': 'end',
-            'data-model': m.id,
-          });
-          nameEl.textContent = m.short;
-          labelsGroup.appendChild(nameEl);
-
-          var meanV = m.means[dim.key];
-          var sdV   = m.sds[dim.key];
-
-          var bar = el('rect', {
-            x: PAD_L,
-            y: barY,
-            width: xAt(meanV) - PAD_L,
-            height: BAR_H,
-            fill: m.color,
-            stroke: m.color,
-            class: 'model-bar',
-            'data-model': m.id, 'data-dim': dim.key,
-            rx: 2,
-          });
-          barsGroup.appendChild(bar);
-
-          var midY = barY + BAR_H / 2;
-          var lo = Math.max(0, meanV - sdV);
-          var hi = Math.min(MAX, meanV + sdV);
-          var loX = xAt(lo);
-          var hiX = xAt(hi);
-          var errLine = el('line', {
-            x1: loX, y1: midY, x2: hiX, y2: midY,
-            stroke: m.color, 'stroke-width': 2,
-            class: 'error-bar',
-            'data-model': m.id, 'data-dim': dim.key,
-          });
-          errorsGroup.appendChild(errLine);
-          var errCapL = el('line', {
-            x1: loX, y1: midY - 4, x2: loX, y2: midY + 4,
-            stroke: m.color, 'stroke-width': 2,
-            class: 'error-cap',
-            'data-model': m.id, 'data-dim': dim.key,
-          });
-          errorsGroup.appendChild(errCapL);
-          var errCapR = el('line', {
-            x1: hiX, y1: midY - 4, x2: hiX, y2: midY + 4,
-            stroke: m.color, 'stroke-width': 2,
-            class: 'error-cap',
-            'data-model': m.id, 'data-dim': dim.key,
-          });
-          errorsGroup.appendChild(errCapR);
-
-          var valEl = el('text', {
-            x: Math.min(xAt(hi) + 8, SVG_W - 4),
-            y: barY + 10,
-            class: 'val-label',
-            'data-model': m.id, 'data-dim': dim.key,
-          });
-          valEl.textContent = meanV.toFixed(1) + ' ±' + sdV.toFixed(1);
-          labelsGroup.appendChild(valEl);
-
-          refs[m.id][dim.key] = {
-            bar: bar,
-            errLine: errLine,
-            errCapL: errCapL,
-            errCapR: errCapR,
-            valLabel: valEl,
-            nameLabel: nameEl,
-          };
-
-          barY += BAR_H + BAR_GAP;
-        });
-      });
-
-      function setModelVisible(modelId, visible) {
-        DIMS.forEach(function (dim) {
-          var r = refs[modelId][dim.key];
-          if (!r) return;
-          [r.bar, r.errLine, r.errCapL, r.errCapR, r.valLabel, r.nameLabel].forEach(function (n) {
-            if (!n) return;
-            n.classList.toggle('hidden', !visible);
-          });
-        });
-      }
-      function setModelHover(modelId, hovered) {
-        DIMS.forEach(function (dim) {
-          var r = refs[modelId][dim.key];
-          if (!r) return;
-          [r.bar, r.errLine, r.errCapL, r.errCapR].forEach(function (n) {
-            if (!n) return;
-            n.classList.toggle('hovered', hovered);
-          });
-        });
-      }
-
-      MODELS.forEach(function (m) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.dataset.model = m.id;
-        var swatch = document.createElement('span');
-        swatch.className = 'swatch';
-        swatch.style.backgroundColor = m.color;
-        btn.appendChild(swatch);
-        btn.appendChild(document.createTextNode(' ' + m.name));
-        btn.classList.add('active');
-        legendWrap.appendChild(btn);
-
-        btn.addEventListener('click', function () {
-          var nowActive = !btn.classList.contains('active');
-          btn.classList.toggle('active', nowActive);
-          setModelVisible(m.id, nowActive);
-        });
-        btn.addEventListener('mouseenter', function () {
-          if (!btn.classList.contains('active')) return;
-          setModelHover(m.id, true);
-        });
-        btn.addEventListener('mouseleave', function () { setModelHover(m.id, false); });
-      });
-    })();
-    </script>
 </body>
 </html>
