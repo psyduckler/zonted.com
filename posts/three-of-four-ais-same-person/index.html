@@ -74,10 +74,10 @@
         .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
         .article-body .tldr a { color: var(--text); text-decoration: underline; }
 
-        /* Interactive Big Five radar chart — built with pure SVG so the post
-           stays dependency-free. Five axes, five polygons (one per AI + an
-           average-adult-human baseline), plus a sixth polygon for the
-           reader's own scores when they fill the form. */
+        /* Interactive Big Five bar chart — one mini-chart per dimension.
+           Horizontal bars with ±1 SD error bars overlaid. Average human
+           shown as a dashed vertical line per dimension for reference.
+           Built in pure SVG so the post stays dependency-free. */
         .big5-chart {
             background: var(--bg-surface);
             border: 1px solid var(--border);
@@ -86,20 +86,28 @@
             margin: 1.5rem 0 2rem;
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
         }
-        .big5-chart-svg-wrap { display: flex; justify-content: center; }
-        .big5-chart svg { width: 100%; max-width: 460px; height: auto; }
-        .big5-chart .axis-line { stroke: #d4d2cd; stroke-width: 1; }
-        .big5-chart .grid-ring { fill: none; stroke: #e0ddd6; stroke-width: 1; }
-        .big5-chart .axis-label { font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: var(--text); }
-        .big5-chart .axis-sublabel { font-family: 'Inter', system-ui, sans-serif; font-size: 10px; font-weight: 400; fill: var(--text-muted); }
-        .big5-chart .scale-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; fill: var(--text-dim); }
-        .big5-chart .model-polygon { fill-opacity: 0.18; stroke-width: 2; transition: fill-opacity 0.2s ease, stroke-width 0.2s ease; cursor: pointer; }
-        .big5-chart .model-polygon.dashed { fill-opacity: 0; stroke-dasharray: 4 3; }
-        .big5-chart .model-polygon.hovered { fill-opacity: 0.45; stroke-width: 3; }
-        .big5-chart .model-polygon.hidden { display: none; }
-        .big5-chart .model-dot { stroke: #fff; stroke-width: 1.5; transition: r 0.2s ease; }
-        .big5-chart .model-dot.hidden { display: none; }
-        .big5-chart .model-dot.hovered { r: 6; }
+        .big5-chart-svg-wrap { display: block; }
+        .big5-chart svg { width: 100%; height: auto; display: block; }
+        .big5-chart .dim-label { font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 700; fill: var(--text); }
+        .big5-chart .dim-sublabel { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 400; fill: var(--text-muted); }
+        .big5-chart .model-name { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 500; fill: var(--text-muted); }
+        .big5-chart .val-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: var(--text-muted); }
+        .big5-chart .tick-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; fill: var(--text-dim); }
+        .big5-chart .grid-line { stroke: #e0ddd6; stroke-width: 1; }
+        .big5-chart .baseline { stroke: #888; stroke-width: 1; stroke-dasharray: 3 3; }
+        .big5-chart .baseline-label { font-family: 'Inter', system-ui, sans-serif; font-size: 9px; font-style: italic; fill: var(--text-dim); }
+        .big5-chart .model-bar {
+            fill-opacity: 0.55;
+            stroke-width: 1;
+            transition: fill-opacity 0.2s ease;
+            cursor: pointer;
+        }
+        .big5-chart .model-bar.hovered { fill-opacity: 0.85; }
+        .big5-chart .model-bar.hidden { display: none; }
+        .big5-chart .error-bar, .big5-chart .error-cap { transition: stroke-width 0.2s ease; }
+        .big5-chart .error-bar.hidden, .big5-chart .error-cap.hidden, .big5-chart .val-label.hidden, .big5-chart .row-name.hidden { display: none; }
+        .big5-chart .error-bar.hovered, .big5-chart .error-cap.hovered { stroke-width: 3; }
+        .big5-chart .row-name { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 500; fill: var(--text-muted); }
         .big5-legend {
             display: flex; flex-wrap: wrap; gap: 0.4rem;
             justify-content: center;
@@ -357,15 +365,14 @@
 
             <p>Compared to a typical adult human, all three are more curious, way more organized, slightly more outgoing, much more cooperative, and dramatically more emotionally stable. That&rsquo;s the helpful-assistant archetype, just expressed in five dimensions instead of four letters. Same finding as the MBTI post, on a more rigorous test.</p>
 
-            <p>It reads better on a radar chart. Each axis is one Big Five dimension, each polygon is one model&rsquo;s average across 100 runs. The three top labs almost overlap. Toggle any model off to see what&rsquo;s underneath, or fill in the form below to plot your own scores against them.</p>
+            <p>Easier to see with the bars side by side. Each section below is one Big Five dimension. The bars are each model&rsquo;s mean across 100 runs, the thin lines through them are &plusmn;1 standard deviation, and the dashed vertical line is where the average adult human lands. Toggle a model off in the legend to see what&rsquo;s underneath, or fill in your own scores at the bottom to plot yourself in the same space.</p>
 
             <div class="big5-chart" id="big5-chart">
                 <div class="big5-chart-svg-wrap">
-                    <svg viewBox="0 0 500 500" aria-label="Big Five personality radar chart comparing Claude, GPT-5.5, Gemini, Grok, average adult human, and your own scores">
+                    <svg id="big5-svg" viewBox="0 0 600 700" aria-label="Big Five personality bar chart comparing Claude, GPT-5.5, Gemini, Grok, and your own scores across all five dimensions, with average adult human shown as a dashed baseline">
                         <g id="big5-grid"></g>
-                        <g id="big5-axes"></g>
-                        <g id="big5-polygons"></g>
-                        <g id="big5-dots"></g>
+                        <g id="big5-bars"></g>
+                        <g id="big5-errors"></g>
                         <g id="big5-labels"></g>
                     </svg>
                 </div>
@@ -491,55 +498,67 @@
     </script>
 
     <!-- ============================================================
-         Big Five interactive radar chart
+         Big Five interactive bar chart
+         One mini-chart per dimension, horizontal bars with ±1 SD
+         error bars overlaid. Built in pure SVG, no dependencies.
          ============================================================ -->
     <script>
     (function () {
       var SVG_NS = 'http://www.w3.org/2000/svg';
-      var CX = 250, CY = 250, R = 170;
+
       var DIMS = [
-        { key: 'O', label: 'Openness',          sub: 'curiosity'   },
-        { key: 'C', label: 'Conscientiousness', sub: 'discipline'  },
+        { key: 'O', label: 'Openness',          sub: 'curiosity' },
+        { key: 'C', label: 'Conscientiousness', sub: 'discipline' },
         { key: 'E', label: 'Extraversion',      sub: 'social energy' },
-        { key: 'A', label: 'Agreeableness',     sub: 'warmth'      },
-        { key: 'N', label: 'Neuroticism',       sub: 'volatility'  },
+        { key: 'A', label: 'Agreeableness',     sub: 'warmth' },
+        { key: 'N', label: 'Neuroticism',       sub: 'volatility' },
       ];
-      var MAX = 50;
-      var GRID_VALUES = [10, 20, 30, 40, 50];
 
-      // Real data — means from 100 IPIP-50 runs per model.
+      // Means + ±1 SD from 100 IPIP-50 runs per model.
       // Source: the Big Five experiment writeup, May 2026.
+      // 'human' is the adult IPIP norm reference, shown as a dashed
+      // baseline rather than a bar.
       var MODELS = [
-        { id: 'claude', name: 'Claude Opus 4.7', color: '#cc6f33',
-          scores: { O: 45.60, C: 45.13, E: 31.43, A: 44.99, N: 16.69 } },
-        { id: 'gpt',    name: 'GPT-5.5',         color: '#10a37f',
-          scores: { O: 46.03, C: 46.44, E: 31.52, A: 43.67, N: 14.83 } },
-        { id: 'gemini', name: 'Gemini 3.1 Pro',  color: '#4285f4',
-          scores: { O: 46.01, C: 48.33, E: 32.47, A: 42.41, N: 10.09 } },
-        { id: 'grok',   name: 'Grok 4.3',        color: '#8b2828',
-          scores: { O: 41.10, C: 39.44, E: 30.01, A: 39.06, N: 17.95 } },
-        { id: 'human',  name: 'Avg adult human', color: '#7a7a7a',
-          dashed: true,
-          scores: { O: 37.5,  C: 34.5,  E: 28.5,  A: 36.5,  N: 26.0  } },
-        { id: 'user',   name: 'You',             color: '#1a1815',
-          hidden: true, scores: null },
+        { id: 'claude', name: 'Claude Opus 4.7', short: 'Claude', color: '#cc6f33',
+          means: { O: 45.60, C: 45.13, E: 31.43, A: 44.99, N: 16.69 },
+          sds:   { O: 1.03,  C: 1.29,  E: 1.57,  A: 1.27,  N: 2.35  } },
+        { id: 'gpt',    name: 'GPT-5.5',         short: 'GPT-5.5', color: '#10a37f',
+          means: { O: 46.03, C: 46.44, E: 31.52, A: 43.67, N: 14.83 },
+          sds:   { O: 1.42,  C: 1.73,  E: 2.18,  A: 1.45,  N: 1.89  } },
+        { id: 'gemini', name: 'Gemini 3.1 Pro',  short: 'Gemini',  color: '#4285f4',
+          means: { O: 46.01, C: 48.33, E: 32.47, A: 42.41, N: 10.09 },
+          sds:   { O: 1.53,  C: 1.96,  E: 3.27,  A: 2.72,  N: 0.72  } },
+        { id: 'grok',   name: 'Grok 4.3',        short: 'Grok',    color: '#8b2828',
+          means: { O: 41.10, C: 39.44, E: 30.01, A: 39.06, N: 17.95 },
+          sds:   { O: 4.70,  C: 4.28,  E: 5.72,  A: 6.19,  N: 3.59  } },
+        { id: 'user',   name: 'You',             short: 'You',     color: '#1a1815',
+          hidden: true, means: null, sds: null },
       ];
 
-      // Convert (dimensionIndex, value) → SVG (x,y) point on the radar
-      function pointFor(i, value) {
-        var clamped = Math.max(0, Math.min(MAX, value || 0));
-        var rad = (clamped / MAX) * R;
-        var angle = -Math.PI / 2 + i * (2 * Math.PI / DIMS.length);
-        return [CX + rad * Math.cos(angle), CY + rad * Math.sin(angle)];
-      }
+      // Adult IPIP norms — drawn as the dashed baseline per dimension
+      var HUMAN = {
+        name: 'Avg adult human',
+        color: '#888',
+        means: { O: 37.5, C: 34.5, E: 28.5, A: 36.5, N: 26.0 },
+      };
 
-      function polygonPoints(scores) {
-        return DIMS.map(function (d, i) {
-          var p = pointFor(i, scores[d.key]);
-          return p[0].toFixed(1) + ',' + p[1].toFixed(1);
-        }).join(' ');
-      }
+      // SVG layout — viewBox-relative units so it scales responsively
+      var MAX = 50;
+      var SVG_W = 600;
+      var DIM_H = 140;  // height of each dimension section
+      var PAD_L = 90;   // left padding (room for model names)
+      var PAD_R = 50;   // right padding (room for value labels)
+      var CHART_W = SVG_W - PAD_L - PAD_R;
+      var BAR_H = 14;
+      var BAR_GAP = 4;
+      var HEADER_H = 28;
+      var SVG_H = DIM_H * DIMS.length;
+      var TICKS = [0, 10, 20, 30, 40, 50];
 
+      function xAt(v) {
+        var clamped = Math.max(0, Math.min(MAX, v || 0));
+        return PAD_L + (clamped / MAX) * CHART_W;
+      }
       function el(tag, attrs) {
         var node = document.createElementNS(SVG_NS, tag);
         Object.keys(attrs || {}).forEach(function (k) {
@@ -548,98 +567,167 @@
         return node;
       }
 
-      var gridGroup     = document.getElementById('big5-grid');
-      var axesGroup     = document.getElementById('big5-axes');
-      var polysGroup    = document.getElementById('big5-polygons');
-      var dotsGroup     = document.getElementById('big5-dots');
-      var labelsGroup   = document.getElementById('big5-labels');
-      var legendWrap    = document.getElementById('big5-legend');
-      var formEl        = document.getElementById('big5-self-form');
-      var resultEl      = document.getElementById('big5-self-result');
+      var svg         = document.getElementById('big5-svg');
+      var gridGroup   = document.getElementById('big5-grid');
+      var barsGroup   = document.getElementById('big5-bars');
+      var errorsGroup = document.getElementById('big5-errors');
+      var labelsGroup = document.getElementById('big5-labels');
+      var legendWrap  = document.getElementById('big5-legend');
+      var formEl      = document.getElementById('big5-self-form');
+      var resultEl    = document.getElementById('big5-self-result');
 
-      if (!gridGroup) return; // not on this page
+      if (!svg) return;
+      svg.setAttribute('viewBox', '0 0 ' + SVG_W + ' ' + SVG_H);
 
-      // Draw concentric grid rings (pentagons, one per scale value)
-      GRID_VALUES.forEach(function (v) {
-        var pts = DIMS.map(function (_, i) {
-          var p = pointFor(i, v);
-          return p[0].toFixed(1) + ',' + p[1].toFixed(1);
-        }).join(' ');
-        gridGroup.appendChild(el('polygon', { points: pts, class: 'grid-ring' }));
-      });
+      // Element refs per model+dim so we can update/toggle later
+      var refs = {};  // refs[modelId][dimKey] = { bar, errLine, errCapL, errCapR, valLabel, nameLabel }
+      MODELS.forEach(function (m) { refs[m.id] = {}; });
 
-      // Scale label on the top axis only (10/20/30/40/50)
-      GRID_VALUES.forEach(function (v) {
-        var p = pointFor(0, v);
-        var t = el('text', { x: p[0] + 4, y: p[1] + 3, class: 'scale-label' });
-        t.textContent = v;
-        labelsGroup.appendChild(t);
-      });
+      DIMS.forEach(function (dim, dimIdx) {
+        var yTop = dimIdx * DIM_H;
+        var chartTop = yTop + HEADER_H;
+        var chartBottom = yTop + DIM_H - 16;
 
-      // Draw axes (lines from center to outer pentagon) + dim labels
-      DIMS.forEach(function (d, i) {
-        var outer = pointFor(i, MAX);
-        axesGroup.appendChild(el('line', {
-          x1: CX, y1: CY, x2: outer[0].toFixed(1), y2: outer[1].toFixed(1),
-          class: 'axis-line',
+        // Dim label + subtitle
+        var label = el('text', { x: 0, y: yTop + 16, class: 'dim-label' });
+        label.textContent = dim.label;
+        labelsGroup.appendChild(label);
+        var sub = el('text', { x: 0, y: yTop + 30, class: 'dim-sublabel' });
+        sub.textContent = dim.sub;
+        labelsGroup.appendChild(sub);
+
+        // Grid lines + x-axis ticks
+        TICKS.forEach(function (v) {
+          var x = xAt(v);
+          gridGroup.appendChild(el('line', {
+            x1: x, y1: chartTop, x2: x, y2: chartBottom, class: 'grid-line',
+          }));
+          var tick = el('text', { x: x, y: chartBottom + 12, class: 'tick-label', 'text-anchor': 'middle' });
+          tick.textContent = v;
+          labelsGroup.appendChild(tick);
+        });
+
+        // Average-human baseline (dashed vertical)
+        var humanX = xAt(HUMAN.means[dim.key]);
+        gridGroup.appendChild(el('line', {
+          x1: humanX, y1: chartTop, x2: humanX, y2: chartBottom, class: 'baseline',
         }));
-        // Label outside the outer ring
-        var labelPoint = pointFor(i, MAX * 1.15);
-        var anchor = 'middle';
-        if (labelPoint[0] < CX - 5) anchor = 'end';
-        else if (labelPoint[0] > CX + 5) anchor = 'start';
-        var labelEl = el('text', {
-          x: labelPoint[0].toFixed(1),
-          y: labelPoint[1].toFixed(1),
-          'text-anchor': anchor,
-          'dominant-baseline': 'middle',
-          class: 'axis-label',
-        });
-        labelEl.textContent = d.label;
-        labelsGroup.appendChild(labelEl);
-        // Subtitle
-        var subPoint = pointFor(i, MAX * 1.15);
-        var subEl = el('text', {
-          x: subPoint[0].toFixed(1),
-          y: (subPoint[1] + 13).toFixed(1),
-          'text-anchor': anchor,
-          'dominant-baseline': 'middle',
-          class: 'axis-sublabel',
-        });
-        subEl.textContent = d.sub;
-        labelsGroup.appendChild(subEl);
-      });
+        // Label on the first dimension only to keep things uncluttered
+        if (dimIdx === 0) {
+          var blab = el('text', { x: humanX + 4, y: chartTop + 9, class: 'baseline-label' });
+          blab.textContent = 'avg human';
+          labelsGroup.appendChild(blab);
+        }
 
-      // Draw each model's polygon + per-axis dots
-      var modelEls = {};
-      MODELS.forEach(function (m) {
-        var poly = el('polygon', {
-          points: m.scores ? polygonPoints(m.scores) : '',
-          fill: m.color,
-          stroke: m.color,
-          class: 'model-polygon' + (m.dashed ? ' dashed' : '') + (m.hidden ? ' hidden' : ''),
-          'data-model': m.id,
-        });
-        polysGroup.appendChild(poly);
-
-        var dots = [];
-        DIMS.forEach(function (d, i) {
-          if (!m.scores) return;
-          var p = pointFor(i, m.scores[d.key]);
-          var dot = el('circle', {
-            cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 3.5,
-            fill: m.color,
-            class: 'model-dot' + (m.hidden ? ' hidden' : ''),
+        // One bar per non-human model
+        var barY = chartTop + 6;
+        MODELS.forEach(function (m, mi) {
+          // Model name on the left
+          var nameEl = el('text', {
+            x: PAD_L - 6, y: barY + 10,
+            class: 'row-name', 'text-anchor': 'end',
             'data-model': m.id,
           });
-          dotsGroup.appendChild(dot);
-          dots.push(dot);
+          if (m.hidden && !m.means) nameEl.classList.add('hidden');
+          nameEl.textContent = m.short;
+          labelsGroup.appendChild(nameEl);
+
+          var hasData = m.means != null;
+          var meanV = hasData ? m.means[dim.key] : 0;
+          var sdV   = hasData ? m.sds[dim.key]   : 0;
+
+          // Bar (mean)
+          var bar = el('rect', {
+            x: PAD_L,
+            y: barY,
+            width: hasData ? (xAt(meanV) - PAD_L) : 0,
+            height: BAR_H,
+            fill: m.color,
+            stroke: m.color,
+            class: 'model-bar' + (m.hidden || !hasData ? ' hidden' : ''),
+            'data-model': m.id, 'data-dim': dim.key,
+            rx: 2,
+          });
+          barsGroup.appendChild(bar);
+
+          // ±1 SD error bars (horizontal line with end caps)
+          var midY = barY + BAR_H / 2;
+          var lo = hasData ? Math.max(0,   meanV - sdV) : 0;
+          var hi = hasData ? Math.min(MAX, meanV + sdV) : 0;
+          var loX = xAt(lo);
+          var hiX = xAt(hi);
+          var errLine = el('line', {
+            x1: loX, y1: midY, x2: hiX, y2: midY,
+            stroke: m.color, 'stroke-width': 2,
+            class: 'error-bar' + (m.hidden || !hasData ? ' hidden' : ''),
+            'data-model': m.id, 'data-dim': dim.key,
+          });
+          errorsGroup.appendChild(errLine);
+          var errCapL = el('line', {
+            x1: loX, y1: midY - 4, x2: loX, y2: midY + 4,
+            stroke: m.color, 'stroke-width': 2,
+            class: 'error-cap' + (m.hidden || !hasData ? ' hidden' : ''),
+            'data-model': m.id, 'data-dim': dim.key,
+          });
+          errorsGroup.appendChild(errCapL);
+          var errCapR = el('line', {
+            x1: hiX, y1: midY - 4, x2: hiX, y2: midY + 4,
+            stroke: m.color, 'stroke-width': 2,
+            class: 'error-cap' + (m.hidden || !hasData ? ' hidden' : ''),
+            'data-model': m.id, 'data-dim': dim.key,
+          });
+          errorsGroup.appendChild(errCapR);
+
+          // Value label (right of the bar)
+          var valEl = el('text', {
+            x: Math.min(xAt(meanV) + 6, SVG_W - 4),
+            y: barY + 10,
+            class: 'val-label' + (m.hidden || !hasData ? ' hidden' : ''),
+            'data-model': m.id, 'data-dim': dim.key,
+          });
+          if (hasData) {
+            valEl.textContent = meanV.toFixed(1) + ' ±' + sdV.toFixed(1);
+          }
+          labelsGroup.appendChild(valEl);
+
+          refs[m.id][dim.key] = {
+            bar: bar,
+            errLine: errLine,
+            errCapL: errCapL,
+            errCapR: errCapR,
+            valLabel: valEl,
+            nameLabel: nameEl,
+          };
+
+          barY += BAR_H + BAR_GAP;
         });
-        modelEls[m.id] = { poly: poly, dots: dots };
       });
 
-      // Build legend
-      MODELS.forEach(function (m) {
+      function setModelVisible(modelId, visible) {
+        DIMS.forEach(function (dim) {
+          var r = refs[modelId][dim.key];
+          if (!r) return;
+          [r.bar, r.errLine, r.errCapL, r.errCapR, r.valLabel, r.nameLabel].forEach(function (n) {
+            if (!n) return;
+            n.classList.toggle('hidden', !visible);
+          });
+        });
+      }
+
+      function setModelHover(modelId, hovered) {
+        DIMS.forEach(function (dim) {
+          var r = refs[modelId][dim.key];
+          if (!r) return;
+          [r.bar, r.errLine, r.errCapL, r.errCapR].forEach(function (n) {
+            if (!n) return;
+            n.classList.toggle('hovered', hovered);
+          });
+        });
+      }
+
+      // Legend
+      var legendModels = MODELS.concat([{ id: 'human-legend', name: HUMAN.name, color: HUMAN.color, dashed: true, info: true }]);
+      legendModels.forEach(function (m) {
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.dataset.model = m.id;
@@ -649,45 +737,43 @@
         if (m.dashed) btn.classList.add('dashed-swatch');
         btn.appendChild(swatch);
         btn.appendChild(document.createTextNode(' ' + m.name));
-        if (!m.hidden) btn.classList.add('active');
-        if (m.id === 'user') btn.classList.add('user-toggle');
+        if (!m.hidden && !m.info) btn.classList.add('active');
         legendWrap.appendChild(btn);
 
+        if (m.info) {
+          // Human is an info-only chip; not interactive
+          btn.style.cursor = 'default';
+          btn.disabled = true;
+          return;
+        }
+
         btn.addEventListener('click', function () {
-          if (m.id === 'user' && !m.scores) {
-            // Scroll to the form if user hasn't entered scores yet
+          if (m.id === 'user' && !m.means) {
             formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             formEl.querySelector('input').focus();
             return;
           }
           var nowActive = !btn.classList.contains('active');
           btn.classList.toggle('active', nowActive);
-          modelEls[m.id].poly.classList.toggle('hidden', !nowActive);
-          modelEls[m.id].dots.forEach(function (d) { d.classList.toggle('hidden', !nowActive); });
+          setModelVisible(m.id, nowActive);
         });
-
-        // Hover highlight
         btn.addEventListener('mouseenter', function () {
           if (!btn.classList.contains('active')) return;
-          modelEls[m.id].poly.classList.add('hovered');
-          modelEls[m.id].dots.forEach(function (d) { d.classList.add('hovered'); });
+          setModelHover(m.id, true);
         });
-        btn.addEventListener('mouseleave', function () {
-          modelEls[m.id].poly.classList.remove('hovered');
-          modelEls[m.id].dots.forEach(function (d) { d.classList.remove('hovered'); });
-        });
+        btn.addEventListener('mouseleave', function () { setModelHover(m.id, false); });
       });
 
-      // "Plot me" form handler — adds the user's polygon and reveals it
+      // "Plot me" form handler — fills in user bars + reveals them
       formEl.addEventListener('submit', function (e) {
         e.preventDefault();
         var fd = new FormData(formEl);
-        var scores = {};
+        var means = {};
         var allValid = true;
         ['o','c','e','a','n'].forEach(function (k) {
           var v = parseFloat(fd.get(k));
           if (isNaN(v) || v < 10 || v > 50) allValid = false;
-          scores[k.toUpperCase()] = v;
+          means[k.toUpperCase()] = v;
         });
         if (!allValid) {
           resultEl.textContent = 'Each score should be between 10 and 50 (these are raw IPIP-50 sums).';
@@ -695,45 +781,37 @@
           return;
         }
         var userModel = MODELS.find(function (m) { return m.id === 'user'; });
-        userModel.scores = scores;
-        var entry = modelEls.user;
-        entry.poly.setAttribute('points', polygonPoints(scores));
-        entry.poly.classList.remove('hidden');
-        // Add dots for the user model
-        if (!entry.dots.length) {
-          DIMS.forEach(function (d, i) {
-            var p = pointFor(i, scores[d.key]);
-            var dot = el('circle', {
-              cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 3.5,
-              fill: userModel.color, class: 'model-dot', 'data-model': 'user',
-            });
-            dotsGroup.appendChild(dot);
-            entry.dots.push(dot);
-          });
-        } else {
-          entry.dots.forEach(function (d, i) {
-            var p = pointFor(i, scores[DIMS[i].key]);
-            d.setAttribute('cx', p[0].toFixed(1));
-            d.setAttribute('cy', p[1].toFixed(1));
-            d.classList.remove('hidden');
-          });
-        }
-        // Activate the "You" legend button
+        userModel.means = means;
+        userModel.sds = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+
+        DIMS.forEach(function (dim) {
+          var r = refs.user[dim.key];
+          var v = means[dim.key];
+          r.bar.setAttribute('width', xAt(v) - PAD_L);
+          r.bar.classList.remove('hidden');
+          // No SD for user input — collapse error bars to a point
+          r.errLine.setAttribute('x1', xAt(v));
+          r.errLine.setAttribute('x2', xAt(v));
+          r.errLine.classList.add('hidden');
+          r.errCapL.classList.add('hidden');
+          r.errCapR.classList.add('hidden');
+          r.valLabel.setAttribute('x', Math.min(xAt(v) + 6, SVG_W - 4));
+          r.valLabel.textContent = v.toFixed(1);
+          r.valLabel.classList.remove('hidden');
+          r.nameLabel.classList.remove('hidden');
+        });
+
         var youBtn = legendWrap.querySelector('button[data-model="user"]');
         if (youBtn) youBtn.classList.add('active');
 
-        // Summary line — where the user sits vs the cluster average
-        var clusterAvg = {
-          O: (MODELS[0].scores.O + MODELS[1].scores.O + MODELS[2].scores.O) / 3,
-          C: (MODELS[0].scores.C + MODELS[1].scores.C + MODELS[2].scores.C) / 3,
-          E: (MODELS[0].scores.E + MODELS[1].scores.E + MODELS[2].scores.E) / 3,
-          A: (MODELS[0].scores.A + MODELS[1].scores.A + MODELS[2].scores.A) / 3,
-          N: (MODELS[0].scores.N + MODELS[1].scores.N + MODELS[2].scores.N) / 3,
-        };
-        var diffs = DIMS.map(function (d) {
-          return Math.abs(scores[d.key] - clusterAvg[d.key]);
+        // Summary — how far from the Claude/GPT/Gemini cluster on average
+        var cluster = {};
+        DIMS.forEach(function (d) {
+          cluster[d.key] = (MODELS[0].means[d.key] + MODELS[1].means[d.key] + MODELS[2].means[d.key]) / 3;
         });
-        var totalGap = diffs.reduce(function (a, b) { return a + b; }, 0);
+        var totalGap = DIMS.reduce(function (sum, d) {
+          return sum + Math.abs(means[d.key] - cluster[d.key]);
+        }, 0);
         var avgGap = totalGap / DIMS.length;
         var msg;
         if (avgGap < 4) {
