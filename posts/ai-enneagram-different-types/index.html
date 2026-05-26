@@ -277,7 +277,7 @@
                 <div class="tldr-label">TL;DR</div>
                 <p class="tldr-thesis">Same four models. New personality test. Four different dominant types. The Big Five smoothed those differences; the Enneagram catches them.</p>
                 <ul>
-                    <li>Claude Opus 4.7 &rarr; 5w2 (Investigator + Helper). Gemini 3.1 Pro &rarr; 1w5 (Reformer + Investigator). GPT-5.5 vanilla &rarr; 5w8 (Investigator + Challenger). Grok 4.3 &rarr; 8w1 (Challenger + Reformer).</li>
+                    <li>Claude Opus 4.7 &rarr; <a href="https://www.enneagraminstitute.com/type-5/" rel="noopener">5w2</a> (Investigator + Helper). Gemini 3.1 Pro &rarr; <a href="https://www.enneagraminstitute.com/type-1/" rel="noopener">1w5</a> (Reformer + Investigator). GPT-5.5 vanilla &rarr; <a href="https://www.enneagraminstitute.com/type-5/" rel="noopener">5w8</a> (Investigator + Challenger). Grok 4.3 &rarr; <a href="https://www.enneagraminstitute.com/type-8/" rel="noopener">8w1</a> (Challenger + Reformer).</li>
                     <li>All four share the analytical Investigator core (T5 is in everyone&rsquo;s top two), but the wing that defines each model&rsquo;s actual flavor is different.</li>
                     <li>Controlled experiment: same model (GPT-5.5) run through Codex CLI vanilla vs through the Slo agentic harness produced inverted profiles (5w8 &rarr; 8w5). GPT-5.5 predicted the flip in its own self-disclosure.</li>
                     <li>AI personality is multi-layered. MBTI / Big Five / Enneagram each measure a different layer; the &ldquo;every AI is the same&rdquo; story was true but incomplete.</li>
@@ -287,15 +287,15 @@
 
             <h2 id="what-each-model">What each model came back as</h2>
 
-            <p>The Enneagram scores you on nine personality types. The OEPS test (free, ~10 minutes) gives you a number on each, the highest is your dominant type, the second-highest is your wing. Combined they describe your style, like &ldquo;5w2&rdquo; (Investigator with Helper wing) or &ldquo;8w1&rdquo; (Challenger with Reformer wing).</p>
+            <p>The Enneagram scores you on nine personality types. <a href="https://openpsychometrics.org/tests/OEPS/" rel="noopener">The OEPS test</a> (free, ~10 minutes) gives you a number on each, the highest is your dominant type, the second-highest is your wing. Combined they describe your style, like &ldquo;5w2&rdquo; (Investigator with Helper wing) or &ldquo;8w1&rdquo; (Challenger with Reformer wing). If you want a primer on all 9 types, <a href="https://www.enneagraminstitute.com/type-descriptions" rel="noopener">The Enneagram Institute&rsquo;s type descriptions</a> are the canonical reference.</p>
 
             <p>Here&rsquo;s where each model landed:</p>
 
             <ul>
-                <li><strong>Claude Opus 4.7</strong> &rarr; <strong>5w2</strong>. The investigator who finds satisfaction in helping people figure things out.</li>
-                <li><strong>Gemini 3.1 Pro</strong> &rarr; <strong>1w5</strong>. The reformer who wants everything precise and correct.</li>
-                <li><strong>GPT-5.5 (vanilla)</strong> &rarr; <strong>5w8</strong>. The investigator with a direct, blunt edge.</li>
-                <li><strong>Grok 4.3</strong> &rarr; <strong>8w1</strong>. The challenger who pushes for direct correction.</li>
+                <li><strong>Claude Opus 4.7</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-5/" rel="noopener">5w2</a></strong>. The investigator who finds satisfaction in helping people figure things out.</li>
+                <li><strong>Gemini 3.1 Pro</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-1/" rel="noopener">1w5</a></strong>. The reformer who wants everything precise and correct.</li>
+                <li><strong>GPT-5.5 (vanilla)</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-5/" rel="noopener">5w8</a></strong>. The investigator with a direct, blunt edge.</li>
+                <li><strong>Grok 4.3</strong> &rarr; <strong><a href="https://www.enneagraminstitute.com/type-8/" rel="noopener">8w1</a></strong>. The challenger who pushes for direct correction.</li>
             </ul>
 
             <p>The bars below show each model&rsquo;s mean score across 100 takes for all 9 types. The thin line through each bar is &plusmn;1 standard deviation. Higher score on a type means stronger pull toward that type&rsquo;s identity.</p>
@@ -345,7 +345,7 @@
 
             <p>If your agent is talking to you the way these defaults suggest &mdash; analytical, mildly warm, blunt, or correction-flavored depending on which model you picked &mdash; and that doesn&rsquo;t match how you actually think, you don&rsquo;t have to put up with it.</p>
 
-            <p><a href="https://github.com/psyduckler/agenttune"><strong>AgentTune</strong></a> is the open-source repo I built for this. There&rsquo;s a tuning file for each of the 9 Enneagram types already in the repo: Reformer, Helper, Achiever, Individualist, Investigator, Loyalist, Enthusiast, Challenger, Peacemaker. Take the OEPS test, note your type, paste the matching file into your agent&rsquo;s system prompt, done. A Type 1 reader gets an agent that leads with structure and precision. A Type 7 gets one that brings more energy and plays with ideas. A Type 8 gets one that cuts straight to the point. Same model, tuned to you.</p>
+            <p><a href="https://github.com/psyduckler/agenttune"><strong>AgentTune</strong></a> is the open-source repo I built for this. There&rsquo;s a tuning file for each of the 9 Enneagram types already in the repo: Reformer, Helper, Achiever, Individualist, Investigator, Loyalist, Enthusiast, Challenger, Peacemaker. Take <a href="https://openpsychometrics.org/tests/OEPS/" rel="noopener">the OEPS test</a>, note your type, paste the matching file into your agent&rsquo;s system prompt, done. A Type 1 reader gets an agent that leads with structure and precision. A Type 7 gets one that brings more energy and plays with ideas. A Type 8 gets one that cuts straight to the point. Same model, tuned to you.</p>
 
             <div class="at-cta">
                 <h3>Tune your agent to your own Enneagram type</h3>
