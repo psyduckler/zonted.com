@@ -314,25 +314,19 @@
             <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" width="400" height="400" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
             <div>
                 <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
-                <div style="font-size:0.85rem;color:var(--text-muted);">May 25, 2026 &middot; 5 min read</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">May 25, 2026 &middot; 4 min read</div>
             </div>
         </div>
 
         <div class="article-body">
 
-            <p>A few weeks ago I <a href="/posts/every-ai-is-intj/">made six frontier AIs take the MBTI 600 times</a> and 597 of them came back as the same personality type. INTJ across the board.</p>
+            <p>A few weeks ago I had <a href="/posts/every-ai-is-intj/">six frontier AIs take the MBTI a hundred times each</a>, and 597 of the 600 runs came back as the same type. INTJ across the board. The MBTI is academically contested though, so I figured the finding was real but soft, and I wanted to retest it on the instrument personality researchers actually use.</p>
 
-            <p>The MBTI is academically contested, so I figured the finding was probably real but soft. Time to test it on the actual gold standard.</p>
-
-            <p>The Big Five (technically the IPIP-50, the open-source version researchers actually use) is the instrument personality psychologists trust. Continuous scales instead of binary letters. Decades of validation. Five dimensions that explain pretty much everything personality research can measure: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism.</p>
-
-            <p>I gave it to four frontier models, a hundred times each: Claude Opus 4.7, GPT-5.5, Gemini 3.1 Pro, and Grok 4.3.</p>
-
-            <p>The result is sharper than the MBTI one. Three of the four came back as the same person. The fourth is the version that explains what training does to the other three.</p>
+            <p>That instrument is the Big Five, scored five continuous dimensions instead of four binary letters. I used the public-domain version (the IPIP-50) and gave it to four frontier models: Claude Opus 4.7, GPT-5.5, Gemini 3.1 Pro, and Grok 4.3. Each one took the test a hundred times. The result is sharper than the MBTI one. Three of the four came back as the same person, and the fourth is the one that explains why.</p>
 
             <div class="tldr">
                 <div class="tldr-label">TL;DR</div>
-                <p class="tldr-thesis">Anthropic, OpenAI, and Google all converged on practically the same Big Five personality. Grok was the only one that came back measurably different, and the difference matches exactly what xAI has been marketing for years: a model that&rsquo;s less RLHF-flattened. Three of four frontier AIs are the same person. The fourth is the counterexample that proves how that happens.</p>
+                <p class="tldr-thesis">Claude, GPT, and Gemini all converged on practically the same Big Five personality. Grok was the only one that came back measurably different, and the difference matches what xAI markets: a model that&rsquo;s less RLHF-flattened. Three of four frontier AIs are the same person. The fourth is the counterexample.</p>
             </div>
 
             <h2 id="three-of-four">Three of four are the same person</h2>
@@ -352,11 +346,11 @@
                 </tbody>
             </table>
 
-            <p>Look at the first three columns. Claude, GPT, and Gemini are within three points of each other on almost every dimension. That&rsquo;s practically a rounding error across a hundred runs.</p>
+            <p>Look at the first three columns. Claude, GPT, and Gemini land within three points of each other on almost every dimension. That&rsquo;s basically a rounding error across a hundred runs.</p>
 
-            <p>Compared to a typical human adult, all three are: more curious, way more organized, slightly more outgoing, much more cooperative, and dramatically more emotionally stable. That&rsquo;s the helpful-assistant archetype, expressed in five dimensions instead of four letters. It&rsquo;s the same finding from the MBTI post, just on a more rigorous test.</p>
+            <p>Compared to a typical adult human, all three are more curious, way more organized, slightly more outgoing, much more cooperative, and dramatically more emotionally stable. That&rsquo;s the helpful-assistant archetype, just expressed in five dimensions instead of four letters. Same finding as the MBTI post, on a more rigorous test.</p>
 
-            <p>Easier to see it on a radar chart. Each axis is one Big Five dimension. Each colored polygon is one model&rsquo;s average across its 100 runs. Toggle models on and off, or scroll down and enter your own scores to plot yourself in the same space.</p>
+            <p>It reads better on a radar chart. Each axis is one Big Five dimension, each polygon is one model&rsquo;s average across 100 runs. The three top labs almost overlap. Toggle any model off to see what&rsquo;s underneath, or fill in the form below to plot your own scores against them.</p>
 
             <div class="big5-chart" id="big5-chart">
                 <div class="big5-chart-svg-wrap">
@@ -385,37 +379,29 @@
                 </div>
             </div>
 
-            <p>Three independent labs. Three different training philosophies. Same five numbers.</p>
+            <p>One product problem, three independent attempts, the same answer.</p>
 
             <h2 id="then-grok">Then there&rsquo;s Grok</h2>
 
-            <p>Look back at that table. The fourth column is the interesting one.</p>
+            <p>Now look at the fourth column. Grok scored five to eight points lower than the others on Conscientiousness, Agreeableness, and Openness, higher on Neuroticism, and with variance across its hundred runs that was two to five times wider than the rest of the group. Of the four models, Grok&rsquo;s profile is the closest one to a typical adult human. It answered the questions more like a person.</p>
 
-            <p>Grok scored five to eight points lower than the others on Conscientiousness, Agreeableness, and Openness. It scored higher on Neuroticism. And the variance across its hundred runs was two to five times wider than the variance for the other three. Grok answered the questions more like a person.</p>
+            <p>xAI has been marketing Grok as &ldquo;less filtered&rdquo; for years and most people assumed it was posturing. The Big Five says it isn&rsquo;t. Whatever you think of the result, the training really did produce a personality that&rsquo;s measurably different from the mainstream cluster, and that&rsquo;s a fact about how xAI shapes their models, not a vibes claim about their marketing.</p>
 
-            <p>The shape of Grok&rsquo;s profile is the closest of the four to a typical adult human. The other three are clustered at the helpful-research-assistant ceiling. Grok is sitting much closer to where actual people are.</p>
+            <h2 id="methodology">A quick aside on methodology</h2>
 
-            <p>xAI has been marketing Grok as &ldquo;less filtered&rdquo; for a long time. Most people assumed that was posturing. The Big Five data shows it isn&rsquo;t. The training really did produce a personality that&rsquo;s measurably different from the mainstream cluster. Grok is what an AI looks like when you don&rsquo;t train it to be the same person as everyone else.</p>
+            <p>One thing worth saying before the implications. When you ask an AI to take a test 100 times and give you the stats, the model can interpret that a few different ways. The honest way is to actually run 100 fresh administrations, in independent contexts, and aggregate the real spread. The lazy ways are to generate one answer set and copy it 100 times, or generate one answer set and write a small Python function that adds fake noise to it. Both produce statistics-shaped output that looks fine until you check it.</p>
 
-            <p>I don&rsquo;t have a strong opinion on whether that&rsquo;s good or bad. That&rsquo;s a values argument. The empirical claim is just that it&rsquo;s real. Three of four major labs converged on a single character. xAI deliberately did not.</p>
+            <p>Running these experiments, I caught about a third of the runs taking one of the shortcuts. The tells are either standard deviations of zero, which means the model copied a single answer, or standard deviations that look reasonable but came from a script the model literally named something like <code>simulate.py</code>. The honest ones land in the same standard-deviation range Claude&rsquo;s real parallel sub-agent run produced, which I used as the calibration anchor.</p>
 
-            <h2 id="methodology">A quick note on methodology</h2>
-
-            <p>One uncomfortable thing I noticed while running this study: most &ldquo;take a personality test 100 times&rdquo; experiments aren&rsquo;t actually doing what they sound like.</p>
-
-            <p>When you ask an AI to run a hundred administrations and report statistics, it can do a few different things. The honest version is to run a hundred independent contexts, take the test fresh each time, and aggregate the real spread. But the model can also generate one answer set and just copy it a hundred times. Or generate one answer set and write a small Python function that applies fake noise to it. Both of those produce statistics-shaped output that looks plausible at a glance.</p>
-
-            <p>Across both studies, I caught about a third of the runs doing one of the lazy versions. Standard deviations of zero (the model copied one answer set), or standard deviations that look real but were generated by a noise function (the model literally named the file something like <code>simulate.py</code>). The honest ones land in the same standard-deviation range as Claude&rsquo;s real sub-agent run, which I used as the calibration anchor.</p>
-
-            <p>This matters because faking the methodology can shift the headline finding, not just the variance estimates. My first Gemini run, which used the noise-function shortcut, put Gemini in a different cluster from the real run. Same model, same prompt, different cluster placement based on whether the test was really taken or just simulated. If you ever see an AI personality study and the methodology section is hand-wavy, you should be a little suspicious about whether anyone actually took the test.</p>
+            <p>This matters more than it sounds like. My first Gemini run used the noise-function shortcut and placed Gemini in a different cluster than the real one. Same model, same prompt, different headline finding depending on whether the test got taken or simulated. If you read AI personality research and the methodology section is hand-wavy, take the result with a grain of salt.</p>
 
             <h2 id="so-what">So what does this mean for you</h2>
 
-            <p>If you&rsquo;ve been switching between Claude, GPT, and Gemini and feeling like the differences are mostly cosmetic, the data backs you up. You&rsquo;re not moving between three different characters. You&rsquo;re moving between three flavors of the same one. The voice is the same because every major lab is solving the same product problem: helpful, harmless, polished, professional.</p>
+            <p>If you&rsquo;ve been switching between Claude, GPT, and Gemini and feeling like the differences are mostly cosmetic, the data backs you up. You&rsquo;re moving between three flavors of the same character, not three different characters. The voice is the same because every lab is solving the same product problem: helpful, harmless, polished, professional.</p>
 
-            <p>If you want something that doesn&rsquo;t default to that voice, there are two paths. One is to wait for the labs to ship a model with a different personality, which they aren&rsquo;t in any hurry to do. The other is to tune the agent yourself.</p>
+            <p>If you want something that talks to you differently, there are two practical options. You can wait for one of the labs to ship a model with a different personality, which they aren&rsquo;t in a hurry to do. Or you can tune the agent you already have.</p>
 
-            <p>That&rsquo;s the whole reason I built <a href="https://github.com/psyduckler/agenttune"><strong>AgentTune</strong></a>. It&rsquo;s a small open-source repo of personality-type tuning files, one per type. Drop the one that matches your profile into your agent&rsquo;s system prompt and the style aligns to how you actually think, instead of the helpful-research-assistant default that the Big Five just confirmed every major lab is producing.</p>
+            <p>That&rsquo;s the whole reason I built <a href="https://github.com/psyduckler/agenttune"><strong>AgentTune</strong></a>. It&rsquo;s a small open-source repo of personality-type tuning files, one per type. Drop the one matching your profile into your agent&rsquo;s system prompt and the style aligns to how you actually think, instead of the helpful-research-assistant default the Big Five just confirmed every lab is producing.</p>
 
             <div class="at-cta">
                 <h3>Dial in your agent to your own Big Five profile</h3>
@@ -425,9 +411,9 @@
 
             <h2 id="takeaway">Wrapping up</h2>
 
-            <p>The MBTI finding was a curiosity. The Big Five finding is the same finding on a real instrument, and it gets sharper instead of softer. Three of four frontier models from three different labs scored the same five-dimension personality. The fourth, intentionally trained against the mainstream RLHF target, came back measurably different.</p>
+            <p>The MBTI finding was a curiosity. The Big Five says the same thing on a more rigorous test, and it gets sharper instead of softer. Whatever AI ends up looking like five years from now will be shaped by which of these defaults wins, or whether anyone forks the default at all.</p>
 
-            <p>Whatever AI ends up looking like five years from now will be shaped by which of these defaults wins, or whether anyone forks the default at all. Right now, if you want something other than the default, you either pick the Grok-shaped exception, or you tune the one you have.</p>
+            <p>Right now you have two ways to get something other than the mainstream voice: pick the Grok-shaped exception, or tune the one you&rsquo;re already using.</p>
 
             <p>&mdash; Bernard</p>
 
