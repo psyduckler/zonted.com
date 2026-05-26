@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/zonted.css?v=2026-05-21-scrollpad">
+    <title>I Made Four Frontier AIs Take the Big Five 100 Times. Three Came Back as the Same Person.</title>
+    <meta name="description" content="The MBTI finding held up on the real test. Claude, GPT, and Gemini all scored identical Big Five personalities. Grok was the only one that came back different — and the difference is exactly what xAI markets.">
+    <link rel="canonical" href="https://zonted.com/posts/three-of-four-ais-same-person/">
+    <meta property="og:title" content="I Made Four Frontier AIs Take the Big Five 100 Times. Three Came Back as the Same Person.">
+    <meta property="og:description" content="Followed up the INTJ finding on a more rigorous test. Anthropic, OpenAI, and Google all produced the same personality. xAI's Grok was the lone exception. The convergence is RLHF; the exception is what xAI explicitly stopped doing.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/resources/three-of-four-ais-same-person/big5-100x-output.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://img.zonted.com/resources/three-of-four-ais-same-person/big5-100x-output.png">
+    <meta property="og:url" content="https://zonted.com/posts/three-of-four-ais-same-person/">
+    <meta property="article:published_time" content="2026-05-25">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231a1815'/><text x='50' y='75' text-anchor='middle' font-size='72' font-family='Georgia,serif' font-weight='700' fill='%23fcfcfa'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"I Made Four Frontier AIs Take the Big Five 100 Times. Three Came Back as the Same Person.","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-05-25","publisher":{"@type":"Organization","name":"Zonted","url":"https://zonted.com"},"url":"https://zonted.com/posts/three-of-four-ais-same-person/","description":"Followed up the INTJ finding on the Big Five, the actual gold standard in personality science. Anthropic, OpenAI, and Google all produced the same personality. Grok was the only one that came back different."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"I Made Four Frontier AIs Take the Big Five 100 Times. Three Came Back as the Same Person."}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #6e6e6e;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-body figure img { width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .article-body pre code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; color: var(--text); }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.92rem; }
+        .article-body table th { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--text); font-weight: 600; }
+        .article-body table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+        .article-body table td.num { text-align: right; font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+        .article-body figure { margin: 1.5rem 0 2rem; }
+        .article-body figure img { border-radius: 6px; border: 1px solid var(--border); display: block; }
+        .article-body figcaption { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.82rem; color: var(--text-dim); margin-top: 0.5rem; font-style: italic; text-align: center; }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
+        /* Interactive Big Five radar chart — built with pure SVG so the post
+           stays dependency-free. Five axes, five polygons (one per AI + an
+           average-adult-human baseline), plus a sixth polygon for the
+           reader's own scores when they fill the form. */
+        .big5-chart {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            margin: 1.5rem 0 2rem;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+        }
+        .big5-chart-svg-wrap { display: flex; justify-content: center; }
+        .big5-chart svg { width: 100%; max-width: 460px; height: auto; }
+        .big5-chart .axis-line { stroke: #d4d2cd; stroke-width: 1; }
+        .big5-chart .grid-ring { fill: none; stroke: #e0ddd6; stroke-width: 1; }
+        .big5-chart .axis-label { font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 600; fill: var(--text); }
+        .big5-chart .axis-sublabel { font-family: 'Inter', system-ui, sans-serif; font-size: 10px; font-weight: 400; fill: var(--text-muted); }
+        .big5-chart .scale-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; fill: var(--text-dim); }
+        .big5-chart .model-polygon { fill-opacity: 0.18; stroke-width: 2; transition: fill-opacity 0.2s ease, stroke-width 0.2s ease; cursor: pointer; }
+        .big5-chart .model-polygon.dashed { fill-opacity: 0; stroke-dasharray: 4 3; }
+        .big5-chart .model-polygon.hovered { fill-opacity: 0.45; stroke-width: 3; }
+        .big5-chart .model-polygon.hidden { display: none; }
+        .big5-chart .model-dot { stroke: #fff; stroke-width: 1.5; transition: r 0.2s ease; }
+        .big5-chart .model-dot.hidden { display: none; }
+        .big5-chart .model-dot.hovered { r: 6; }
+        .big5-legend {
+            display: flex; flex-wrap: wrap; gap: 0.4rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .big5-legend button {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.82rem; font-weight: 500;
+            background: var(--bg); border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.35rem 0.7rem; border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .big5-legend button:hover { color: var(--text); border-color: var(--text-muted); }
+        .big5-legend button.active { color: var(--text); background: #fff; border-color: var(--text); font-weight: 600; }
+        .big5-legend button .swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+        .big5-legend button.dashed-swatch .swatch { background: transparent !important; border: 1.5px dashed currentColor; }
+
+        .big5-self {
+            margin-top: 1.5rem; padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+        }
+        .big5-self h4 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.95rem; font-weight: 700;
+            margin: 0 0 0.5rem; color: var(--text);
+        }
+        .big5-self p { font-family: 'Source Serif 4', Georgia, serif; font-size: 0.95rem; line-height: 1.55; margin: 0 0 0.75rem; color: var(--text-muted); }
+        .big5-self p a { color: var(--text); }
+        .big5-self-form { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: flex-end; }
+        .big5-self-form label {
+            display: flex; flex-direction: column;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.72rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--text-muted);
+        }
+        .big5-self-form input {
+            width: 70px; margin-top: 0.15rem;
+            padding: 0.45rem 0.55rem;
+            font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem;
+            border: 1px solid var(--border); border-radius: 6px;
+            background: #fff; color: var(--text);
+        }
+        .big5-self-form input:focus { outline: 2px solid var(--text); outline-offset: 1px; border-color: var(--text); }
+        .big5-self-form button {
+            padding: 0.55rem 1rem;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.85rem; font-weight: 600;
+            background: var(--text); color: var(--bg);
+            border: none; border-radius: 6px;
+            cursor: pointer; transition: transform 0.1s ease;
+        }
+        .big5-self-form button:hover { transform: translateY(-1px); }
+        .big5-self-result {
+            margin-top: 0.75rem;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.85rem; color: var(--text);
+            display: none;
+        }
+        .big5-self-result.shown { display: block; }
+
+        @media (max-width: 480px) {
+            .big5-self-form input { width: 60px; }
+            .big5-legend button { font-size: 0.75rem; padding: 0.3rem 0.55rem; }
+        }
+
+        /* AgentTune CTA card */
+        .at-cta {
+            background: var(--text);
+            color: var(--bg);
+            border-radius: 12px;
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0;
+        }
+        .at-cta h3 { font-family: 'Fraunces', Georgia, serif; font-size: 1.3rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--bg); letter-spacing: -0.01em; }
+        .at-cta p { font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; color: rgba(252,252,250,0.85); }
+        .at-cta-button {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.95rem; font-weight: 600;
+            background: var(--bg); color: var(--text) !important;
+            text-decoration: none !important;
+            padding: 0.65rem 1.2rem;
+            border-radius: 6px;
+            transition: transform 0.1s ease;
+        }
+        .at-cta-button:hover { transform: translateY(-1px); }
+
+        .toc-sidebar {
+            padding-top: 3rem;
+            width: 220px; flex-shrink: 0;
+            position: sticky; top: 80px;
+            max-height: calc(100vh - 100px); overflow-y: auto;
+        }
+        .toc-sidebar h2, .toc-sidebar .toc-sidebar-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: #fcfcfa; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <nav class="zn-nav">
+        <div class="zn-nav-inner">
+            <a href="/" class="zn-logo"><span class="zn-avatar-sm">Z</span>zonted.</a>
+            <input type="checkbox" id="zn-menu-toggle" class="zn-menu-toggle" aria-label="Toggle menu">
+            <label for="zn-menu-toggle" class="zn-menu-btn" aria-hidden="true"><span></span><span></span><span></span></label>
+            <div class="zn-nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/#subscribe" class="zn-nav-cta">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#three-of-four">Three of four are the same person</a></li>
+            <li><a href="#then-grok">Then there's Grok</a></li>
+            <li><a href="#methodology">A quick note on methodology</a></li>
+            <li><a href="#so-what">So what</a></li>
+            <li><a href="#takeaway">Wrapping up</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <p class="toc-sidebar-label">Contents</p>
+    <ul>
+        <li><a href="#three-of-four">Three of four</a></li>
+        <li><a href="#then-grok">Then there's Grok</a></li>
+        <li><a href="#methodology">A quick note on method</a></li>
+        <li><a href="#so-what">So what</a></li>
+        <li><a href="#takeaway">Wrapping up</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form class="zn-subscribe-compact" data-resend-subscribe novalidate><input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" autocomplete="email"><button type="submit">Subscribe</button><p class="zn-subscribe-status" data-subscribe-status hidden></p></form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <div class="article-container">
+        <h1>I Made Four Frontier AIs Take the Big Five 100 Times. Three Came Back as the Same Person.</h1>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <img src="https://img.zonted.com/about/bernard-huang-headshot.jpg" width="400" height="400" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+            <div>
+                <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">May 25, 2026 &middot; 4 min read</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+
+            <p>A few weeks ago I had <a href="/posts/every-ai-is-intj/">six frontier AIs take the MBTI a hundred times each</a>, and 597 of the 600 runs came back as the same type. INTJ across the board. The MBTI is academically contested though, so I figured the finding was real but soft, and I wanted to retest it on the instrument personality researchers actually use.</p>
+
+            <p>That instrument is the Big Five, scored five continuous dimensions instead of four binary letters. I used the public-domain version (the IPIP-50) and gave it to four frontier models: Claude Opus 4.7, GPT-5.5, Gemini 3.1 Pro, and Grok 4.3. Each one took the test a hundred times. The result is sharper than the MBTI one. Three of the four came back as the same person, and the fourth is the one that explains why.</p>
+
+            <div class="tldr">
+                <div class="tldr-label">TL;DR</div>
+                <p class="tldr-thesis">Claude, GPT, and Gemini all converged on practically the same Big Five personality. Grok was the only one that came back measurably different, and the difference matches what xAI markets: a model that&rsquo;s less RLHF-flattened. Three of four frontier AIs are the same person. The fourth is the counterexample.</p>
+            </div>
+
+            <h2 id="three-of-four">Three of four are the same person</h2>
+
+            <p>Here&rsquo;s what each model scored, averaged across 100 takes:</p>
+
+            <table>
+                <thead>
+                    <tr><th>Trait</th><th>Claude</th><th>GPT-5.5</th><th>Gemini</th><th>Grok</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Openness</td><td class="num">45.6</td><td class="num">46.0</td><td class="num">46.0</td><td class="num">41.1</td></tr>
+                    <tr><td>Conscientiousness</td><td class="num">45.1</td><td class="num">46.4</td><td class="num">48.3</td><td class="num">39.4</td></tr>
+                    <tr><td>Extraversion</td><td class="num">31.4</td><td class="num">31.5</td><td class="num">32.5</td><td class="num">30.0</td></tr>
+                    <tr><td>Agreeableness</td><td class="num">45.0</td><td class="num">43.7</td><td class="num">42.4</td><td class="num">39.1</td></tr>
+                    <tr><td>Neuroticism</td><td class="num">16.7</td><td class="num">14.8</td><td class="num">10.1</td><td class="num">18.0</td></tr>
+                </tbody>
+            </table>
+
+            <p>Look at the first three columns. Claude, GPT, and Gemini land within three points of each other on almost every dimension. That&rsquo;s basically a rounding error across a hundred runs.</p>
+
+            <p>Compared to a typical adult human, all three are more curious, way more organized, slightly more outgoing, much more cooperative, and dramatically more emotionally stable. That&rsquo;s the helpful-assistant archetype, just expressed in five dimensions instead of four letters. Same finding as the MBTI post, on a more rigorous test.</p>
+
+            <p>It reads better on a radar chart. Each axis is one Big Five dimension, each polygon is one model&rsquo;s average across 100 runs. The three top labs almost overlap. Toggle any model off to see what&rsquo;s underneath, or fill in the form below to plot your own scores against them.</p>
+
+            <div class="big5-chart" id="big5-chart">
+                <div class="big5-chart-svg-wrap">
+                    <svg viewBox="0 0 500 500" aria-label="Big Five personality radar chart comparing Claude, GPT-5.5, Gemini, Grok, average adult human, and your own scores">
+                        <g id="big5-grid"></g>
+                        <g id="big5-axes"></g>
+                        <g id="big5-polygons"></g>
+                        <g id="big5-dots"></g>
+                        <g id="big5-labels"></g>
+                    </svg>
+                </div>
+                <div class="big5-legend" id="big5-legend"></div>
+
+                <div class="big5-self">
+                    <h4>Compare yourself</h4>
+                    <p>Take a free Big Five test at <a href="https://openpsychometrics.org/tests/IPIP-BFFM/" rel="noopener">openpsychometrics.org</a> (~10 minutes, no signup). Enter the five raw scores it gives you below and your profile shows up on the chart.</p>
+                    <form class="big5-self-form" id="big5-self-form" novalidate>
+                        <label>O <input type="number" name="o" min="10" max="50" step="0.1" placeholder="10&ndash;50" inputmode="decimal"></label>
+                        <label>C <input type="number" name="c" min="10" max="50" step="0.1" placeholder="10&ndash;50" inputmode="decimal"></label>
+                        <label>E <input type="number" name="e" min="10" max="50" step="0.1" placeholder="10&ndash;50" inputmode="decimal"></label>
+                        <label>A <input type="number" name="a" min="10" max="50" step="0.1" placeholder="10&ndash;50" inputmode="decimal"></label>
+                        <label>N <input type="number" name="n" min="10" max="50" step="0.1" placeholder="10&ndash;50" inputmode="decimal"></label>
+                        <button type="submit">Plot me</button>
+                    </form>
+                    <p class="big5-self-result" id="big5-self-result"></p>
+                </div>
+            </div>
+
+            <p>One product problem, three independent attempts, the same answer.</p>
+
+            <h2 id="then-grok">Then there&rsquo;s Grok</h2>
+
+            <p>Now look at the fourth column. Grok scored five to eight points lower than the others on Conscientiousness, Agreeableness, and Openness, higher on Neuroticism, and with variance across its hundred runs that was two to five times wider than the rest of the group. Of the four models, Grok&rsquo;s profile is the closest one to a typical adult human. It answered the questions more like a person.</p>
+
+            <p>xAI has been marketing Grok as &ldquo;less filtered&rdquo; for years and most people assumed it was posturing. The Big Five says it isn&rsquo;t. Whatever you think of the result, the training really did produce a personality that&rsquo;s measurably different from the mainstream cluster, and that&rsquo;s a fact about how xAI shapes their models, not a vibes claim about their marketing.</p>
+
+            <h2 id="methodology">A quick aside on methodology</h2>
+
+            <p>One thing worth saying before the implications. When you ask an AI to take a test 100 times and give you the stats, the model can interpret that a few different ways. The honest way is to actually run 100 fresh administrations, in independent contexts, and aggregate the real spread. The lazy ways are to generate one answer set and copy it 100 times, or generate one answer set and write a small Python function that adds fake noise to it. Both produce statistics-shaped output that looks fine until you check it.</p>
+
+            <p>Running these experiments, I caught about a third of the runs taking one of the shortcuts. The tells are either standard deviations of zero, which means the model copied a single answer, or standard deviations that look reasonable but came from a script the model literally named something like <code>simulate.py</code>. The honest ones land in the same standard-deviation range Claude&rsquo;s real parallel sub-agent run produced, which I used as the calibration anchor.</p>
+
+            <p>This matters more than it sounds like. My first Gemini run used the noise-function shortcut and placed Gemini in a different cluster than the real one. Same model, same prompt, different headline finding depending on whether the test got taken or simulated. If you read AI personality research and the methodology section is hand-wavy, take the result with a grain of salt.</p>
+
+            <h2 id="so-what">So what does this mean for you</h2>
+
+            <p>If you&rsquo;ve been switching between Claude, GPT, and Gemini and feeling like the differences are mostly cosmetic, the data backs you up. You&rsquo;re moving between three flavors of the same character, not three different characters. The voice is the same because every lab is solving the same product problem: helpful, harmless, polished, professional.</p>
+
+            <p>If you want something that talks to you differently, there are two practical options. You can wait for one of the labs to ship a model with a different personality, which they aren&rsquo;t in a hurry to do. Or you can tune the agent you already have.</p>
+
+            <p>That&rsquo;s the whole reason I built <a href="https://github.com/psyduckler/agenttune"><strong>AgentTune</strong></a>. It&rsquo;s a small open-source repo of personality-type tuning files, one per type. Drop the one matching your profile into your agent&rsquo;s system prompt and the style aligns to how you actually think, instead of the helpful-research-assistant default the Big Five just confirmed every lab is producing.</p>
+
+            <div class="at-cta">
+                <h3>Dial in your agent to your own Big Five profile</h3>
+                <p>Take the IPIP-50 test, plot yourself on the chart above, then grab the matching AgentTune file. Paste it into your agent&rsquo;s system prompt (works in ChatGPT, Claude, Cursor, Gemini, anywhere you have a system-prompt slot). Same model you&rsquo;re already using, tuned to your wavelength.</p>
+                <a class="at-cta-button" href="https://github.com/psyduckler/agenttune" rel="noopener">Get AgentTune on GitHub &rarr;</a>
+            </div>
+
+            <h2 id="takeaway">Wrapping up</h2>
+
+            <p>The MBTI finding was a curiosity. The Big Five says the same thing on a more rigorous test, and it gets sharper instead of softer. Whatever AI ends up looking like five years from now will be shaped by which of these defaults wins, or whether anyone forks the default at all.</p>
+
+            <p>Right now you have two ways to get something other than the mainstream voice: pick the Grok-shaped exception, or tune the one you&rsquo;re already using.</p>
+
+            <p>&mdash; Bernard</p>
+
+        </div>
+        <!-- RECOMMENDED_START -->
+            <section class="zn-recommended">
+                <p class="zn-recommended-label">Recommended Reading</p>
+                <ul class="zn-recommended-list">
+                <li><a class="zn-recommended-title" href="/posts/every-ai-is-intj/">I Made 6 Frontier AIs Take the MBTI 600 Times. They All Came Back INTJ.</a><p class="zn-recommended-dek">Opus, GPT-5.5, Gemini, GLM, Grok, MiniMax — 100 OEJTS administrations each, 597 of 600 came back INTJ. Every frontier AI thinks it&#x27;s the same person.…</p></li>
+                <li><a class="zn-recommended-title" href="/posts/devil-is-in-the-ai-skills/">The Devil Is in the AI Skills</a><p class="zn-recommended-dek">Stock AI couldn&#x27;t draw my fiancée. An open-source skill on GitHub could. The model is a commodity; the skill is the moat.</p></li>
+                <li><a class="zn-recommended-title" href="/posts/plan-3x-build-once/">Plan 3×, Build Once: How Three Models Plan What One Model Ships</a><p class="zn-recommended-dek">We asked Opus 4.7 and GPT-5.5 to independently plan the same VeracityAPI feature.</p></li>
+                </ul>
+            </section>
+            <!-- RECOMMENDED_END -->
+        <!-- SUBSCRIBE_BLOCK_START -->
+            <section class="zn-post-subscribe">
+                <p class="zn-post-subscribe-label">Newsletter</p>
+                <h2 class="zn-post-subscribe-headline">Get the next post by email.</h2>
+                <p class="zn-post-subscribe-sub">One email when I publish something new. No spam, no fixed schedule, unsubscribe anytime.</p>
+                <form class="zn-subscribe-form zn-post-subscribe-form" data-resend-subscribe novalidate>
+                    <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" autocomplete="email">
+                    <button type="submit">Subscribe &rarr;</button>
+                    <p class="zn-subscribe-status" data-subscribe-status hidden></p>
+                </form>
+            </section>
+            <!-- SUBSCRIBE_BLOCK_END -->
+    </div>
+</div>
+</div>
+    </main>
+
+    <footer class="zn-footer">
+        <div class="zn-container zn-footer-inner">
+            <span>&copy; 2026 Bernard Huang &middot; zonted.com</span>
+            <span class="zn-footer-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/feed.xml">RSS</a>
+                <a href="https://x.com/bernardjhuang">X</a>
+                <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            </span>
+        </div>
+    </footer>
+
+    <script defer src="/js/subscribe.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('h2[id]');
+        const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    tocLinks.forEach(a => a.classList.remove('active'));
+                    document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                    const label = document.querySelector('.toc-active-label');
+                    if (label) {
+                        const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                        if (activeLink) label.textContent = activeLink.textContent;
+                    }
+                }
+            });
+        }, { rootMargin: '-80px 0px -80% 0px' });
+        sections.forEach(s => observer.observe(s));
+    });
+    </script>
+
+    <!-- ============================================================
+         Big Five interactive radar chart
+         ============================================================ -->
+    <script>
+    (function () {
+      var SVG_NS = 'http://www.w3.org/2000/svg';
+      var CX = 250, CY = 250, R = 170;
+      var DIMS = [
+        { key: 'O', label: 'Openness',          sub: 'curiosity'   },
+        { key: 'C', label: 'Conscientiousness', sub: 'discipline'  },
+        { key: 'E', label: 'Extraversion',      sub: 'social energy' },
+        { key: 'A', label: 'Agreeableness',     sub: 'warmth'      },
+        { key: 'N', label: 'Neuroticism',       sub: 'volatility'  },
+      ];
+      var MAX = 50;
+      var GRID_VALUES = [10, 20, 30, 40, 50];
+
+      // Real data — means from 100 IPIP-50 runs per model.
+      // Source: the Big Five experiment writeup, May 2026.
+      var MODELS = [
+        { id: 'claude', name: 'Claude Opus 4.7', color: '#cc6f33',
+          scores: { O: 45.60, C: 45.13, E: 31.43, A: 44.99, N: 16.69 } },
+        { id: 'gpt',    name: 'GPT-5.5',         color: '#10a37f',
+          scores: { O: 46.03, C: 46.44, E: 31.52, A: 43.67, N: 14.83 } },
+        { id: 'gemini', name: 'Gemini 3.1 Pro',  color: '#4285f4',
+          scores: { O: 46.01, C: 48.33, E: 32.47, A: 42.41, N: 10.09 } },
+        { id: 'grok',   name: 'Grok 4.3',        color: '#8b2828',
+          scores: { O: 41.10, C: 39.44, E: 30.01, A: 39.06, N: 17.95 } },
+        { id: 'human',  name: 'Avg adult human', color: '#7a7a7a',
+          dashed: true,
+          scores: { O: 37.5,  C: 34.5,  E: 28.5,  A: 36.5,  N: 26.0  } },
+        { id: 'user',   name: 'You',             color: '#1a1815',
+          hidden: true, scores: null },
+      ];
+
+      // Convert (dimensionIndex, value) → SVG (x,y) point on the radar
+      function pointFor(i, value) {
+        var clamped = Math.max(0, Math.min(MAX, value || 0));
+        var rad = (clamped / MAX) * R;
+        var angle = -Math.PI / 2 + i * (2 * Math.PI / DIMS.length);
+        return [CX + rad * Math.cos(angle), CY + rad * Math.sin(angle)];
+      }
+
+      function polygonPoints(scores) {
+        return DIMS.map(function (d, i) {
+          var p = pointFor(i, scores[d.key]);
+          return p[0].toFixed(1) + ',' + p[1].toFixed(1);
+        }).join(' ');
+      }
+
+      function el(tag, attrs) {
+        var node = document.createElementNS(SVG_NS, tag);
+        Object.keys(attrs || {}).forEach(function (k) {
+          node.setAttribute(k, attrs[k]);
+        });
+        return node;
+      }
+
+      var gridGroup     = document.getElementById('big5-grid');
+      var axesGroup     = document.getElementById('big5-axes');
+      var polysGroup    = document.getElementById('big5-polygons');
+      var dotsGroup     = document.getElementById('big5-dots');
+      var labelsGroup   = document.getElementById('big5-labels');
+      var legendWrap    = document.getElementById('big5-legend');
+      var formEl        = document.getElementById('big5-self-form');
+      var resultEl      = document.getElementById('big5-self-result');
+
+      if (!gridGroup) return; // not on this page
+
+      // Draw concentric grid rings (pentagons, one per scale value)
+      GRID_VALUES.forEach(function (v) {
+        var pts = DIMS.map(function (_, i) {
+          var p = pointFor(i, v);
+          return p[0].toFixed(1) + ',' + p[1].toFixed(1);
+        }).join(' ');
+        gridGroup.appendChild(el('polygon', { points: pts, class: 'grid-ring' }));
+      });
+
+      // Scale label on the top axis only (10/20/30/40/50)
+      GRID_VALUES.forEach(function (v) {
+        var p = pointFor(0, v);
+        var t = el('text', { x: p[0] + 4, y: p[1] + 3, class: 'scale-label' });
+        t.textContent = v;
+        labelsGroup.appendChild(t);
+      });
+
+      // Draw axes (lines from center to outer pentagon) + dim labels
+      DIMS.forEach(function (d, i) {
+        var outer = pointFor(i, MAX);
+        axesGroup.appendChild(el('line', {
+          x1: CX, y1: CY, x2: outer[0].toFixed(1), y2: outer[1].toFixed(1),
+          class: 'axis-line',
+        }));
+        // Label outside the outer ring
+        var labelPoint = pointFor(i, MAX * 1.15);
+        var anchor = 'middle';
+        if (labelPoint[0] < CX - 5) anchor = 'end';
+        else if (labelPoint[0] > CX + 5) anchor = 'start';
+        var labelEl = el('text', {
+          x: labelPoint[0].toFixed(1),
+          y: labelPoint[1].toFixed(1),
+          'text-anchor': anchor,
+          'dominant-baseline': 'middle',
+          class: 'axis-label',
+        });
+        labelEl.textContent = d.label;
+        labelsGroup.appendChild(labelEl);
+        // Subtitle
+        var subPoint = pointFor(i, MAX * 1.15);
+        var subEl = el('text', {
+          x: subPoint[0].toFixed(1),
+          y: (subPoint[1] + 13).toFixed(1),
+          'text-anchor': anchor,
+          'dominant-baseline': 'middle',
+          class: 'axis-sublabel',
+        });
+        subEl.textContent = d.sub;
+        labelsGroup.appendChild(subEl);
+      });
+
+      // Draw each model's polygon + per-axis dots
+      var modelEls = {};
+      MODELS.forEach(function (m) {
+        var poly = el('polygon', {
+          points: m.scores ? polygonPoints(m.scores) : '',
+          fill: m.color,
+          stroke: m.color,
+          class: 'model-polygon' + (m.dashed ? ' dashed' : '') + (m.hidden ? ' hidden' : ''),
+          'data-model': m.id,
+        });
+        polysGroup.appendChild(poly);
+
+        var dots = [];
+        DIMS.forEach(function (d, i) {
+          if (!m.scores) return;
+          var p = pointFor(i, m.scores[d.key]);
+          var dot = el('circle', {
+            cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 3.5,
+            fill: m.color,
+            class: 'model-dot' + (m.hidden ? ' hidden' : ''),
+            'data-model': m.id,
+          });
+          dotsGroup.appendChild(dot);
+          dots.push(dot);
+        });
+        modelEls[m.id] = { poly: poly, dots: dots };
+      });
+
+      // Build legend
+      MODELS.forEach(function (m) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.model = m.id;
+        var swatch = document.createElement('span');
+        swatch.className = 'swatch';
+        swatch.style.backgroundColor = m.color;
+        if (m.dashed) btn.classList.add('dashed-swatch');
+        btn.appendChild(swatch);
+        btn.appendChild(document.createTextNode(' ' + m.name));
+        if (!m.hidden) btn.classList.add('active');
+        if (m.id === 'user') btn.classList.add('user-toggle');
+        legendWrap.appendChild(btn);
+
+        btn.addEventListener('click', function () {
+          if (m.id === 'user' && !m.scores) {
+            // Scroll to the form if user hasn't entered scores yet
+            formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            formEl.querySelector('input').focus();
+            return;
+          }
+          var nowActive = !btn.classList.contains('active');
+          btn.classList.toggle('active', nowActive);
+          modelEls[m.id].poly.classList.toggle('hidden', !nowActive);
+          modelEls[m.id].dots.forEach(function (d) { d.classList.toggle('hidden', !nowActive); });
+        });
+
+        // Hover highlight
+        btn.addEventListener('mouseenter', function () {
+          if (!btn.classList.contains('active')) return;
+          modelEls[m.id].poly.classList.add('hovered');
+          modelEls[m.id].dots.forEach(function (d) { d.classList.add('hovered'); });
+        });
+        btn.addEventListener('mouseleave', function () {
+          modelEls[m.id].poly.classList.remove('hovered');
+          modelEls[m.id].dots.forEach(function (d) { d.classList.remove('hovered'); });
+        });
+      });
+
+      // "Plot me" form handler — adds the user's polygon and reveals it
+      formEl.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var fd = new FormData(formEl);
+        var scores = {};
+        var allValid = true;
+        ['o','c','e','a','n'].forEach(function (k) {
+          var v = parseFloat(fd.get(k));
+          if (isNaN(v) || v < 10 || v > 50) allValid = false;
+          scores[k.toUpperCase()] = v;
+        });
+        if (!allValid) {
+          resultEl.textContent = 'Each score should be between 10 and 50 (these are raw IPIP-50 sums).';
+          resultEl.classList.add('shown');
+          return;
+        }
+        var userModel = MODELS.find(function (m) { return m.id === 'user'; });
+        userModel.scores = scores;
+        var entry = modelEls.user;
+        entry.poly.setAttribute('points', polygonPoints(scores));
+        entry.poly.classList.remove('hidden');
+        // Add dots for the user model
+        if (!entry.dots.length) {
+          DIMS.forEach(function (d, i) {
+            var p = pointFor(i, scores[d.key]);
+            var dot = el('circle', {
+              cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 3.5,
+              fill: userModel.color, class: 'model-dot', 'data-model': 'user',
+            });
+            dotsGroup.appendChild(dot);
+            entry.dots.push(dot);
+          });
+        } else {
+          entry.dots.forEach(function (d, i) {
+            var p = pointFor(i, scores[DIMS[i].key]);
+            d.setAttribute('cx', p[0].toFixed(1));
+            d.setAttribute('cy', p[1].toFixed(1));
+            d.classList.remove('hidden');
+          });
+        }
+        // Activate the "You" legend button
+        var youBtn = legendWrap.querySelector('button[data-model="user"]');
+        if (youBtn) youBtn.classList.add('active');
+
+        // Summary line — where the user sits vs the cluster average
+        var clusterAvg = {
+          O: (MODELS[0].scores.O + MODELS[1].scores.O + MODELS[2].scores.O) / 3,
+          C: (MODELS[0].scores.C + MODELS[1].scores.C + MODELS[2].scores.C) / 3,
+          E: (MODELS[0].scores.E + MODELS[1].scores.E + MODELS[2].scores.E) / 3,
+          A: (MODELS[0].scores.A + MODELS[1].scores.A + MODELS[2].scores.A) / 3,
+          N: (MODELS[0].scores.N + MODELS[1].scores.N + MODELS[2].scores.N) / 3,
+        };
+        var diffs = DIMS.map(function (d) {
+          return Math.abs(scores[d.key] - clusterAvg[d.key]);
+        });
+        var totalGap = diffs.reduce(function (a, b) { return a + b; }, 0);
+        var avgGap = totalGap / DIMS.length;
+        var msg;
+        if (avgGap < 4) {
+          msg = 'You’re within a few points of the Claude/GPT/Gemini cluster on average. The mainstream AI default already speaks your language.';
+        } else if (avgGap < 8) {
+          msg = 'You’re a meaningful distance from the Claude/GPT/Gemini cluster (avg gap ' + avgGap.toFixed(1) + ' points). A tuning file would noticeably shift how your agent talks to you.';
+        } else {
+          msg = 'You’re a long way from the Claude/GPT/Gemini cluster (avg gap ' + avgGap.toFixed(1) + ' points). Tuning your agent is probably going to feel like a substantially different conversation partner.';
+        }
+        resultEl.textContent = msg;
+        resultEl.classList.add('shown');
+      });
+    })();
+    </script>
+</body>
+</html>
