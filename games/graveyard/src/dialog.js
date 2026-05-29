@@ -57,7 +57,7 @@ export function advance() {
 
 export function tick(now) {
   if (!open || !typing) return;
-  const dt = (now - lastTick) / 1000;
+  const dt = Math.max(0, (now - lastTick) / 1000);
   lastTick = now;
   charIdx = Math.min(pages[pageIdx].length, charIdx + dt * TYPE_CPS);
   textEl.textContent = pages[pageIdx].slice(0, Math.floor(charIdx));
