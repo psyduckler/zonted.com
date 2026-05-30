@@ -232,6 +232,7 @@ function checkGhostCollision(now) {
       Dialog.openDialog({
         name: `${g.project.name} · ${g.project.born} ☩ ${g.project.died}`,
         pages: g.project.pages,
+        link: g.project.link,
       });
       updateHud();
     } else {

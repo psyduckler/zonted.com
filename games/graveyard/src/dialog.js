@@ -2,6 +2,7 @@ const root = document.getElementById('dialog');
 const nameEl = document.getElementById('dialog-name');
 const textEl = document.getElementById('dialog-text');
 const hintEl = document.getElementById('dialog-hint');
+const linkEl = document.getElementById('dialog-link');
 
 const TYPE_CPS = 50;
 
@@ -11,10 +12,26 @@ let charIdx = 0;
 let lastTick = 0;
 let typing = false;
 let open = false;
+let link = null;
 
 export function isOpen() { return open; }
 
-export function openDialog({ name = '', pages: incoming = [] } = {}) {
+function isLastPage() {
+  return pageIdx === pages.length - 1;
+}
+
+function showLinkIfReady() {
+  if (!linkEl) return;
+  if (link && !typing && isLastPage()) {
+    linkEl.textContent = link.label;
+    linkEl.setAttribute('href', link.href);
+    linkEl.classList.add('show');
+  } else {
+    linkEl.classList.remove('show');
+  }
+}
+
+export function openDialog({ name = '', pages: incoming = [], link: incomingLink = null } = {}) {
   pages = Array.isArray(incoming) ? incoming : [String(incoming)];
   if (pages.length === 0) pages = [''];
   pageIdx = 0;
@@ -22,15 +39,19 @@ export function openDialog({ name = '', pages: incoming = [] } = {}) {
   typing = true;
   lastTick = performance.now();
   open = true;
+  link = incomingLink && incomingLink.href ? incomingLink : null;
   nameEl.textContent = name;
   textEl.textContent = '';
   hintEl.classList.remove('show');
+  if (linkEl) linkEl.classList.remove('show');
   root.classList.remove('hidden');
 }
 
 export function closeDialog() {
   open = false;
   typing = false;
+  link = null;
+  if (linkEl) linkEl.classList.remove('show');
   root.classList.add('hidden');
 }
 
@@ -41,6 +62,7 @@ export function advance() {
     textEl.textContent = pages[pageIdx];
     typing = false;
     hintEl.classList.add('show');
+    showLinkIfReady();
     return;
   }
   pageIdx++;
@@ -53,6 +75,7 @@ export function advance() {
   lastTick = performance.now();
   textEl.textContent = '';
   hintEl.classList.remove('show');
+  if (linkEl) linkEl.classList.remove('show');
 }
 
 export function tick(now) {
@@ -64,5 +87,6 @@ export function tick(now) {
   if (charIdx >= pages[pageIdx].length) {
     typing = false;
     hintEl.classList.add('show');
+    showLinkIfReady();
   }
 }
