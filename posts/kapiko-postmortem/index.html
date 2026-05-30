@@ -218,6 +218,11 @@
 
 <p class="dropcap">Kapiko is a capybara in over-ear headphones. The tagline is <em>&ldquo;a capybara, a pair of headphones, and nowhere to be. Solo instruments. Gentle melodies.&rdquo;</em> The site is <a href="https://kapiko.ai">kapiko.ai</a>. The YouTube channel is <code>@kapiko-music</code>. Fifty-seven videos as of writing. Three subscribers. Yes, three.</p>
 
+<figure style="margin:1.75rem 0;">
+  <img src="https://img.zonted.com/resources/kapiko-postmortem/kapiko-channel.jpg" alt="The kapiko YouTube channel page showing 3 subscribers and 57 videos, with the capybara-in-headphones avatar." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">The receipts. <code>@kapiko-music</code> &mdash; 57 videos, 3 subscribers, top video at ~49 views.</figcaption>
+</figure>
+
 <p>I built the whole pipeline in five days. Total spend was about $100 &mdash; DistroKid annual ($23), one month of Suno Pro (~$10), Gemini / Nano Banana / MiniMax token spend, and openclaw cron compute. That&rsquo;s it.</p>
 
 <p>The loop starts with a genre selector. Solo piano first &mdash; neo-classical, jazz ballad, ambient piano, cinematic emotional, Japanese piano, lo-fi piano, blues, tango, bossa nova, dark ambient, classical nocturne. Then fingerstyle guitar. Handpan was next in the queue. A prompt generator used &ldquo;artist anchors&rdquo; internally to shape style without naming them in the Suno prompt &mdash; Suno blocks artist names. Each run produced 25-50 prompts. Two clips per prompt. Fifty to a hundred candidate tracks per day.</p>
@@ -327,11 +332,31 @@
 
 <p><strong>Lofi Girl</strong> &mdash; 15.8M subscribers, 407 videos, tagline <em>&ldquo;connecting people through music.&rdquo;</em> The anchor of the niche. One animated loop and a curated radio of ambient hip-hop became a generational study soundtrack.</p>
 
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/kapiko-postmortem/lofi-girl.jpg" alt="Lofi Girl YouTube channel header showing 15.8M subscribers and 407 videos." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">Lofi Girl &mdash; the genre&rsquo;s anchor tenant.</figcaption>
+</figure>
+
 <p><strong>Complex&rsquo;s 10-hour fireplace clip</strong> &mdash; <em>Fireplace 10 hours full HD</em>, 156M+ views, reportedly $1M+ in ad revenue over a decade. One upload. One channel. Set-it-and-forget-it incarnate.</p>
+
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/kapiko-postmortem/fireplace-reddit.jpg" alt="Reddit r/passive_income post about Complex's 10-hour YouTube fireplace video reportedly earning the creator over $1 million." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">One upload, ten years, reportedly $1M+. The category has receipts.</figcaption>
+</figure>
 
 <p><strong>Relax My Dog</strong> &mdash; <em>15 HOURS of Deep Separation Anxiety Music for Dog Relaxation</em>, 66M+ views, &ldquo;helped 4 million dogs worldwide.&rdquo; Animal-calming is a durable sub-niche I would not have guessed at without looking.</p>
 
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/kapiko-postmortem/dog-anxiety-music.jpg" alt="YouTube search results for dog separation anxiety music; top result has 66 million views." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">Animal-calming audio &mdash; an entire sub-niche I&rsquo;d never have surfaced without looking.</figcaption>
+</figure>
+
 <p><strong>Trainers Warehouse meeting chime</strong> &mdash; 161K views, 17 years old, used in physical workshops and seminars to signal start, end, and attention. This is not entertainment. It&rsquo;s functional audio &mdash; a tool people play in a room of humans. Different category. Same shape.</p>
+
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/kapiko-postmortem/meeting-chime.jpg" alt="YouTube video of the Trainers Warehouse Meeting Chime sound, 161K views over 17 years." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">Functional audio: 17 years old, still earning its keep one workshop at a time.</figcaption>
+</figure>
 
 <p>Patient operators in ambient and functional audio do quite well over time. The audience is large. The niches are non-obvious until you find them. The space is real.</p>
 
