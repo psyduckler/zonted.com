@@ -870,6 +870,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-post", action="store_true", help="Do everything except posting to Slack")
     parser.add_argument("--no-push", action="store_true", help="Update files but do not commit/push")
+    parser.add_argument("--skip-revenue", action="store_true", help="Keep the existing revenue snapshot unchanged")
     args = parser.parse_args()
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -881,16 +882,22 @@ def main() -> int:
     fetch = run(["node", str(FETCHER)], capture=True)
     data = json.loads(fetch.stdout)
     warnings: list[str] = []
-    try:
-        data["revenueSnapshot"] = revenue_cards(fetch_stripe_usage_revenue())
-    except Exception as exc:
+    if args.skip_revenue:
         fallback_revenue = load_existing_revenue_snapshot()
         if not fallback_revenue:
-            raise
+            raise RuntimeError("Cannot skip revenue refresh because no existing revenue snapshot was found")
         data["revenueSnapshot"] = fallback_revenue
-        warning = f"⚠️ VeracityAPI revenue unchanged: {exc}"
-        warnings.append(warning)
-        print(warning, file=sys.stderr)
+    else:
+        try:
+            data["revenueSnapshot"] = revenue_cards(fetch_stripe_usage_revenue())
+        except Exception as exc:
+            fallback_revenue = load_existing_revenue_snapshot()
+            if not fallback_revenue:
+                raise
+            data["revenueSnapshot"] = fallback_revenue
+            warning = f"⚠️ VeracityAPI revenue unchanged: {exc}"
+            warnings.append(warning)
+            print(warning, file=sys.stderr)
 
     previous = load_previous_state()
     update_html(data)
