@@ -95,6 +95,19 @@
     }
     .dialog-hint.show { opacity: 1; }
     @keyframes blink { 0%, 100% { opacity: .3 } 50% { opacity: 1 } }
+    .dialog-link {
+      display: inline-block; margin-top: 0.8rem;
+      padding: 7px 14px;
+      font-family: 'Special Elite', ui-monospace, Menlo, monospace;
+      font-size: 13px; letter-spacing: 0.04em;
+      color: #1a0a25; background: #c9b87a; border: 1.5px solid #c9b87a;
+      border-radius: 6px; text-decoration: none;
+      opacity: 0; transform: translateY(4px);
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease, background .15s ease;
+    }
+    .dialog-link.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .dialog-link:hover { background: #ece2c4; }
 
     /* ---- Arcade CRT section ABOVE the game ---- */
     .zg-arcade {
@@ -355,6 +368,7 @@
       <div class="dialog-inner">
         <div class="dialog-name" id="dialog-name"></div>
         <div class="dialog-text" id="dialog-text"></div>
+        <a class="dialog-link" id="dialog-link" href="#" target="_blank" rel="noopener"></a>
         <div class="dialog-hint" id="dialog-hint">▼</div>
       </div>
     </div>
