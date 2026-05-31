@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <title>Games — Zonted</title>
+    <meta name="description" content="Playable experiments from the lab. Three small browser games built with AI agents — an endless runner, an arcade maze of dead projects, and a first-person panic sim where you're a french fry.">
+    <link rel="canonical" href="https://zonted.com/games/">
+    <meta property="og:title" content="Games — Zonted">
+    <meta property="og:description" content="Three small browser games built in the lab: Run to Rebecca, the Zonted Graveyard, and Life of Fry.">
+    <meta property="og:url" content="https://zonted.com/games/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://img.zonted.com/og/operator-notes.png">
+    <meta name="twitter:image" content="https://img.zonted.com/og/operator-notes.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231a1815'/><text x='50' y='75' text-anchor='middle' font-size='72' font-family='Georgia,serif' font-weight='700' fill='%23fcfcfa'>Z</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/zonted.css?v=2026-05-21-scrollpad">
+    <style>
+        /* Games hub — built from site tokens (--paper / --ink / --ox / etc.) */
+        .gh-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 8px;
+        }
+        .gh-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--ink);
+            border: 1px solid var(--rule);
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--paper);
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+        .gh-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px #1a18151f;
+            border-color: #1a181544;
+        }
+        .gh-thumb {
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.2rem;
+            line-height: 1;
+            position: relative;
+        }
+        .gh-thumb.fry { background: radial-gradient(circle at 50% 30%, #c0392b, #7a1d15); }
+        .gh-thumb.grave { background: radial-gradient(circle at 50% 35%, #2a1f4d, #0a0420); }
+        .gh-thumb.rebecca { background: radial-gradient(120% 120% at 50% 0%, #2a2350, #0e1022); }
+        .gh-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .gh-eyebrow {
+            font-family: var(--mono);
+            font-size: .68rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--faded);
+        }
+        .gh-title { font-family: var(--display); font-size: 1.34rem; font-weight: 600; line-height: 1.15; }
+        .gh-dek { font-family: var(--serif); font-size: .92rem; line-height: 1.5; color: var(--faded); flex: 1; }
+        .gh-play { font-family: var(--mono); font-size: .8rem; font-weight: 600; color: var(--ox); margin-top: 4px; }
+        .gh-card:hover .gh-play { text-decoration: underline; text-underline-offset: 3px; }
+        @media (max-width: 760px) { .gh-grid { grid-template-columns: 1fr; gap: 18px; } }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <nav class="zn-nav">
+        <div class="zn-nav-inner">
+            <a href="/" class="zn-logo"><span class="zn-avatar-sm">Z</span>zonted.</a>
+            <input type="checkbox" id="zn-menu-toggle" class="zn-menu-toggle" aria-label="Toggle menu">
+            <label for="zn-menu-toggle" class="zn-menu-btn" aria-hidden="true"><span></span><span></span><span></span></label>
+            <div class="zn-nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/games/" class="active">Games</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/#subscribe" class="zn-nav-cta">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main">
+        <div class="zn-container">
+
+            <header class="zn-hero">
+                <h1 class="zn-hero-headline">Games</h1>
+                <p class="zn-hero-byline-text" style="margin-top:14px;">Small browser games built in the lab — agents writing the code, me herding them. No installs, no accounts. Click and play.</p>
+            </header>
+
+            <section class="zn-section">
+                <div class="gh-grid">
+
+                    <a class="gh-card" href="/games/run-to-rebecca/">
+                        <div class="gh-thumb rebecca" aria-hidden="true">🏃💨</div>
+                        <div class="gh-body">
+                            <span class="gh-eyebrow">Endless runner</span>
+                            <span class="gh-title">Run to Rebecca</span>
+                            <span class="gh-dek">An Austin rooftop sprint. Run, jump, and dash across the skyline to reach Rebecca — don't miss the leap.</span>
+                            <span class="gh-play">Play &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a class="gh-card" href="/games/graveyard/">
+                        <div class="gh-thumb grave" aria-hidden="true">🪦</div>
+                        <div class="gh-body">
+                            <span class="gh-eyebrow">Arcade maze</span>
+                            <span class="gh-title">Graveyard Pacman</span>
+                            <span class="gh-dek">A Pac-Man maze haunted by the ghosts of dead Zonted projects. Every dead idea brought us one run closer.</span>
+                            <span class="gh-play">Play &rarr;</span>
+                        </div>
+                    </a>
+
+                    <a class="gh-card" href="/games/life-of-fry/">
+                        <div class="gh-thumb fry" aria-hidden="true">🍟</div>
+                        <div class="gh-body">
+                            <span class="gh-eyebrow">First-person panic sim</span>
+                            <span class="gh-title">Life of Fry</span>
+                            <span class="gh-dek">You're a french fry. A giant human reaches into the basket to eat you. Hide behind the others, dodge the hand, survive until she's full.</span>
+                            <span class="gh-play">Play &rarr;</span>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="zn-footer">
+        <div class="zn-container zn-footer-inner">
+            <span>&copy; 2026 Bernard Huang &middot; zonted.com</span>
+            <span class="zn-footer-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/games/">Games</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/feed.xml">RSS</a>
+                <a href="https://x.com/bernardjhuang">X</a>
+                <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+            </span>
+        </div>
+    </footer>
+</body>
+</html>
