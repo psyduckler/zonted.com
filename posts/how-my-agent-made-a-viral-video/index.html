@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/zonted.css?v=2026-05-21-scrollpad">
+    <title>How My Agent Produced a 3.9M-View Viral Video — Zonted</title>
+    <meta name="description" content="A step-by-step teardown of one autonomous AI video: the Tulum spare-tire scam reel that hit 3.8 million views. The real queue JSON, the exact Seedance prompt, the FFmpeg overlay code, and the publish flow.">
+    <link rel="canonical" href="https://zonted.com/posts/how-my-agent-made-a-viral-video/">
+    <meta property="og:title" content="How My Agent Produced a 3.9M-View Viral Video">
+    <meta property="og:description" content="A step-by-step teardown of one autonomous AI video: the Tulum spare-tire scam reel that hit 3.8 million views. The real queue JSON, the exact Seedance prompt, the FFmpeg overlay code, and the publish flow.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/resources/how-my-agent-made-a-viral-video/viral-og.jpg">
+    <meta property="og:url" content="https://zonted.com/posts/how-my-agent-made-a-viral-video/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-05-31T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://img.zonted.com/resources/how-my-agent-made-a-viral-video/viral-og.jpg">
+    <meta name="twitter:title" content="How My Agent Produced a 3.9M-View Viral Video">
+    <meta name="twitter:description" content="A step-by-step teardown of one autonomous AI video: the Tulum spare-tire scam reel that hit 3.8 million views. The real queue JSON, the exact Seedance prompt, the FFmpeg overlay code, and the publish flow.">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231a1815'/><text x='50' y='75' text-anchor='middle' font-size='72' font-family='Georgia,serif' font-weight='700' fill='%23fcfcfa'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"How My Agent Produced a 3.9M-View Viral Video","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-05-31T00:00:00Z","publisher":{"@type":"Organization","name":"Zonted","url":"https://zonted.com"},"url":"https://zonted.com/posts/how-my-agent-made-a-viral-video/","description":"A step-by-step teardown of one autonomous AI video: the Tulum spare-tire scam reel that hit 3.8 million views. The real queue JSON, the exact Seedance prompt, the FFmpeg overlay code, and the publish flow."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"How My Agent Produced a 3.9M-View Viral Video"}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #6e6e6e;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-body figure img { width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+        .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
+
+        /* TL;DR callout — left accent rule, no border, light tint background. */
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
+        .toc-sidebar { width: 220px; position: sticky; top: 80px; flex-shrink: 0; align-self: flex-start; padding: 1rem 0; }
+        .toc-sidebar h2, .toc-sidebar .toc-sidebar-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.75rem; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: #fcfcfa; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+        <nav class="zn-nav">
+        <div class="zn-nav-inner">
+            <a href="/" class="zn-logo"><span class="zn-avatar-sm">Z</span>zonted.</a>
+            <input type="checkbox" id="zn-menu-toggle" class="zn-menu-toggle" aria-label="Toggle menu">
+            <label for="zn-menu-toggle" class="zn-menu-btn" aria-hidden="true"><span></span><span></span><span></span></label>
+            <div class="zn-nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/games/">Games</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/#subscribe" class="zn-nav-cta">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#the-video">The video</a></li>
+        <li><a href="#the-pipeline">The pipeline</a></li>
+        <li><a href="#step-1-concept">1 &middot; Concept</a></li>
+        <li><a href="#step-2-prompt">2 &middot; Prompt</a></li>
+        <li><a href="#step-3-generate">3 &middot; Generate</a></li>
+        <li><a href="#step-4-overlay">4 &middot; Overlay</a></li>
+        <li><a href="#step-5-publish">5 &middot; Publish</a></li>
+        <li><a href="#why-it-hit">Why it hit</a></li>
+        <li><a href="#takeaway">Takeaway</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <p class="toc-sidebar-label">Contents</p>
+    <ul>
+        <li><a href="#the-video">The video</a></li>
+        <li><a href="#the-pipeline">The pipeline</a></li>
+        <li><a href="#step-1-concept">1 &middot; Concept</a></li>
+        <li><a href="#step-2-prompt">2 &middot; Prompt</a></li>
+        <li><a href="#step-3-generate">3 &middot; Generate</a></li>
+        <li><a href="#step-4-overlay">4 &middot; Overlay</a></li>
+        <li><a href="#step-5-publish">5 &middot; Publish</a></li>
+        <li><a href="#why-it-hit">Why it hit</a></li>
+        <li><a href="#takeaway">Takeaway</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form class="zn-subscribe-compact" data-resend-subscribe novalidate><input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" autocomplete="email"><button type="submit">Subscribe</button><p class="zn-subscribe-status" data-subscribe-status hidden></p></form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <article class="article-container">
+        <div style="margin-bottom:1.5rem;padding-top:1rem;">
+            <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+        </div>
+        <h1>How My Agent Produced a 3.9M-View Viral Video</h1>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <img  src="https://img.zonted.com/about/bernard-huang-headshot.jpg" width="400" height="400" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+            <div>
+                <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">May 31, 2026 &middot; 5 min read</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+
+<style>
+.artifact { background: #f5f4f0; border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 1rem 1.15rem; margin: 1.25rem 0; overflow-x: auto; }
+.artifact pre, pre.artifact { margin: 0; }
+.artifact code, pre.artifact code, pre.artifact { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 0.8rem; line-height: 1.55; color: #2a2a2a; white-space: pre; background: none; padding: 0; }
+.artifact-cap { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim, #6e6e6e); margin: 0 0 0.5rem; font-weight: 600; }
+.ig-embed-wrap { display: flex; justify-content: center; margin: 1.75rem 0; }
+</style>
+
+<div class="tldr">
+    <div class="tldr-label">TL;DR</div>
+    <p class="tldr-thesis">One scam concept goes into a queue. A fully autonomous pipeline turns it into a documentary-style reel and ships it to four platforms. This one came out the other side with 3.8 million views and counting.</p>
+    <ul>
+        <li>The video is the <strong>Tulum spare-tire rental scam</strong> reel &mdash; <strong>3,843,861 views</strong>, 100% from non-followers, 990 shares. No camera, no actor, no editor.</li>
+        <li>It&rsquo;s one run of a skill my agent executes end to end: concept &rarr; Seedance prompt &rarr; WaveSpeed generation &rarr; FFmpeg overlay &rarr; multi-platform publish.</li>
+        <li>Every artifact below is the real one: the queue JSON, the exact prompt that generated the footage, the overlay code, and the publish config.</li>
+        <li>The account-level story &mdash; how the whole channel hit <a href="/posts/tabiji-18m-views/">18 million views in 90 days</a> &mdash; is the companion piece. This is the anatomy of one video inside it.</li>
+    </ul>
+</div>
+
+<h2 id="the-video">The video</h2>
+
+<p class="dropcap">This is a ten-second clip of a couple at a Cancun airport rental counter, a pushy agent fixated on the spare tire, and &mdash; days later &mdash; a different employee claiming the tire is gone and reaching for a card machine. It is a real scam. None of it was filmed. The footage, the people, the garage, the luggage carts: all generated.</p>
+
+<div class="ig-embed-wrap">
+  <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXRxyemE8Bs/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:1px; max-width:540px; min-width:326px; padding:0; width:99.375%;">
+    <a href="https://www.instagram.com/p/DXRxyemE8Bs/" target="_blank" rel="noopener" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;">View this reel on Instagram</a>
+  </blockquote>
+</div>
+<script async src="//www.instagram.com/embed.js"></script>
+
+<p>Here is what that produced, from the account&rsquo;s own insights the morning I grabbed this:</p>
+
+<figure style="margin:1.75rem 0;">
+  <img src="https://img.zonted.com/resources/how-my-agent-made-a-viral-video/reel-insights.jpg" alt="Instagram insights for the Tulum spare-tire scam reel: 3,843,861 views, 100% non-followers, 1,847,599 accounts reached, 2,822 likes, 408 comments, 519 saves, 990 shares, 5,265 accounts engaged." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">3,843,861 views, 100% non-followers, 1.85M accounts reached &mdash; and 990 shares against 519 saves and 2,822 likes.</figcaption>
+</figure>
+
+<p>Two numbers matter more than the view count. <strong>100% non-followers</strong> &mdash; the reel reached essentially zero existing audience; it was pure cold algorithmic reach. And <strong>990 shares</strong>, which outnumber the 519 saves and run heavy against just 2,822 likes. People didn&rsquo;t double-tap this. They sent it &mdash; to the friend flying to Mexico next month. Hold onto that; it&rsquo;s the whole reason it traveled.</p>
+
+<h2 id="the-pipeline">The pipeline, in one line</h2>
+
+<p>A concept becomes a prompt becomes a clip becomes a captioned, overlaid, multi-platform reel &mdash; from a queue, with no human in the loop on the production side. Five steps, one skill my agent runs:</p>
+
+<p><strong>concept (JSON) &rarr; documentary prompt &rarr; WaveSpeed Seedance clip &rarr; FFmpeg overlay &rarr; publish to four platforms.</strong></p>
+
+<p>One thing worth saying up front, because it&rsquo;s the difference between this working and not: <a href="https://wavespeed.ai/?ref=zonted" target="_blank" rel="noopener">WaveSpeed</a> exposes a real, authenticated API. Unlike the Suno mess that <a href="/posts/kapiko-postmortem/">killed Kapiko</a>, nothing here is reverse-engineered or breaking every 36 hours. The key lives in the keychain, the call is a clean POST, and the whole skill actually survives as a cron job. Here is each step, with the real files.</p>
+
+<h2 id="step-1-concept">Step 1: the concept is data, not a script</h2>
+
+<p>Every reel starts as a structured queue item. Not a screenplay &mdash; a small JSON object that names the place, the setup, where each person stands, and the five beats that will become the on-screen story. This is the actual Tulum entry:</p>
+
+<div class="artifact">
+<p class="artifact-cap">data/queue.json &mdash; the Tulum item</p>
+<pre><code>{
+  "id": "tulum-car-rental-spare-tire-scam",
+  "destination": "Tulum",
+  "country": "Mexico",
+  "scam_name": "Spare Tire Rental Scam",
+  "location_context": "At Cancun Airport rental counters feeding Tulum
+     road trips, inside bright garages and return lanes packed with carts.",
+  "concept": "The pickup agent makes a big show of the spare tire, then at
+     return another employee claims it is missing and charges hundreds.",
+  "prompt_anchors": ["airport rental garage", "open trunk",
+     "spare tire close-up", "clipboard inspection",
+     "different employee at return", "credit card machine"],
+  "tourist_blocking": "A couple stands at the open trunk as the pickup agent
+     points hard at the spare tire and tools like it matters most.",
+  "scammer_blocking": "Days later, a different employee at return bends into
+     the same trunk, straightens up, and announces the spare is gone.",
+  "beats": [
+    "Pickup fixates on the spare tire",
+    "The trunk gets extra attention",
+    "Return day feels routine at first",
+    "Then the tire is suddenly missing",
+    "The charge hits before you can react"
+  ],
+  "hashtags": ["tulum", "mexico", "travelscam", "rentalcar",
+     "sparetire", "travelsafety", "cancunairport", "tabiji"]
+}</code></pre>
+</div>
+
+<p>The concept itself isn&rsquo;t invented. It&rsquo;s lifted from a real, upvoted travel-scam report &mdash; the kind where a tourist got burned and came back to write it up. That&rsquo;s the validated-demand trick I cover in the <a href="/posts/tabiji-18m-views/">account-level post</a>: you&rsquo;re transcribing a scam people already proved they care about, not guessing. The <code>beats</code> array is the most important field &mdash; those five lines become the lower-third captions, and they follow a deliberate threat-then-fix arc.</p>
+
+<h2 id="step-2-prompt">Step 2: concept &rarr; documentary prompt</h2>
+
+<p>A script, <code>generate_prompt.py</code>, flattens that JSON into one Seedance prompt. It stitches the location, the opening visual, the two blocking descriptions, the reveal, and the visual anchors into a single paragraph, then ends with a fixed clause that forces documentary realism. This is the <em>exact</em> prompt that generated the footage you just watched:</p>
+
+<div class="artifact">
+<p class="artifact-cap">Generated Seedance prompt</p>
+<pre><code>Photorealistic documentary-style travel footage in Tulum, Mexico. At
+Cancun Airport rental counters feeding Tulum road trips, inside bright
+garages and return lanes packed with luggage carts. A bright rental
+garage hums with rolling suitcases, cars pulling out, and staff guiding
+tired arrivals into inspection lanes. A couple stands at the open trunk
+as the pickup agent points hard at the spare tire and tools like it
+matters more than anything else. Days later, a different employee at
+return bends into the same trunk, straightens up, and announces the
+spare is gone while holding a payment terminal. [...] Visual anchors to
+preserve: airport rental garage, open trunk, spare tire close-up,
+clipboard inspection, different employee at return, credit card machine.
+Natural handheld camera movement, subtle zoom or push-in only when it
+helps the social tension, realistic pacing, overlapping background
+motion, authentic tourist behavior, grounded travel realism, no
+stylization, no subtitles, no on-screen text.</code></pre>
+</div>
+
+<p>Two rules are doing quiet work here. First, <strong>&ldquo;no subtitles, no on-screen text&rdquo;</strong> &mdash; the model is bad at rendering text and it instantly breaks the documentary look, so all words get added later in FFmpeg, never by the model. Second, the script runs a small substitution pass to keep a scam prompt from tripping the generator&rsquo;s safety filter without losing the mechanics:</p>
+
+<div class="artifact">
+<p class="artifact-cap">generate_prompt.py &mdash; moderation softening</p>
+<pre><code>replacements = {
+    ' aggressive ':   ' pressuring ',
+    ' aggressively ': ' insistently ',
+    ' threatens ':    ' warns about ',
+    ' threat ':       ' warning ',
+    ' extortion ':    ' fake fine ',
+}</code></pre>
+</div>
+
+<p>&ldquo;Pressuring&rdquo; renders the same social tension as &ldquo;aggressive&rdquo; and sails through moderation. The scam still reads; the trigger words don&rsquo;t.</p>
+
+<h2 id="step-3-generate">Step 3: generate the clip</h2>
+
+<p>The prompt goes to WaveSpeed running ByteDance&rsquo;s Seedance 2.0, vertical, ten seconds. The call is unremarkable, which is the point &mdash; it&rsquo;s a real API:</p>
+
+<div class="artifact">
+<p class="artifact-cap">run_queue_item.py &mdash; submit to WaveSpeed</p>
+<pre><code>BASE  = 'https://api.wavespeed.ai/api/v3'
+MODEL = 'bytedance/seedance-2.0/text-to-video'
+
+payload = {
+    'prompt': prompt,
+    'duration': 10,
+    'aspect_ratio': '9:16',
+    'resolution': '480p',
+}
+# POST, then poll /predictions/{id}/result every 8s until the
+# status flips to completed, then stream the mp4 to disk.</code></pre>
+</div>
+
+<p>A clip runs roughly $0.30 to $2 depending on duration and resolution. Cheap per unit, not free at volume &mdash; and it says nothing about whether the result is any good, which is still the hard part. The raw 480p vertical clip lands on disk and moves to the only step that touches a human-readable word.</p>
+
+<h2 id="step-4-overlay">Step 4: burn the overlay</h2>
+
+<p>Everything you read on screen &mdash; the flag, the crimson headline, the five beats that appear one at a time &mdash; is added <em>after</em> generation with FFmpeg. The overlay script never assumes a canvas size; it measures the real frame with <code>ffprobe</code>, then dynamically wraps and shrinks text to fit. That&rsquo;s why a long scam name never runs off the edge:</p>
+
+<div class="artifact">
+<p class="artifact-cap">render_overlay.py &mdash; measure, wrap, fit</p>
+<pre><code># measured from the actual rendered frame, not a fixed 1080x1920
+max_headline_width = int(w * 0.78)
+max_beat_width     = int(w * 0.76)
+
+def fit_wrapped(text, font_path, start_size, max_width, max_lines, min_size):
+    size = start_size
+    while size &gt;= min_size:
+        lines = wrap_text(text, font((font_path, size)), max_width)
+        if len(lines) &lt;= max_lines:
+            return size, lines
+        size = max(min_size, math.floor(size * 0.92))  # shrink 8%, retry
+    return min_size, wrap_text(text, font((font_path, min_size)), max_width)</code></pre>
+</div>
+
+<p>The five beats are timed to reveal in sequence across the clip&rsquo;s duration &mdash; one lower-third line at a time, each fading in, the last one held to the end in crimson for emphasis:</p>
+
+<div class="artifact">
+<p class="artifact-cap">render_overlay.py &mdash; beat timing</p>
+<pre><code>beat_start = 0.9
+segment = max(1.1, (duration - beat_start) / max(len(beats), 1))
+# beat i appears at beat_start + i*segment, behind a translucent
+# black box, drawn with an alpha ramp so it fades in cleanly.</code></pre>
+</div>
+
+<p>The output is a finished, captioned, on-brand vertical MP4 &mdash; the exact thing in the embed above. No human has touched it.</p>
+
+<h2 id="step-5-publish">Step 5: publish everywhere at once</h2>
+
+<p>A config builder turns the same queue item into per-platform captions, then one publish script fans the video out. Here is the Instagram caption it generated &mdash; note that it&rsquo;s the five beats again, plus the explainer, plus the <em>&ldquo;save this&rdquo;</em> call to action that drives the shares:</p>
+
+<div class="artifact">
+<p class="artifact-cap">build_config.py &mdash; generated Instagram caption</p>
+<pre><code>The Spare Tire Rental Scam in Tulum, Mexico 🇲🇽
+
+Pickup fixates on the spare tire
+The trunk gets extra attention
+Return day feels routine at first
+Then the tire is suddenly missing
+The charge hits before you can react
+
+The spare tire rental scam works by making the trunk part of the
+story from the beginning, so the final accusation feels pre-scripted.
+
+Save this before your next trip. 📌
+
+#tulum #mexico #travelscam #rentalcar #sparetire #travelsafety
+#cancunairport #tabiji</code></pre>
+</div>
+
+<p>One script (<code>publish-video.py</code>) then does the whole fan-out: upload the file to temporary storage, create the Instagram Reel, upload the YouTube Short, post the Facebook Page reel, hand the clip to TikTok, and clean up &mdash; each with a thumbnail pulled from the 1-second mark. For this reel, Instagram, YouTube, and TikTok all shipped; Facebook got rate-limited and was left to retry rather than hammered. X stays off by default.</p>
+
+<h2 id="why-it-hit">Why this one hit 3.8 million</h2>
+
+<p>The pipeline ships a reel like this every day. Most do fine. This one detonated, and the insights say why. Look at the engagement shape again: 990 shares, 519 saves, 2,822 likes. On most content likes dwarf everything; here shares are a third of the likes and <em>beat the saves</em>. That is the signature of content people forward rather than admire.</p>
+
+<p>It&rsquo;s engineered for exactly that. A named scam at a named place is a warning you feel obligated to pass to someone specific. The five beats deliver the threat fast and the caption delivers the fix (&ldquo;save this&rdquo;), which is the structure that travels &mdash; a threat with no defense just makes people anxious and they scroll on. And because Instagram weights shares heavily for reaching people who don&rsquo;t follow you, 990 shares is what turned a tiny account&rsquo;s reel into 1.85 million strangers reached. The <a href="/posts/tabiji-18m-views/">account-level post</a> breaks down those mechanics &mdash; the Reddit demand-mining, the account warming, the human kept on engagement &mdash; in full.</p>
+
+<h2 id="takeaway">The takeaway</h2>
+
+<p>A single structured concept went into a queue and came out as 3.8 million views, with no human touching the footage between the two. That&rsquo;s the part that&rsquo;s genuinely solved: the production line. What it doesn&rsquo;t solve is which concept detonates and which dies at 4,000 views &mdash; that&rsquo;s still taste, validated demand, and a distribution game the platforms keep changing.</p>
+
+<p>The machine makes the video. The judgment about <em>what</em> to make, and the patience to keep feeding it, is the whole job. One in fifty hits 3.8 million. The skill&rsquo;s contribution is making the other forty-nine cost a dollar each.</p>
+
+
+        </div>
+        <!-- SUBSCRIBE_BLOCK_START -->
+            <section class="zn-post-subscribe">
+                <p class="zn-post-subscribe-label">Newsletter</p>
+                <h2 class="zn-post-subscribe-headline">Get the next post by email.</h2>
+                <p class="zn-post-subscribe-sub">One email when I publish something new. No spam, no fixed schedule, unsubscribe anytime.</p>
+                <form class="zn-subscribe-form zn-post-subscribe-form" data-resend-subscribe novalidate>
+                    <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" autocomplete="email">
+                    <button type="submit">Subscribe &rarr;</button>
+                    <p class="zn-subscribe-status" data-subscribe-status hidden></p>
+                </form>
+            </section>
+            <!-- SUBSCRIBE_BLOCK_END -->
+        <!-- RECOMMENDED_START -->
+            <section class="zn-recommended">
+                <p class="zn-recommended-label">Recommended Reading</p>
+                <ul class="zn-recommended-list">
+                <li><a class="zn-recommended-title" href="/posts/tabiji-18m-views/">The Three Unlocks Behind 18M Views of AI Travel Content</a><p class="zn-recommended-dek">Tabiji, our AI travel-safety channel, got 18,117,121 views in 90 days — 98.6% from strangers. The three unlocks: Reddit as a demand oracle, warming accounts…</p></li>
+                <li><a class="zn-recommended-title" href="/posts/true-cost-of-ai-content-production/">The True Cost of AI Content Production</a><p class="zn-recommended-dek">Everyone obsesses over model costs and token prices. But after producing 400+ pages and 200+ videos with AI, we learned the real expense is data…</p></li>
+                <li><a class="zn-recommended-title" href="/posts/kapiko-postmortem/">Kapiko: a 10-day, $150 post-mortem</a><p class="zn-recommended-dek">Built and shipped Kapiko — an AI-generated ambient music YouTube channel — in 10 days for ~$150. The pipeline worked. The Suno API does not exist. Here is…</p></li>
+                </ul>
+            </section>
+            <!-- RECOMMENDED_END -->
+    </article>
+</div>
+</div>
+
+</main>
+
+<footer class="zn-footer">
+    <div class="zn-container zn-footer-inner">
+        <span>&copy; 2026 Bernard Huang &middot; zonted.com</span>
+        <span class="zn-footer-links">
+            <a href="/posts/">Posts</a>
+            <a href="/portfolio/">Portfolio</a>
+            <a href="/games/">Games</a>
+            <a href="/ai-stack/">AI Stack</a>
+            <a href="/metrics/">Metrics</a>
+            <a href="/about/">About</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+        </span>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                const label = document.querySelector('.toc-active-label');
+                if (label) {
+                    const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                    if (activeLink) label.textContent = activeLink.textContent;
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
+<script defer src="/js/subscribe.js"></script>
+</body>
+</html>
