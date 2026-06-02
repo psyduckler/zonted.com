@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcfcfa">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/zonted.css?v=2026-05-21-scrollpad">
+    <title>The May Recap: Miami, a Google Wipeout, and $600 in the Red — Zonted</title>
+    <meta name="description" content="May 2026 recap: Consensus in Miami and the plan-three-times build technique, Google wiping Tabiji's search traffic overnight, ~$600/month in the red, and the four lessons that compounded.">
+    <link rel="canonical" href="https://zonted.com/posts/may-2026-recap/">
+    <meta property="og:title" content="The May Recap: Miami, a Google Wipeout, and $600 in the Red">
+    <meta property="og:description" content="May 2026 recap: Consensus in Miami and the plan-three-times build technique, Google wiping Tabiji's search traffic overnight, ~$600/month in the red, and the four lessons that compounded.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://img.zonted.com/resources/may-2026-recap/og.jpg">
+    <meta property="og:url" content="https://zonted.com/posts/may-2026-recap/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Bernard Huang">
+    <meta property="article:published_time" content="2026-06-01T00:00:00Z">
+    <meta property="article:section" content="AI &amp; Technology">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://img.zonted.com/resources/may-2026-recap/og.jpg">
+    <meta name="twitter:title" content="The May Recap: Miami, a Google Wipeout, and $600 in the Red">
+    <meta name="twitter:description" content="May 2026 recap: Consensus in Miami and the plan-three-times build technique, Google wiping Tabiji's search traffic overnight, ~$600/month in the red, and the four lessons that compounded.">
+
+    <link rel="alternate" type="application/rss+xml" title="Zonted RSS Feed" href="https://zonted.com/feed.xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231a1815'/><text x='50' y='75' text-anchor='middle' font-size='72' font-family='Georgia,serif' font-weight='700' fill='%23fcfcfa'>Z</text></svg>">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"The May Recap: Miami, a Google Wipeout, and $600 in the Red","author":{"@type":"Person","name":"Bernard Huang","url":"https://zonted.com/about/"},"datePublished":"2026-06-01T00:00:00Z","publisher":{"@type":"Organization","name":"Zonted","url":"https://zonted.com"},"url":"https://zonted.com/posts/may-2026-recap/","description":"May 2026 recap: Consensus in Miami and the plan-three-times build technique, Google wiping Tabiji's search traffic overnight, ~$600/month in the red, and the four lessons that compounded."}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zonted.com/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https://zonted.com/posts/"},{"@type":"ListItem","position":3,"name":"The May Recap: Miami, a Google Wipeout, and $600 in the Red"}]}
+    </script>
+    <style>
+        :root {
+            --bg: #fcfcfa; --bg-surface: #f5f4f0; --bg-raised: #edecea;
+            --border: #ddd; --border-light: #e8e8e4;
+            --text: #1a1a1a; --text-muted: #595959; --text-dim: #6e6e6e;
+            --accent: #1a1a1a; --accent-hover: #000;
+            --green: #2a7a2a; --red: #a33; --blue: #369;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+        body { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.1rem; line-height: 1.85; font-feature-settings: 'kern' 1, 'liga' 1; background: var(--bg); color: var(--text); }
+        img, video { max-width: 100%; height: auto; }
+        .article-body figure img { width: 100%; height: auto; }
+        .article-container { max-width: 660px; margin: 0 auto; padding: 0.5rem 2rem 3rem; }
+        .article-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--text); line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .article-body h2 { font-size: 1.4rem; color: var(--text); font-weight: 700; margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+        .article-body h3 { font-size: 1.15rem; color: var(--text); font-weight: 600; margin: 2rem 0 0.75rem; }
+        .article-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--text); }
+        .article-body ul, .article-body ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-body li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-body a { color: var(--text); text-decoration: underline; }
+        .article-body blockquote { background: var(--bg-surface); border-left: 3px solid var(--text); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-style: italic; color: var(--text-muted); }
+        .article-body strong { color: var(--text); font-weight: 700; }
+        .article-body code { background: var(--bg-surface); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: var(--text-muted); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); background: var(--bg); }
+        footer p { color: var(--text-muted); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; }
+        footer a { color: var(--text-muted); text-decoration: underline; }
+        .dropcap::first-letter { float: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 3.5rem; line-height: 0.8; padding-right: 0.1em; padding-top: 0.1em; font-weight: 700; color: var(--text); }
+
+        /* TL;DR callout — left accent rule, no border, light tint background. */
+        .article-body .tldr { background: var(--bg-surface); border-left: 4px solid var(--text); border-radius: 0 8px 8px 0; padding: 1.25rem 1.75rem; margin: 2rem 0; }
+        .article-body .tldr-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.5rem; }
+        .article-body .tldr-thesis { font-weight: 600; margin-bottom: 0.75rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
+        .article-body .tldr ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+        .article-body .tldr li { margin-bottom: 0.35rem; font-size: 0.95rem; line-height: 1.55; color: var(--text); }
+        .article-body .tldr-tail { margin-top: 0.5rem; margin-bottom: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+        .article-body .tldr a { color: var(--text); text-decoration: underline; }
+
+        .toc-sidebar { width: 220px; position: sticky; top: 80px; flex-shrink: 0; align-self: flex-start; padding: 1rem 0; }
+        .toc-sidebar h2, .toc-sidebar .toc-sidebar-label { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.75rem; }
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .toc-sidebar li { margin-bottom: 0.4rem; }
+        .toc-sidebar a { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; display: block; padding: 0.25rem 0 0.25rem 0.75rem; border-left: 2px solid transparent; line-height: 1.3; }
+        .toc-sidebar a:hover { color: var(--text); }
+        .toc-sidebar a.active { color: var(--text); border-left-color: var(--text); font-weight: 600; }
+
+        .toc-mobile-wrapper { display: none; position: sticky; top: 56px; z-index: 99; }
+        .toc-mobile-sticky { background: #fcfcfa; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .toc-mobile-toggle { width: 100%; padding: 0.7rem 1.2rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .toc-mobile-toggle .toc-active-label { flex: 1; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 0.5rem; }
+        .toc-mobile-toggle .toc-chevron { transition: transform 0.25s ease; font-size: 0.7rem; color: var(--text-muted); }
+        .toc-mobile-sticky.open .toc-chevron { transform: rotate(180deg); }
+        .toc-mobile-dropdown { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid var(--border); }
+        .toc-mobile-sticky.open .toc-mobile-dropdown { max-height: 60vh; overflow-y: auto; }
+        .toc-mobile-dropdown ul { list-style: none; padding: 0.5rem 0; margin: 0; }
+        .toc-mobile-dropdown a { display: block; padding: 0.55rem 1.2rem; font-family: 'Inter', -apple-system, system-ui, sans-serif; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: background 0.15s, color 0.15s; }
+        .toc-mobile-dropdown a:hover { background: var(--bg-surface); color: var(--text); }
+        .toc-mobile-dropdown a.active { color: var(--text); font-weight: 600; background: var(--bg-surface); }
+
+        .content-wrapper { max-width: 1040px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 3rem; align-items: flex-start; }
+        .content-wrapper .article-content { flex: 1; min-width: 0; max-width: 720px; }
+        .content-wrapper .article-content .article-container { max-width: none; padding-left: 0; padding-right: 0; }
+        @media (max-width: 900px) {
+            .content-wrapper { flex-direction: column; gap: 0; padding: 0; max-width: 100%; }
+            .toc-sidebar { display: none; }
+            .toc-mobile-wrapper { display: block; }
+            .article-content { max-width: 100%; width: 100%; }
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 2rem; max-width: 100%; }
+            .article-container h1 { font-size: 1.4rem; line-height: 1.3; word-wrap: break-word; overflow-wrap: break-word; }
+            .article-body h2 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+            .article-body h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+            .article-body p, .article-body li { font-size: 0.95rem; line-height: 1.7; }
+            .article-body blockquote { padding: 0.75rem 1rem; font-size: 0.95rem; margin: 1rem 0; }
+        }
+        @media (max-width: 480px) {
+            .content-wrapper .article-content .article-container { padding: 2rem 1.25rem 1.5rem; }
+            .article-container h1 { font-size: 1.25rem; }
+            .article-body p, .article-body li { font-size: 0.9rem; }
+        }
+
+        .skip-link { position: absolute; top: 0; left: 0; background: var(--text); color: var(--bg); padding: 8px 16px; z-index: 200; font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; text-decoration: none; border-radius: 0 0 4px 0; transform: translateY(-100%); }
+        .skip-link:focus { transform: translateY(0); }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .footer-social { display: flex; gap: 20px; justify-content: center; font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 0.85rem; margin-top: 8px; }
+        .footer-social a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--text); }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3Z9EWG16PS');</script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+        <nav class="zn-nav">
+        <div class="zn-nav-inner">
+            <a href="/" class="zn-logo"><span class="zn-avatar-sm">Z</span>zonted.</a>
+            <input type="checkbox" id="zn-menu-toggle" class="zn-menu-toggle" aria-label="Toggle menu">
+            <label for="zn-menu-toggle" class="zn-menu-btn" aria-hidden="true"><span></span><span></span><span></span></label>
+            <div class="zn-nav-links">
+                <a href="/posts/">Posts</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/games/">Games</a>
+                <a href="/ai-stack/">AI Stack</a>
+                <a href="/metrics/">Metrics</a>
+                <a href="/about/">About</a>
+                <a href="/#subscribe" class="zn-nav-cta">Subscribe</a>
+            </div>
+        </div>
+    </nav>
+
+
+<div class="toc-mobile-wrapper">
+<div class="toc-mobile-sticky" id="toc-mobile">
+    <button class="toc-mobile-toggle" aria-expanded="false" onclick="this.closest('.toc-mobile-sticky').classList.toggle('open');this.setAttribute('aria-expanded',this.closest('.toc-mobile-sticky').classList.contains('open'))">
+        <span class="toc-active-label">Contents</span>
+        <span class="toc-chevron">&#9660;</span>
+    </button>
+    <div class="toc-mobile-dropdown" id="toc-mobile-dropdown">
+        <ul>
+            <li><a href="#consensus">Consensus, Miami</a></li>
+        <li><a href="#google-wipeout">The Google wipeout</a></li>
+        <li><a href="#the-numbers">The numbers</a></li>
+        <li><a href="#lessons">What May taught me</a></li>
+        <li><a href="#next">Next</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+    <main id="main">
+    <div class="content-wrapper">
+<aside class="toc-sidebar">
+    <p class="toc-sidebar-label">Contents</p>
+    <ul>
+        <li><a href="#consensus">Consensus, Miami</a></li>
+        <li><a href="#google-wipeout">The Google wipeout</a></li>
+        <li><a href="#the-numbers">The numbers</a></li>
+        <li><a href="#lessons">What May taught me</a></li>
+        <li><a href="#next">Next</a></li>
+    </ul>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div style="font-family:'Inter',system-ui,sans-serif;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:8px;">Newsletter</div>
+        <form class="zn-subscribe-compact" data-resend-subscribe novalidate><input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" autocomplete="email"><button type="submit">Subscribe</button><p class="zn-subscribe-status" data-subscribe-status hidden></p></form>
+    </div>
+<!-- COPY_LINK -->
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const t=this.querySelector('span');t.textContent='Copied!';setTimeout(()=>t.textContent='Copy Link',1500)})" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.75rem;cursor:pointer;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--text)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy Post Link</span></button>
+    </div>
+    <!-- /COPY_LINK -->
+</aside>
+<div class="article-content">
+    <article class="article-container">
+        <div style="margin-bottom:1.5rem;padding-top:1rem;">
+            <a href="/posts/" style="font-family:'Inter',-apple-system,system-ui,sans-serif;color:var(--text-muted);text-decoration:none;font-size:0.9rem;font-weight:500;">&larr; Back to Posts</a>
+        </div>
+        <h1>The May Recap: Miami, a Google Wipeout, and $600 in the Red</h1>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+            <img  src="https://img.zonted.com/about/bernard-huang-headshot.jpg" width="400" height="400" alt="Bernard Huang" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;">
+            <div>
+                <div style="font-weight:600;color:var(--text);">Bernard Huang</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">June 1, 2026 &middot; 5 min read</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+
+<div class="tldr">
+    <div class="tldr-label">TL;DR &mdash; May 2026</div>
+    <p class="tldr-thesis">A conference handed me a build technique that changed everything, Google erased my biggest site&rsquo;s search traffic overnight, and the only reason that didn&rsquo;t matter is diversification.</p>
+    <ul>
+        <li>Went to Consensus in Miami. The takeaway wasn&rsquo;t a keynote &mdash; it was one idea a friend shared over dinner that now lets my build loop one-shot Chrome extensions and two-to-three-shot mobile apps.</li>
+        <li>Around May 10, Google wiped almost all of Tabiji&rsquo;s search traffic and it hasn&rsquo;t recovered.</li>
+        <li>Still about $600/month in the red. The biggest revenue line is Tabiji books on Amazon (~$125/mo) &mdash; which is exactly why the Google wipeout didn&rsquo;t sink anything.</li>
+        <li>Four lessons, the kind that compound.</li>
+    </ul>
+</div>
+
+<h2 id="consensus">Consensus, Miami</h2>
+
+<p class="dropcap">The best part of a conference is never the stage. I flew to Consensus and spent it trading notes with people who build the way I do.</p>
+
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/may-2026-recap/consensus-selfie.jpg" alt="Selfie at Consensus in Miami wearing an x402 cap and an Anchorage Digital lanyard." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">Consensus, Miami. The x402 hat got more conversations started than my badge did.</figcaption>
+</figure>
+
+<p>The one that mattered: Jen introduced me to <strong>planning three times before building once</strong>. Run a frontier model through three independent planning passes, reconcile where they disagree, <em>then</em> let it implement. I&rsquo;d <a href="/posts/plan-3x-build-once/">written about a version of this before</a>, but watching a practitioner who lives it explain the nuance moved it from &ldquo;a thing I do sometimes&rdquo; to the default. On my Hermes + GPT-5.5 setup it&rsquo;s the difference between a coin flip and a near-sure thing: Chrome extensions (Veracity) now come out in <strong>one shot</strong>, mobile apps (Palmaura) in <strong>two or three</strong>. Aaron sharpened a few other corners of the workflow, and Gaetano was the standing reminder that one freelancer with the right taste can out-maneuver a whole team.</p>
+
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/may-2026-recap/consensus-dinner.jpg" alt="Dinner at a Miami restaurant with two fellow builders, plates of breaded cutlets and fries on the table." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">The dinner that paid for the flight &mdash; in ideas, not schnitzel.</figcaption>
+</figure>
+
+<h2 id="google-wipeout">Google wiped Tabiji&rsquo;s search traffic</h2>
+
+<p>Then the gut-punch. Around May 10, Tabiji&rsquo;s search traffic fell off a cliff &mdash; from a healthy ramp to essentially zero overnight &mdash; and weeks of trying haven&rsquo;t brought it back.</p>
+
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/may-2026-recap/tabiji-search.jpg" alt="Google Search Console showing Tabiji's clicks and impressions climbing through April then collapsing to near-zero around May 10." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">2.17K clicks, 396K impressions &mdash; then a wall, right around May 10.</figcaption>
+</figure>
+
+<p>I can&rsquo;t point to a manual penalty. My best guess is that Google has gotten extremely twitchy about new sites in the vibecoded-slop era: a young domain publishing AI-assisted content at volume is exactly the profile they&rsquo;re now quick to bury, and the algorithm would rather wrongly suppress a thousand new sites than let one slop farm through. Painful. But &mdash; and this is the whole story of the month &mdash; not fatal.</p>
+
+<h2 id="the-numbers">The numbers</h2>
+
+<p>Full transparency, as always. The stack runs about <strong>$700/month</strong>: ads, video generation (<a href="https://wavespeed.ai/?ref=zonted" target="_blank" rel="noopener">Wavespeed</a>), cloud, the model subscriptions (Claude, GPT, <a href="https://z.ai/subscribe?ic=JY9V1BN5ZO" target="_blank" rel="noopener">z.ai</a>), and a long tail of small tools.</p>
+
+<figure style="margin:1.5rem 0; max-width:420px; margin-left:auto; margin-right:auto;">
+  <img src="https://img.zonted.com/resources/may-2026-recap/costs.jpg" alt="Monthly cost breakdown totaling about $700: Amazon ads $150, Wavespeed $100, Google Cloud $100, GPT $100, Claude $100, Cloudflare $50, z.ai $30, pubby $30, X $16, Instagram $15, Slack $14, 1Password $4." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">~$700/month out the door.</figcaption>
+</figure>
+
+<p>Against that, the biggest revenue line is <a href="https://tabiji.ai/books/">Tabiji books on Amazon Kindle</a>: 45 units across 30 titles in May, roughly $125/month.</p>
+
+<figure style="margin:1.5rem 0;">
+  <img src="https://img.zonted.com/resources/may-2026-recap/kdp-units.jpg" alt="Amazon Kindle Direct Publishing report: 45 units processed across all 30 books, May 1-31, 2026." loading="lazy" />
+  <figcaption style="font-family:'Inter',-apple-system,system-ui,sans-serif;font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:0.6rem;line-height:1.5;">45 books sold in May &mdash; on Amazon, not on the site Google just buried.</figcaption>
+</figure>
+
+<p>Net: still about <strong>$600/month in the red</strong>. Not a business yet. A lab with a tab. But the shape of where the money comes from is the lesson.</p>
+
+<h2 id="lessons">What May taught me</h2>
+
+<p><strong>1. Diversify or die.</strong> Google erased Tabiji&rsquo;s search traffic and it barely touched revenue &mdash; because the money is made on Amazon, a completely different surface that Google can&rsquo;t turn off. The <a href="/posts/tabiji-18m-views/">18 million social views</a> live on yet another. Single points of failure are how you die quietly; spread the bets and a catastrophe on one channel becomes a Tuesday.</p>
+
+<p><strong>2. Trade notes with practitioners.</strong> The plan-three-times unlock didn&rsquo;t come from a blog post or a model release. It came from Jen, over dinner. In the AI era your edge is specific, hard-won technique &mdash; the prompts, the skills, the way you decompose a problem &mdash; and the fastest way to compound it is to swap notes with people who are also in the weeds. One dinner moved my whole build loop.</p>
+
+<p><strong>3. Protect the flow.</strong> When I&rsquo;m locked in I&rsquo;m juggling four to seven contexts across the agents at once. Breaking that to take a meeting costs roughly <strong>5&times;</strong> what it did before AI &mdash; rebuilding all that mental state is the expensive part, not the meeting. It&rsquo;s also seductively easy to optimize a local maximum (more social views, more SEO, a slightly nicer product) instead of the thing that actually moves the business.</p>
+
+<p><strong>4. More surfaces, more combinations.</strong> Every area I learn &mdash; AI influencers, books, apps, games, MCP and APIs &mdash; isn&rsquo;t a separate silo. It&rsquo;s another card in the deck. The real wins keep coming from <em>combining</em> them: a viral reel that funnels to a book, a game that documents a dead project, an API that powers an app. The playbook compounds.</p>
+
+<h2 id="next">Next</h2>
+
+<p>The search wipeout stings, and I&rsquo;ll keep poking at recovery. But May proved the thesis it was quietly built on: diversify the surfaces, compound the technique, and guard the focus that makes any of it possible. June: keep stacking cards.</p>
+
+
+        </div>
+        <!-- SUBSCRIBE_BLOCK_START -->
+            <section class="zn-post-subscribe">
+                <p class="zn-post-subscribe-label">Newsletter</p>
+                <h2 class="zn-post-subscribe-headline">Get the next post by email.</h2>
+                <p class="zn-post-subscribe-sub">One email when I publish something new. No spam, no fixed schedule, unsubscribe anytime.</p>
+                <form class="zn-subscribe-form zn-post-subscribe-form" data-resend-subscribe novalidate>
+                    <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address" autocomplete="email">
+                    <button type="submit">Subscribe &rarr;</button>
+                    <p class="zn-subscribe-status" data-subscribe-status hidden></p>
+                </form>
+            </section>
+            <!-- SUBSCRIBE_BLOCK_END -->
+        <!-- RECOMMENDED_START -->
+            <section class="zn-recommended">
+                <p class="zn-recommended-label">Recommended Reading</p>
+                <ul class="zn-recommended-list">
+                <li><a class="zn-recommended-title" href="/posts/plan-3x-build-once/">Plan 3×, Build Once: How Three Models Plan What One Model Ships</a><p class="zn-recommended-dek">We asked Opus 4.7 and GPT-5.5 to independently plan the same VeracityAPI feature.</p></li>
+                <li><a class="zn-recommended-title" href="/posts/tabiji-18m-views/">The Three Unlocks Behind 18M Views of AI Travel Content</a><p class="zn-recommended-dek">Tabiji, our AI travel-safety channel, got 18,117,121 views in 90 days — 98.6% from strangers. The three unlocks: Reddit as a demand oracle, warming accounts…</p></li>
+                <li><a class="zn-recommended-title" href="/posts/how-my-agent-made-a-viral-video/">How My Agent Produced a 3.9M-View Viral Video</a><p class="zn-recommended-dek">A step-by-step teardown of one autonomous AI video: the Tulum spare-tire scam reel that hit 3.9 million views. The real queue JSON, the exact Seedance…</p></li>
+                </ul>
+            </section>
+            <!-- RECOMMENDED_END -->
+    </article>
+</div>
+</div>
+
+</main>
+
+<footer class="zn-footer">
+    <div class="zn-container zn-footer-inner">
+        <span>&copy; 2026 Bernard Huang &middot; zonted.com</span>
+        <span class="zn-footer-links">
+            <a href="/posts/">Posts</a>
+            <a href="/portfolio/">Portfolio</a>
+            <a href="/games/">Games</a>
+            <a href="/ai-stack/">AI Stack</a>
+            <a href="/metrics/">Metrics</a>
+            <a href="/about/">About</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="https://x.com/bernardjhuang">X</a>
+            <a href="https://www.linkedin.com/in/bernardjhuang/">LinkedIn</a>
+        </span>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-sidebar a, .toc-mobile-dropdown a');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tocLinks.forEach(a => a.classList.remove('active'));
+                document.querySelectorAll(`a[href="#${entry.target.id}"]`).forEach(a => a.classList.add('active'));
+                const label = document.querySelector('.toc-active-label');
+                if (label) {
+                    const activeLink = document.querySelector(`.toc-mobile-dropdown a[href="#${entry.target.id}"]`);
+                    if (activeLink) label.textContent = activeLink.textContent;
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -80% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
+<script defer src="/js/subscribe.js"></script>
+</body>
+</html>
