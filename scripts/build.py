@@ -727,6 +727,7 @@ CURATED_RELATED = {
     "posts/kapiko-postmortem": ["posts/ai-music-generation-comparison", "posts/true-cost-of-ai-content-production", "posts/slop-iterate-curate-ai-content"],
     "posts/tabiji-18m-views": ["posts/how-my-agent-made-a-viral-video", "posts/true-cost-of-ai-content-production", "posts/kapiko-postmortem"],
     "posts/how-my-agent-made-a-viral-video": ["posts/tabiji-18m-views", "posts/true-cost-of-ai-content-production", "posts/kapiko-postmortem"],
+    "posts/may-2026-recap": ["posts/plan-3x-build-once", "posts/tabiji-18m-views", "posts/how-my-agent-made-a-viral-video"],
     "posts/human-in-the-loop": ["posts/ai-psychosis", "posts/openclaw-vs-claude-code-freedom", "posts/stop-optimizing-ai-infrastructure"],
     "posts/local-models-free-tokens": ["posts/ai-resilience-planning", "posts/openclaw-vs-claude-code-freedom", "posts/build-for-agents-price-per-call"],
     "posts/makeugc": ["posts/wavespeed", "posts/ai-reels-what-actually-works", "posts/veo3-vs-hailuo-minimax"],
