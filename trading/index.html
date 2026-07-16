@@ -35,12 +35,24 @@
         .ticker { min-width: 92px; padding: 13px 16px 12px; border: 1px solid var(--ink); background: var(--paper); }
         .ticker-symbol { display: block; font-family: var(--mono); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.03em; color: var(--ink); }
         .ticker-name { display: block; margin-top: 3px; font-size: 0.78rem; line-height: 1.25; color: var(--faded); }
+        .activity-list { list-style: none; border-top: 1px solid var(--rule); }
+        .activity-row { display: grid; grid-template-columns: 84px 1fr auto; gap: 16px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--rule); }
+        .activity-date { font-family: var(--mono); font-size: 0.67rem; letter-spacing: 0.05em; color: var(--faded); }
+        .activity-action { font-size: 1rem; font-weight: 600; line-height: 1.3; }
+        .activity-type { display: block; margin-top: 2px; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faded); }
+        .activity-result { min-width: 92px; text-align: right; }
+        .activity-pnl { display: block; font-family: var(--mono); font-size: 0.83rem; font-weight: 600; }
+        .activity-pnl.positive { color: var(--green-live); }
+        .activity-pnl.negative { color: var(--ox); }
+        .activity-status { display: block; margin-top: 1px; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faded); }
         .trading-note { margin: 4px 0 50px; padding: 18px 0 0; border-top: 1px solid var(--rule); font-size: 0.87rem; line-height: 1.6; color: var(--faded); }
         @media (max-width: 600px) {
             .trading-hero { padding-top: 44px; }
             .position-head { display: block; }
             .position-head span { display: block; margin-top: 4px; }
             .ticker { flex: 1 1 calc(50% - 10px); min-width: 0; }
+            .activity-row { grid-template-columns: 1fr auto; gap: 4px 12px; }
+            .activity-date { grid-column: 1 / -1; }
         }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
@@ -91,34 +103,82 @@
                 </div>
             </section>
 
+            <section class="position-section" aria-labelledby="activity-heading">
+                <div class="position-head">
+                    <h2 id="activity-heading">Recent large trades</h2>
+                    <span>Last 10 filled · $2K+ notional</span>
+                </div>
+                <ol class="activity-list" aria-label="Last 10 Robinhood transactions of at least $2,000">
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-16">Jul 16</time>
+                        <div><span class="activity-action">Bought NVO shares</span><span class="activity-type">Equity</span></div>
+                        <div class="activity-result"><span class="activity-pnl positive">+0.5%</span><span class="activity-status">Unrealized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-16">Jul 16</time>
+                        <div><span class="activity-action">Bought WEN shares</span><span class="activity-type">Equity</span></div>
+                        <div class="activity-result"><span class="activity-pnl positive">+0.5%</span><span class="activity-status">Unrealized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-16">Jul 16</time>
+                        <div><span class="activity-action">Sold BYDDY shares</span><span class="activity-type">Equity</span></div>
+                        <div class="activity-result"><span class="activity-pnl negative">−0.1%</span><span class="activity-status">Realized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-16">Jul 16</time>
+                        <div><span class="activity-action">Bought BYDDY shares</span><span class="activity-type">Equity</span></div>
+                        <div class="activity-result"><span class="activity-pnl negative">−0.1%</span><span class="activity-status">Realized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-15">Jul 15</time>
+                        <div><span class="activity-action">Bought CYPH shares</span><span class="activity-type">Equity</span></div>
+                        <div class="activity-result"><span class="activity-pnl negative">−7.7%</span><span class="activity-status">Unrealized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-15">Jul 15</time>
+                        <div><span class="activity-action">Sold FIG call</span><span class="activity-type">Option</span></div>
+                        <div class="activity-result"><span class="activity-pnl positive">+10.5%</span><span class="activity-status">Realized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-15">Jul 15</time>
+                        <div><span class="activity-action">Sold META call</span><span class="activity-type">Option</span></div>
+                        <div class="activity-result"><span class="activity-pnl positive">+80.7%</span><span class="activity-status">Realized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-15">Jul 15</time>
+                        <div><span class="activity-action">Sold BMNR call</span><span class="activity-type">Option</span></div>
+                        <div class="activity-result"><span class="activity-pnl positive">+19.1%</span><span class="activity-status">Realized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-15">Jul 15</time>
+                        <div><span class="activity-action">Sold META call</span><span class="activity-type">Option</span></div>
+                        <div class="activity-result"><span class="activity-pnl positive">+98.2%</span><span class="activity-status">Realized</span></div>
+                    </li>
+                    <li class="activity-row">
+                        <time class="activity-date" datetime="2026-07-15">Jul 15</time>
+                        <div><span class="activity-action">Sold BMNR call</span><span class="activity-type">Option</span></div>
+                        <div class="activity-result"><span class="activity-pnl positive">+42.4%</span><span class="activity-status">Realized</span></div>
+                    </li>
+                </ol>
+            </section>
+
             <section class="position-section" aria-labelledby="web3-heading">
                 <div class="position-head">
                     <h2 id="web3-heading">Web3 wallet</h2>
                     <span>Robinhood Chain</span>
                 </div>
                 <div class="position-group">
-                    <h3>Onchain assets</h3>
-                    <ul class="ticker-list" aria-label="Onchain token positions">
-                        <li class="ticker"><span class="ticker-symbol">ETH</span><span class="ticker-name">Ether</span></li>
+                    <h3>Positions above $100</h3>
+                    <ul class="ticker-list" aria-label="Onchain token positions above $100">
                         <li class="ticker"><span class="ticker-symbol">CASHCAT</span><span class="ticker-name">Cash Cat</span></li>
                         <li class="ticker"><span class="ticker-symbol">HOODRAT</span><span class="ticker-name">Hoodrat</span></li>
                         <li class="ticker"><span class="ticker-symbol">MEOW</span><span class="ticker-name">meow</span></li>
                         <li class="ticker"><span class="ticker-symbol">WISHBONE</span><span class="ticker-name">Wishbone</span></li>
                     </ul>
                 </div>
-                <div class="position-group">
-                    <h3>Tokenized equities</h3>
-                    <ul class="ticker-list" aria-label="Tokenized equity positions">
-                        <li class="ticker"><span class="ticker-symbol">AAPL</span><span class="ticker-name">Apple token</span></li>
-                        <li class="ticker"><span class="ticker-symbol">NVDA</span><span class="ticker-name">NVIDIA token</span></li>
-                        <li class="ticker"><span class="ticker-symbol">AMD</span><span class="ticker-name">AMD token</span></li>
-                        <li class="ticker"><span class="ticker-symbol">TSLA</span><span class="ticker-name">Tesla token</span></li>
-                        <li class="ticker"><span class="ticker-symbol">SPCX</span><span class="ticker-name">SpaceX token</span></li>
-                    </ul>
-                </div>
             </section>
 
-            <p class="trading-note">Point-in-time disclosure. Dust and unsolicited spam tokens are excluded. Nothing here is investment advice, and a listed position is not a recommendation.</p>
+            <p class="trading-note">Point-in-time disclosure. Web3 positions worth $100 or less and unsolicited spam tokens are excluded. P&amp;L percentages are realized for closed trades and mark-to-market unrealized estimates for open buys. Nothing here is investment advice, and a listed position or trade is not a recommendation.</p>
         </div>
     </main>
 
