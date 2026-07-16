@@ -50,8 +50,7 @@
         .activity-pnl.positive { color: var(--green-live); }
         .activity-pnl.negative { color: var(--ox); }
         .activity-status { display: block; margin-top: 1px; font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--faded); }
-        .activity-roundtrip { display: grid; grid-template-columns: 54px 1fr auto; gap: 10px; align-items: center; margin-bottom: 26px; padding: 15px 16px; border: 1px solid var(--ink); background: var(--paper); }
-        .activity-roundtrip .activity-action::after { content: 'Buy → sell'; display: block; margin-top: 3px; font-family: var(--mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faded); }
+        .activity-policy { margin: -5px 0 22px; font-family: var(--mono); font-size: 0.62rem; line-height: 1.5; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faded); }
         .trading-note { margin: 4px 0 50px; padding: 18px 0 0; border-top: 1px solid var(--rule); font-size: 0.87rem; line-height: 1.6; color: var(--faded); }
         @media (max-width: 600px) {
             .trading-hero { padding-top: 44px; }
@@ -59,8 +58,7 @@
             .position-head span { display: block; margin-top: 4px; }
             .ticker { flex: 1 1 calc(50% - 10px); min-width: 0; }
             .activity-columns { grid-template-columns: 1fr; gap: 30px; }
-            .activity-row, .activity-roundtrip { grid-template-columns: 48px 1fr auto; gap: 8px; }
-            .activity-roundtrip { padding: 14px 12px; }
+            .activity-row { grid-template-columns: 48px 1fr auto; gap: 8px; }
         }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
@@ -114,21 +112,17 @@
             <section class="position-section" aria-labelledby="activity-heading">
                 <div class="position-head">
                     <h2 id="activity-heading">Recent large trades</h2>
-                    <span>Last 10 filled · $2K+ notional</span>
+                    <span>10 buys + 10 sells · $2K+ each</span>
                 </div>
-                <div class="activity-roundtrip" aria-label="Same-day round trip: bought and sold BYDDY shares on July 16 for a realized loss of 0.1 percent">
-                    <time class="activity-date" datetime="2026-07-16">Jul 16</time>
-                    <div><span class="activity-action">BYDDY shares</span><span class="activity-type">Same day · 2 fills</span></div>
-                    <div class="activity-result"><span class="activity-pnl negative">−0.1%</span><span class="activity-status">Realized</span></div>
-                </div>
+                <p class="activity-policy">Same-day round trips excluded · Same-symbol fills consolidated by date</p>
                 <div class="activity-columns">
                     <section class="activity-lane activity-lane--buy" aria-labelledby="buys-heading">
                         <h3 id="buys-heading">Buys</h3>
-                        <ol class="activity-list" aria-label="Recent Robinhood buys">
+                        <ol class="activity-list" aria-label="Last 10 qualifying Robinhood buys">
                             <li class="activity-row">
                                 <time class="activity-date" datetime="2026-07-16">Jul 16</time>
                                 <div><span class="activity-action">NVO shares</span><span class="activity-type">Equity</span></div>
-                                <div class="activity-result"><span class="activity-pnl positive">+0.5%</span><span class="activity-status">Unrealized</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+0.1%</span><span class="activity-status">Unrealized</span></div>
                             </li>
                             <li class="activity-row">
                                 <time class="activity-date" datetime="2026-07-16">Jul 16</time>
@@ -137,14 +131,49 @@
                             </li>
                             <li class="activity-row">
                                 <time class="activity-date" datetime="2026-07-15">Jul 15</time>
-                                <div><span class="activity-action">CYPH shares</span><span class="activity-type">Equity</span></div>
-                                <div class="activity-result"><span class="activity-pnl negative">−7.7%</span><span class="activity-status">Unrealized</span></div>
+                                <div><span class="activity-action">CYPH shares</span><span class="activity-type">Equity · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl negative">−8.8%</span><span class="activity-status">Unrealized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-14">Jul 14</time>
+                                <div><span class="activity-action">SPCX call</span><span class="activity-type">Option</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+2.0%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-14">Jul 14</time>
+                                <div><span class="activity-action">FIG call</span><span class="activity-type">Option</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+10.5%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-13">Jul 13</time>
+                                <div><span class="activity-action">WEN shares</span><span class="activity-type">Equity</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+1.0%</span><span class="activity-status">Unrealized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-13">Jul 13</time>
+                                <div><span class="activity-action">SPCX call</span><span class="activity-type">Option · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+2.0%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-09">Jul 9</time>
+                                <div><span class="activity-action">BMNR call</span><span class="activity-type">Option · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+19.1%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-08">Jul 8</time>
+                                <div><span class="activity-action">BMNR call</span><span class="activity-type">Option · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+40.3%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-07">Jul 7</time>
+                                <div><span class="activity-action">META call</span><span class="activity-type">Option · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+57.5%</span><span class="activity-status">Realized</span></div>
                             </li>
                         </ol>
                     </section>
                     <section class="activity-lane activity-lane--sell" aria-labelledby="sells-heading">
                         <h3 id="sells-heading">Sells</h3>
-                        <ol class="activity-list" aria-label="Recent Robinhood sells">
+                        <ol class="activity-list" aria-label="Last 10 qualifying Robinhood sells">
                             <li class="activity-row">
                                 <time class="activity-date" datetime="2026-07-15">Jul 15</time>
                                 <div><span class="activity-action">FIG call</span><span class="activity-type">Option</span></div>
@@ -152,23 +181,48 @@
                             </li>
                             <li class="activity-row">
                                 <time class="activity-date" datetime="2026-07-15">Jul 15</time>
-                                <div><span class="activity-action">META call</span><span class="activity-type">Option</span></div>
-                                <div class="activity-result"><span class="activity-pnl positive">+80.7%</span><span class="activity-status">Realized</span></div>
+                                <div><span class="activity-action">META call</span><span class="activity-type">Option · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+86.2%</span><span class="activity-status">Realized</span></div>
                             </li>
                             <li class="activity-row">
                                 <time class="activity-date" datetime="2026-07-15">Jul 15</time>
-                                <div><span class="activity-action">BMNR call</span><span class="activity-type">Option</span></div>
-                                <div class="activity-result"><span class="activity-pnl positive">+19.1%</span><span class="activity-status">Realized</span></div>
+                                <div><span class="activity-action">BMNR call</span><span class="activity-type">Option · 3 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+27.2%</span><span class="activity-status">Realized</span></div>
                             </li>
                             <li class="activity-row">
                                 <time class="activity-date" datetime="2026-07-15">Jul 15</time>
-                                <div><span class="activity-action">META call</span><span class="activity-type">Option</span></div>
-                                <div class="activity-result"><span class="activity-pnl positive">+98.2%</span><span class="activity-status">Realized</span></div>
+                                <div><span class="activity-action">SPCX call</span><span class="activity-type">Option</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+2.0%</span><span class="activity-status">Realized</span></div>
                             </li>
                             <li class="activity-row">
-                                <time class="activity-date" datetime="2026-07-15">Jul 15</time>
-                                <div><span class="activity-action">BMNR call</span><span class="activity-type">Option</span></div>
-                                <div class="activity-result"><span class="activity-pnl positive">+42.4%</span><span class="activity-status">Realized</span></div>
+                                <time class="activity-date" datetime="2026-07-10">Jul 10</time>
+                                <div><span class="activity-action">META call</span><span class="activity-type">Option · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+96.0%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-10">Jul 10</time>
+                                <div><span class="activity-action">AMZN call</span><span class="activity-type">Option · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl negative">−3.8%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-08">Jul 8</time>
+                                <div><span class="activity-action">BYDDY shares</span><span class="activity-type">Equity · 2 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+1.7%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-07">Jul 7</time>
+                                <div><span class="activity-action">QCOM shares</span><span class="activity-type">Equity</span></div>
+                                <div class="activity-result"><span class="activity-pnl negative">−3.4%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-07">Jul 7</time>
+                                <div><span class="activity-action">BABA call</span><span class="activity-type">Option · 3 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+6.1%</span><span class="activity-status">Realized</span></div>
+                            </li>
+                            <li class="activity-row">
+                                <time class="activity-date" datetime="2026-07-07">Jul 7</time>
+                                <div><span class="activity-action">FWDI call</span><span class="activity-type">Option · 3 fills</span></div>
+                                <div class="activity-result"><span class="activity-pnl positive">+15.1%</span><span class="activity-status">Realized</span></div>
                             </li>
                         </ol>
                     </section>
