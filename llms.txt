@@ -31,6 +31,7 @@ Zonted is Bernard Huang's personal site. The angle is non-commodity: specific sy
 - [All posts](https://zonted.com/posts/): Complete archive — 42 essays, updated regularly
 - [AI Stack](https://zonted.com/ai-stack/): The tools and models actually running in production right now
 - [Portfolio](https://zonted.com/portfolio/): Companies built or in-build with AI agents
+- [Trading](https://zonted.com/trading/): Quantity-free snapshot of current Robinhood and Web3 positions
 - [Metrics](https://zonted.com/metrics/): Live operator dashboard — traffic, books shipped, revenue
 - [About](https://zonted.com/about/): Background, current focus, how to get in touch
 
