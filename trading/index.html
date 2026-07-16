@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fcfcfa">
-    <title>Trading Positions — Zonted</title>
-    <meta name="description" content="A quantity-free snapshot of Bernard Huang's current Robinhood and Web3 positions.">
+    <title>Trading Positions &amp; Watchlist — Zonted</title>
+    <meta name="description" content="A quantity-free snapshot of Bernard Huang's current positions, recent trades, and research watchlist.">
     <link rel="canonical" href="https://zonted.com/trading/">
-    <meta property="og:title" content="Trading Positions — Zonted">
-    <meta property="og:description" content="A quantity-free snapshot of current Robinhood and Web3 positions.">
+    <meta property="og:title" content="Trading Positions &amp; Watchlist — Zonted">
+    <meta property="og:description" content="A quantity-free snapshot of current positions, recent trades, and research watchlist.">
     <meta property="og:url" content="https://zonted.com/trading/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://img.zonted.com/og/operator-notes.png">
@@ -24,6 +24,13 @@
         .trading-hero p { max-width: 620px; color: var(--faded); font-size: 1.18rem; line-height: 1.6; }
         .trading-stamp { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 999px; font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faded); }
         .trading-stamp::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green-live); box-shadow: 0 0 0 3px rgba(26,122,60,0.12); }
+        .trading-tabs { display: flex; gap: 28px; padding-top: 24px; border-bottom: 1px solid var(--rule); }
+        .trading-tab { appearance: none; margin-bottom: -1px; padding: 13px 0 12px; border: 0; border-bottom: 2px solid transparent; background: transparent; font-family: var(--mono); font-size: 0.71rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faded); cursor: pointer; }
+        .trading-tab:hover { color: var(--ink); }
+        .trading-tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+        .trading-tab[aria-selected="true"] { border-bottom-color: var(--ox); color: var(--ink); }
+        .trading-tab-count { display: inline-block; min-width: 23px; margin-left: 5px; padding: 2px 5px; border-radius: 999px; background: var(--paper-2); font-size: 0.58rem; line-height: 1.2; text-align: center; }
+        .trading-panel[hidden] { display: none; }
         .position-section { padding: 42px 0; border-bottom: 1px solid var(--rule); }
         .position-section:last-of-type { border-bottom: 0; }
         .position-head { display: flex; justify-content: space-between; gap: 20px; align-items: baseline; margin-bottom: 20px; }
@@ -51,6 +58,12 @@
         .activity-pnl.negative { color: var(--ox); }
         .activity-status { display: block; margin-top: 1px; font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--faded); }
         .activity-policy { margin: -5px 0 22px; font-family: var(--mono); font-size: 0.62rem; line-height: 1.5; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faded); }
+        .watchlist-panel { padding: 42px 0 8px; }
+        .watchlist-intro { max-width: 590px; margin: -6px 0 28px; color: var(--faded); font-size: 1rem; line-height: 1.6; }
+        .watchlist-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); list-style: none; }
+        .watchlist-symbol, .watchlist-empty { min-width: 0; padding: 15px 8px 14px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--paper); font-family: var(--mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-align: center; }
+        .watchlist-empty { background: var(--paper-2); }
+        .watchlist-note { margin: 24px 0 50px; font-size: 0.87rem; line-height: 1.6; color: var(--faded); }
         .trading-note { margin: 4px 0 50px; padding: 18px 0 0; border-top: 1px solid var(--rule); font-size: 0.87rem; line-height: 1.6; color: var(--faded); }
         @media (max-width: 600px) {
             .trading-hero { padding-top: 44px; }
@@ -59,6 +72,10 @@
             .ticker { flex: 1 1 calc(50% - 10px); min-width: 0; }
             .activity-columns { grid-template-columns: 1fr; gap: 30px; }
             .activity-row { grid-template-columns: 48px 1fr auto; gap: 8px; }
+            .trading-tabs { gap: 20px; }
+            .trading-tab { font-size: 0.64rem; letter-spacing: 0.07em; }
+            .watchlist-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .watchlist-symbol, .watchlist-empty { padding: 13px 4px 12px; font-size: 0.72rem; }
         }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z9EWG16PS"></script>
@@ -89,11 +106,17 @@
         <div class="zn-container">
             <header class="trading-hero">
                 <span class="zn-eyebrow zn-eyebrow--ox">Public position log</span>
-                <h1>What we're holding.</h1>
-                <p>A quantity-free view across Robinhood brokerage accounts and the Web3 wallet. Positions only—no balances, cost basis, or performance theater.</p>
+                <h1>What we're holding—and watching.</h1>
+                <p>A quantity-free view of positions, recent large trades, and the symbols in our research pipeline. No balances, cost basis, or performance theater.</p>
                 <span class="trading-stamp">Snapshot · July 16, 2026</span>
             </header>
 
+            <div class="trading-tabs" role="tablist" aria-label="Trading page sections">
+                <button class="trading-tab" id="positions-tab" type="button" role="tab" aria-selected="true" aria-controls="positions-panel">Positions &amp; trades</button>
+                <button class="trading-tab" id="watchlist-tab" type="button" role="tab" aria-selected="false" aria-controls="watchlist-panel">Watchlist <span class="trading-tab-count">82</span></button>
+            </div>
+
+            <div class="trading-panel" id="positions-panel" role="tabpanel" tabindex="0" aria-labelledby="positions-tab">
             <section class="position-section" aria-labelledby="robinhood-heading">
                 <div class="position-head">
                     <h2 id="robinhood-heading">Robinhood</h2>
@@ -246,6 +269,102 @@
             </section>
 
             <p class="trading-note">Point-in-time disclosure. Web3 positions worth $100 or less and unsolicited spam tokens are excluded. P&amp;L percentages are realized for closed trades and mark-to-market unrealized estimates for open buys. Nothing here is investment advice, and a listed position or trade is not a recommendation.</p>
+            </div>
+
+            <section class="trading-panel watchlist-panel" id="watchlist-panel" role="tabpanel" tabindex="0" aria-labelledby="watchlist-tab" hidden>
+                <div class="position-head">
+                    <h2 id="watchlist-heading">Research watchlist</h2>
+                    <span>82 symbols · Robinhood</span>
+                </div>
+                <p class="watchlist-intro">Names we're researching, monitoring, or waiting to become interesting. The list spans companies we own, companies we've traded, and companies still earning a closer look.</p>
+                <ul class="watchlist-grid" aria-label="Symbols on the research watchlist">
+                    <li class="watchlist-symbol">AAPL</li>
+                    <li class="watchlist-symbol">ABNB</li>
+                    <li class="watchlist-symbol">ABT</li>
+                    <li class="watchlist-symbol">ADBE</li>
+                    <li class="watchlist-symbol">AKAM</li>
+                    <li class="watchlist-symbol">AMD</li>
+                    <li class="watchlist-symbol">AMZN</li>
+                    <li class="watchlist-symbol">ARM</li>
+                    <li class="watchlist-symbol">ASML</li>
+                    <li class="watchlist-symbol">ASTS</li>
+                    <li class="watchlist-symbol">BABA</li>
+                    <li class="watchlist-symbol">BKNG</li>
+                    <li class="watchlist-symbol">BLK</li>
+                    <li class="watchlist-symbol">BRK.B</li>
+                    <li class="watchlist-symbol">BYDDY</li>
+                    <li class="watchlist-symbol">CAT</li>
+                    <li class="watchlist-symbol">CME</li>
+                    <li class="watchlist-symbol">COST</li>
+                    <li class="watchlist-symbol">CRCL</li>
+                    <li class="watchlist-symbol">CRM</li>
+                    <li class="watchlist-symbol">CRWD</li>
+                    <li class="watchlist-symbol">DIS</li>
+                    <li class="watchlist-symbol">DKNG</li>
+                    <li class="watchlist-symbol">DOCN</li>
+                    <li class="watchlist-symbol">DRI</li>
+                    <li class="watchlist-symbol">EBAY</li>
+                    <li class="watchlist-symbol">FIG</li>
+                    <li class="watchlist-symbol">FLUT</li>
+                    <li class="watchlist-symbol">GOOG</li>
+                    <li class="watchlist-symbol">GRAB</li>
+                    <li class="watchlist-symbol">HAS</li>
+                    <li class="watchlist-symbol">HD</li>
+                    <li class="watchlist-symbol">HOOD</li>
+                    <li class="watchlist-symbol">IBKR</li>
+                    <li class="watchlist-symbol">ICE</li>
+                    <li class="watchlist-symbol">INTC</li>
+                    <li class="watchlist-symbol">INTU</li>
+                    <li class="watchlist-symbol">JPM</li>
+                    <li class="watchlist-symbol">LITE</li>
+                    <li class="watchlist-symbol">LLY</li>
+                    <li class="watchlist-symbol">LMT</li>
+                    <li class="watchlist-symbol">LULU</li>
+                    <li class="watchlist-symbol">MAR</li>
+                    <li class="watchlist-symbol">MCD</li>
+                    <li class="watchlist-symbol">META</li>
+                    <li class="watchlist-symbol">MPNGY</li>
+                    <li class="watchlist-symbol">MSFT</li>
+                    <li class="watchlist-symbol">MU</li>
+                    <li class="watchlist-symbol">NBIS</li>
+                    <li class="watchlist-symbol">NET</li>
+                    <li class="watchlist-symbol">NFLX</li>
+                    <li class="watchlist-symbol">NKE</li>
+                    <li class="watchlist-symbol">NTDOY</li>
+                    <li class="watchlist-symbol">NVDA</li>
+                    <li class="watchlist-symbol">NVO</li>
+                    <li class="watchlist-symbol">OXY</li>
+                    <li class="watchlist-symbol">PINS</li>
+                    <li class="watchlist-symbol">PL</li>
+                    <li class="watchlist-symbol">PLTR</li>
+                    <li class="watchlist-symbol">QCOM</li>
+                    <li class="watchlist-symbol">RDDT</li>
+                    <li class="watchlist-symbol">RKLB</li>
+                    <li class="watchlist-symbol">SBUX</li>
+                    <li class="watchlist-symbol">SHOP</li>
+                    <li class="watchlist-symbol">SONY</li>
+                    <li class="watchlist-symbol">SPCX</li>
+                    <li class="watchlist-symbol">SPOT</li>
+                    <li class="watchlist-symbol">TCEHY</li>
+                    <li class="watchlist-symbol">TEAM</li>
+                    <li class="watchlist-symbol">TSLA</li>
+                    <li class="watchlist-symbol">TSM</li>
+                    <li class="watchlist-symbol">TXRH</li>
+                    <li class="watchlist-symbol">UBER</li>
+                    <li class="watchlist-symbol">UNH</li>
+                    <li class="watchlist-symbol">V</li>
+                    <li class="watchlist-symbol">W</li>
+                    <li class="watchlist-symbol">WBD</li>
+                    <li class="watchlist-symbol">WELL</li>
+                    <li class="watchlist-symbol">WMT</li>
+                    <li class="watchlist-symbol">WTS</li>
+                    <li class="watchlist-symbol">XYL</li>
+                    <li class="watchlist-symbol">ZM</li>
+                    <li class="watchlist-empty" aria-hidden="true"></li>
+                    <li class="watchlist-empty" aria-hidden="true"></li>
+                </ul>
+                <p class="watchlist-note">Synced from the <strong>slo</strong> Robinhood watchlist on July 16, 2026. A watchlist is a research pipeline—not a position, price target, or recommendation.</p>
+            </section>
         </div>
     </main>
 
@@ -266,5 +385,44 @@
             </span>
         </div>
     </footer>
+    <script>
+        (() => {
+            const tabs = [...document.querySelectorAll('[role="tab"]')];
+            const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
+
+            function activate(tab, updateUrl = false) {
+                tabs.forEach((item, index) => {
+                    const selected = item === tab;
+                    item.setAttribute('aria-selected', String(selected));
+                    item.tabIndex = selected ? 0 : -1;
+                    panels[index].hidden = !selected;
+                });
+                if (updateUrl) {
+                    const url = tab.id === 'watchlist-tab'
+                        ? `${window.location.pathname}${window.location.search}#watchlist`
+                        : `${window.location.pathname}${window.location.search}`;
+                    history.replaceState(null, '', url);
+                }
+            }
+
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => activate(tab, true));
+                tab.addEventListener('keydown', (event) => {
+                    let next = null;
+                    if (event.key === 'ArrowRight') next = tabs[(index + 1) % tabs.length];
+                    if (event.key === 'ArrowLeft') next = tabs[(index - 1 + tabs.length) % tabs.length];
+                    if (event.key === 'Home') next = tabs[0];
+                    if (event.key === 'End') next = tabs[tabs.length - 1];
+                    if (!next) return;
+                    event.preventDefault();
+                    activate(next, true);
+                    next.focus();
+                });
+            });
+
+            activate(window.location.hash === '#watchlist' ? tabs[1] : tabs[0]);
+            window.addEventListener('hashchange', () => activate(window.location.hash === '#watchlist' ? tabs[1] : tabs[0]));
+        })();
+    </script>
 </body>
 </html>
